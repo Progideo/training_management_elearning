@@ -1,0 +1,10 @@
+page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:18269/web/login
+Call log:
+[2m  - navigating to "http://127.0.0.1:18269/web/login", waiting until "load"[22m
+
+    at /Users/jbcrouigneau/Documents/ChatGPT/Formations/training_management_elearning/bench/e01/browser.cjs:9:13 {
+  log: [
+    '  - navigating to "http://127.0.0.1:18269/web/login", waiting until "load"'
+  ],
+  name: 'Error'
+}

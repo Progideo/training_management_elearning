@@ -1,2 +1,2 @@
 # Preserve tool output verbatim; its trailing spaces are evidence, not source.
-evidence/*.log -whitespace
+evidence/** -whitespace

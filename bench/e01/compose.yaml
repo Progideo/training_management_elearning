@@ -1,0 +1,59 @@
+name: tm-e01-20261101
+services:
+  odb:
+    image: postgres:18.6-bookworm@sha256:5c4783a8cc3f0074912164f94dfa1be4e043438f0f707cf968d7af9a0d31a2c8
+    platform: linux/amd64
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets: [db_password]
+    networks: [private]
+    mem_limit: 512m
+    volumes: [db:/var/lib/postgresql]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U odoo -d postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+  odoo:
+    image: odoo@sha256:61e3c71b0503c5f658e604c3e340bede20b97d05f726179fa006eae50a32fd23
+    platform: linux/amd64
+    environment:
+      HOST: odb
+      USER: odoo
+      PASSWORD_FILE: /run/secrets/db_password
+    secrets: [db_password]
+    networks: [private]
+    mem_limit: 1536m
+    volumes:
+      - ${TM_ADDONS_DIR:?Read-only TM addons}:/mnt/extra-addons:ro
+      - ../../addons:/mnt/qualification-addons:ro
+      - ./:/qual:ro
+      - odoo:/var/lib/odoo
+    depends_on:
+      odb: {condition: service_healthy}
+    command: [odoo, -d, e01, '--addons-path=/mnt/extra-addons,/mnt/qualification-addons', --without-demo=all, --workers=0, --max-cron-threads=0, --db-filter=^e01$]
+  gateway:
+    image: nginxinc/nginx-unprivileged:stable-alpine@sha256:f5116ed4606f3eb015dd4a8e28cb9b351476dc0ad4bc6e9f93b19cec130cdf03
+    platform: linux/amd64
+    entrypoint: [nginx, -g, 'daemon off;']
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 32m
+    pids_limit: 32
+    tmpfs: ['/tmp:uid=101,gid=101,mode=1770,size=16m']
+    volumes: ['./gateway.conf:/etc/nginx/nginx.conf:ro']
+    networks: [private, entry]
+    ports: ['127.0.0.1:18269:8080', '127.0.0.1:18270:8081']
+    depends_on: [odoo]
+networks:
+  private: {internal: true}
+  entry:
+volumes:
+  db:
+  odoo:
+secrets:
+  db_password:
+    file: ${LMS_SECRET_DIR:?Temporary local secret folder}/db_password

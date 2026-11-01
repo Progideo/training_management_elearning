@@ -1,0 +1,2 @@
+gateway-1  | 2026/11/01 23:30:20 [emerg] 1#1: mkdir() "/var/cache/nginx/fastcgi_temp" failed (30: Read-only file system)
+gateway-1  | nginx: [emerg] mkdir() "/var/cache/nginx/fastcgi_temp" failed (30: Read-only file system)

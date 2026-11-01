@@ -1,0 +1,69 @@
+ Container tm-e01-20261101-odb-1 Running 
+ Container tm-e01-20261101-odb-1 Waiting 
+ Container tm-e01-20261101-odb-1 Healthy 
+ Container tm-e01-20261101-odoo-run-24a9b328eca7 Creating 
+ Container tm-e01-20261101-odoo-run-24a9b328eca7 Created 
+2026-11-01 23:32:32,274 1 INFO ? odoo: Odoo version 20.0-20261015
+2026-11-01 23:32:32,275 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf
+2026-11-01 23:32:32,275 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/20.0', '/mnt/extra-addons', '/mnt/qualification-addons', '/usr/lib/python3/dist-packages/addons'])
+2026-11-01 23:32:32,275 1 INFO ? odoo: database: odoo@odb:5432
+2026-11-01 23:32:32,950 1 INFO ? odoo.service.server: HTTP service running on 0.0.0.0:8069
+2026-11-01 23:32:32,957 1 INFO e01 odoo.tests.common: Importing test framework
+2026-11-01 23:32:33,058 1 INFO e01 odoo.modules.loading: loading 1 modules...
+2026-11-01 23:32:33,062 1 INFO e01 odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra)
+2026-11-01 23:32:33,086 1 INFO e01 odoo.modules.loading: updating modules list
+2026-11-01 23:32:33,092 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a
+2026-11-01 23:32:34,000 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['Training Management — eLearning'] to user __system__ #1 via n/a
+2026-11-01 23:32:34,000 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['Training Management — eLearning'] to user __system__ #1 via n/a
+2026-11-01 23:32:34,382 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.button_install on [] to user __system__ #1 via n/a
+2026-11-01 23:32:34,436 1 INFO e01 odoo.modules.loading: loading 38 modules...
+2026-11-01 23:32:34,649 1 WARNING e01 odoo.addons.mail.controllers.attachment: markdown2 is not installed, markdown will not be rendered
+2026-11-01 23:32:34,987 1 INFO e01 odoo.modules.loading: Loading module training_management_elearning (38/38)
+2026-11-01 23:32:35,113 1 INFO e01 odoo.registry: module training_management_elearning: creating or updating database tables
+2026-11-01 23:32:35,254 1 INFO e01 odoo.modules.loading: loading training_management_elearning/security/groups.xml
+2026-11-01 23:32:35,328 1 INFO e01 odoo.modules.loading: loading training_management_elearning/security/ir.access.csv
+2026-11-01 23:32:35,384 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/resource_views.xml
+2026-11-01 23:32:35,430 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/resource_views.xml',
+ 'line': 3,
+ 'name': 'training.elearning.resource.form',
+ 'view': ir.ui.view(760,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': 'training_management_elearning.resource_form'}
+2026-11-01 23:32:35,457 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-01 23:32:35,470 1 INFO e01 odoo.modules.loading: Module training_management_elearning loaded in 0.48s, 253 queries (+253 other)
+2026-11-01 23:32:35,470 1 INFO e01 odoo.modules.loading: 38 modules loaded in 1.03s, 253 queries (+253 extra)
+2026-11-01 23:32:35,996 1 INFO e01 odoo.modules.loading: Modules loaded.
+2026-11-01 23:32:36,004 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-01 23:32:36,006 1 INFO e01 odoo.registry: Registry loaded in 3.054s
+2026-11-01 23:32:36,006 1 INFO e01 odoo.service.server: Starting post tests
+2026-11-01 23:32:36,205 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_author> to <e.e@example.com>
+2026-11-01 23:32:36,302 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_coord> to <e.e@example.com>
+2026-11-01 23:32:36,401 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_portal> to <e.e@example.com>
+2026-11-01 23:32:36,424 1 INFO e01 odoo.addons.training_management_elearning.tests.test_content_security: Starting TestContentSecurity.test_h5p_version_numbers_from_export ...
+2026-11-01 23:32:36,428 1 INFO e01 odoo.addons.training_management_elearning.tests.test_content_security: Starting TestContentSecurity.test_hostile_archives ...
+2026-11-01 23:32:36,439 1 INFO e01 odoo.addons.training_management_elearning.tests.test_content_security: Starting TestContentSecurity.test_immutable_bytes_and_native_bypass ...
+2026-11-01 23:32:36,463 1 INFO e01 odoo.models: Access Denied by ACLs for operation: read, uid: 12, model: training.elearning.file, field: data
+2026-11-01 23:32:36,477 1 INFO e01 odoo.models: Access Denied by ACLs for operation: read, uid: 13, model: training.elearning.file, field: data
+2026-11-01 23:32:36,483 1 INFO e01 odoo.models: Access Denied by ACLs for operation: read, uid: 14, model: training.elearning.file, field: data
+2026-11-01 23:32:36,497 1 INFO e01 odoo.addons.training_management_elearning.tests.test_content_security: Starting TestContentSecurity.test_lease_current_rights_and_withdrawal ...
+2026-11-01 23:32:36,524 1 INFO e01 odoo.models.unlink: User #1 deleted discuss.channel.member records with IDs: [9]
+2026-11-01 23:32:36,595 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 3 checked, 2 removed
+2026-11-01 23:32:36,712 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e00_author> to <e.e@example.com>
+2026-11-01 23:32:36,788 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e00_portal> to <e.e@example.com>
+2026-11-01 23:32:36,840 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-01 23:32:36,939 1 INFO e01 odoo.addons.training_management_elearning.tests.test_foundation: Starting TestFoundation.test_company_and_portal_boundaries ...
+2026-11-01 23:32:36,978 1 INFO e01 odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.elearning.resource operation=read uid=15 records=[7]
+2026-11-01 23:32:36,987 1 INFO e01 odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.elearning.resource operation=create uid=15 records=[8]
+2026-11-01 23:32:36,988 1 INFO e01 odoo.addons.training_management_elearning.tests.test_foundation: Starting TestFoundation.test_native_form_identity_and_archive ...
+2026-11-01 23:32:37,029 1 INFO e01 odoo.addons.training_management_elearning.tests.test_foundation: Starting TestFoundation.test_no_competing_learning_or_runtime ...
+2026-11-01 23:32:37,035 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 5 checked, 1 removed
+2026-11-01 23:32:37,036 1 INFO e01 odoo.service.server: 7 post-tests in 1.03s, 944 queries
+2026-11-01 23:32:37,036 1 INFO e01 odoo.tests.stats: training_management_elearning: 11 tests 1.03s 944 queries
+2026-11-01 23:32:37,036 1 INFO e01 odoo.tests.result: 0 failed, 0 error(s) of 7 tests when loading database 'e01'
+2026-11-01 23:32:37,036 1 INFO e01 odoo.service.server.ThreadedServer: Initiating shutdown
+2026-11-01 23:32:37,036 1 INFO e01 odoo.service.server.ThreadedServer: Hit CTRL-C again or send a second signal to force the shutdown.
+2026-11-01 23:32:37,037 1 INFO e01 odoo.addons.bus.websocket: Disconnecting 0 websockets
+2026-11-01 23:32:37,141 1 INFO e01 odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 1 connections 

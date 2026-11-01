@@ -1,0 +1,14 @@
+browserType.launch: Executable doesn't exist at /Users/jbcrouigneau/Library/Caches/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-mac-arm64/chrome-headless-shell
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+    at /Users/jbcrouigneau/Documents/ChatGPT/Formations/training_management_elearning/bench/e01/browser.cjs:6:31
+    at Object.<anonymous> (/Users/jbcrouigneau/Documents/ChatGPT/Formations/training_management_elearning/bench/e01/browser.cjs:33:3) {
+  log: [],
+  name: 'Error'
+}

@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+404 !== 403
+
+    at /Users/jbcrouigneau/Documents/ChatGPT/Formations/training_management_elearning/bench/e01/browser.cjs:25:9 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 404,
+  expected: 403,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

@@ -55,7 +55,7 @@ class Lease(models.Model):
         else:
             self._preview_access(version)
         token = secrets.token_urlsafe(32)
-        lease = super(Lease, self.sudo()).create({'version_id': version.id, 'user_id': self.env.uid,
+        lease = super(Lease, self.sudo().with_context({})).create({'version_id': version.id, 'user_id': self.env.uid,
             'attempt_id': attempt.id if attempt else False, 'token_hash': hashlib.sha256(token.encode()).hexdigest(),
             'nonce': secrets.token_urlsafe(24), 'expires_at': fields.Datetime.now() + timedelta(minutes=5)})
         return lease, token

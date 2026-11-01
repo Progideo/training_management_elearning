@@ -1,7 +1,7 @@
 {
     "name": "Training Management — eLearning",
     "summary": "Private interactive resource foundation (E00)",
-    "version": "20.0.1.3.0",
+    "version": "20.0.1.4.0",
     "category": "Services/Training",
     "author": "Training Management contributors",
     "license": "LGPL-3",

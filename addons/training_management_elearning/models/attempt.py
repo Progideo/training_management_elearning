@@ -84,7 +84,7 @@ class Attempt(models.Model):
             latest=self.sudo().search([('enrollment_id','=',enrollment.id),('usage_id','=',usage.id)],order='number desc',limit=1)
             if latest and not new:
                 return latest.with_user(self.env.user)
-            attempt=super(Attempt,self.sudo()).create({'enrollment_id':enrollment.id,'usage_id':usage.id,
+            attempt=super(Attempt,self.sudo().with_context({})).create({'enrollment_id':enrollment.id,'usage_id':usage.id,
                 'actor_id':self.env.uid,'number':latest.number+1 if latest else 1,'request_key':request_key})
             return attempt.with_user(self.env.user)
 
@@ -165,7 +165,7 @@ class Event(models.Model):
 
     @api.private
     def _append(self, values):
-        return super(Event,self.sudo()).create(values)
+        return super(Event,self.sudo().with_context({})).create(values)
 
     def write(self, values):
         raise AccessError('Events are immutable')

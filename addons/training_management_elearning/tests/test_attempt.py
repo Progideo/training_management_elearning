@@ -6,8 +6,7 @@ from odoo.addons.training_management.tests.test_learning import LearningCase
 from .test_content_security import package
 
 
-@tagged('post_install','-at_install')
-class TestAttempt(LearningCase):
+class RuntimeCase(LearningCase):
     def setup_runtime(self, threshold=70):
         resource=self.env['training.elearning.resource'].with_user(self.coordinator).create({'name':'Interactive fixture','format':'scorm12'})
         version=self.env['training.elearning.version'].with_user(self.coordinator)._import(resource,'1',package(),'Test','Fictional')
@@ -23,6 +22,9 @@ class TestAttempt(LearningCase):
     def start(self,enrollment,usage,new=False,key=None):
         return self.env['training.elearning.attempt'].with_user(self.portal)._start(enrollment.id,usage.id,key or str(uuid.uuid4()),new=new)
 
+
+@tagged('post_install','-at_install')
+class TestAttempt(RuntimeCase):
     def test_resume_retry_idempotence_and_conflicts(self):
         enrollment,usage=self.setup_runtime()
         key=str(uuid.uuid4())

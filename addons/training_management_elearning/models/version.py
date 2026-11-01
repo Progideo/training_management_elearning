@@ -45,7 +45,7 @@ class Version(models.Model):
         except ValueError as error:
             raise ValidationError(str(error)) from error
         with self.env.cr.savepoint():
-            version = super(Version, self).create({'resource_id': resource.id, 'number': number,
+            version = super(Version, self.with_context({})).create({'resource_id': resource.id, 'number': number,
                 'sha256': result['sha256'], 'entrypoint': result['entrypoint'],
                 'license_note': license_note, 'provenance': provenance})
             self.env['training.elearning.file']._insert([
@@ -98,7 +98,7 @@ class PackageFile(models.Model):
 
     @api.private
     def _insert(self, values):
-        return super(PackageFile, self.sudo()).create(values)
+        return super(PackageFile, self.sudo().with_context({})).create(values)
 
     def write(self, values):
         raise AccessError(self.env._('Package files are immutable.'))

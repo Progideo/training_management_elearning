@@ -25,6 +25,7 @@ class Assignment(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        vals_list=[self._add_missing_default_values(dict(values)) for values in vals_list]
         for values in vals_list:
             if values.get('state', 'draft') != 'draft' or values.get('usage_ids'):
                 raise ValidationError(self.env._('Validate the draft through the publication action.'))

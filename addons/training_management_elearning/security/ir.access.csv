@@ -15,3 +15,5 @@ apply_coordinator,Interactive apply coordinator,training.elearning.apply,trainin
 withdraw_coordinator,Interactive withdraw coordinator,training.elearning.withdraw,training_management.group_training_coordinator,crud,
 attempt_coordinator,Interactive attempt coordinator,training.elearning.attempt,training_management.group_training_coordinator,r,
 attempt_company,Interactive attempt company,training.elearning.attempt,,crud,"[('company_id', 'in', company_ids)] if user.active else [('id', '=', 0)]"
+invalidation_coordinator,Interactive invalidation coordinator,training.elearning.invalidation,training_management.group_training_coordinator,r,
+invalidation_company,Interactive invalidation company,training.elearning.invalidation,,crud,"[('company_id', 'in', company_ids)] if user.active else [('id', '=', 0)]"

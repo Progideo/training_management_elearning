@@ -1,0 +1,19 @@
+ Container tm-e01-20261101-odb-1 Running 
+ Container tm-e01-20261101-odb-1 Waiting 
+ Container tm-e01-20261101-odb-1 Healthy 
+ Container tm-e01-20261101-odoo-run-f7969a6255ca Creating 
+ Container tm-e01-20261101-odoo-run-f7969a6255ca Created 
+2026-11-01 23:52:15,419 1 INFO ? odoo: Odoo version 20.0-20261015
+2026-11-01 23:52:15,419 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf
+2026-11-01 23:52:15,419 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/20.0', '/mnt/extra-addons', '/mnt/qualification-addons', '/usr/lib/python3/dist-packages/addons'])
+2026-11-01 23:52:15,420 1 INFO ? odoo: database: odoo@odb:5432
+2026-11-01 23:52:16,012 1 INFO ? odoo.service.server.ThreadedServer: Initiating shutdown
+2026-11-01 23:52:16,012 1 INFO ? odoo.service.server.ThreadedServer: Hit CTRL-C again or send a second signal to force the shutdown.
+2026-11-01 23:52:16,139 1 INFO e01 odoo.modules.loading: loading 1 modules...
+2026-11-01 23:52:16,143 1 INFO e01 odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra)
+2026-11-01 23:52:16,157 1 INFO e01 odoo.modules.loading: loading 38 modules...
+2026-11-01 23:52:16,355 1 WARNING e01 odoo.addons.mail.controllers.attachment: markdown2 is not installed, markdown will not be rendered
+2026-11-01 23:52:16,711 1 INFO e01 odoo.modules.loading: 38 modules loaded in 0.55s, 0 queries (+0 extra)
+2026-11-01 23:52:16,792 1 INFO e01 odoo.modules.loading: Modules loaded.
+2026-11-01 23:52:16,815 1 INFO e01 odoo.registry: Registry loaded in 0.801s
+E06_SUSPENDED

@@ -1,0 +1,1 @@
+{"concurrent_participants":50,"successful_saves":50,"launch_ms":{"p95":2469,"max":2471},"private_resources_ms":{"p95":7534,"max":7669},"save_ms":{"p95":1227,"max":1235},"target_save_p95_ms":5000}

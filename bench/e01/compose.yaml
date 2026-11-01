@@ -33,7 +33,7 @@ services:
       - odoo:/var/lib/odoo
     depends_on:
       odb: {condition: service_healthy}
-    command: [odoo, -d, e01, '--addons-path=/mnt/extra-addons,/mnt/qualification-addons', --without-demo=all, --workers=0, --max-cron-threads=0, --db-filter=^e01$]
+    command: [odoo, -d, e01, '--addons-path=/mnt/extra-addons,/mnt/qualification-addons', --without-demo=all, --workers=0, --max-cron-threads=0, --db-filter=^e01$, --log-handler=odoo.http.server:WARNING]
   gateway:
     image: nginxinc/nginx-unprivileged:stable-alpine@sha256:f5116ed4606f3eb015dd4a8e28cb9b351476dc0ad4bc6e9f93b19cec130cdf03
     platform: linux/amd64

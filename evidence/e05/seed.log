@@ -1,0 +1,23 @@
+ Container tm-e01-20261101-odb-1 Running 
+ Container tm-e01-20261101-odb-1 Waiting 
+ Container tm-e01-20261101-odb-1 Healthy 
+ Container tm-e01-20261101-odoo-run-e5c57c0fcf2e Creating 
+ Container tm-e01-20261101-odoo-run-e5c57c0fcf2e Created 
+2026-11-01 23:42:32,094 1 INFO ? odoo: Odoo version 20.0-20261015
+2026-11-01 23:42:32,095 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf
+2026-11-01 23:42:32,095 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/20.0', '/mnt/extra-addons', '/mnt/qualification-addons', '/usr/lib/python3/dist-packages/addons'])
+2026-11-01 23:42:32,095 1 INFO ? odoo: database: odoo@odb:5432
+2026-11-01 23:42:32,720 1 INFO ? odoo.service.server.ThreadedServer: Initiating shutdown
+2026-11-01 23:42:32,720 1 INFO ? odoo.service.server.ThreadedServer: Hit CTRL-C again or send a second signal to force the shutdown.
+2026-11-01 23:42:32,865 1 INFO e01 odoo.modules.loading: loading 1 modules...
+2026-11-01 23:42:32,869 1 INFO e01 odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra)
+2026-11-01 23:42:32,888 1 INFO e01 odoo.modules.loading: loading 38 modules...
+2026-11-01 23:42:33,110 1 WARNING e01 odoo.addons.mail.controllers.attachment: markdown2 is not installed, markdown will not be rendered
+2026-11-01 23:42:33,496 1 INFO e01 odoo.modules.loading: 38 modules loaded in 0.61s, 0 queries (+0 extra)
+2026-11-01 23:42:33,588 1 INFO e01 odoo.modules.loading: Modules loaded.
+2026-11-01 23:42:33,619 1 INFO e01 odoo.registry: Registry loaded in 0.896s
+2026-11-01 23:42:33,647 1 INFO e01 odoo.tests.common: Importing test framework
+2026-11-01 23:42:37,808 1 INFO e01 odoo.addons.base_report_wkhtmltox.models.ir_actions_report: Will use the Wkhtmltopdf binary at /usr/local/bin/wkhtmltopdf
+2026-11-01 23:42:37,872 1 INFO e01 odoo.addons.base_report_wkhtmltox.models.ir_actions_report: Will use the Wkhtmltoimage binary at /usr/local/bin/wkhtmltoimage
+2026-11-01 23:42:41,007 1 INFO e01 odoo.registry: Caches invalidated, signaling through the database: ['default']
+E05_IDS={"enrollments": {"X_e05_learner": 23, "X_e05_peer": 24, "Y_e05_learner": 25}, "usages": {"X_h5p": 24, "X_scorm12": 25, "Y_scorm12": 26}, "path": 4, "versions": {"h5p": 34, "scorm12": 35}, "coord": 97, "learner": 98, "peer": 99}

@@ -46,3 +46,16 @@ class Withdraw(models.TransientModel):
         self.check_access('read')
         self.version_id._withdraw(self.reason)
         return {'type':'ir.actions.act_window_close'}
+
+
+class Invalidate(models.TransientModel):
+    _name = 'training.elearning.invalidate'
+    _description = 'Invalidate Formative Acquisition'
+    progress_id = fields.Many2one('training.learning.progress',required=True)
+    reason = fields.Text(required=True)
+
+    def action_invalidate(self):
+        self.ensure_one()
+        self.check_access('read')
+        self.progress_id._invalidate_formative(self.reason)
+        return {'type':'ir.actions.act_window_close'}

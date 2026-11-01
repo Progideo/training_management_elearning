@@ -1,0 +1,19 @@
+ Container tm-e01-20261101-odb-1 Running 
+ Container tm-e01-20261101-odb-1 Waiting 
+ Container tm-e01-20261101-odb-1 Healthy 
+ Container tm-e01-20261101-odoo-run-3acea666df41 Creating 
+ Container tm-e01-20261101-odoo-run-3acea666df41 Created 
+2026-11-01 23:46:20,920 1 INFO ? odoo: Odoo version 20.0-20261015
+2026-11-01 23:46:20,921 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf
+2026-11-01 23:46:20,921 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/20.0', '/mnt/extra-addons', '/mnt/qualification-addons', '/usr/lib/python3/dist-packages/addons'])
+2026-11-01 23:46:20,921 1 INFO ? odoo: database: odoo@odb:5432
+2026-11-01 23:46:21,828 1 INFO ? odoo.service.server.ThreadedServer: Initiating shutdown
+2026-11-01 23:46:21,828 1 INFO ? odoo.service.server.ThreadedServer: Hit CTRL-C again or send a second signal to force the shutdown.
+2026-11-01 23:46:22,005 1 INFO e01 odoo.modules.loading: loading 1 modules...
+2026-11-01 23:46:22,011 1 INFO e01 odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra)
+2026-11-01 23:46:22,031 1 INFO e01 odoo.modules.loading: loading 38 modules...
+2026-11-01 23:46:22,321 1 WARNING e01 odoo.addons.mail.controllers.attachment: markdown2 is not installed, markdown will not be rendered
+2026-11-01 23:46:22,790 1 INFO e01 odoo.modules.loading: 38 modules loaded in 0.76s, 0 queries (+0 extra)
+2026-11-01 23:46:22,906 1 INFO e01 odoo.modules.loading: Modules loaded.
+2026-11-01 23:46:22,936 1 INFO e01 odoo.registry: Registry loaded in 1.105s
+E05_CHECKPOINT={"E05 X_e05_learner": {"activities": [{"available": true, "complete": true, "id": 30}, {"available": true, "complete": true, "id": 31}], "complete": 2, "count": 2, "effective_access": "active"}, "E05 X_e05_peer": {"activities": [{"available": true, "complete": false, "id": 30}, {"available": false, "complete": false, "id": 31}], "complete": 0, "count": 2, "effective_access": "active"}, "E05 Y_e05_learner": {"activities": [{"available": true, "complete": false, "id": 32}], "complete": 0, "count": 1, "effective_access": "unopened"}}

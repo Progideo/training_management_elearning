@@ -1,0 +1,16 @@
+console Failed to load resource: the server responded with a status of 404 (NOT FOUND)
+H5P_BODY Deux plus deux font quatre.
+
+Yes
+No
+Check
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#content').contentFrame().locator('iframe').contentFrame().getByRole('radio', { name: 'Yes', exact: true })[22m
+
+    at /Users/jbcrouigneau/Documents/ChatGPT/Formations/training_management_elearning/bench/e05/browser.cjs:23:58 {
+  log: [
+    "  - waiting for locator('#content').contentFrame().locator('iframe').contentFrame().getByRole('radio', { name: 'Yes', exact: true })"
+  ],
+  name: 'TimeoutError'
+}

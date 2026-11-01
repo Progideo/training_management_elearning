@@ -44,7 +44,7 @@ class Content(http.Controller):
         config = {'origin': content, 'nonce': lease.nonce, 'csrf': request.csrf_token(),
                   'attempt': attempt.id if attempt else None, 'revision': attempt.sudo().revision if attempt else 0, 'lease':lease.id}
         source = content + '/tm-content/' + token + '/launch'
-        page = '<!doctype html><html lang="fr"><meta charset="utf-8"><title>Contenu interactif</title><h1>%s</h1>' % html.escape(version.resource_id.name)
+        page = '<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Contenu interactif</title><h1>%s</h1>' % html.escape(version.resource_id.name)
         page += '<p>Activité formative — aucune attestation automatique.</p><p id="status" role="status">Chargement…</p>'
         page += '<iframe id="content" title="Contenu interactif" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer" style="width:100%%;height:70vh;border:0" src="%s"></iframe>' % html.escape(source, quote=True)
         if attempt:
@@ -109,6 +109,26 @@ class Content(http.Controller):
         lease, portal, content=self._lease(token)
         data=(Path(__file__).resolve().parents[1]/'static/src/runner.js').read_bytes()
         return request.make_response(data,headers=headers('application/javascript',portal,content))
+
+    @http.route('/training/interactive/<int:enrollment_id>/<int:usage_id>',auth='user',type='http',methods=['GET'])
+    def entry(self,enrollment_id,usage_id,**kw):
+        portal,content=request.env['training.elearning.lease']._origins()
+        if origin()!=portal:
+            raise Forbidden()
+        service=request.env['training.elearning.attempt']
+        enrollment,usage,activity=service._scope(enrollment_id,usage_id)
+        attempts=service.sudo().search([('enrollment_id','=',enrollment_id),('usage_id','=',usage_id)],order='number desc')
+        acquired=request.env['training.learning.service']._complete(enrollment,activity)
+        values={'title':activity.name,'objective':usage.assignment_id.objective,'version':usage.version_id.number,
+            'acquired':acquired,'threshold':usage.assignment_id.threshold if usage.assignment_id.rule=='score' else None,
+            'start_url':'/training/interactive/%s/%s/start' % (enrollment_id,usage_id),
+            'back':'/my/trainings/%s' % enrollment_id,'request_key':str(uuid.uuid4()),'new_key':str(uuid.uuid4()),
+            'attempts':[{'number':a.number,'saved':str(a.last_saved_at or 'Pas encore sauvegardée'),
+                'score':('%g / %g' % (a.score,a.maximum)) if a.maximum else 'Non disponible'} for a in attempts]}
+        response=request.render('training_management_elearning.interactive_entry',values)
+        response.headers['Cache-Control']='no-store'
+        response.headers['Referrer-Policy']='no-referrer'
+        return response
 
     @http.route('/training/interactive/<int:enrollment_id>/<int:usage_id>/start',auth='user',type='http',methods=['POST'])
     def start(self,enrollment_id,usage_id,**values):

@@ -51,7 +51,11 @@ class TestAttempt(RuntimeCase):
         enrollment,usage=self.setup_runtime()
         attempt=self.start(enrollment,usage)
         payload={'result':{'score':80,'maximum':100,'completed':True}}
-        with patch.object(type(attempt),'_project',side_effect=ValidationError('Injected projection failure')):
+        original=type(attempt)._project
+        def fail_after_projection(record,event):
+            original(record,event)
+            raise ValidationError('Injected failure after native projection')
+        with patch.object(type(attempt),'_project',new=fail_after_projection):
             with self.assertRaises(ValidationError): attempt._save('first',1,payload)
         self.assertEqual(attempt.sudo().revision,0)
         self.assertFalse(attempt.sudo().event_ids)

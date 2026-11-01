@@ -1,0 +1,9 @@
+AssertionError [ERR_ASSERTION]: SCORM prerequisite should refuse: 422
+    at /Users/jbcrouigneau/Documents/ChatGPT/Formations/training_management_elearning/bench/e05/browser.cjs:18:50 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

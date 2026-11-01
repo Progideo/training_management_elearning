@@ -13,3 +13,5 @@ import_author,Interactive import author,training.elearning.import,group_elearnin
 import_coordinator,Interactive import coordinator,training.elearning.import,training_management.group_training_coordinator,crud,
 apply_coordinator,Interactive apply coordinator,training.elearning.apply,training_management.group_training_coordinator,crud,
 withdraw_coordinator,Interactive withdraw coordinator,training.elearning.withdraw,training_management.group_training_coordinator,crud,
+attempt_coordinator,Interactive attempt coordinator,training.elearning.attempt,training_management.group_training_coordinator,r,
+attempt_company,Interactive attempt company,training.elearning.attempt,,crud,"[('company_id', 'in', company_ids)] if user.active else [('id', '=', 0)]"

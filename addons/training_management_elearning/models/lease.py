@@ -15,7 +15,7 @@ class Lease(models.Model):
     token_hash = fields.Char(required=True, index=True)
     nonce = fields.Char(required=True)
     expires_at = fields.Datetime(required=True)
-    # E03 will extend leases with the native enrollment attempt scope.
+    attempt_id = fields.Many2one('training.elearning.attempt', ondelete='restrict')
     _token_unique = models.Constraint('UNIQUE(token_hash)', 'Unique content authorization required.')
 
     @api.private
@@ -49,11 +49,14 @@ class Lease(models.Model):
     def _issue(self, version, attempt=None):
         self._origins()
         if attempt:
-            raise ValidationError('Participant runtime not enabled')
-        self._preview_access(version)
+            attempt._authorize()
+            if attempt.sudo().version_id != version:
+                raise AccessError('Attempt version mismatch')
+        else:
+            self._preview_access(version)
         token = secrets.token_urlsafe(32)
         lease = super(Lease, self.sudo()).create({'version_id': version.id, 'user_id': self.env.uid,
-            'token_hash': hashlib.sha256(token.encode()).hexdigest(),
+            'attempt_id': attempt.id if attempt else False, 'token_hash': hashlib.sha256(token.encode()).hexdigest(),
             'nonce': secrets.token_urlsafe(24), 'expires_at': fields.Datetime.now() + timedelta(minutes=5)})
         return lease, token
 
@@ -67,8 +70,18 @@ class Lease(models.Model):
         if lease.version_id.state == 'withdrawn':
             raise AccessError('Withdrawn content')
         actor = self.with_user(lease.user_id)
-        actor._preview_access(lease.version_id.with_user(lease.user_id))
+        if lease.attempt_id:
+            lease.attempt_id.with_user(lease.user_id)._authorize()
+        else:
+            actor._preview_access(lease.version_id.with_user(lease.user_id))
         return lease
+
+    @api.private
+    def _renew(self):
+        self.ensure_one()
+        self.attempt_id.with_user(self.user_id)._authorize()
+        self.lock_for_update()
+        return super().write({'expires_at':fields.Datetime.now()+timedelta(minutes=5)})
 
     def write(self, vals):
         raise AccessError('Immutable launch authorization')

@@ -1,2 +1,5 @@
 # Preserve tool output verbatim; its trailing spaces are evidence, not source.
 evidence/** -whitespace
+
+# Third-party release bytes are intentionally unmodified.
+addons/training_management_elearning/vendor/** -whitespace

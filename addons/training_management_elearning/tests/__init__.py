@@ -1,1 +1,1 @@
-from . import test_foundation, test_content_security
+from . import test_foundation, test_content_security, test_editorial

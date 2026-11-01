@@ -1,1 +1,1 @@
-from . import resource, version, lease
+from . import resource, version, lease, assignment

@@ -13,6 +13,7 @@ class Resource(models.Model):
     name = fields.Char(required=True, translate=True)
     identifier = fields.Char(required=True, default=lambda self: str(uuid.uuid4()), copy=False, readonly=True)
     company_id = fields.Many2one("res.company", required=True, default=lambda self: self.env.company, index=True)
+    version_ids = fields.One2many('training.elearning.version', 'resource_id', readonly=True)
     active = fields.Boolean(default=True)
     format = fields.Selection([("h5p", "H5P"), ("scorm12", "SCORM 1.2")], required=True)
     provenance = fields.Text()

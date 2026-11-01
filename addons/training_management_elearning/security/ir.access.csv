@@ -5,3 +5,11 @@ resource_company,Interactive resources company,training.elearning.resource,,crud
 version_author,Interactive versions author,training.elearning.version,group_elearning_author,cru,
 version_coordinator,Interactive versions coordinator,training.elearning.version,training_management.group_training_coordinator,cru,
 version_company,Interactive versions company,training.elearning.version,,crud,"[('company_id', 'in', company_ids)] if user.active else [('id', '=', 0)]"
+assignment_coordinator,Interactive assignment coordinator,training.elearning.assignment,training_management.group_training_coordinator,crud,
+assignment_company,Interactive assignment company,training.elearning.assignment,,crud,"[('company_id', 'in', company_ids)] if user.active else [('id', '=', 0)]"
+usage_coordinator,Interactive usage coordinator,training.elearning.usage,training_management.group_training_coordinator,cr,
+usage_company,Interactive usage company,training.elearning.usage,,crud,"[('company_id', 'in', company_ids)] if user.active else [('id', '=', 0)]"
+import_author,Interactive import author,training.elearning.import,group_elearning_author,crud,
+import_coordinator,Interactive import coordinator,training.elearning.import,training_management.group_training_coordinator,crud,
+apply_coordinator,Interactive apply coordinator,training.elearning.apply,training_management.group_training_coordinator,crud,
+withdraw_coordinator,Interactive withdraw coordinator,training.elearning.withdraw,training_management.group_training_coordinator,crud,

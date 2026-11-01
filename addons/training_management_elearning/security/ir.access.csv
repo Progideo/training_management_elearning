@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+resource_author,Interactive resources author,training.elearning.resource,group_elearning_author,cru,
+resource_coordinator,Interactive resources coordinator,training.elearning.resource,training_management.group_training_coordinator,cru,
+resource_company,Interactive resources company,training.elearning.resource,,crud,"[('company_id', 'in', company_ids)] if user.active else [('id', '=', 0)]"

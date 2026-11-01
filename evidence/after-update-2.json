@@ -1,0 +1,252 @@
+{
+  "addon_xmlids": [
+    {
+      "id": 26327,
+      "model": "ir.model.constraint",
+      "name": "constraint_training_elearning_resource_identifier_unique",
+      "res_id": 1568
+    },
+    {
+      "id": 26317,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__active",
+      "res_id": 6007
+    },
+    {
+      "id": 26316,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__company_id",
+      "res_id": 6006
+    },
+    {
+      "id": 26322,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__create_date",
+      "res_id": 6012
+    },
+    {
+      "id": 26321,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__create_uid",
+      "res_id": 6011
+    },
+    {
+      "id": 26313,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__display_name",
+      "res_id": 6003
+    },
+    {
+      "id": 26318,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__format",
+      "res_id": 6008
+    },
+    {
+      "id": 26312,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__id",
+      "res_id": 6002
+    },
+    {
+      "id": 26315,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__identifier",
+      "res_id": 6005
+    },
+    {
+      "id": 26320,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__license_note",
+      "res_id": 6010
+    },
+    {
+      "id": 26314,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__name",
+      "res_id": 6004
+    },
+    {
+      "id": 26319,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__provenance",
+      "res_id": 6009
+    },
+    {
+      "id": 26324,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__write_date",
+      "res_id": 6014
+    },
+    {
+      "id": 26323,
+      "model": "ir.model.fields",
+      "name": "field_training_elearning_resource__write_uid",
+      "res_id": 6013
+    },
+    {
+      "id": 26328,
+      "model": "res.groups",
+      "name": "group_elearning_author",
+      "res_id": 26
+    },
+    {
+      "id": 26311,
+      "model": "ir.model",
+      "name": "model_training_elearning_resource",
+      "res_id": 1487
+    },
+    {
+      "id": 26334,
+      "model": "ir.actions.act_window",
+      "name": "resource_action",
+      "res_id": 267
+    },
+    {
+      "id": 26329,
+      "model": "ir.access",
+      "name": "resource_author",
+      "res_id": 556
+    },
+    {
+      "id": 26331,
+      "model": "ir.access",
+      "name": "resource_company",
+      "res_id": 558
+    },
+    {
+      "id": 26330,
+      "model": "ir.access",
+      "name": "resource_coordinator",
+      "res_id": 557
+    },
+    {
+      "id": 26333,
+      "model": "ir.ui.view",
+      "name": "resource_form",
+      "res_id": 875
+    },
+    {
+      "id": 26332,
+      "model": "ir.ui.view",
+      "name": "resource_list",
+      "res_id": 874
+    },
+    {
+      "id": 26335,
+      "model": "ir.ui.menu",
+      "name": "resource_menu",
+      "res_id": 178
+    },
+    {
+      "id": 26325,
+      "model": "ir.model.fields.selection",
+      "name": "selection__training_elearning_resource__format__h5p",
+      "res_id": 1490
+    },
+    {
+      "id": 26326,
+      "model": "ir.model.fields.selection",
+      "name": "selection__training_elearning_resource__format__scorm12",
+      "res_id": 1491
+    }
+  ],
+  "training.course": [
+    {
+      "company_id": [
+        1,
+        "My Company"
+      ],
+      "id": 1,
+      "name": "E00 fictional course"
+    }
+  ],
+  "training.delivery": [
+    {
+      "id": 1,
+      "name": "E00 fictional delivery",
+      "program_id": [
+        1,
+        "E00 fictional course \u2014 E00-1"
+      ]
+    }
+  ],
+  "training.elearning.resource": [
+    {
+      "active": true,
+      "company_id": [
+        1,
+        "My Company"
+      ],
+      "format": "h5p",
+      "id": 1,
+      "identifier": "e25dada5-ff40-46d9-8405-a4e17201c5b4",
+      "license_note": "Fictional metadata; no package",
+      "name": "E00 fictional resource"
+    }
+  ],
+  "training.enrollment": [
+    {
+      "delivery_id": [
+        1,
+        "E00 fictional delivery"
+      ],
+      "id": 1,
+      "participant_id": [
+        7,
+        "e00_learner (base.group_portal)"
+      ],
+      "state": "confirmed",
+      "user_id": [
+        6,
+        "e00_learner (base.group_portal)"
+      ]
+    }
+  ],
+  "training.learning.activity": [
+    {
+      "criterion": "declaration",
+      "delivery_id": [
+        1,
+        "E00 fictional delivery"
+      ],
+      "id": 1,
+      "name": "E00 historical consultation"
+    },
+    {
+      "criterion": "validation",
+      "delivery_id": [
+        1,
+        "E00 fictional delivery"
+      ],
+      "id": 2,
+      "name": "E00 historical human review"
+    }
+  ],
+  "training.learning.progress": [
+    {
+      "activity_id": [
+        1,
+        "E00 historical consultation"
+      ],
+      "completed": true,
+      "enrollment_id": [
+        1,
+        "e00_learner (base.group_portal) \u2014 E00 fictional delivery (Enrollment 1)"
+      ],
+      "id": 1,
+      "revision": 1
+    }
+  ],
+  "training.program.version": [
+    {
+      "course_id": [
+        1,
+        "E00 fictional course"
+      ],
+      "id": 1,
+      "title": "E00 fictional programme",
+      "version": "E00-1"
+    }
+  ]
+}

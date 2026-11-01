@@ -1,0 +1,12 @@
+ Container tm-e00-20261101-odb-1 Stopping 
+ Container tm-e00-20261101-odb-1 Stopped 
+ Container tm-e00-20261101-odb-1 Removing 
+ Container tm-e00-20261101-odb-1 Removed 
+ Volume tm-e00-20261101_db Removing 
+ Volume tm-e00-20261101_odoo Removing 
+ Network tm-e00-20261101_private Removing 
+ Network tm-e00-20261101_private Removed 
+ Volume tm-e00-20261101_db Removed 
+ Volume tm-e00-20261101_odoo Removed 
+
+PASS: unrelated containers unchanged; no E00 volumes/networks; temporary secret deleted.

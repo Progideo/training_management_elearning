@@ -1,0 +1,222 @@
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
+
+RELEASE_LEVELS = [ALPHA, BETA, RELEASE_CANDIDATE, FINAL] = ['alpha', 'beta', 'candidate', 'final']
+RELEASE_LEVELS_DISPLAY = {ALPHA: 'a',
+                          BETA: 'b',
+                          RELEASE_CANDIDATE: 'rc',
+                          FINAL: ''}
+
+# version_info format: (MAJOR, MINOR, MICRO, RELEASE_LEVEL, SERIAL)
+# inspired by Python's own sys.version_info, in order to be
+# properly comparable using normal operators, for example:
+#  (6,1,0,'beta',0) < (6,1,0,'candidate',1) < (6,1,0,'candidate',2)
+#  (6,1,0,'candidate',2) < (6,1,0,'final',0) < (6,1,2,'final',0)
+# NOTE: during release, the MAJOR version can become an arbitrary string ('saas~xx')
+version_info = (20, 0, 0, FINAL, 0, '')
+series = serie = major_version = '.'.join(str(s) for s in version_info[:2])
+version = series + RELEASE_LEVELS_DISPLAY[version_info[3]] + str(version_info[4] or '') + version_info[5]
+
+product_name = 'Odoo'
+description = 'Odoo Server'
+long_desc = '''Odoo is a complete ERP and CRM. The main features are accounting (analytic
+and financial), stock management, sales and purchases management, tasks
+automation, marketing campaigns, help desk, POS, etc. Technical features include
+a distributed server, an object database, a dynamic GUI,
+customizable reports, and XML-RPC interfaces.
+'''
+classifiers = """Development Status :: 5 - Production/Stable
+License :: OSI Approved :: GNU Lesser General Public License v3
+
+Programming Language :: Python
+"""
+url = 'https://www.odoo.com'
+author = 'OpenERP S.A.'
+author_email = 'info@odoo.com'
+license = 'LGPL-3'
+
+nt_service_name = "odoo-server-" + series.replace('~','-')
+
+MIN_PY_VERSION = (3, 12)
+MAX_PY_VERSION = (3, 14)
+MIN_PG_VERSION = 16
+
+version += '-20261015'
+
+repos_heads = {'odoo': '49529f034a60e4e9838e08e0a5616e5f2f38c601', 'enterprise': 'e2514184443254911c5e241b973e8b8af3b56675', 'design-themes': '55c319cdffa8958de4ec4073560581df121bfaaf'}
+id,name,model_id,group_id/id,operation,domain
+access_decimal_precision_config,decimal.precision configuration,decimal.precision,base.group_system,ru,
+access_ir_access_group_erp_manager,ir_access_group_erp_manager,ir.access,base.group_erp_manager,crud,
+ir_attachment_public_rule,read public attachments,ir.attachment,base.group_user,r,"[('public', '=', True)]"
+ir_attachment_access_read_rule,read res_model,ir.attachment,base.group_user,r,"[('res_access_read', '=', True)]"
+{
+    'name': 'eLearning',
+    'version': '2.7',
+    'sequence': 125,
+    'summary': 'Manage and publish an eLearning platform',
+    'website': 'https://www.odoo.com/app/elearning',
+    'category': 'Website/eLearning',
+    'description': """
+Create Online Courses
+=====================
+
+Featuring
+
+ * Integrated course and lesson management
+ * Fullscreen navigation
+ * Support Youtube videos, Google documents, PDF, images, articles
+ * Test knowledge with quizzes
+ * Filter and Tag
+ * Statistics
+""",
+    'depends': [
+        'portal_rating',
+        'website',
+        'website_mail',
+        'website_profile',
+        'digest'
+    ],
+    'data': [
+        'security/website_slides_security.xml',
+        'views/digest_views.xml',
+        'views/gamification_karma_tracking_views.xml',
+        'views/mail_activity_views.xml',
+        'views/res_config_settings_views.xml',
+        'views/res_partner_views.xml',
+        'views/rating_rating_views.xml',
+        'views/slide_embed_views.xml',
+        'views/slide_question_views.xml',
+        'views/slide_slide_partner_views.xml',
+        'views/slide_slide_views.xml',
+        'views/slide_channel_partner_views.xml',
+        'views/slide_channel_views.xml',
+        'views/slide_channel_tag_views.xml',
+        'views/website_slides_menu_views.xml',
+        'views/website_slides_templates_homepage.xml',
+        'views/website_slides_templates_course.xml',
+        'views/website_slides_templates_lesson.xml',
+        'views/website_slides_templates_lesson_fullscreen.xml',
+        'views/website_slides_templates_lesson_embed.xml',
+        'views/website_slides_templates_profile.xml',
+        'views/website_slides_templates_utils.xml',
+        'views/website_slides_visitor_views.xml',
+        'views/website_pages_views.xml',
+        'views/slide_channel_add.xml',
+        'views/website_slides_snippet_templates.xml',
+        'wizard/slide_channel_invite_views.xml',
+        'data/digest_data.xml',
+        'data/gamification_data.xml',
+        'data/mail_message_subtype_data.xml',
+        'data/mail_template_data.xml',
+        'data/portal_entry_data.xml',
+        'data/slide_data.xml',
+        'data/website_data.xml',
+        'data/slides_tour.xml',
+        'data/website_snippet_filter_data.xml',
+        'security/ir.access.csv',
+    ],
+    'demo': [
+        'data/res_users_demo.xml',
+        'data/slide_channel_tag_demo.xml',
+        'data/slide_channel_demo.xml',
+        'data/slide_slide_demo.xml',
+        'data/slide_user_demo.xml',
+        'data/slide_user_gamification_demo.xml',
+    ],
+    'application': True,
+    'assets': {
+        'web.assets_backend': [
+            'website_slides/static/src/core/**/*',
+            'website_slides/static/src/slide_category_one2many_field.js',
+            'website_slides/static/src/slide_category_list_renderer.js',
+            'website_slides/static/src/scss/slide_views.scss',
+            'website_slides/static/src/js/tours/slides_tour.js',
+            'website_slides/static/src/js/components/**/*.js',
+            'website_slides/static/src/views/**/*.js',
+            'website_slides/static/src/views/**/*.xml',
+        ],
+        'web.assets_frontend': [
+            'website_slides/static/src/interactions/**/*',
+            'website_slides/static/src/js/slides_course_service.js',
+            'website_slides/static/src/js/utils.js',
+            'website_slides/static/src/scss/website_slides.scss',
+            'website_slides/static/src/scss/website_slides_profile.scss',
+            'website_slides/static/src/scss/slides_slide_fullscreen.scss',
+            'website_slides/static/src/xml/website_slides_sidebar.xml',
+            'website_slides/static/src/xml/website_slides_fullscreen.xml',
+            'website_slides/static/src/xml/slide_management.xml',
+            'website_slides/static/src/xml/slide_course_join.xml',
+            'website_slides/static/src/xml/slide_course_prerequisite.xml',
+            'website_slides/static/src/xml/slide_quiz.xml',
+            'website_slides/static/src/js/public/**/*',
+        ],
+        'website.assets_editor': [
+            'website_slides/static/src/js/systray_items/*.js',
+        ],
+        'web.assets_tests': [
+            'website_slides/static/tests/tours/*.js',
+        ],
+        'website_slides.slide_embed_assets': [
+            ('include', 'web._assets_helpers'),
+            ('include', 'web._assets_frontend_helpers'),
+
+            'web/static/src/scss/pre_variables.scss',
+            'web/static/lib/bootstrap/scss/_variables.scss',
+            'web/static/lib/bootstrap/scss/_variables-dark.scss',
+            'web/static/lib/bootstrap/scss/_maps.scss',
+
+            ('include', 'web._assets_bootstrap_frontend'),
+
+            ('include', 'web.icons_fonts'),
+            'web/static/src/module_loader.js',
+            'web/static/src/session.js',
+
+            'web/static/lib/luxon/luxon.js',
+            'web/static/src/libs/luxon.js',
+            'web/static/lib/owl/owl.js',
+            'web/static/src/owl2/owl3_compatibility_layer.js',
+            'web/static/src/owl2/utils.js',
+            'web/static/lib/owl/odoo_module.js',
+
+            'web/static/src/core/utils/transitions.scss',  # included early because used by other files
+            'web/static/src/core/**/*',
+            'web/static/src/env.js',
+            ('remove', 'web/static/src/core/emoji_picker/emoji_data.js'),
+
+            'website_slides/static/src/scss/website_slides.scss',
+            'website_slides/static/src/js/slides_embed.js',
+            'website_slides/static/src/js/public/components/slide_share_dialog/*',
+            'web/static/src/public/**/*.js',
+            'web/static/src/public/**/*.xml',
+            ('remove', 'web/static/src/public/database_manager.js'),
+        ],
+        'web.assets_unit_tests': [
+            'website_slides/static/tests/**/*',
+            ('remove', 'website_slides/static/tests/tours/**/*'),
+        ],
+        'web.assets_unit_tests_setup': [
+            'website_slides/static/src/interactions/**/*',
+            'website_slides/static/src/js/public/**/*',
+            'website_slides/static/src/js/slides_course_service.js',
+            'website_slides/static/src/js/utils.js',
+        ],
+        'website.website_builder_assets': [
+            'website_slides/static/src/website_builder/**/*',
+        ],
+        "im_livechat.assets_embed_core": [
+            "website_slides/static/src/core/common/**/*",
+        ],
+        "mail.assets_public": [
+            "website_slides/static/src/core/common/**/*",
+        ],
+        'portal.assets_chatter': [
+            'website_slides/static/src/chatter/portal/**/*',
+        ],
+        "portal.assets_chatter_helpers": [
+            "website_slides/static/src/core/common/**/*",
+        ],
+    },
+    'author': 'Odoo S.A.',
+    'license': 'LGPL-3',
+}
+ffab1416cc2caaa54220e1873d026fa88cc180b035c6b540937168a570a0e999  /usr/lib/python3/dist-packages/odoo/addons/website_slides/models/slide_channel_partner.py
+fb1950415f03974086c9af4556459a9622e85a7d13af8e4490213c322e95eee7  /usr/lib/python3/dist-packages/odoo/addons/website_slides/models/slide_slide.py

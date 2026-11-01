@@ -1,0 +1,15 @@
+<odoo>
+  <record id="resource_list" model="ir.ui.view">
+    <field name="name">training.elearning.resource.list</field><field name="model">training.elearning.resource</field>
+    <field name="arch" type="xml"><list><field name="name"/><field name="format"/><field name="company_id" groups="base.group_multi_company"/><field name="active"/></list></field>
+  </record>
+  <record id="resource_form" model="ir.ui.view">
+    <field name="name">training.elearning.resource.form</field><field name="model">training.elearning.resource</field>
+    <field name="arch" type="xml"><form><sheet>
+      <div class="alert alert-info">Editorial inventory only. Package import, publication and playback are not available yet.</div>
+      <group><field name="name"/><field name="identifier"/><field name="format" readonly="id"/><field name="company_id" readonly="id" groups="base.group_multi_company"/><field name="active"/><field name="license_note"/><field name="provenance"/></group>
+    </sheet></form></field>
+  </record>
+  <record id="resource_action" model="ir.actions.act_window"><field name="name">Interactive resources</field><field name="res_model">training.elearning.resource</field><field name="view_mode">list,form</field></record>
+  <menuitem id="resource_menu" parent="training_management.menu_training_catalogue" name="Interactive resources" action="resource_action" groups="group_elearning_author,training_management.group_training_coordinator" sequence="90"/>
+</odoo>

@@ -1,0 +1,59 @@
+ Container tm-e00-20261101-odb-1 Running 
+ Container tm-e00-20261101-odb-1 Waiting 
+ Container tm-e00-20261101-odb-1 Healthy 
+ Container tm-e00-20261101-odoo-run-0bd6fb509a69 Creating 
+ Container tm-e00-20261101-odoo-run-0bd6fb509a69 Created 
+2026-11-01 23:20:28,145 1 WARNING ? odoo.tools.config: option --without-demo: since 19.0, invalid boolean value: 'all', assume True
+2026-11-01 23:20:28,147 1 INFO ? odoo: Odoo version 20.0-20261015
+2026-11-01 23:20:28,147 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf
+2026-11-01 23:20:28,147 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/20.0', '/mnt/extra-addons', '/mnt/qualification-addons', '/usr/lib/python3/dist-packages/addons'])
+2026-11-01 23:20:28,147 1 INFO ? odoo: database: odoo@odb:5432
+2026-11-01 23:20:29,072 1 INFO ? odoo.service.server: HTTP service running on 0.0.0.0:8069
+2026-11-01 23:20:29,084 1 INFO e00_fresh odoo.tests.common: Importing test framework
+2026-11-01 23:20:29,208 1 INFO e00_fresh odoo.modules.loading: loading 1 modules...
+2026-11-01 23:20:29,213 1 INFO e00_fresh odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra)
+2026-11-01 23:20:29,242 1 INFO e00_fresh odoo.modules.loading: updating modules list
+2026-11-01 23:20:29,246 1 INFO e00_fresh odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a
+2026-11-01 23:20:30,271 1 INFO e00_fresh odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['Training Management — eLearning'] to user __system__ #1 via n/a
+2026-11-01 23:20:30,272 1 INFO e00_fresh odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['Training Management — eLearning'] to user __system__ #1 via n/a
+2026-11-01 23:20:30,609 1 INFO e00_fresh odoo.addons.base.models.ir_module: ALLOW access to module.button_install on [] to user __system__ #1 via n/a
+2026-11-01 23:20:30,664 1 INFO e00_fresh odoo.modules.loading: loading 42 modules...
+2026-11-01 23:20:30,936 1 WARNING e00_fresh odoo.addons.mail.controllers.attachment: markdown2 is not installed, markdown will not be rendered
+2026-11-01 23:20:31,364 1 INFO e00_fresh odoo.modules.loading: Loading module training_management_elearning (41/42)
+2026-11-01 23:20:31,481 1 INFO e00_fresh odoo.registry: module training_management_elearning: creating or updating database tables
+2026-11-01 23:20:31,584 1 INFO e00_fresh odoo.modules.loading: loading training_management_elearning/security/groups.xml
+2026-11-01 23:20:31,636 1 INFO e00_fresh odoo.modules.loading: loading training_management_elearning/security/ir.access.csv
+2026-11-01 23:20:31,673 1 INFO e00_fresh odoo.modules.loading: loading training_management_elearning/views/resource_views.xml
+2026-11-01 23:20:31,720 1 WARNING e00_fresh odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/resource_views.xml',
+ 'line': 3,
+ 'name': 'training.elearning.resource.form',
+ 'view': ir.ui.view(875,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': 'training_management_elearning.resource_form'}
+2026-11-01 23:20:31,738 1 INFO e00_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-01 23:20:31,748 1 INFO e00_fresh odoo.modules.loading: Module training_management_elearning loaded in 0.38s, 171 queries (+171 other)
+2026-11-01 23:20:31,787 1 INFO e00_fresh odoo.modules.loading: 42 modules loaded in 1.12s, 171 queries (+171 extra)
+2026-11-01 23:20:32,048 1 INFO e00_fresh odoo.registry: verifying fields for every extended model
+2026-11-01 23:20:32,331 1 INFO e00_fresh odoo.modules.loading: Modules loaded.
+2026-11-01 23:20:32,340 1 INFO e00_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-01 23:20:32,342 1 INFO e00_fresh odoo.registry: Registry loaded in 3.267s
+2026-11-01 23:20:32,342 1 INFO e00_fresh odoo.service.server: Starting post tests
+2026-11-01 23:20:32,511 1 INFO e00_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <e00_author> to <e.e@example.com>
+2026-11-01 23:20:32,616 1 INFO e00_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <e00_portal> to <e.e@example.com>
+2026-11-01 23:20:32,649 1 INFO e00_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-01 23:20:32,739 1 INFO e00_fresh odoo.addons.training_management_elearning.tests.test_foundation: Starting TestFoundation.test_company_and_portal_boundaries ...
+2026-11-01 23:20:32,777 1 INFO e00_fresh odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.elearning.resource operation=read uid=7 records=[2]
+2026-11-01 23:20:32,787 1 INFO e00_fresh odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.elearning.resource operation=create uid=7 records=[3]
+2026-11-01 23:20:32,788 1 INFO e00_fresh odoo.addons.training_management_elearning.tests.test_foundation: Starting TestFoundation.test_native_form_identity_and_archive ...
+2026-11-01 23:20:32,824 1 INFO e00_fresh odoo.addons.training_management_elearning.tests.test_foundation: Starting TestFoundation.test_no_competing_learning_or_runtime ...
+2026-11-01 23:20:32,830 1 INFO e00_fresh odoo.addons.base.models.ir_attachment: filestore gc 31 checked, 1 removed
+2026-11-01 23:20:32,832 1 INFO e00_fresh odoo.service.server: 3 post-tests in 0.49s, 423 queries
+2026-11-01 23:20:32,832 1 INFO e00_fresh odoo.tests.stats: training_management_elearning: 5 tests 0.49s 423 queries
+2026-11-01 23:20:32,832 1 INFO e00_fresh odoo.tests.result: 0 failed, 0 error(s) of 3 tests when loading database 'e00_fresh'
+2026-11-01 23:20:32,832 1 INFO e00_fresh odoo.service.server.ThreadedServer: Initiating shutdown
+2026-11-01 23:20:32,832 1 INFO e00_fresh odoo.service.server.ThreadedServer: Hit CTRL-C again or send a second signal to force the shutdown.
+2026-11-01 23:20:32,832 1 INFO e00_fresh odoo.addons.bus.websocket: Disconnecting 0 websockets
+2026-11-01 23:20:32,934 1 INFO e00_fresh odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 1 connections 

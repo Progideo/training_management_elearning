@@ -1,0 +1,23 @@
+ Container tm-e00-20261101-odb-1 Running 
+ Container tm-e00-20261101-odb-1 Waiting 
+ Container tm-e00-20261101-odb-1 Healthy 
+ Container tm-e00-20261101-odoo-run-6a7ae6edfddf Creating 
+ Container tm-e00-20261101-odoo-run-6a7ae6edfddf Created 
+2026-11-01 23:20:12,958 1 INFO ? odoo: Odoo version 20.0-20261015
+2026-11-01 23:20:12,959 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf
+2026-11-01 23:20:12,959 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/20.0', '/mnt/extra-addons', '/mnt/qualification-addons', '/usr/lib/python3/dist-packages/addons'])
+2026-11-01 23:20:12,959 1 INFO ? odoo: database: odoo@odb:5432
+2026-11-01 23:20:13,786 1 INFO ? odoo.service.server.ThreadedServer: Initiating shutdown
+2026-11-01 23:20:13,786 1 INFO ? odoo.service.server.ThreadedServer: Hit CTRL-C again or send a second signal to force the shutdown.
+2026-11-01 23:20:13,930 1 INFO e00_fresh odoo.modules.loading: loading 1 modules...
+2026-11-01 23:20:13,934 1 INFO e00_fresh odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra)
+2026-11-01 23:20:13,962 1 INFO e00_fresh odoo.modules.loading: loading 42 modules...
+2026-11-01 23:20:14,233 1 WARNING e00_fresh odoo.addons.mail.controllers.attachment: markdown2 is not installed, markdown will not be rendered
+2026-11-01 23:20:14,743 1 INFO e00_fresh odoo.modules.loading: 42 modules loaded in 0.78s, 0 queries (+0 extra)
+2026-11-01 23:20:14,843 1 INFO e00_fresh odoo.modules.loading: Modules loaded.
+2026-11-01 23:20:14,874 1 INFO e00_fresh odoo.registry: Registry loaded in 1.085s
+2026-11-01 23:20:14,901 1 INFO e00_fresh odoo.tests.common: Importing test framework
+2026-11-01 23:20:17,445 1 INFO e00_fresh odoo.addons.base_report_wkhtmltox.models.ir_actions_report: Will use the Wkhtmltopdf binary at /usr/local/bin/wkhtmltopdf
+2026-11-01 23:20:17,567 1 INFO e00_fresh odoo.addons.base_report_wkhtmltox.models.ir_actions_report: Will use the Wkhtmltoimage binary at /usr/local/bin/wkhtmltoimage
+2026-11-01 23:20:19,497 1 INFO e00_fresh odoo.registry: Caches invalidated, signaling through the database: ['default']
+E00_SEED_OK

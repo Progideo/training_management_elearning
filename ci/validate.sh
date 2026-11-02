@@ -41,11 +41,15 @@ trap cleanup EXIT
 ./bench/e01/run up -d --wait odb
 for phase in install update; do
   flag=-i
-  [[ "$phase" == update ]] && flag=-u
+  modules=training_management_elearning
+  if [[ "$phase" == update ]]; then
+    flag=-u
+    modules=training_management,training_management_survey,training_management_elearning
+  fi
   ./bench/e01/run run --rm -T odoo odoo -d elearning_ci \
     --addons-path=/mnt/extra-addons,/mnt/qualification-addons \
     --without-demo=all --workers=0 --max-cron-threads=0 \
-    "$flag" training_management_elearning --test-enable \
+    "$flag" "$modules" --test-enable \
     --test-tags "$(cat bench/review/test-tags)" --stop-after-init \
     2>&1 | tee "ci-results/$phase.log"
   python3 ci/check_results.py "ci-results/$phase.log"

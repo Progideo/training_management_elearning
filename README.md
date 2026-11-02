@@ -1,6 +1,6 @@
 # Training Management eLearning
 
-Extension locale Odoo 20 Community : ressources formatives privées H5P/SCORM,
+Extension Odoo 20 Community : ressources formatives privées H5P/SCORM,
 publication versionnée, affectations, tentatives et reprise, progression native TM,
 portail et deux types d’examen blanc — appariement et mise en ordre.
 
@@ -8,7 +8,7 @@ Un seul addon `training_management_elearning`, LGPL-3.0-only. Il dépend de
 `training_management` et, depuis Q01, de `training_management_survey`. Aucun fichier
 métier TM ni cœur Odoo modifié. Les lecteurs tiers embarqués gardent leurs licences.
 
-## Livraison locale
+## Fonctions livrées
 
 | Lot | Fonction livrée | Documentation et preuves |
 | --- | --- | --- |
@@ -27,7 +27,8 @@ Les lots E00–E06, Q00–Q01 et les corrections validées sont intégrés dans 
 principale locale `main` depuis le 2 novembre 2026. L’avance rapide conserve le
 contenu revu au commit `a76946c` et tout son historique. Les branches de travail
 sont conservées. [Vérifications de fusion](evidence/merge/verification.txt).
-Aucun dépôt distant configuré, aucune publication distante ni mise en production.
+Dépôt public : [Progideo/training_management_elearning](https://github.com/Progideo/training_management_elearning).
+Voir [organisation et validation](docs/ORGANIZATION.md) et [versions compatibles](compatibility.json).
 
 ## Périmètre qualifié
 

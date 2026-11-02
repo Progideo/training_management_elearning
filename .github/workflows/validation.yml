@@ -1,0 +1,45 @@
+name: Validation eLearning
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: elearning-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Lire la version compatible
+        id: compatibility
+        run: python3 -c 'import json; print("commit=" + json.load(open("compatibility.json"))["training_management"]["commit"])' >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Progideo/training_management
+          ref: ${{ steps.compatibility.outputs.commit }}
+          path: .dependencies/training_management
+          persist-credentials: false
+      - name: Régressions JavaScript
+        run: |
+          node bench/review/parent.test.cjs
+          node bench/review/runner.test.cjs
+      - name: Installation et mise à jour Odoo réelles
+        env:
+          TM_ADDONS_DIR: ${{ github.workspace }}/.dependencies/training_management/addons
+          LMS_SECRET_DIR: ${{ runner.temp }}/elearning-secrets
+          LMS_COMPOSE_PROJECT: elearning-ci-${{ github.run_id }}-${{ github.run_attempt }}
+        run: bash ci/validate.sh
+      - name: Journaux de validation
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: validation-elearning
+          path: ci-results/
+          if-no-files-found: error

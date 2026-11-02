@@ -1,6 +1,6 @@
 #!/bin/sh
 set -eu
 cd "$(dirname "$0")"
-export TM_ADDONS_DIR="${TM_ADDONS_DIR:-/Users/jbcrouigneau/.codex/.chatgpt-projects/g-p-6abcef897d6c81918e54a1836d958518/training_management/addons}"
-export LMS_SECRET_DIR="${LMS_SECRET_DIR:-/private/tmp/tm-e01-20261101-secrets}"
-exec docker compose -p tm-e01-20261101 "$@"
+: "${TM_ADDONS_DIR:?Set TM_ADDONS_DIR to the qualified Training Management addons directory}"
+: "${LMS_SECRET_DIR:?Set LMS_SECRET_DIR to a temporary directory containing db_password}"
+exec docker compose -p "${LMS_COMPOSE_PROJECT:-tm-e01-20261101}" "$@"

@@ -1,0 +1,7 @@
+PASS: main created at E00 then fast-forwarded to a76946c3c9b7095ff22f596da21bb98e5e685b67.
+All delivered feature/review branches are ancestors of main; no conflict or rewritten commit.
+The complete merged tree is identical to the reviewed tree with 80 successful final Odoo tests.
+Those Odoo tests were not rerun: the merge changed no file in the validated tree.
+Post-merge checks: git fsck, Python syntax (25 files), XML syntax (5 files), both JavaScript regression tests PASS.
+All 673 tracked TM files retain their original SHA256; business HEAD and clean status unchanged.
+No remote configured; no push, deployment, branch deletion or temporary service started.

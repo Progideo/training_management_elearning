@@ -23,9 +23,11 @@ métier TM ni cœur Odoo modifié. Les lecteurs tiers embarqués gardent leurs l
 
 [Revue et corrections du 2 novembre](docs/REVIEW_2026-11-02.md) ·
 [Banc reproductible](bench/README.md) · [Revue finale](evidence/FINAL_REVIEW.md).
-Livraison initiale sur `feat/e01-e06-elearning` ; revue corrective sur
-`fix/review-elearning-20261102`, commits locaux prêts pour revue. Aucune fusion,
-publication distante ou mise en production effectuée.
+Les lots E00–E06, Q00–Q01 et les corrections validées sont intégrés dans la branche
+principale locale `main` depuis le 2 novembre 2026. L’avance rapide conserve le
+contenu revu au commit `a76946c` et tout son historique. Les branches de travail
+sont conservées. [Vérifications de fusion](evidence/merge/verification.txt).
+Aucun dépôt distant configuré, aucune publication distante ni mise en production.
 
 ## Périmètre qualifié
 

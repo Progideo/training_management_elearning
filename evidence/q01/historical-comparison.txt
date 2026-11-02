@@ -1,0 +1,1 @@
+PASS: all pre-Q versions, usages, attempts, events, native progress rows and package byte hashes remain identical after the Q update. New Q records/assets are allowed; filestore equality was independently verified at E06 restoration.

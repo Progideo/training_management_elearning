@@ -1,0 +1,28 @@
+<odoo>
+ <record id="question_configure_form" model="ir.ui.view"><field name="name">elearning.question.configure.form</field><field name="model">training.elearning.question.configure</field><field name="arch" type="xml"><form string="Configurer une interaction"><group><field name="question_id"/><field name="kind"/><field name="items" placeholder="Appariement : gauche | droite, une paire par ligne.&#10;Mise en ordre : une ligne par élément, dans l’ordre correct."/></group><p>Deux à huit éléments distincts. Réponse exacte complète : tous les points ; réponse partielle, incorrecte ou vide : zéro.</p><footer><button name="action_configure" type="object" string="Configurer la question" class="btn-primary"/><button special="cancel" string="Annuler"/></footer></form></field></record>
+ <record id="question_configure_action" model="ir.actions.act_window"><field name="name">Configurer une interaction</field><field name="res_model">training.elearning.question.configure</field><field name="view_mode">form</field><field name="target">new</field></record>
+ <record id="question_enriched_form" model="ir.ui.view"><field name="name">survey.question.enriched</field><field name="model">survey.question</field><field name="inherit_id" ref="survey.survey_question_form"/><field name="arch" type="xml">
+  <xpath expr="//field[@name='question_type']" position="after"><field name="training_interaction" readonly="1" invisible="not training_program_id"/><button name="%(question_configure_action)d" type="action" string="Configurer appariement / ordre" context="{'default_question_id': id}" invisible="not training_program_id or not id"/></xpath>
+  <xpath expr="//field[@name='suggested_answer_ids']" position="before"><field name="training_interaction_solution" string="Solution attendue" invisible="not training_interaction" groups="training_management.group_training_coordinator"/></xpath>
+  <xpath expr="//field[@name='suggested_answer_ids']" position="attributes"><attribute name="invisible">training_interaction or question_type not in ['simple_choice', 'multiple_choice', 'matrix']</attribute></xpath>
+ </field></record>
+ <template id="exam_enriched_question" inherit_id="training_management_survey.exam_attempt" name="Enriched private exam interactions">
+  <xpath expr="//t[@t-call='training_management_survey.exam_multiple_choice']" position="replace">
+   <t t-else=""><t t-if="question.training_interaction" t-call="training_management_elearning.enriched_question"/><t t-else="" t-call="training_management_survey.exam_multiple_choice"/></t>
+  </xpath>
+ </template>
+ <template id="enriched_question" name="Matching or ordering question">
+  <div class="tm_enriched" t-att-data-kind="question.training_interaction">
+   <p t-if="question.training_interaction == 'matching'">Associez chaque élément à une seule proposition. Chaque proposition doit être utilisée une seule fois.</p>
+   <p t-else="">Choisissez l’élément qui correspond à chaque position. Chaque élément doit être utilisé une seule fois.</p>
+   <t t-foreach="question._interaction_rows()" t-as="row"><div class="mb-3">
+    <label class="form-label" t-att-for="'enriched-%s-%s' % (question.id, row['key'])" t-out="row['label']"/>
+    <select disabled="disabled" class="form-select tm_enriched_select" t-att-id="'enriched-%s-%s' % (question.id, row['key'])" t-att-data-row="row['key']">
+     <option value="">— Sans réponse —</option>
+     <option t-foreach="row['choices']" t-as="choice" t-att-value="choice['id']" t-att-data-option="choice['option']" t-att-selected="choice['id'] in answer_lines.suggested_answer_id.ids" t-out="choice['label']"/>
+    </select>
+    <input t-foreach="row['choices']" t-as="choice" type="checkbox" class="o_survey_form_choice_item tm_enriched_value" hidden="hidden" tabindex="-1" aria-hidden="true" t-att-data-row="row['key']" t-att-value="choice['id']" t-att-checked="choice['id'] in answer_lines.suggested_answer_id.ids"/>
+   </div></t>
+  </div>
+ </template>
+</odoo>

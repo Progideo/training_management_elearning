@@ -1,0 +1,30 @@
+odoo-1  | 2026-11-01 23:51:43,021 1 INFO e01 odoo.addons.base.models.res_device: User 98 inserts device log: REDACTED - 172.28.0.4 - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36
+odoo-1  | 2026-11-01 23:52:46,214 1 INFO e01 odoo.service.server.ThreadedServer: Initiating shutdown
+odoo-1  | 2026-11-01 23:52:46,221 1 INFO e01 odoo.service.server.ThreadedServer: Hit CTRL-C again or send a second signal to force the shutdown.
+odoo-1  | 2026-11-01 23:52:46,224 1 INFO e01 odoo.addons.bus.websocket: Disconnecting 0 websockets
+odoo-1  | 2026-11-01 23:52:46,393 1 INFO e01 odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 25 connections 
+odoo-1  | 2026-11-02 00:00:04,854 1 WARNING ? odoo.tools.config: option --without-demo: since 19.0, invalid boolean value: 'all', assume True
+odoo-1  | 2026-11-02 00:00:04,855 1 INFO ? odoo: Odoo version 20.0-20261015
+odoo-1  | 2026-11-02 00:00:04,855 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf
+odoo-1  | 2026-11-02 00:00:04,855 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/20.0', '/mnt/extra-addons', '/mnt/qualification-addons', '/usr/lib/python3/dist-packages/addons'])
+odoo-1  | 2026-11-02 00:00:04,855 1 INFO ? odoo: database: odoo@odb:5432
+odoo-1  | 2026-11-02 00:00:05,583 1 INFO ? odoo.service.server: HTTP service running on 0.0.0.0:8069
+odoo-1  | 2026-11-02 00:00:05,707 1 INFO e01 odoo.modules.loading: loading 1 modules...
+odoo-1  | 2026-11-02 00:00:05,712 1 INFO e01 odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra)
+odoo-1  | 2026-11-02 00:00:05,730 1 INFO e01 odoo.modules.loading: loading 42 modules...
+odoo-1  | 2026-11-02 00:00:05,938 1 WARNING e01 odoo.addons.mail.controllers.attachment: markdown2 is not installed, markdown will not be rendered
+odoo-1  | 2026-11-02 00:00:06,363 1 INFO e01 odoo.modules.loading: 42 modules loaded in 0.63s, 0 queries (+0 extra)
+odoo-1  | 2026-11-02 00:00:06,463 1 INFO e01 odoo.modules.loading: Modules loaded.
+odoo-1  | 2026-11-02 00:00:06,497 1 INFO e01 odoo.registry: Registry loaded in 0.912s
+odoo-1  | 2026-11-02 00:00:24,641 1 INFO e01 odoo.addons.base.models.ir_http: Generating routing map for key None
+odoo-1  | 2026-11-02 00:00:26,184 1 INFO e01 odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/bcf353c/web.assets_frontend_lazy.min.js (id:513)
+odoo-1  | 2026-11-02 00:00:26,185 1 INFO e01 odoo.addons.base.models.assetsbundle: Deleting attachments [37] (matching /web/assets/_______/web.assets_frontend_lazy.min.js) because it was replaced with /web/assets/bcf353c/web.assets_frontend_lazy.min.js
+odoo-1  | 2026-11-02 00:00:28,113 1 INFO e01 odoo.addons.base.models.res_users: Login successful for login:q01_learner from 172.28.0.4
+odoo-1  | 2026-11-02 00:00:28,119 1 INFO e01 odoo.http: Session rotated: REDACTED
+odoo-1  | 2026-11-02 00:00:28,171 1 INFO e01 odoo.registry: Caches invalidated, signaling through the database: ['default']
+odoo-1  | 2026-11-02 00:00:28,192 1 INFO e01 odoo.addons.base.models.res_device: User 155 inserts device log: REDACTED - 172.28.0.4 - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36
+odoo-1  | 2026-11-02 00:00:46,668 1 INFO e01 odoo.addons.base.models.res_users: Login successful for login:q01_learner from 172.28.0.4
+odoo-1  | 2026-11-02 00:00:46,672 1 INFO e01 odoo.http: Session rotated: REDACTED
+odoo-1  | 2026-11-02 00:00:46,689 1 INFO e01 odoo.addons.base.models.res_device: User 155 inserts device log: REDACTED - 172.28.0.4 - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36
+odoo-1  | 2026-11-02 00:00:47,358 1 INFO e01 odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/8f198ac/survey.survey_assets.min.css (id:514)
+odoo-1  | 2026-11-02 00:00:47,445 1 INFO e01 odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/871d0dc/survey.survey_assets.min.js (id:515)

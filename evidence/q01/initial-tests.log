@@ -1,0 +1,184 @@
+ Container tm-e01-20261101-odb-1 Running 
+ Container tm-e01-20261101-odb-1 Waiting 
+ Container tm-e01-20261101-odb-1 Healthy 
+ Container tm-e01-20261101-odoo-run-90ea4f06d46f Creating 
+ Container tm-e01-20261101-odoo-run-90ea4f06d46f Created 
+2026-11-01 23:58:58,351 1 INFO ? odoo: Odoo version 20.0-20261015
+2026-11-01 23:58:58,352 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf
+2026-11-01 23:58:58,352 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/20.0', '/mnt/extra-addons', '/mnt/qualification-addons', '/usr/lib/python3/dist-packages/addons'])
+2026-11-01 23:58:58,352 1 INFO ? odoo: database: odoo@odb:5432
+2026-11-01 23:58:59,087 1 INFO ? odoo.service.server: HTTP service running on 0.0.0.0:8069
+2026-11-01 23:58:59,096 1 INFO e01 odoo.tests.common: Importing test framework
+2026-11-01 23:58:59,207 1 INFO e01 odoo.modules.loading: loading 1 modules...
+2026-11-01 23:58:59,212 1 INFO e01 odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra)
+2026-11-01 23:58:59,237 1 INFO e01 odoo.modules.loading: updating modules list
+2026-11-01 23:58:59,241 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a
+2026-11-01 23:59:00,061 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['Training Management — eLearning'] to user __system__ #1 via n/a
+2026-11-01 23:59:00,061 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['Training Management — eLearning'] to user __system__ #1 via n/a
+2026-11-01 23:59:00,417 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.button_install on ['Training Management — Mock Exams'] to user __system__ #1 via n/a
+2026-11-01 23:59:00,482 1 INFO e01 odoo.modules.loading: loading 42 modules...
+2026-11-01 23:59:00,730 1 WARNING e01 odoo.addons.mail.controllers.attachment: markdown2 is not installed, markdown will not be rendered
+2026-11-01 23:59:01,034 1 INFO e01 odoo.modules.loading: Loading module gamification (38/42)
+2026-11-01 23:59:01,131 1 INFO e01 odoo.registry: module gamification: creating or updating database tables
+2026-11-01 23:59:01,210 1 INFO e01 odoo.fields: Prepare computation of res.users.karma in 59 records
+2026-11-01 23:59:01,504 1 INFO e01 odoo.modules.loading: loading gamification/wizard/update_goal.xml
+2026-11-01 23:59:01,558 1 INFO e01 odoo.modules.loading: loading gamification/wizard/grant_badge.xml
+2026-11-01 23:59:01,566 1 INFO e01 odoo.modules.loading: loading gamification/views/res_users_views.xml
+2026-11-01 23:59:01,588 1 INFO e01 odoo.modules.loading: loading gamification/views/gamification_karma_rank_views.xml
+2026-11-01 23:59:01,610 1 INFO e01 odoo.modules.loading: loading gamification/views/gamification_karma_tracking_views.xml
+2026-11-01 23:59:01,621 1 INFO e01 odoo.modules.loading: loading gamification/views/gamification_badge_views.xml
+2026-11-01 23:59:01,640 1 INFO e01 odoo.modules.loading: loading gamification/views/gamification_badge_user_views.xml
+2026-11-01 23:59:01,644 1 INFO e01 odoo.modules.loading: loading gamification/views/gamification_goal_views.xml
+2026-11-01 23:59:01,663 1 INFO e01 odoo.modules.loading: loading gamification/views/gamification_goal_definition_views.xml
+2026-11-01 23:59:01,677 1 INFO e01 odoo.modules.loading: loading gamification/views/gamification_challenge_views.xml
+2026-11-01 23:59:01,700 1 INFO e01 odoo.modules.loading: loading gamification/views/gamification_challenge_line_views.xml
+2026-11-01 23:59:01,703 1 INFO e01 odoo.modules.loading: loading gamification/views/gamification_menus.xml
+2026-11-01 23:59:01,720 1 INFO e01 odoo.modules.loading: loading gamification/data/ir_cron_data.xml
+2026-11-01 23:59:01,777 1 INFO e01 odoo.modules.loading: loading gamification/data/mail_template_data.xml
+2026-11-01 23:59:01,820 1 INFO e01 odoo.modules.loading: loading gamification/data/gamification_badge_data.xml
+2026-11-01 23:59:01,992 1 INFO e01 odoo.modules.loading: loading gamification/data/gamification_challenge_data.xml
+2026-11-01 23:59:02,027 1 INFO e01 odoo.modules.loading: loading gamification/data/gamification_karma_rank_data.xml
+2026-11-01 23:59:02,120 1 INFO e01 odoo.modules.loading: loading gamification/security/ir.access.csv
+2026-11-01 23:59:02,188 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-01 23:59:02,279 1 INFO e01 odoo.modules.loading: Module gamification loaded in 1.25s, 1011 queries (+1011 other)
+2026-11-01 23:59:02,279 1 INFO e01 odoo.modules.loading: Loading module digest (39/42)
+2026-11-01 23:59:02,297 1 INFO e01 odoo.registry: module digest: creating or updating database tables
+2026-11-01 23:59:02,398 1 INFO e01 odoo.modules.loading: loading digest/data/digest_data.xml
+2026-11-01 23:59:02,418 1 INFO e01 odoo.modules.loading: loading digest/data/digest_tips_data.xml
+2026-11-01 23:59:02,432 1 INFO e01 odoo.modules.loading: loading digest/data/ir_cron_data.xml
+2026-11-01 23:59:02,461 1 INFO e01 odoo.modules.loading: loading digest/data/res_config_settings_data.xml
+2026-11-01 23:59:02,466 1 INFO e01 odoo.modules.loading: loading digest/views/digest_views.xml
+2026-11-01 23:59:02,514 1 INFO e01 odoo.modules.loading: loading digest/views/digest_templates.xml
+2026-11-01 23:59:02,518 1 INFO e01 odoo.modules.loading: loading digest/views/res_config_settings_views.xml
+2026-11-01 23:59:02,536 1 INFO e01 odoo.modules.loading: loading digest/wizard/digest_test_views.xml
+2026-11-01 23:59:02,540 1 INFO e01 odoo.modules.loading: loading digest/security/ir.access.csv
+2026-11-01 23:59:02,576 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-01 23:59:02,582 1 INFO e01 odoo.modules.loading: Module digest loaded in 0.30s, 397 queries (+397 other)
+2026-11-01 23:59:02,582 1 INFO e01 odoo.modules.loading: Loading module survey (40/42)
+2026-11-01 23:59:02,630 1 INFO e01 odoo.registry: module survey: creating or updating database tables
+2026-11-01 23:59:02,636 1 INFO e01 odoo.fields: Prepare computation of gamification.badge.survey_id in 4 records
+2026-11-01 23:59:02,707 1 INFO e01 odoo.fields: Prepare computation of survey.invite.attachment_ids
+2026-11-01 23:59:02,930 1 INFO e01 odoo.modules.loading: loading survey/report/survey_templates.xml
+2026-11-01 23:59:02,941 1 INFO e01 odoo.modules.loading: loading survey/report/survey_reports.xml
+2026-11-01 23:59:02,948 1 INFO e01 odoo.modules.loading: loading survey/data/digest_data.xml
+2026-11-01 23:59:02,951 1 INFO e01 odoo.modules.loading: loading survey/data/ir_actions_server_data.xml
+2026-11-01 23:59:02,973 1 INFO e01 odoo.modules.loading: loading survey/data/mail_message_subtype_data.xml
+2026-11-01 23:59:02,978 1 INFO e01 odoo.modules.loading: loading survey/data/mail_template_data.xml
+2026-11-01 23:59:02,987 1 INFO e01 odoo.modules.loading: loading survey/data/survey_tour.xml
+2026-11-01 23:59:02,992 1 INFO e01 odoo.modules.loading: loading survey/security/survey_security.xml
+2026-11-01 23:59:03,054 1 INFO e01 odoo.modules.loading: loading survey/views/digest_views.xml
+2026-11-01 23:59:03,077 1 INFO e01 odoo.modules.loading: loading survey/views/survey_menus.xml
+2026-11-01 23:59:03,085 1 INFO e01 odoo.modules.loading: loading survey/views/survey_survey_views.xml
+2026-11-01 23:59:03,130 1 INFO e01 odoo.modules.loading: loading survey/views/survey_user_views.xml
+2026-11-01 23:59:03,162 1 INFO e01 odoo.modules.loading: loading survey/views/survey_question_views.xml
+2026-11-01 23:59:03,199 1 INFO e01 odoo.modules.loading: loading survey/views/survey_templates.xml
+2026-11-01 23:59:03,261 1 INFO e01 odoo.modules.loading: loading survey/views/survey_templates_management.xml
+2026-11-01 23:59:03,284 1 INFO e01 odoo.modules.loading: loading survey/views/survey_templates_print.xml
+2026-11-01 23:59:03,292 1 INFO e01 odoo.modules.loading: loading survey/views/survey_templates_statistics.xml
+2026-11-01 23:59:03,327 1 INFO e01 odoo.modules.loading: loading survey/views/survey_templates_user_input_session.xml
+2026-11-01 23:59:03,345 1 INFO e01 odoo.modules.loading: loading survey/views/gamification_badge_views.xml
+2026-11-01 23:59:03,349 1 INFO e01 odoo.modules.loading: loading survey/wizard/survey_invite_views.xml
+2026-11-01 23:59:03,354 1 INFO e01 odoo.modules.loading: loading survey/views/res_partner_views.xml
+2026-11-01 23:59:03,365 1 INFO e01 odoo.modules.loading: loading survey/security/ir.access.csv
+2026-11-01 23:59:03,437 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-01 23:59:03,449 1 INFO e01 odoo.modules.loading: Module survey loaded in 0.87s, 1228 queries (+1228 other)
+2026-11-01 23:59:03,449 1 INFO e01 odoo.modules.loading: Loading module training_management_survey (41/42)
+2026-11-01 23:59:03,577 1 INFO e01 odoo.registry: module training_management_survey: creating or updating database tables
+2026-11-01 23:59:04,143 1 WARNING e01 odoo.addons.base.models.ir_model: Two fields (record_label, record_id) of training.operation() have the same label: Record. [Modules: training_management and training_management]
+2026-11-01 23:59:04,144 1 WARNING e01 odoo.addons.base.models.ir_model: Two fields (intra_version_ids, intra_version_id) of training.delivery() have the same label: Intra Version. [Modules: training_management and training_management]
+2026-11-01 23:59:04,144 1 WARNING e01 odoo.addons.base.models.ir_model: Two fields (period_label, period_key) of training.attendance() have the same label: Half-day. [Modules: training_management and training_management]
+2026-11-01 23:59:04,144 1 WARNING e01 odoo.addons.base.models.ir_model: Two fields (participant_name, name) of training.evaluation.assignment() have the same label: Name. [Modules: training_management and training_management]
+2026-11-01 23:59:04,643 1 INFO e01 odoo.modules.loading: loading training_management_survey/security/groups.xml
+2026-11-01 23:59:04,692 1 INFO e01 odoo.modules.loading: loading training_management_survey/security/ir.access.csv
+2026-11-01 23:59:04,766 1 INFO e01 odoo.modules.loading: loading training_management_survey/views/exam_views.xml
+2026-11-01 23:59:04,827 1 INFO e01 odoo.modules.loading: loading training_management_survey/views/evaluation_views.xml
+2026-11-01 23:59:04,834 1 INFO e01 odoo.modules.loading: loading training_management_survey/views/feedback_views.xml
+2026-11-01 23:59:04,856 1 INFO e01 odoo.modules.loading: loading training_management_survey/views/exam_templates.xml
+2026-11-01 23:59:04,896 1 INFO e01 odoo.modules.loading: loading training_management_survey/views/orientation_views.xml
+2026-11-01 23:59:04,923 1 INFO e01 odoo.modules.loading: loading training_management_survey/views/orientation_templates.xml
+2026-11-01 23:59:04,937 1 INFO e01 odoo.modules.loading: loading training_management_survey/data/cron.xml
+2026-11-01 23:59:05,089 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-01 23:59:05,253 1 INFO e01 odoo.modules.loading: Module training_management_survey loaded in 1.80s, 3721 queries (+3721 other)
+2026-11-01 23:59:05,253 1 INFO e01 odoo.modules.loading: Loading module training_management_elearning (42/42)
+2026-11-01 23:59:05,300 1 INFO e01 odoo.registry: module training_management_elearning: creating or updating database tables
+2026-11-01 23:59:05,404 1 INFO e01 odoo.modules.loading: loading training_management_elearning/security/groups.xml
+2026-11-01 23:59:05,430 1 INFO e01 odoo.modules.loading: loading training_management_elearning/security/ir.access.csv
+2026-11-01 23:59:05,555 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/resource_views.xml
+2026-11-01 23:59:05,585 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/resource_views.xml',
+ 'line': 1,
+ 'name': 'training.elearning.resource.form',
+ 'view': ir.ui.view(760,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': 'training_management_elearning.resource_form'}
+2026-11-01 23:59:05,592 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/editorial_views.xml
+2026-11-01 23:59:05,622 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/editorial_views.xml',
+ 'line': 2,
+ 'name': 'elearning.resource.editorial',
+ 'view': ir.ui.view(766,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(760,),
+ 'xmlid': 'training_management_elearning.resource_editorial'}
+2026-11-01 23:59:05,625 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/editorial_views.xml',
+ 'line': 1,
+ 'name': 'elearning.resource.editorial',
+ 'view': ir.ui.view(766,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(760,),
+ 'xmlid': 'training_management_elearning.resource_editorial'}
+2026-11-01 23:59:05,639 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/runtime_views.xml
+2026-11-01 23:59:05,656 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/runtime_views.xml',
+ 'line': 2,
+ 'name': 'elearning.attempt.form',
+ 'view': ir.ui.view(771,),
+ 'view.model': 'training.elearning.attempt',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': 'training_management_elearning.attempt_form'}
+2026-11-01 23:59:05,674 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/enriched_views.xml
+2026-11-01 23:59:05,720 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-01 23:59:05,733 1 INFO e01 odoo.modules.loading: Module training_management_elearning loaded in 0.48s, 843 queries (+843 other)
+2026-11-01 23:59:05,733 1 INFO e01 odoo.modules.loading: 42 modules loaded in 5.25s, 7200 queries (+7200 extra)
+2026-11-01 23:59:06,223 1 INFO e01 odoo.modules.loading: Modules loaded.
+2026-11-01 23:59:06,233 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-01 23:59:06,235 1 INFO e01 odoo.registry: Registry loaded in 7.146s
+2026-11-01 23:59:06,235 1 INFO e01 odoo.service.server: Starting post tests
+2026-11-01 23:59:06,309 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [26, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-01 23:59:06,527 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-01 23:59:06,618 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-01 23:59:06,735 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-01 23:59:06,841 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-01 23:59:06,910 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-01 23:59:06,964 1 INFO e01 odoo.addons.base_report_wkhtmltox.models.ir_actions_report: Will use the Wkhtmltopdf binary at /usr/local/bin/wkhtmltopdf
+2026-11-01 23:59:07,020 1 INFO e01 odoo.addons.base_report_wkhtmltox.models.ir_actions_report: Will use the Wkhtmltoimage binary at /usr/local/bin/wkhtmltoimage
+2026-11-01 23:59:08,462 1 INFO e01 odoo.addons.training_management_elearning.tests.test_enriched: Starting TestEnriched.test_exact_partial_wrong_empty_and_resume ...
+2026-11-01 23:59:08,554 1 INFO e01 odoo.models.unlink: User #150 deleted survey.question.answer records with IDs: [1, 2]
+2026-11-01 23:59:08,589 1 INFO e01 odoo.models.unlink: User #150 deleted survey.question.answer records with IDs: [3, 4, 5]
+2026-11-01 23:59:08,978 1 INFO e01 odoo.addons.training_management_elearning.tests.test_enriched: Starting TestEnriched.test_invalid_edges_cross_actor_and_deadline ...
+2026-11-01 23:59:09,054 1 INFO e01 odoo.models.unlink: User #150 deleted survey.question.answer records with IDs: [24, 25]
+2026-11-01 23:59:09,086 1 INFO e01 odoo.models.unlink: User #150 deleted survey.question.answer records with IDs: [26, 27, 28]
+2026-11-01 23:59:09,344 1 INFO e01 odoo.addons.training_management_elearning.tests.test_enriched: Starting TestEnriched.test_malformed_configuration_and_native_publication_checks ...
+2026-11-01 23:59:09,422 1 INFO e01 odoo.models.unlink: User #150 deleted survey.question.answer records with IDs: [47, 48]
+2026-11-01 23:59:09,482 1 INFO e01 odoo.models.unlink: User #150 deleted survey.question.answer records with IDs: [56, 57]
+2026-11-01 23:59:09,597 1 INFO e01 odoo.models.unlink: User #150 deleted survey.question.answer records with IDs: [75, 76]
+2026-11-01 23:59:09,614 1 INFO e01 odoo.models.unlink: User #150 deleted survey.question.answer records with IDs: [80]
+2026-11-01 23:59:09,661 1 INFO e01 odoo.models.unlink: User #150 deleted survey.question.answer records with IDs: [84, 85]
+2026-11-01 23:59:09,686 1 INFO e01 odoo.addons.training_management_elearning.tests.test_enriched: Starting TestEnriched.test_publication_freeze_revision_and_safe_render_data ...
+2026-11-01 23:59:09,758 1 INFO e01 odoo.models.unlink: User #150 deleted survey.question.answer records with IDs: [93, 94]
+2026-11-01 23:59:09,788 1 INFO e01 odoo.models.unlink: User #150 deleted survey.question.answer records with IDs: [95, 96, 97]
+2026-11-01 23:59:09,988 1 INFO e01 odoo.models.unlink: User #150 deleted survey.question.answer records with IDs: [116, 117, 118, 119, 120, 121, 122, 123, 124]
+2026-11-01 23:59:10,037 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 23 checked, 4 removed
+2026-11-01 23:59:10,039 1 INFO e01 odoo.service.server: 4 post-tests in 3.80s, 2639 queries
+2026-11-01 23:59:10,039 1 INFO e01 odoo.tests.stats: training_management_elearning: 6 tests 3.78s 2639 queries
+2026-11-01 23:59:10,039 1 INFO e01 odoo.tests.result: 0 failed, 0 error(s) of 4 tests when loading database 'e01'
+2026-11-01 23:59:10,040 1 INFO e01 odoo.service.server.ThreadedServer: Initiating shutdown
+2026-11-01 23:59:10,040 1 INFO e01 odoo.service.server.ThreadedServer: Hit CTRL-C again or send a second signal to force the shutdown.
+2026-11-01 23:59:10,040 1 INFO e01 odoo.addons.bus.websocket: Disconnecting 0 websockets
+2026-11-01 23:59:10,153 1 INFO e01 odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 1 connections 

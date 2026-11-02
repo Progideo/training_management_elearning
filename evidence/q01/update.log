@@ -1,0 +1,72 @@
+ Container tm-e01-20261101-odb-1 Running 
+ Container tm-e01-20261101-odb-1 Waiting 
+ Container tm-e01-20261101-odb-1 Healthy 
+ Container tm-e01-20261101-odoo-run-0793453ac943 Creating 
+ Container tm-e01-20261101-odoo-run-0793453ac943 Created 
+2026-11-01 23:59:51,052 1 INFO ? odoo: Odoo version 20.0-20261015
+2026-11-01 23:59:51,053 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf
+2026-11-01 23:59:51,053 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/20.0', '/mnt/extra-addons', '/mnt/qualification-addons', '/usr/lib/python3/dist-packages/addons'])
+2026-11-01 23:59:51,054 1 INFO ? odoo: database: odoo@odb:5432
+2026-11-01 23:59:51,822 1 INFO e01 odoo.modules.loading: loading 1 modules...
+2026-11-01 23:59:51,827 1 INFO e01 odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra)
+2026-11-01 23:59:51,855 1 INFO e01 odoo.modules.loading: updating modules list
+2026-11-01 23:59:51,858 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a
+2026-11-01 23:59:52,588 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['Training Management — eLearning'] to user __system__ #1 via n/a
+2026-11-01 23:59:52,588 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['Training Management — eLearning'] to user __system__ #1 via n/a
+2026-11-01 23:59:52,910 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.button_install on [] to user __system__ #1 via n/a
+2026-11-01 23:59:52,958 1 INFO e01 odoo.modules.loading: loading 42 modules...
+2026-11-01 23:59:53,151 1 WARNING e01 odoo.addons.mail.controllers.attachment: markdown2 is not installed, markdown will not be rendered
+2026-11-01 23:59:53,507 1 INFO e01 odoo.modules.loading: Loading module training_management_elearning (42/42)
+2026-11-01 23:59:53,633 1 INFO e01 odoo.registry: module training_management_elearning: creating or updating database tables
+2026-11-01 23:59:53,799 1 INFO e01 odoo.modules.loading: loading training_management_elearning/security/groups.xml
+2026-11-01 23:59:53,857 1 INFO e01 odoo.modules.loading: loading training_management_elearning/security/ir.access.csv
+2026-11-01 23:59:53,979 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/resource_views.xml
+2026-11-01 23:59:54,034 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/resource_views.xml',
+ 'line': 1,
+ 'name': 'training.elearning.resource.form',
+ 'view': ir.ui.view(760,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': 'training_management_elearning.resource_form'}
+2026-11-01 23:59:54,048 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/editorial_views.xml
+2026-11-01 23:59:54,080 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/editorial_views.xml',
+ 'line': 2,
+ 'name': 'elearning.resource.editorial',
+ 'view': ir.ui.view(766,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(760,),
+ 'xmlid': 'training_management_elearning.resource_editorial'}
+2026-11-01 23:59:54,082 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/editorial_views.xml',
+ 'line': 1,
+ 'name': 'elearning.resource.editorial',
+ 'view': ir.ui.view(766,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(760,),
+ 'xmlid': 'training_management_elearning.resource_editorial'}
+2026-11-01 23:59:54,101 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/runtime_views.xml
+2026-11-01 23:59:54,122 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/runtime_views.xml',
+ 'line': 2,
+ 'name': 'elearning.attempt.form',
+ 'view': ir.ui.view(771,),
+ 'view.model': 'training.elearning.attempt',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': 'training_management_elearning.attempt_form'}
+2026-11-01 23:59:54,141 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/enriched_views.xml
+2026-11-01 23:59:54,217 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-01 23:59:54,220 1 INFO e01 odoo.modules.loading: Module training_management_elearning loaded in 0.71s, 844 queries (+844 other)
+2026-11-01 23:59:54,220 1 INFO e01 odoo.modules.loading: 42 modules loaded in 1.26s, 844 queries (+844 extra)
+2026-11-01 23:59:54,680 1 INFO e01 odoo.modules.loading: Modules loaded.
+2026-11-01 23:59:54,689 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-01 23:59:54,691 1 INFO e01 odoo.registry: Registry loaded in 2.999s
+2026-11-01 23:59:54,691 1 INFO e01 odoo.service.server.ThreadedServer: Initiating shutdown
+2026-11-01 23:59:54,691 1 INFO e01 odoo.service.server.ThreadedServer: Hit CTRL-C again or send a second signal to force the shutdown.
+2026-11-01 23:59:54,692 1 INFO e01 odoo.addons.bus.websocket: Disconnecting 0 websockets
+2026-11-01 23:59:54,798 1 INFO e01 odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 1 connections 

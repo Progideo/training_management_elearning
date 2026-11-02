@@ -1,0 +1,10 @@
+locator.click: Error: strict mode violation: locator('button[type=submit]') resolved to 2 elements:
+    1) <button id="o_logout" type="submit" class="btn w-100 ps-3 text-start">…</button> aka getByText('Logout')
+    2) <button type="submit" class="btn btn-primary">Confirm and start the mock exam</button> aka getByRole('button', { name: 'Confirm and start the mock' })
+
+Call log:
+[2m  - waiting for locator('button[type=submit]')[22m
+
+    at /Users/jbcrouigneau/Documents/ChatGPT/Formations/training_management_elearning/bench/q01/browser.cjs:13:44 {
+  log: [ "  - waiting for locator('button[type=submit]')" ]
+}

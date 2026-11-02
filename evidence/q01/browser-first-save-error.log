@@ -1,0 +1,11 @@
+locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.tm_save_status').filter({ hasText: 'Saved on the server.' }) to be visible[22m
+
+    at save (/Users/jbcrouigneau/Documents/ChatGPT/Formations/training_management_elearning/bench/q01/browser.cjs:18:102)
+    at /Users/jbcrouigneau/Documents/ChatGPT/Formations/training_management_elearning/bench/q01/browser.cjs:19:95 {
+  log: [
+    "  - waiting for locator('.tm_save_status').filter({ hasText: 'Saved on the server.' }) to be visible"
+  ],
+  name: 'TimeoutError'
+}

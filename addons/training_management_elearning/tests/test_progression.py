@@ -60,3 +60,17 @@ class TestFormativeProgress(RuntimeCase):
         self.result(attempt,'pass',1,80)
         self.assertFalse(yref.blocked)
         self.assertFalse(self.service()._complete(y_enrollment,y_activity))
+
+    def test_declared_result_does_not_decide_the_completion_certificate_by_default(self):
+        enrollment,usage=self.setup_runtime()
+        service=self.env['training.learning.service'].with_user(self.coordinator)
+        activity=usage.activity_id
+        self.assertFalse(service._required_for_certificate(activity))
+        other=self.activity(enrollment.delivery_id,criterion='validation')
+        self.assertTrue(service._required_for_certificate(other))
+        counted=self.env['training.elearning.assignment'].with_user(self.coordinator).create({'name':'Counted',
+            'program_id':self.program.id,'version_id':usage.version_id.id,'objective':'Practice','rule':'completed','counts_for_completion':True})
+        counted.action_validate()
+        counted_usage=counted._apply(self.delivery())
+        self.assertTrue(service._required_for_certificate(counted_usage.activity_id))
+

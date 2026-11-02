@@ -54,3 +54,11 @@ for phase in install update; do
     2>&1 | tee "ci-results/$phase.log"
   python3 ci/check_results.py "ci-results/$phase.log"
 done
+# Website rewrites portal layouts: the participant routes must also work on this stack.
+./bench/e01/run run --rm -T odoo odoo -d elearning_ci_website \
+  --addons-path=/mnt/extra-addons,/mnt/qualification-addons \
+  --without-demo=all --workers=0 --max-cron-threads=0 \
+  -i website,training_management_website,training_management_elearning --test-enable \
+  --test-tags /training_management_elearning --stop-after-init \
+  2>&1 | tee ci-results/website.log
+python3 ci/check_results.py ci-results/website.log

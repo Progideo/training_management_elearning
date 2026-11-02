@@ -42,11 +42,11 @@
             seen.add(message.key);queue.push({key:message.key,data:message.data});flush();
         }
     });
-    if(cfg.attempt) setInterval(async()=>{
+    setInterval(async()=>{
         const controller=new AbortController();
         const timeout=setTimeout(()=>controller.abort(),15000);
         try {
-            const response=await fetch('/training/interactive/attempt/'+cfg.attempt+'/renew',{
+            const response=await fetch(cfg.renew,{
                 method:'POST',credentials:'same-origin',signal:controller.signal,body:new URLSearchParams({csrf_token:cfg.csrf,lease:String(cfg.lease)})});
             if(!response.ok||response.redirected) throw new Error();
         } catch(e) {status.textContent='Autorisation indisponible. Rechargez le lecteur pour reprendre.';frame.remove();}

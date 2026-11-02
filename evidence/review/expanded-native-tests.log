@@ -1,0 +1,1047 @@
+ Container tm-review-20261102-odb-1 Running 
+ Container tm-review-20261102-odb-1 Waiting 
+ Container tm-review-20261102-odb-1 Healthy 
+ Container tm-review-20261102-odoo-run-a9e928ef70db Creating 
+ Container tm-review-20261102-odoo-run-a9e928ef70db Created 
+2026-11-02 08:25:52,447 1 INFO ? odoo: Odoo version 20.0-20261015
+2026-11-02 08:25:52,448 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf
+2026-11-02 08:25:52,448 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/20.0', '/mnt/extra-addons', '/mnt/qualification-addons', '/usr/lib/python3/dist-packages/addons'])
+2026-11-02 08:25:52,448 1 INFO ? odoo: database: odoo@odb:5432
+2026-11-02 08:25:53,588 1 INFO ? odoo.service.server: HTTP service running on 0.0.0.0:8069
+2026-11-02 08:25:53,598 1 INFO review_fresh odoo.tests.common: Importing test framework
+2026-11-02 08:25:53,690 1 INFO review_fresh odoo.modules.loading: Initializing database review_fresh
+2026-11-02 08:25:54,856 1 INFO review_fresh odoo.modules.loading: loading 1 modules...
+2026-11-02 08:25:54,857 1 INFO review_fresh odoo.modules.loading: Loading module base (1/1)
+2026-11-02 08:25:54,884 1 INFO review_fresh odoo.registry: module base: creating or updating database tables
+2026-11-02 08:25:55,161 1 INFO review_fresh odoo.fields: Prepare computation of ir.module.module.menus_by_module in 699 records
+2026-11-02 08:25:55,162 1 INFO review_fresh odoo.fields: Prepare computation of ir.module.module.reports_by_module in 699 records
+2026-11-02 08:25:55,163 1 INFO review_fresh odoo.fields: Prepare computation of ir.module.module.views_by_module in 699 records
+2026-11-02 08:25:55,242 1 INFO review_fresh odoo.fields: Prepare computation of res.partner.user_id in 1 records
+2026-11-02 08:25:55,243 1 INFO review_fresh odoo.fields: Prepare computation of res.partner.commercial_partner_id in 1 records
+2026-11-02 08:25:55,244 1 INFO review_fresh odoo.fields: Prepare computation of res.partner.complete_name in 1 records
+2026-11-02 08:25:55,245 1 INFO review_fresh odoo.fields: Prepare computation of res.partner.lang in 1 records
+2026-11-02 08:25:55,249 1 INFO review_fresh odoo.fields: Prepare computation of res.partner.commercial_company_name in 1 records
+2026-11-02 08:25:55,250 1 INFO review_fresh odoo.fields: Prepare computation of res.partner.properties in 1 records
+2026-11-02 08:25:55,251 1 INFO review_fresh odoo.fields: Prepare computation of res.partner.partner_share in 1 records
+2026-11-02 08:25:55,274 1 INFO review_fresh odoo.fields: Prepare computation of res.currency.decimal_places in 1 records
+2026-11-02 08:25:55,296 1 INFO review_fresh odoo.fields: Prepare computation of res.company.company_details in 1 records
+2026-11-02 08:25:55,297 1 INFO review_fresh odoo.fields: Prepare computation of res.company.uses_default_logo in 1 records
+2026-11-02 08:25:55,300 1 INFO review_fresh odoo.models: Computing parent_path for table res_company...
+2026-11-02 08:25:55,326 1 INFO review_fresh odoo.fields: Prepare computation of res.users.signature in 1 records
+2026-11-02 08:25:55,327 1 INFO review_fresh odoo.fields: Prepare computation of res.users.share in 1 records
+2026-11-02 08:25:56,579 1 INFO review_fresh odoo.modules.loading: loading base/data/res.lang.csv
+2026-11-02 08:25:56,619 1 INFO review_fresh odoo.modules.loading: loading base/data/res_lang_data.xml
+2026-11-02 08:25:56,685 1 INFO review_fresh odoo.modules.loading: loading base/data/res_partner_data.xml
+2026-11-02 08:25:56,788 1 INFO review_fresh odoo.modules.loading: loading base/data/res_currency_data.xml
+2026-11-02 08:25:57,211 1 INFO review_fresh odoo.modules.loading: loading base/data/res_company_data.xml
+2026-11-02 08:25:57,229 1 INFO review_fresh odoo.modules.loading: loading base/data/res_users_data.xml
+2026-11-02 08:25:59,356 1 INFO review_fresh odoo.modules.loading: loading base/data/report_paperformat_data.xml
+2026-11-02 08:25:59,364 1 INFO review_fresh odoo.modules.loading: loading base/data/res_country_data.xml
+2026-11-02 08:25:59,773 1 INFO review_fresh odoo.modules.loading: loading base/data/clearing_label_data.xml
+2026-11-02 08:25:59,791 1 INFO review_fresh odoo.modules.loading: loading base/data/ir_demo_data.xml
+2026-11-02 08:25:59,813 1 INFO review_fresh odoo.modules.loading: loading base/security/base_groups.xml
+2026-11-02 08:26:00,072 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 3 who belonged to [] with changes [(<Command.LINK: 4>, 12, 0)]
+2026-11-02 08:26:00,126 1 INFO review_fresh odoo.modules.loading: loading base/wizard/wizard_ir_model_menu_create_views.xml
+2026-11-02 08:26:00,139 1 INFO review_fresh odoo.modules.loading: loading base/views/decimal_precision_views.xml
+2026-11-02 08:26:00,154 1 INFO review_fresh odoo.modules.loading: loading base/views/res_config_views.xml
+2026-11-02 08:26:00,160 1 INFO review_fresh odoo.modules.loading: loading base/data/res.country.state.csv
+2026-11-02 08:26:00,595 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_actions_views.xml
+2026-11-02 08:26:00,705 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_asset_views.xml
+2026-11-02 08:26:00,717 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_config_parameter_views.xml
+2026-11-02 08:26:00,729 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_cron_views.xml
+2026-11-02 08:26:00,755 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_cron_trigger_views.xml
+2026-11-02 08:26:00,767 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_filters_views.xml
+2026-11-02 08:26:00,784 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_mail_server_views.xml
+2026-11-02 08:26:00,797 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_model_views.xml
+2026-11-02 08:26:00,882 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_attachment_views.xml
+2026-11-02 08:26:00,906 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_access_views.xml
+2026-11-02 08:26:00,928 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_sequence_views.xml
+2026-11-02 08:26:00,942 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_ui_menu_views.xml
+2026-11-02 08:26:00,953 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_ui_view_views.xml
+2026-11-02 08:26:00,985 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_default_views.xml
+2026-11-02 08:26:00,998 1 INFO review_fresh odoo.modules.loading: loading base/data/ir_config_parameter_data.xml
+2026-11-02 08:26:01,001 1 INFO review_fresh odoo.modules.loading: loading base/data/ir_cron_data.xml
+2026-11-02 08:26:01,015 1 INFO review_fresh odoo.modules.loading: loading base/report/ir_model_report.xml
+2026-11-02 08:26:01,020 1 INFO review_fresh odoo.modules.loading: loading base/report/ir_model_templates.xml
+2026-11-02 08:26:01,029 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_logging_views.xml
+2026-11-02 08:26:01,040 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_qweb_widget_templates.xml
+2026-11-02 08:26:01,051 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_module_views.xml
+2026-11-02 08:26:01,079 1 INFO review_fresh odoo.modules.loading: loading base/data/ir_module_category_data.xml
+2026-11-02 08:26:01,111 1 INFO review_fresh odoo.modules.loading: loading base/data/ir_module_module.xml
+2026-11-02 08:26:01,163 1 INFO review_fresh odoo.modules.loading: loading base/report/ir_module_reports.xml
+2026-11-02 08:26:01,170 1 INFO review_fresh odoo.modules.loading: loading base/report/ir_module_report_templates.xml
+2026-11-02 08:26:01,175 1 INFO review_fresh odoo.modules.loading: loading base/wizard/base_module_update_views.xml
+2026-11-02 08:26:01,181 1 INFO review_fresh odoo.modules.loading: loading base/wizard/base_language_install_views.xml
+2026-11-02 08:26:01,191 1 INFO review_fresh odoo.modules.loading: loading base/wizard/base_import_language_views.xml
+2026-11-02 08:26:01,199 1 INFO review_fresh odoo.modules.loading: loading base/wizard/base_module_upgrade_views.xml
+2026-11-02 08:26:01,223 1 INFO review_fresh odoo.modules.loading: loading base/wizard/base_module_uninstall_views.xml
+2026-11-02 08:26:01,233 1 INFO review_fresh odoo.modules.loading: loading base/wizard/base_export_language_views.xml
+2026-11-02 08:26:01,242 1 INFO review_fresh odoo.modules.loading: loading base/wizard/base_partner_merge_views.xml
+2026-11-02 08:26:01,256 1 INFO review_fresh odoo.modules.loading: loading base/data/ir_demo_failure_data.xml
+2026-11-02 08:26:01,271 1 INFO review_fresh odoo.modules.loading: loading base/views/ir_profile_views.xml
+2026-11-02 08:26:01,302 1 INFO review_fresh odoo.modules.loading: loading base/views/res_company_views.xml
+2026-11-02 08:26:01,316 1 INFO review_fresh odoo.modules.loading: loading base/views/res_lang_views.xml
+2026-11-02 08:26:01,330 1 INFO review_fresh odoo.modules.loading: loading base/views/res_partner_views.xml
+2026-11-02 08:26:01,401 1 INFO review_fresh odoo.modules.loading: loading base/views/clearing_label_views.xml
+2026-11-02 08:26:01,405 1 INFO review_fresh odoo.modules.loading: loading base/views/res_partner_bank_views.xml
+2026-11-02 08:26:01,420 1 INFO review_fresh odoo.modules.loading: loading base/views/res_country_views.xml
+2026-11-02 08:26:01,433 1 INFO review_fresh odoo.modules.loading: loading base/views/res_country_group_views.xml
+2026-11-02 08:26:01,442 1 INFO review_fresh odoo.modules.loading: loading base/views/res_country_state_views.xml
+2026-11-02 08:26:01,453 1 INFO review_fresh odoo.modules.loading: loading base/views/res_currency_views.xml
+2026-11-02 08:26:01,481 1 INFO review_fresh odoo.modules.loading: loading base/views/res_groups_views.xml
+2026-11-02 08:26:01,518 1 INFO review_fresh odoo.modules.loading: loading base/views/res_users_views.xml
+2026-11-02 08:26:01,586 1 INFO review_fresh odoo.modules.loading: loading base/views/res_users_apikeys_views.xml
+2026-11-02 08:26:01,592 1 INFO review_fresh odoo.modules.loading: loading base/views/res_device_views.xml
+2026-11-02 08:26:01,615 1 INFO review_fresh odoo.modules.loading: loading base/views/res_users_identitycheck_views.xml
+2026-11-02 08:26:01,620 1 INFO review_fresh odoo.modules.loading: loading base/views/res_config_settings_views.xml
+2026-11-02 08:26:01,626 1 INFO review_fresh odoo.modules.loading: loading base/views/report_paperformat_views.xml
+2026-11-02 08:26:01,637 1 INFO review_fresh odoo.modules.loading: loading base/data/ir_action_data.xml
+2026-11-02 08:26:01,642 1 INFO review_fresh odoo.modules.loading: loading base/data/website.xml
+2026-11-02 08:26:01,645 1 INFO review_fresh odoo.modules.loading: loading base/views/base_menus.xml
+2026-11-02 08:26:01,787 1 INFO review_fresh odoo.modules.loading: loading base/security/ir.access.csv
+2026-11-02 08:26:02,004 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:02,129 1 INFO review_fresh odoo.modules.loading: Module base loaded in 7.27s, 8642 queries (+8642 other)
+2026-11-02 08:26:02,129 1 INFO review_fresh odoo.modules.loading: 1 modules loaded in 7.27s, 8642 queries (+8642 extra)
+2026-11-02 08:26:02,135 1 INFO review_fresh odoo.modules.loading: updating modules list
+2026-11-02 08:26:02,137 1 INFO review_fresh odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a
+2026-11-02 08:26:02,678 1 INFO review_fresh odoo.addons.base.models.ir_module: ALLOW access to module.button_install on ['Training Management — eLearning'] to user __system__ #1 via n/a
+2026-11-02 08:26:02,756 1 INFO review_fresh odoo.modules.loading: loading 42 modules...
+2026-11-02 08:26:02,756 1 INFO review_fresh odoo.modules.loading: Loading module base_report_wkhtmltox (2/42)
+2026-11-02 08:26:02,764 1 INFO review_fresh odoo.registry: module base_report_wkhtmltox: creating or updating database tables
+2026-11-02 08:26:02,796 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:02,799 1 INFO review_fresh odoo.modules.loading: Module base_report_wkhtmltox loaded in 0.04s, 44 queries (+44 other)
+2026-11-02 08:26:02,799 1 INFO review_fresh odoo.modules.loading: Loading module rpc (3/42)
+2026-11-02 08:26:02,814 1 INFO review_fresh odoo.registry: Caches invalidated, signaling through the database: ['default', 'stable']
+2026-11-02 08:26:02,817 1 INFO review_fresh odoo.modules.loading: Module rpc loaded in 0.02s, 12 queries (+12 other)
+2026-11-02 08:26:02,817 1 INFO review_fresh odoo.modules.loading: Loading module web (4/42)
+2026-11-02 08:26:02,844 1 INFO review_fresh odoo.registry: module web: creating or updating database tables
+2026-11-02 08:26:03,164 1 INFO review_fresh odoo.modules.loading: loading web/views/webclient_templates.xml
+2026-11-02 08:26:03,220 1 INFO review_fresh odoo.modules.loading: loading web/views/report_templates.xml
+2026-11-02 08:26:03,352 1 INFO review_fresh odoo.modules.loading: loading web/views/base_document_layout_views.xml
+2026-11-02 08:26:03,369 1 INFO review_fresh odoo.modules.loading: loading web/views/partner_view.xml
+2026-11-02 08:26:03,381 1 INFO review_fresh odoo.modules.loading: loading web/views/speedscope_template.xml
+2026-11-02 08:26:03,387 1 INFO review_fresh odoo.modules.loading: loading web/views/memory_template.xml
+2026-11-02 08:26:03,391 1 INFO review_fresh odoo.modules.loading: loading web/views/speedscope_config_wizard.xml
+2026-11-02 08:26:03,397 1 INFO review_fresh odoo.modules.loading: loading web/views/neutralize_views.xml
+2026-11-02 08:26:03,404 1 INFO review_fresh odoo.modules.loading: loading web/views/ir_ui_view_views.xml
+2026-11-02 08:26:03,413 1 INFO review_fresh odoo.modules.loading: loading web/data/ir_attachment.xml
+2026-11-02 08:26:03,418 1 INFO review_fresh odoo.modules.loading: loading web/data/report_layout.xml
+2026-11-02 08:26:03,468 1 INFO review_fresh odoo.modules.loading: loading web/security/ir.access.csv
+2026-11-02 08:26:03,553 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:03,588 1 INFO review_fresh odoo.modules.loading: Module web loaded in 0.77s, 1384 queries (+1384 other)
+2026-11-02 08:26:03,588 1 INFO review_fresh odoo.modules.loading: Loading module api_doc (5/42)
+2026-11-02 08:26:03,599 1 INFO review_fresh odoo.registry: module api_doc: creating or updating database tables
+2026-11-02 08:26:03,621 1 INFO review_fresh odoo.modules.loading: loading api_doc/security/res_groups.xml
+2026-11-02 08:26:03,656 1 INFO review_fresh odoo.modules.loading: loading api_doc/views/docclient.xml
+2026-11-02 08:26:03,671 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:03,676 1 INFO review_fresh odoo.modules.loading: Module api_doc loaded in 0.09s, 88 queries (+88 other)
+2026-11-02 08:26:03,676 1 INFO review_fresh odoo.modules.loading: Loading module auth_totp (6/42)
+2026-11-02 08:26:03,710 1 INFO review_fresh odoo.registry: module auth_totp: creating or updating database tables
+2026-11-02 08:26:03,784 1 INFO review_fresh odoo.modules.loading: loading auth_totp/data/ir_action_data.xml
+2026-11-02 08:26:03,797 1 INFO review_fresh odoo.modules.loading: loading auth_totp/views/res_users_views.xml
+2026-11-02 08:26:03,838 1 INFO review_fresh odoo.modules.loading: loading auth_totp/views/templates.xml
+2026-11-02 08:26:03,844 1 INFO review_fresh odoo.modules.loading: loading auth_totp/wizard/auth_totp_wizard_views.xml
+2026-11-02 08:26:03,852 1 INFO review_fresh odoo.modules.loading: loading auth_totp/security/ir.access.csv
+2026-11-02 08:26:03,884 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:03,892 1 INFO review_fresh odoo.modules.loading: Module auth_totp loaded in 0.22s, 208 queries (+208 other)
+2026-11-02 08:26:03,892 1 INFO review_fresh odoo.modules.loading: Loading module base_address_extended (7/42)
+2026-11-02 08:26:03,903 1 INFO review_fresh odoo.registry: module base_address_extended: creating or updating database tables
+2026-11-02 08:26:03,915 1 INFO review_fresh odoo.fields: Prepare computation of res.partner.street_name in 5 records
+2026-11-02 08:26:03,916 1 INFO review_fresh odoo.fields: Prepare computation of res.partner.street_number in 5 records
+2026-11-02 08:26:03,916 1 INFO review_fresh odoo.fields: Prepare computation of res.partner.street_number2 in 5 records
+2026-11-02 08:26:03,970 1 INFO review_fresh odoo.modules.loading: loading base_address_extended/views/res_city_view.xml
+2026-11-02 08:26:03,991 1 INFO review_fresh odoo.modules.loading: loading base_address_extended/views/res_country_view.xml
+2026-11-02 08:26:04,000 1 INFO review_fresh odoo.modules.loading: loading base_address_extended/views/res_partner_views.xml
+2026-11-02 08:26:04,010 1 INFO review_fresh odoo.modules.loading: loading base_address_extended/security/ir.access.csv
+2026-11-02 08:26:04,033 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:04,036 1 INFO review_fresh odoo.modules.loading: Module base_address_extended loaded in 0.14s, 204 queries (+204 other)
+2026-11-02 08:26:04,036 1 INFO review_fresh odoo.modules.loading: Loading module base_import (8/42)
+2026-11-02 08:26:04,067 1 INFO review_fresh odoo.registry: module base_import: creating or updating database tables
+2026-11-02 08:26:04,364 1 INFO review_fresh odoo.modules.loading: loading base_import/security/ir.access.csv
+2026-11-02 08:26:04,426 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:04,427 1 INFO review_fresh odoo.modules.loading: Module base_import loaded in 0.39s, 1130 queries (+1130 other)
+2026-11-02 08:26:04,427 1 INFO review_fresh odoo.modules.loading: Loading module base_import_module (9/42)
+2026-11-02 08:26:04,437 1 INFO review_fresh odoo.registry: module base_import_module: creating or updating database tables
+2026-11-02 08:26:04,487 1 INFO review_fresh odoo.modules.loading: loading base_import_module/views/base_import_module_view.xml
+2026-11-02 08:26:04,509 1 INFO review_fresh odoo.modules.loading: loading base_import_module/views/ir_module_views.xml
+2026-11-02 08:26:04,538 1 INFO review_fresh odoo.modules.loading: loading base_import_module/security/ir.access.csv
+2026-11-02 08:26:04,561 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:04,566 1 INFO review_fresh odoo.modules.loading: Module base_import_module loaded in 0.14s, 172 queries (+172 other)
+2026-11-02 08:26:04,566 1 INFO review_fresh odoo.modules.loading: Loading module base_setup (10/42)
+2026-11-02 08:26:04,580 1 INFO review_fresh odoo.registry: module base_setup: creating or updating database tables
+2026-11-02 08:26:04,622 1 INFO review_fresh odoo.modules.loading: loading base_setup/data/base_setup_data.xml
+2026-11-02 08:26:04,627 1 INFO review_fresh odoo.modules.loading: loading base_setup/views/res_config_settings_views.xml
+2026-11-02 08:26:04,656 1 INFO review_fresh odoo.modules.loading: loading base_setup/views/res_partner_views.xml
+2026-11-02 08:26:04,675 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:04,680 1 INFO review_fresh odoo.modules.loading: Module base_setup loaded in 0.11s, 154 queries (+154 other)
+2026-11-02 08:26:04,681 1 INFO review_fresh odoo.modules.loading: Loading module bus (11/42)
+2026-11-02 08:26:04,709 1 INFO review_fresh odoo.registry: module bus: creating or updating database tables
+2026-11-02 08:26:04,800 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:04,817 1 INFO review_fresh odoo.modules.loading: Module bus loaded in 0.14s, 128 queries (+128 other)
+2026-11-02 08:26:04,817 1 INFO review_fresh odoo.modules.loading: Loading module http_routing (12/42)
+2026-11-02 08:26:04,821 1 INFO review_fresh odoo.registry: module http_routing: creating or updating database tables
+2026-11-02 08:26:04,839 1 INFO review_fresh odoo.modules.loading: loading http_routing/views/http_routing_template.xml
+2026-11-02 08:26:04,893 1 INFO review_fresh odoo.modules.loading: loading http_routing/views/res_lang_views.xml
+2026-11-02 08:26:04,918 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:04,920 1 INFO review_fresh odoo.modules.loading: Module http_routing loaded in 0.10s, 141 queries (+141 other)
+2026-11-02 08:26:04,920 1 INFO review_fresh odoo.modules.loading: Loading module mysubscription (13/42)
+2026-11-02 08:26:04,929 1 INFO review_fresh odoo.registry: module mysubscription: creating or updating database tables
+2026-11-02 08:26:04,942 1 INFO review_fresh odoo.modules.loading: loading mysubscription/data/ir_config_parameter_data.xml
+2026-11-02 08:26:04,946 1 INFO review_fresh odoo.modules.loading: loading mysubscription/views/menus.xml
+2026-11-02 08:26:04,955 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:04,958 1 INFO review_fresh odoo.modules.loading: Module mysubscription loaded in 0.04s, 36 queries (+36 other)
+2026-11-02 08:26:04,958 1 INFO review_fresh odoo.modules.loading: Loading module resource (14/42)
+2026-11-02 08:26:04,974 1 INFO review_fresh odoo.registry: module resource: creating or updating database tables
+2026-11-02 08:26:04,978 1 INFO review_fresh odoo.fields: Prepare computation of res.company.tz in 1 records
+2026-11-02 08:26:05,104 1 INFO review_fresh odoo.modules.loading: loading resource/data/resource_data.xml
+2026-11-02 08:26:05,128 1 INFO review_fresh odoo.modules.loading: loading resource/data/ir_cron.xml
+2026-11-02 08:26:05,140 1 INFO review_fresh odoo.modules.loading: loading resource/views/resource_resource_views.xml
+2026-11-02 08:26:05,164 1 INFO review_fresh odoo.modules.loading: loading resource/views/resource_calendar_leaves_views.xml
+2026-11-02 08:26:05,184 1 INFO review_fresh odoo.modules.loading: loading resource/views/resource_calendar_attendance_views.xml
+2026-11-02 08:26:05,200 1 INFO review_fresh odoo.modules.loading: loading resource/views/resource_calendar_views.xml
+2026-11-02 08:26:05,215 1 INFO review_fresh odoo.modules.loading: loading resource/views/menuitems.xml
+2026-11-02 08:26:05,225 1 INFO review_fresh odoo.modules.loading: loading resource/security/ir.access.csv
+2026-11-02 08:26:05,261 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:05,268 1 INFO review_fresh odoo.modules.loading: Module resource loaded in 0.31s, 472 queries (+472 other)
+2026-11-02 08:26:05,268 1 INFO review_fresh odoo.modules.loading: Loading module web_tour (15/42)
+2026-11-02 08:26:05,278 1 INFO review_fresh odoo.registry: module web_tour: creating or updating database tables
+2026-11-02 08:26:05,281 1 INFO review_fresh odoo.fields: Prepare computation of res.users.tour_enabled in 4 records
+2026-11-02 08:26:05,353 1 INFO review_fresh odoo.modules.loading: loading web_tour/views/tour_views.xml
+2026-11-02 08:26:05,390 1 INFO review_fresh odoo.modules.loading: loading web_tour/security/ir.access.csv
+2026-11-02 08:26:05,419 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:05,424 1 INFO review_fresh odoo.modules.loading: Module web_tour loaded in 0.16s, 206 queries (+206 other)
+2026-11-02 08:26:05,424 1 INFO review_fresh odoo.modules.loading: Loading module auth_passkey (16/42)
+2026-11-02 08:26:05,491 1 INFO review_fresh odoo.registry: module auth_passkey: creating or updating database tables
+2026-11-02 08:26:05,548 1 INFO review_fresh odoo.modules.loading: loading auth_passkey/views/auth_passkey_key_views.xml
+2026-11-02 08:26:05,578 1 INFO review_fresh odoo.modules.loading: loading auth_passkey/views/auth_passkey_login_templates.xml
+2026-11-02 08:26:05,597 1 INFO review_fresh odoo.modules.loading: loading auth_passkey/views/res_users_identitycheck_views.xml
+2026-11-02 08:26:05,615 1 INFO review_fresh odoo.modules.loading: loading auth_passkey/views/res_users_views.xml
+2026-11-02 08:26:05,641 1 INFO review_fresh odoo.modules.loading: loading auth_passkey/security/ir.access.csv
+2026-11-02 08:26:05,675 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:05,683 1 INFO review_fresh odoo.modules.loading: Module auth_passkey loaded in 0.26s, 214 queries (+214 other)
+2026-11-02 08:26:05,683 1 INFO review_fresh odoo.modules.loading: Loading module html_editor (17/42)
+2026-11-02 08:26:05,820 1 WARNING review_fresh odoo.addons.mail.controllers.attachment: markdown2 is not installed, markdown will not be rendered
+2026-11-02 08:26:05,878 1 INFO review_fresh odoo.registry: module html_editor: creating or updating database tables
+2026-11-02 08:26:06,235 1 INFO review_fresh odoo.modules.loading: loading html_editor/security/ir.access.csv
+2026-11-02 08:26:06,299 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:06,306 1 INFO review_fresh odoo.modules.loading: Module html_editor loaded in 0.62s, 1270 queries (+1270 other)
+2026-11-02 08:26:06,306 1 INFO review_fresh odoo.modules.loading: Loading module iap (18/42)
+2026-11-02 08:26:06,310 1 INFO review_fresh odoo.registry: module iap: creating or updating database tables
+2026-11-02 08:26:06,376 1 INFO review_fresh odoo.modules.loading: loading iap/data/services.xml
+2026-11-02 08:26:06,382 1 INFO review_fresh odoo.modules.loading: loading iap/views/iap_views.xml
+2026-11-02 08:26:06,413 1 INFO review_fresh odoo.modules.loading: loading iap/views/res_config_settings.xml
+2026-11-02 08:26:06,424 1 INFO review_fresh odoo.modules.loading: loading iap/views/res_users_views.xml
+2026-11-02 08:26:06,431 1 INFO review_fresh odoo.modules.loading: loading iap/security/ir.access.csv
+2026-11-02 08:26:06,460 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:06,464 1 INFO review_fresh odoo.modules.loading: Module iap loaded in 0.16s, 238 queries (+238 other)
+2026-11-02 08:26:06,464 1 INFO review_fresh odoo.modules.loading: Loading module mail (19/42)
+2026-11-02 08:26:06,522 1 INFO review_fresh odoo.registry: module mail: creating or updating database tables
+2026-11-02 08:26:06,705 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.partner_ids
+2026-11-02 08:26:06,709 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.activity_user_id in 10 records
+2026-11-02 08:26:06,710 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.activity_type_id in 10 records
+2026-11-02 08:26:06,710 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.template_id in 10 records
+2026-11-02 08:26:06,711 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.activity_plan_id in 10 records
+2026-11-02 08:26:06,711 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.activity_date_deadline_range in 10 records
+2026-11-02 08:26:06,712 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.activity_role_id in 10 records
+2026-11-02 08:26:06,712 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.activity_summary in 10 records
+2026-11-02 08:26:06,713 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.followers_type in 10 records
+2026-11-02 08:26:06,713 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.followers_partner_field_name in 10 records
+2026-11-02 08:26:06,714 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.activity_date_deadline_range_type in 10 records
+2026-11-02 08:26:06,714 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.activity_user_type in 10 records
+2026-11-02 08:26:06,714 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.activity_user_field_name in 10 records
+2026-11-02 08:26:06,715 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.log_note_note in 10 records
+2026-11-02 08:26:06,716 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.mail_post_autofollow in 10 records
+2026-11-02 08:26:06,831 1 INFO review_fresh odoo.fields: Prepare computation of res.partner.email_normalized in 5 records
+2026-11-02 08:26:06,847 1 INFO review_fresh odoo.fields: Prepare computation of mail.compose.message.attachment_ids
+2026-11-02 08:26:06,848 1 INFO review_fresh odoo.fields: Prepare computation of mail.compose.message.partner_ids
+2026-11-02 08:26:06,851 1 INFO review_fresh odoo.fields: Prepare computation of mail.compose.message.partner_cc_ids
+2026-11-02 08:26:06,856 1 INFO review_fresh odoo.fields: Prepare computation of mail.activity.schedule.plan_available_ids
+2026-11-02 08:26:08,105 1 INFO review_fresh odoo.modules.loading: loading mail/data/mail_groups.xml
+2026-11-02 08:26:08,188 1 INFO review_fresh odoo.modules.loading: loading mail/wizard/mail_activity_schedule_views.xml
+2026-11-02 08:26:08,207 1 INFO review_fresh odoo.modules.loading: loading mail/wizard/mail_blacklist_remove_views.xml
+2026-11-02 08:26:08,213 1 INFO review_fresh odoo.modules.loading: loading mail/wizard/mail_compose_message_views.xml
+2026-11-02 08:26:08,229 1 INFO review_fresh odoo.modules.loading: loading mail/wizard/mail_template_preview_views.xml
+2026-11-02 08:26:08,236 1 INFO review_fresh odoo.modules.loading: loading mail/wizard/mail_followers_edit_views.xml
+2026-11-02 08:26:08,244 1 INFO review_fresh odoo.modules.loading: loading mail/wizard/mail_template_reset_views.xml
+2026-11-02 08:26:08,252 1 INFO review_fresh odoo.modules.loading: loading mail/views/fetchmail_views.xml
+2026-11-02 08:26:08,270 1 INFO review_fresh odoo.modules.loading: loading mail/views/ir_access_views.xml
+2026-11-02 08:26:08,281 1 INFO review_fresh odoo.modules.loading: loading mail/views/ir_cron_views.xml
+2026-11-02 08:26:08,291 1 INFO review_fresh odoo.modules.loading: loading mail/views/ir_filters_views.xml
+2026-11-02 08:26:08,312 1 INFO review_fresh odoo.modules.loading: loading mail/views/ir_mail_server_views.xml
+2026-11-02 08:26:08,319 1 INFO review_fresh odoo.modules.loading: loading mail/views/ir_ui_view_views.xml
+2026-11-02 08:26:08,328 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_message_subtype_views.xml
+2026-11-02 08:26:08,344 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_notification_views.xml
+2026-11-02 08:26:08,354 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_message_views.xml
+2026-11-02 08:26:08,395 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_message_schedule_views.xml
+2026-11-02 08:26:08,409 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_mail_views.xml
+2026-11-02 08:26:08,432 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_followers_views.xml
+2026-11-02 08:26:08,442 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_ice_server_views.xml
+2026-11-02 08:26:08,462 1 INFO review_fresh odoo.modules.loading: loading mail/views/discuss_category_views.xml
+2026-11-02 08:26:08,481 1 INFO review_fresh odoo.modules.loading: loading mail/views/discuss_channel_member_views.xml
+2026-11-02 08:26:08,491 1 INFO review_fresh odoo.modules.loading: loading mail/views/discuss_channel_rtc_session_views.xml
+2026-11-02 08:26:08,504 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_link_preview_views.xml
+2026-11-02 08:26:08,518 1 INFO review_fresh odoo.modules.loading: loading mail/views/discuss/discuss_gif_favorite_views.xml
+2026-11-02 08:26:08,527 1 INFO review_fresh odoo.modules.loading: loading mail/views/discuss_channel_views.xml
+2026-11-02 08:26:08,565 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_canned_response_views.xml
+2026-11-02 08:26:08,587 1 INFO review_fresh odoo.modules.loading: loading mail/views/res_role_views.xml
+2026-11-02 08:26:08,599 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_activity_views.xml
+2026-11-02 08:26:08,712 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_activity_plan_views.xml
+2026-11-02 08:26:08,740 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_activity_plan_template_views.xml
+2026-11-02 08:26:08,749 1 INFO review_fresh odoo.modules.loading: loading mail/views/res_config_settings_views.xml
+2026-11-02 08:26:08,772 1 INFO review_fresh odoo.modules.loading: loading mail/data/mail_templates_chatter.xml
+2026-11-02 08:26:08,795 1 INFO review_fresh odoo.modules.loading: loading mail/data/ir_config_parameter_data.xml
+2026-11-02 08:26:08,800 1 INFO review_fresh odoo.modules.loading: loading mail/data/res_partner_data.xml
+2026-11-02 08:26:08,897 1 INFO review_fresh odoo.modules.loading: loading mail/data/mail_message_subtype_data.xml
+2026-11-02 08:26:08,905 1 INFO review_fresh odoo.modules.loading: loading mail/data/mail_templates_email_layouts.xml
+2026-11-02 08:26:08,924 1 INFO review_fresh odoo.modules.loading: loading mail/data/mail_templates_mailgateway.xml
+2026-11-02 08:26:08,940 1 INFO review_fresh odoo.modules.loading: loading mail/data/discuss_channel_data.xml
+2026-11-02 08:26:08,993 1 INFO review_fresh odoo.modules.loading: loading mail/data/mail_activity_type_data.xml
+2026-11-02 08:26:09,003 1 INFO review_fresh odoo.modules.loading: loading mail/data/security_notifications_templates.xml
+2026-11-02 08:26:09,009 1 INFO review_fresh odoo.modules.loading: loading mail/data/ir_cron_data.xml
+2026-11-02 08:26:09,131 1 INFO review_fresh odoo.modules.loading: loading mail/data/ir_actions_data.xml
+2026-11-02 08:26:09,138 1 INFO review_fresh odoo.modules.loading: loading mail/views/discuss_public_templates.xml
+2026-11-02 08:26:09,144 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_alias_domain_views.xml
+2026-11-02 08:26:09,160 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_alias_views.xml
+2026-11-02 08:26:09,174 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_attachment_views.xml
+2026-11-02 08:26:09,181 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_gateway_allowed_views.xml
+2026-11-02 08:26:09,190 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_guest_views.xml
+2026-11-02 08:26:09,200 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_message_reaction_views.xml
+2026-11-02 08:26:09,209 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_templates_public.xml
+2026-11-02 08:26:09,216 1 INFO review_fresh odoo.modules.loading: loading mail/views/res_users_views.xml
+2026-11-02 08:26:09,239 1 INFO review_fresh odoo.modules.loading: loading mail/views/res_users_settings_views.xml
+2026-11-02 08:26:09,252 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_template_views.xml
+2026-11-02 08:26:09,274 1 INFO review_fresh odoo.modules.loading: loading mail/views/ir_actions_server_views.xml
+2026-11-02 08:26:09,288 1 INFO review_fresh odoo.modules.loading: loading mail/views/ir_model_views.xml
+2026-11-02 08:26:09,307 1 INFO review_fresh odoo.modules.loading: loading mail/views/res_partner_views.xml
+2026-11-02 08:26:09,345 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_blacklist_views.xml
+2026-11-02 08:26:09,356 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_menus.xml
+2026-11-02 08:26:09,459 1 INFO review_fresh odoo.modules.loading: loading mail/views/discuss/discuss_call_history_views.xml
+2026-11-02 08:26:09,478 1 INFO review_fresh odoo.modules.loading: loading mail/views/res_company_views.xml
+2026-11-02 08:26:09,491 1 INFO review_fresh odoo.modules.loading: loading mail/views/mail_scheduled_message_views.xml
+2026-11-02 08:26:09,500 1 INFO review_fresh odoo.modules.loading: loading mail/data/mail_canned_response_data.xml
+2026-11-02 08:26:09,510 1 INFO review_fresh odoo.modules.loading: loading mail/data/mail_templates_invite.xml
+2026-11-02 08:26:09,524 1 INFO review_fresh odoo.modules.loading: loading mail/data/web_tour_tour.xml
+2026-11-02 08:26:09,533 1 INFO review_fresh odoo.modules.loading: loading mail/security/ir.access.csv
+2026-11-02 08:26:09,805 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:09,908 1 INFO review_fresh odoo.modules.loading: Module mail loaded in 3.44s, 5649 queries (+5650 other)
+2026-11-02 08:26:09,908 1 INFO review_fresh odoo.modules.loading: Loading module web_unsplash (20/42)
+2026-11-02 08:26:09,929 1 INFO review_fresh odoo.registry: module web_unsplash: creating or updating database tables
+2026-11-02 08:26:09,975 1 INFO review_fresh odoo.modules.loading: loading web_unsplash/views/res_config_settings_view.xml
+2026-11-02 08:26:10,014 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:10,017 1 INFO review_fresh odoo.modules.loading: Module web_unsplash loaded in 0.11s, 116 queries (+116 other)
+2026-11-02 08:26:10,017 1 INFO review_fresh odoo.modules.loading: Loading module auth_signup (21/42)
+2026-11-02 08:26:10,036 1 INFO review_fresh odoo.registry: module auth_signup: creating or updating database tables
+2026-11-02 08:26:10,109 1 INFO review_fresh odoo.modules.loading: loading auth_signup/data/ir_config_parameter_data.xml
+2026-11-02 08:26:10,113 1 INFO review_fresh odoo.modules.loading: loading auth_signup/data/ir_cron_data.xml
+2026-11-02 08:26:10,140 1 INFO review_fresh odoo.modules.loading: loading auth_signup/data/mail_template_data.xml
+2026-11-02 08:26:10,191 1 INFO review_fresh odoo.modules.loading: loading auth_signup/views/res_config_settings_views.xml
+2026-11-02 08:26:10,214 1 INFO review_fresh odoo.modules.loading: loading auth_signup/views/res_users_views.xml
+2026-11-02 08:26:10,245 1 INFO review_fresh odoo.modules.loading: loading auth_signup/views/auth_signup_login_templates.xml
+2026-11-02 08:26:10,263 1 INFO review_fresh odoo.modules.loading: loading auth_signup/views/auth_signup_templates_email.xml
+2026-11-02 08:26:10,267 1 INFO review_fresh odoo.modules.loading: loading auth_signup/views/webclient_templates.xml
+2026-11-02 08:26:10,283 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:10,289 1 INFO review_fresh odoo.modules.loading: Module auth_signup loaded in 0.27s, 266 queries (+266 other)
+2026-11-02 08:26:10,289 1 INFO review_fresh odoo.modules.loading: Loading module auth_totp_mail (22/42)
+2026-11-02 08:26:10,303 1 INFO review_fresh odoo.registry: module auth_totp_mail: creating or updating database tables
+2026-11-02 08:26:10,339 1 INFO review_fresh odoo.modules.loading: loading auth_totp_mail/data/ir_action_data.xml
+2026-11-02 08:26:10,375 1 INFO review_fresh odoo.modules.loading: loading auth_totp_mail/data/mail_template_data.xml
+2026-11-02 08:26:10,401 1 INFO review_fresh odoo.modules.loading: loading auth_totp_mail/data/security_notifications_template.xml
+2026-11-02 08:26:10,409 1 INFO review_fresh odoo.modules.loading: loading auth_totp_mail/views/res_config_settings_views.xml
+2026-11-02 08:26:10,431 1 INFO review_fresh odoo.modules.loading: loading auth_totp_mail/views/res_users_views.xml
+2026-11-02 08:26:10,450 1 INFO review_fresh odoo.modules.loading: loading auth_totp_mail/views/templates.xml
+2026-11-02 08:26:10,463 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:10,467 1 INFO review_fresh odoo.modules.loading: Module auth_totp_mail loaded in 0.18s, 199 queries (+199 other)
+2026-11-02 08:26:10,467 1 INFO review_fresh odoo.modules.loading: Loading module base_install_request (23/42)
+2026-11-02 08:26:10,477 1 INFO review_fresh odoo.registry: module base_install_request: creating or updating database tables
+2026-11-02 08:26:10,532 1 INFO review_fresh odoo.modules.loading: loading base_install_request/wizard/base_module_install_request_views.xml
+2026-11-02 08:26:10,555 1 INFO review_fresh odoo.modules.loading: loading base_install_request/data/mail_templates.xml
+2026-11-02 08:26:10,560 1 INFO review_fresh odoo.modules.loading: loading base_install_request/data/mail_templates_module_install.xml
+2026-11-02 08:26:10,565 1 INFO review_fresh odoo.modules.loading: loading base_install_request/views/ir_module_module_views.xml
+2026-11-02 08:26:10,577 1 INFO review_fresh odoo.modules.loading: loading base_install_request/security/ir.access.csv
+2026-11-02 08:26:10,616 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:10,618 1 INFO review_fresh odoo.modules.loading: Module base_install_request loaded in 0.15s, 187 queries (+187 other)
+2026-11-02 08:26:10,618 1 INFO review_fresh odoo.modules.loading: Loading module gamification (24/42)
+2026-11-02 08:26:10,640 1 INFO review_fresh odoo.registry: module gamification: creating or updating database tables
+2026-11-02 08:26:10,691 1 INFO review_fresh odoo.fields: Prepare computation of res.users.karma in 4 records
+2026-11-02 08:26:10,960 1 INFO review_fresh odoo.modules.loading: loading gamification/wizard/update_goal.xml
+2026-11-02 08:26:10,982 1 INFO review_fresh odoo.modules.loading: loading gamification/wizard/grant_badge.xml
+2026-11-02 08:26:10,991 1 INFO review_fresh odoo.modules.loading: loading gamification/views/res_users_views.xml
+2026-11-02 08:26:11,015 1 INFO review_fresh odoo.modules.loading: loading gamification/views/gamification_karma_rank_views.xml
+2026-11-02 08:26:11,044 1 INFO review_fresh odoo.modules.loading: loading gamification/views/gamification_karma_tracking_views.xml
+2026-11-02 08:26:11,062 1 INFO review_fresh odoo.modules.loading: loading gamification/views/gamification_badge_views.xml
+2026-11-02 08:26:11,085 1 INFO review_fresh odoo.modules.loading: loading gamification/views/gamification_badge_user_views.xml
+2026-11-02 08:26:11,091 1 INFO review_fresh odoo.modules.loading: loading gamification/views/gamification_goal_views.xml
+2026-11-02 08:26:11,124 1 INFO review_fresh odoo.modules.loading: loading gamification/views/gamification_goal_definition_views.xml
+2026-11-02 08:26:11,144 1 INFO review_fresh odoo.modules.loading: loading gamification/views/gamification_challenge_views.xml
+2026-11-02 08:26:11,169 1 INFO review_fresh odoo.modules.loading: loading gamification/views/gamification_challenge_line_views.xml
+2026-11-02 08:26:11,174 1 INFO review_fresh odoo.modules.loading: loading gamification/views/gamification_menus.xml
+2026-11-02 08:26:11,192 1 INFO review_fresh odoo.modules.loading: loading gamification/data/ir_cron_data.xml
+2026-11-02 08:26:11,242 1 INFO review_fresh odoo.modules.loading: loading gamification/data/mail_template_data.xml
+2026-11-02 08:26:11,282 1 INFO review_fresh odoo.modules.loading: loading gamification/data/gamification_badge_data.xml
+2026-11-02 08:26:11,457 1 INFO review_fresh odoo.modules.loading: loading gamification/data/gamification_challenge_data.xml
+2026-11-02 08:26:11,492 1 INFO review_fresh odoo.modules.loading: loading gamification/data/gamification_karma_rank_data.xml
+2026-11-02 08:26:11,603 1 INFO review_fresh odoo.modules.loading: loading gamification/security/ir.access.csv
+2026-11-02 08:26:11,693 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:11,702 1 INFO review_fresh odoo.modules.loading: Module gamification loaded in 1.08s, 1012 queries (+1012 other)
+2026-11-02 08:26:11,702 1 INFO review_fresh odoo.modules.loading: Loading module google_gmail (25/42)
+2026-11-02 08:26:11,723 1 INFO review_fresh odoo.registry: module google_gmail: creating or updating database tables
+2026-11-02 08:26:11,779 1 INFO review_fresh odoo.modules.loading: loading google_gmail/views/fetchmail_server_views.xml
+2026-11-02 08:26:11,803 1 INFO review_fresh odoo.modules.loading: loading google_gmail/views/ir_mail_server_views.xml
+2026-11-02 08:26:11,814 1 INFO review_fresh odoo.modules.loading: loading google_gmail/views/res_config_settings_views.xml
+2026-11-02 08:26:11,834 1 INFO review_fresh odoo.modules.loading: loading google_gmail/views/templates.xml
+2026-11-02 08:26:11,854 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:11,858 1 INFO review_fresh odoo.modules.loading: Module google_gmail loaded in 0.16s, 150 queries (+150 other)
+2026-11-02 08:26:11,858 1 INFO review_fresh odoo.modules.loading: Loading module iap_mail (26/42)
+2026-11-02 08:26:11,865 1 INFO review_fresh odoo.registry: module iap_mail: creating or updating database tables
+2026-11-02 08:26:11,895 1 INFO review_fresh odoo.modules.loading: loading iap_mail/data/mail_templates.xml
+2026-11-02 08:26:11,909 1 INFO review_fresh odoo.modules.loading: loading iap_mail/views/iap_views.xml
+2026-11-02 08:26:11,938 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:11,940 1 INFO review_fresh odoo.modules.loading: Module iap_mail loaded in 0.08s, 77 queries (+77 other)
+2026-11-02 08:26:11,940 1 INFO review_fresh odoo.modules.loading: Loading module mail_bot (27/42)
+2026-11-02 08:26:11,957 1 INFO review_fresh odoo.registry: module mail_bot: creating or updating database tables
+2026-11-02 08:26:12,003 1 INFO review_fresh odoo.modules.loading: loading mail_bot/views/res_users_views.xml
+2026-11-02 08:26:12,034 1 INFO review_fresh odoo.modules.loading: loading mail_bot/data/mailbot_data.xml
+2026-11-02 08:26:12,072 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:12,074 1 INFO review_fresh odoo.modules.loading: Module mail_bot loaded in 0.13s, 128 queries (+128 other)
+2026-11-02 08:26:12,074 1 INFO review_fresh odoo.modules.loading: Loading module microsoft_outlook (28/42)
+2026-11-02 08:26:12,093 1 INFO review_fresh odoo.registry: module microsoft_outlook: creating or updating database tables
+2026-11-02 08:26:12,156 1 INFO review_fresh odoo.modules.loading: loading microsoft_outlook/views/fetchmail_server_views.xml
+2026-11-02 08:26:12,179 1 INFO review_fresh odoo.modules.loading: loading microsoft_outlook/views/ir_mail_server_views.xml
+2026-11-02 08:26:12,191 1 INFO review_fresh odoo.modules.loading: loading microsoft_outlook/views/res_config_settings_views.xml
+2026-11-02 08:26:12,211 1 INFO review_fresh odoo.modules.loading: loading microsoft_outlook/views/templates.xml
+2026-11-02 08:26:12,227 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:12,230 1 INFO review_fresh odoo.modules.loading: Module microsoft_outlook loaded in 0.16s, 153 queries (+153 other)
+2026-11-02 08:26:12,230 1 INFO review_fresh odoo.modules.loading: Loading module phone_validation (29/42)
+2026-11-02 08:26:12,402 1 INFO review_fresh odoo.registry: module phone_validation: creating or updating database tables
+2026-11-02 08:26:12,430 1 INFO review_fresh odoo.fields: Prepare computation of res.partner.phone_sanitized in 5 records
+2026-11-02 08:26:13,088 1 INFO review_fresh odoo.modules.loading: loading phone_validation/views/phone_blacklist_views.xml
+2026-11-02 08:26:13,125 1 INFO review_fresh odoo.modules.loading: loading phone_validation/views/res_partner_views.xml
+2026-11-02 08:26:13,159 1 INFO review_fresh odoo.modules.loading: loading phone_validation/wizard/mail_activity_schedule_views.xml
+2026-11-02 08:26:13,166 1 INFO review_fresh odoo.modules.loading: loading phone_validation/wizard/phone_blacklist_remove_view.xml
+2026-11-02 08:26:13,172 1 INFO review_fresh odoo.modules.loading: loading phone_validation/security/ir.access.csv
+2026-11-02 08:26:13,285 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:13,297 1 INFO review_fresh odoo.modules.loading: Module phone_validation loaded in 1.07s, 2149 queries (+2149 other)
+2026-11-02 08:26:13,297 1 INFO review_fresh odoo.modules.loading: Loading module privacy_lookup (30/42)
+2026-11-02 08:26:13,322 1 INFO review_fresh odoo.registry: module privacy_lookup: creating or updating database tables
+2026-11-02 08:26:13,422 1 INFO review_fresh odoo.modules.loading: loading privacy_lookup/wizard/privacy_lookup_wizard_views.xml
+2026-11-02 08:26:13,495 1 INFO review_fresh odoo.modules.loading: loading privacy_lookup/views/privacy_log_views.xml
+2026-11-02 08:26:13,513 1 INFO review_fresh odoo.modules.loading: loading privacy_lookup/data/ir_actions_server_data.xml
+2026-11-02 08:26:13,532 1 INFO review_fresh odoo.modules.loading: loading privacy_lookup/security/ir.access.csv
+2026-11-02 08:26:13,567 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:13,570 1 INFO review_fresh odoo.modules.loading: Module privacy_lookup loaded in 0.27s, 318 queries (+318 other)
+2026-11-02 08:26:13,570 1 INFO review_fresh odoo.modules.loading: Loading module resource_mail (31/42)
+2026-11-02 08:26:13,585 1 INFO review_fresh odoo.registry: module resource_mail: creating or updating database tables
+2026-11-02 08:26:13,631 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:13,633 1 INFO review_fresh odoo.modules.loading: Module resource_mail loaded in 0.06s, 34 queries (+34 other)
+2026-11-02 08:26:13,633 1 INFO review_fresh odoo.modules.loading: Loading module partner_autocomplete (32/42)
+2026-11-02 08:26:13,665 1 INFO review_fresh odoo.registry: module partner_autocomplete: creating or updating database tables
+2026-11-02 08:26:13,739 1 INFO review_fresh odoo.modules.loading: loading partner_autocomplete/views/res_company_views.xml
+2026-11-02 08:26:13,765 1 INFO review_fresh odoo.modules.loading: loading partner_autocomplete/views/res_config_settings_views.xml
+2026-11-02 08:26:13,781 1 INFO review_fresh odoo.modules.loading: loading partner_autocomplete/views/res_partner_views.xml
+2026-11-02 08:26:13,821 1 INFO review_fresh odoo.modules.loading: loading partner_autocomplete/data/iap_service_data.xml
+2026-11-02 08:26:13,834 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:13,838 1 INFO review_fresh odoo.modules.loading: Module partner_autocomplete loaded in 0.21s, 175 queries (+175 other)
+2026-11-02 08:26:13,838 1 INFO review_fresh odoo.modules.loading: Loading module portal (33/42)
+2026-11-02 08:26:13,885 1 INFO review_fresh odoo.registry: module portal: creating or updating database tables
+2026-11-02 08:26:14,112 1 INFO review_fresh odoo.modules.loading: loading portal/data/mail_templates.xml
+2026-11-02 08:26:14,121 1 INFO review_fresh odoo.modules.loading: loading portal/data/portal_entry_data.xml
+2026-11-02 08:26:14,143 1 INFO review_fresh odoo.modules.loading: loading portal/views/address_templates.xml
+2026-11-02 08:26:14,184 1 INFO review_fresh odoo.modules.loading: loading portal/views/mail_templates_public.xml
+2026-11-02 08:26:14,193 1 INFO review_fresh odoo.modules.loading: loading portal/views/portal_templates.xml
+2026-11-02 08:26:14,305 1 INFO review_fresh odoo.modules.loading: loading portal/views/res_config_settings_views.xml
+2026-11-02 08:26:14,332 1 INFO review_fresh odoo.modules.loading: loading portal/wizard/portal_share_views.xml
+2026-11-02 08:26:14,342 1 INFO review_fresh odoo.modules.loading: loading portal/wizard/portal_wizard_views.xml
+2026-11-02 08:26:14,378 1 INFO review_fresh odoo.modules.loading: loading portal/security/ir.access.csv
+2026-11-02 08:26:14,437 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:14,444 1 INFO review_fresh odoo.modules.loading: Module portal loaded in 0.61s, 701 queries (+701 other)
+2026-11-02 08:26:14,445 1 INFO review_fresh odoo.modules.loading: Loading module sms (34/42)
+2026-11-02 08:26:14,493 1 INFO review_fresh odoo.registry: module sms: creating or updating database tables
+2026-11-02 08:26:14,501 1 INFO review_fresh odoo.fields: Prepare computation of ir.actions.server.sms_template_id in 32 records
+2026-11-02 08:26:14,800 1 INFO review_fresh odoo.modules.loading: loading sms/data/iap_service_data.xml
+2026-11-02 08:26:14,805 1 INFO review_fresh odoo.modules.loading: loading sms/data/ir_cron_data.xml
+2026-11-02 08:26:14,834 1 INFO review_fresh odoo.modules.loading: loading sms/wizard/sms_account_code_views.xml
+2026-11-02 08:26:14,858 1 INFO review_fresh odoo.modules.loading: loading sms/wizard/sms_account_phone_views.xml
+2026-11-02 08:26:14,864 1 INFO review_fresh odoo.modules.loading: loading sms/wizard/sms_account_sender_views.xml
+2026-11-02 08:26:14,869 1 INFO review_fresh odoo.modules.loading: loading sms/wizard/sms_composer_views.xml
+2026-11-02 08:26:14,884 1 INFO review_fresh odoo.modules.loading: loading sms/wizard/sms_template_preview_views.xml
+2026-11-02 08:26:14,892 1 INFO review_fresh odoo.modules.loading: loading sms/wizard/sms_template_reset_views.xml
+2026-11-02 08:26:14,901 1 INFO review_fresh odoo.modules.loading: loading sms/views/ir_actions_server_views.xml
+2026-11-02 08:26:14,919 1 INFO review_fresh odoo.modules.loading: loading sms/views/mail_notification_views.xml
+2026-11-02 08:26:14,934 1 INFO review_fresh odoo.modules.loading: loading sms/views/res_config_settings_views.xml
+2026-11-02 08:26:14,948 1 INFO review_fresh odoo.modules.loading: loading sms/views/res_partner_views.xml
+2026-11-02 08:26:14,965 1 INFO review_fresh odoo.modules.loading: loading sms/views/iap_account_views.xml
+2026-11-02 08:26:14,976 1 INFO review_fresh odoo.modules.loading: loading sms/views/sms_sms_views.xml
+2026-11-02 08:26:15,006 1 INFO review_fresh odoo.modules.loading: loading sms/views/sms_template_views.xml
+2026-11-02 08:26:15,028 1 INFO review_fresh odoo.modules.loading: loading sms/security/ir.access.csv
+2026-11-02 08:26:15,094 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:15,101 1 INFO review_fresh odoo.modules.loading: Module sms loaded in 0.66s, 854 queries (+854 other)
+2026-11-02 08:26:15,101 1 INFO review_fresh odoo.modules.loading: Loading module auth_passkey_portal (35/42)
+2026-11-02 08:26:15,113 1 INFO review_fresh odoo.modules.loading: loading auth_passkey_portal/views/templates.xml
+2026-11-02 08:26:15,136 1 INFO review_fresh odoo.registry: Caches invalidated, signaling through the database: ['default', 'stable', 'templates']
+2026-11-02 08:26:15,140 1 INFO review_fresh odoo.modules.loading: Module auth_passkey_portal loaded in 0.04s, 24 queries (+24 other)
+2026-11-02 08:26:15,140 1 INFO review_fresh odoo.modules.loading: Loading module auth_totp_portal (36/42)
+2026-11-02 08:26:15,154 1 INFO review_fresh odoo.registry: module auth_totp_portal: creating or updating database tables
+2026-11-02 08:26:15,178 1 INFO review_fresh odoo.modules.loading: loading auth_totp_portal/views/templates.xml
+2026-11-02 08:26:15,196 1 INFO review_fresh odoo.modules.loading: loading auth_totp_portal/security/ir.access.csv
+2026-11-02 08:26:15,229 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:15,232 1 INFO review_fresh odoo.modules.loading: Module auth_totp_portal loaded in 0.09s, 106 queries (+106 other)
+2026-11-02 08:26:15,232 1 INFO review_fresh odoo.modules.loading: Loading module digest (37/42)
+2026-11-02 08:26:15,255 1 INFO review_fresh odoo.registry: module digest: creating or updating database tables
+2026-11-02 08:26:15,363 1 INFO review_fresh odoo.modules.loading: loading digest/data/digest_data.xml
+2026-11-02 08:26:15,385 1 INFO review_fresh odoo.modules.loading: loading digest/data/digest_tips_data.xml
+2026-11-02 08:26:15,402 1 INFO review_fresh odoo.modules.loading: loading digest/data/ir_cron_data.xml
+2026-11-02 08:26:15,432 1 INFO review_fresh odoo.modules.loading: loading digest/data/res_config_settings_data.xml
+2026-11-02 08:26:15,438 1 INFO review_fresh odoo.modules.loading: loading digest/views/digest_views.xml
+2026-11-02 08:26:15,491 1 INFO review_fresh odoo.modules.loading: loading digest/views/digest_templates.xml
+2026-11-02 08:26:15,496 1 INFO review_fresh odoo.modules.loading: loading digest/views/res_config_settings_views.xml
+2026-11-02 08:26:15,510 1 INFO review_fresh odoo.modules.loading: loading digest/wizard/digest_test_views.xml
+2026-11-02 08:26:15,518 1 INFO review_fresh odoo.modules.loading: loading digest/security/ir.access.csv
+2026-11-02 08:26:15,579 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:15,585 1 INFO review_fresh odoo.modules.loading: Module digest loaded in 0.35s, 397 queries (+397 other)
+2026-11-02 08:26:15,585 1 INFO review_fresh odoo.modules.loading: Loading module portal_discuss (38/42)
+2026-11-02 08:26:15,599 1 INFO review_fresh odoo.registry: module portal_discuss: creating or updating database tables
+2026-11-02 08:26:15,639 1 INFO review_fresh odoo.modules.loading: loading portal_discuss/data/portal_entry_data.xml
+2026-11-02 08:26:15,654 1 INFO review_fresh odoo.modules.loading: loading portal_discuss/views/portal_templates.xml
+2026-11-02 08:26:15,672 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:15,675 1 INFO review_fresh odoo.modules.loading: Module portal_discuss loaded in 0.09s, 84 queries (+84 other)
+2026-11-02 08:26:15,675 1 INFO review_fresh odoo.modules.loading: Loading module training_management (39/42)
+2026-11-02 08:26:16,079 1 INFO review_fresh odoo.registry: module training_management: creating or updating database tables
+2026-11-02 08:26:16,966 1 WARNING review_fresh odoo.addons.base.models.ir_model: Two fields (record_label, record_id) of training.operation() have the same label: Record. [Modules: training_management and training_management]
+2026-11-02 08:26:16,967 1 WARNING review_fresh odoo.addons.base.models.ir_model: Two fields (intra_version_ids, intra_version_id) of training.delivery() have the same label: Intra Version. [Modules: training_management and training_management]
+2026-11-02 08:26:16,967 1 WARNING review_fresh odoo.addons.base.models.ir_model: Two fields (period_label, period_key) of training.attendance() have the same label: Half-day. [Modules: training_management and training_management]
+2026-11-02 08:26:16,967 1 WARNING review_fresh odoo.addons.base.models.ir_model: Two fields (participant_name, name) of training.evaluation.assignment() have the same label: Name. [Modules: training_management and training_management]
+2026-11-02 08:26:18,919 1 INFO review_fresh odoo.modules.loading: loading training_management/security/training_security.xml
+2026-11-02 08:26:19,047 1 INFO review_fresh odoo.modules.loading: loading training_management/security/ir.access.csv
+2026-11-02 08:26:19,402 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_notification_settings.xml
+2026-11-02 08:26:19,452 1 INFO review_fresh odoo.modules.loading: loading training_management/wizard/training_program_new_version_views.xml
+2026-11-02 08:26:19,461 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_category_views.xml
+2026-11-02 08:26:19,474 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_course_views.xml
+2026-11-02 08:26:19,494 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_program_views.xml
+2026-11-02 08:26:19,544 1 INFO review_fresh odoo.modules.loading: loading training_management/report/programme_pdf.xml
+2026-11-02 08:26:19,567 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_menus.xml
+2026-11-02 08:26:19,597 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_path_views.xml
+2026-11-02 08:26:19,633 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_delivery_views.xml
+2026-11-02 08:26:19,694 1 INFO review_fresh odoo.modules.loading: loading training_management/wizard/training_enrollment_operation_views.xml
+2026-11-02 08:26:19,715 1 INFO review_fresh odoo.modules.loading: loading training_management/wizard/training_action_reason_views.xml
+2026-11-02 08:26:19,724 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_enrollment_actions.xml
+2026-11-02 08:26:19,854 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_preparation_views.xml
+2026-11-02 08:26:19,939 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_frontend_templates.xml
+2026-11-02 08:26:19,956 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_portal_home.xml
+2026-11-02 08:26:19,969 1 INFO review_fresh odoo.modules.loading: loading training_management/views/trainer_portal_templates.xml
+2026-11-02 08:26:19,983 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_material_views.xml
+2026-11-02 08:26:20,008 1 INFO review_fresh odoo.modules.loading: loading training_management/views/material_portal_templates.xml
+2026-11-02 08:26:20,024 1 INFO review_fresh odoo.modules.loading: loading training_management/views/path_portal_templates.xml
+2026-11-02 08:26:20,041 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_learning_views.xml
+2026-11-02 08:26:20,063 1 INFO review_fresh odoo.modules.loading: loading training_management/views/learning_portal_templates.xml
+2026-11-02 08:26:20,087 1 INFO review_fresh odoo.modules.loading: loading training_management/data/learning_cron.xml
+2026-11-02 08:26:20,104 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_attendance_views.xml
+2026-11-02 08:26:20,142 1 INFO review_fresh odoo.modules.loading: loading training_management/report/training_certificate.xml
+2026-11-02 08:26:20,151 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_closure_views.xml
+2026-11-02 08:26:20,177 1 WARNING review_fresh odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/extra-addons/training_management/views/training_closure_views.xml',
+ 'line': 15,
+ 'name': 'training.closure.form',
+ 'view': ir.ui.view(683,),
+ 'view.model': 'training.closure',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': ''}
+2026-11-02 08:26:20,204 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_certificate_verification_views.xml
+2026-11-02 08:26:20,218 1 INFO review_fresh odoo.modules.loading: loading training_management/wizard/training_certificate_change_views.xml
+2026-11-02 08:26:20,225 1 INFO review_fresh odoo.modules.loading: loading training_management/wizard/training_closure_change_views.xml
+2026-11-02 08:26:20,231 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_evaluation_views.xml
+2026-11-02 08:26:20,294 1 INFO review_fresh odoo.modules.loading: loading training_management/report/training_evaluation.xml
+2026-11-02 08:26:20,303 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_feedback_views.xml
+2026-11-02 08:26:20,330 1 INFO review_fresh odoo.modules.loading: loading training_management/data/feedback_cron.xml
+2026-11-02 08:26:20,346 1 INFO review_fresh odoo.modules.loading: loading training_management/report/training_feedback.xml
+2026-11-02 08:26:20,357 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_quality_views.xml
+2026-11-02 08:26:20,413 1 INFO review_fresh odoo.modules.loading: loading training_management/views/quality_portal_templates.xml
+2026-11-02 08:26:20,427 1 INFO review_fresh odoo.modules.loading: loading training_management/report/training_quality.xml
+2026-11-02 08:26:20,439 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_provider_views.xml
+2026-11-02 08:26:20,482 1 INFO review_fresh odoo.modules.loading: loading training_management/data/training_notification_data.xml
+2026-11-02 08:26:20,500 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_dashboard_views.xml
+2026-11-02 08:26:20,535 1 WARNING review_fresh odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/extra-addons/training_management/views/training_dashboard_views.xml',
+ 'line': 4,
+ 'name': 'training.pdf.accessibility.review.form',
+ 'view': ir.ui.view(736,),
+ 'view.model': 'training.pdf.accessibility.review',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': ''}
+2026-11-02 08:26:20,543 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_dashboard_templates.xml
+2026-11-02 08:26:20,563 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_security_views.xml
+2026-11-02 08:26:20,576 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_attendance_matrix.xml
+2026-11-02 08:26:20,605 1 INFO review_fresh odoo.modules.loading: loading training_management/views/public_catalogue_templates.xml
+2026-11-02 08:26:20,615 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_company_views.xml
+2026-11-02 08:26:20,669 1 INFO review_fresh odoo.modules.loading: loading training_management/views/company_portal_templates.xml
+2026-11-02 08:26:20,685 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_practice_views.xml
+2026-11-02 08:26:20,709 1 INFO review_fresh odoo.modules.loading: loading training_management/views/practice_portal_templates.xml
+2026-11-02 08:26:20,725 1 INFO review_fresh odoo.modules.loading: loading training_management/data/practice_cron.xml
+2026-11-02 08:26:20,741 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_project_views.xml
+2026-11-02 08:26:20,770 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_tutoring_views.xml
+2026-11-02 08:26:20,802 1 INFO review_fresh odoo.modules.loading: loading training_management/views/tutoring_portal_templates.xml
+2026-11-02 08:26:20,821 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_publication_views.xml
+2026-11-02 08:26:20,886 1 INFO review_fresh odoo.modules.loading: loading training_management/views/publication_portal_templates.xml
+2026-11-02 08:26:20,912 1 INFO review_fresh odoo.modules.loading: loading training_management/views/training_session_publication_views.xml
+2026-11-02 08:26:21,021 1 INFO review_fresh odoo.modules.loading: loading training_management/views/session_publication_templates.xml
+2026-11-02 08:26:21,279 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:21,721 1 INFO review_fresh odoo.modules.loading: Module training_management loaded in 6.05s, 7973 queries (+7973 other)
+2026-11-02 08:26:21,721 1 INFO review_fresh odoo.modules.loading: Loading module survey (40/42)
+2026-11-02 08:26:21,814 1 INFO review_fresh odoo.registry: module survey: creating or updating database tables
+2026-11-02 08:26:21,829 1 INFO review_fresh odoo.fields: Prepare computation of gamification.badge.survey_id in 4 records
+2026-11-02 08:26:21,916 1 INFO review_fresh odoo.fields: Prepare computation of survey.invite.attachment_ids
+2026-11-02 08:26:22,261 1 INFO review_fresh odoo.modules.loading: loading survey/report/survey_templates.xml
+2026-11-02 08:26:22,279 1 INFO review_fresh odoo.modules.loading: loading survey/report/survey_reports.xml
+2026-11-02 08:26:22,286 1 INFO review_fresh odoo.modules.loading: loading survey/data/digest_data.xml
+2026-11-02 08:26:22,292 1 INFO review_fresh odoo.modules.loading: loading survey/data/ir_actions_server_data.xml
+2026-11-02 08:26:22,328 1 INFO review_fresh odoo.modules.loading: loading survey/data/mail_message_subtype_data.xml
+2026-11-02 08:26:22,337 1 INFO review_fresh odoo.modules.loading: loading survey/data/mail_template_data.xml
+2026-11-02 08:26:22,352 1 INFO review_fresh odoo.modules.loading: loading survey/data/survey_tour.xml
+2026-11-02 08:26:22,358 1 INFO review_fresh odoo.modules.loading: loading survey/security/survey_security.xml
+2026-11-02 08:26:22,434 1 INFO review_fresh odoo.modules.loading: loading survey/views/digest_views.xml
+2026-11-02 08:26:22,461 1 INFO review_fresh odoo.modules.loading: loading survey/views/survey_menus.xml
+2026-11-02 08:26:22,475 1 INFO review_fresh odoo.modules.loading: loading survey/views/survey_survey_views.xml
+2026-11-02 08:26:22,519 1 INFO review_fresh odoo.modules.loading: loading survey/views/survey_user_views.xml
+2026-11-02 08:26:22,559 1 INFO review_fresh odoo.modules.loading: loading survey/views/survey_question_views.xml
+2026-11-02 08:26:22,602 1 INFO review_fresh odoo.modules.loading: loading survey/views/survey_templates.xml
+2026-11-02 08:26:22,694 1 INFO review_fresh odoo.modules.loading: loading survey/views/survey_templates_management.xml
+2026-11-02 08:26:22,734 1 INFO review_fresh odoo.modules.loading: loading survey/views/survey_templates_print.xml
+2026-11-02 08:26:22,748 1 INFO review_fresh odoo.modules.loading: loading survey/views/survey_templates_statistics.xml
+2026-11-02 08:26:22,807 1 INFO review_fresh odoo.modules.loading: loading survey/views/survey_templates_user_input_session.xml
+2026-11-02 08:26:22,832 1 INFO review_fresh odoo.modules.loading: loading survey/views/gamification_badge_views.xml
+2026-11-02 08:26:22,838 1 INFO review_fresh odoo.modules.loading: loading survey/wizard/survey_invite_views.xml
+2026-11-02 08:26:22,845 1 INFO review_fresh odoo.modules.loading: loading survey/views/res_partner_views.xml
+2026-11-02 08:26:22,860 1 INFO review_fresh odoo.modules.loading: loading survey/security/ir.access.csv
+2026-11-02 08:26:22,948 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:22,968 1 INFO review_fresh odoo.modules.loading: Module survey loaded in 1.25s, 1228 queries (+1228 other)
+2026-11-02 08:26:22,968 1 INFO review_fresh odoo.modules.loading: Loading module training_management_survey (41/42)
+2026-11-02 08:26:23,159 1 INFO review_fresh odoo.registry: module training_management_survey: creating or updating database tables
+2026-11-02 08:26:23,756 1 WARNING review_fresh odoo.addons.base.models.ir_model: Two fields (record_label, record_id) of training.operation() have the same label: Record. [Modules: training_management and training_management]
+2026-11-02 08:26:23,756 1 WARNING review_fresh odoo.addons.base.models.ir_model: Two fields (intra_version_ids, intra_version_id) of training.delivery() have the same label: Intra Version. [Modules: training_management and training_management]
+2026-11-02 08:26:23,756 1 WARNING review_fresh odoo.addons.base.models.ir_model: Two fields (period_label, period_key) of training.attendance() have the same label: Half-day. [Modules: training_management and training_management]
+2026-11-02 08:26:23,756 1 WARNING review_fresh odoo.addons.base.models.ir_model: Two fields (participant_name, name) of training.evaluation.assignment() have the same label: Name. [Modules: training_management and training_management]
+2026-11-02 08:26:24,344 1 INFO review_fresh odoo.modules.loading: loading training_management_survey/security/groups.xml
+2026-11-02 08:26:24,381 1 INFO review_fresh odoo.modules.loading: loading training_management_survey/security/ir.access.csv
+2026-11-02 08:26:24,455 1 INFO review_fresh odoo.modules.loading: loading training_management_survey/views/exam_views.xml
+2026-11-02 08:26:24,527 1 INFO review_fresh odoo.modules.loading: loading training_management_survey/views/evaluation_views.xml
+2026-11-02 08:26:24,537 1 INFO review_fresh odoo.modules.loading: loading training_management_survey/views/feedback_views.xml
+2026-11-02 08:26:24,563 1 INFO review_fresh odoo.modules.loading: loading training_management_survey/views/exam_templates.xml
+2026-11-02 08:26:24,613 1 INFO review_fresh odoo.modules.loading: loading training_management_survey/views/orientation_views.xml
+2026-11-02 08:26:24,644 1 INFO review_fresh odoo.modules.loading: loading training_management_survey/views/orientation_templates.xml
+2026-11-02 08:26:24,660 1 INFO review_fresh odoo.modules.loading: loading training_management_survey/data/cron.xml
+2026-11-02 08:26:24,849 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:24,900 1 INFO review_fresh odoo.modules.loading: Module training_management_survey loaded in 1.93s, 3717 queries (+3717 other)
+2026-11-02 08:26:24,901 1 INFO review_fresh odoo.modules.loading: Loading module training_management_elearning (42/42)
+2026-11-02 08:26:24,952 1 INFO review_fresh odoo.registry: module training_management_elearning: creating or updating database tables
+2026-11-02 08:26:25,278 1 INFO review_fresh odoo.modules.loading: loading training_management_elearning/security/groups.xml
+2026-11-02 08:26:25,311 1 INFO review_fresh odoo.modules.loading: loading training_management_elearning/security/ir.access.csv
+2026-11-02 08:26:25,369 1 INFO review_fresh odoo.modules.loading: loading training_management_elearning/views/resource_views.xml
+2026-11-02 08:26:25,401 1 WARNING review_fresh odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/resource_views.xml',
+ 'line': 2,
+ 'name': 'training.elearning.resource.form',
+ 'view': ir.ui.view(902,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': ''}
+2026-11-02 08:26:25,408 1 INFO review_fresh odoo.modules.loading: loading training_management_elearning/views/editorial_views.xml
+2026-11-02 08:26:25,442 1 WARNING review_fresh odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/editorial_views.xml',
+ 'line': 1,
+ 'name': 'elearning.resource.editorial',
+ 'view': ir.ui.view(908,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(902,),
+ 'xmlid': ''}
+2026-11-02 08:26:25,455 1 INFO review_fresh odoo.modules.loading: loading training_management_elearning/views/runtime_views.xml
+2026-11-02 08:26:25,470 1 WARNING review_fresh odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/runtime_views.xml',
+ 'line': 1,
+ 'name': 'elearning.attempt.form',
+ 'view': ir.ui.view(913,),
+ 'view.model': 'training.elearning.attempt',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': ''}
+2026-11-02 08:26:25,487 1 INFO review_fresh odoo.modules.loading: loading training_management_elearning/views/enriched_views.xml
+2026-11-02 08:26:25,542 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:25,566 1 INFO review_fresh odoo.modules.loading: Module training_management_elearning loaded in 0.66s, 916 queries (+916 other)
+2026-11-02 08:26:25,566 1 INFO review_fresh odoo.modules.loading: 42 modules loaded in 22.81s, 32714 queries (+32715 extra)
+2026-11-02 08:26:26,061 1 INFO review_fresh odoo.modules.loading: Modules loaded.
+2026-11-02 08:26:26,074 1 INFO review_fresh odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:26:26,076 1 INFO review_fresh odoo.registry: Registry loaded in 32.485s
+2026-11-02 08:26:26,077 1 INFO review_fresh odoo.service.server: Starting post tests
+2026-11-02 08:26:26,128 1 INFO review_fresh odoo.registry: Reloading the model registry after database signaling.
+2026-11-02 08:26:26,265 1 INFO review_fresh odoo.modules.loading: loading 1 modules...
+2026-11-02 08:26:26,271 1 INFO review_fresh odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra)
+2026-11-02 08:26:26,273 1 INFO review_fresh odoo.modules.loading: loading 42 modules...
+2026-11-02 08:26:26,301 1 INFO review_fresh odoo.modules.loading: 42 modules loaded in 0.03s, 0 queries (+0 extra)
+2026-11-02 08:26:26,404 1 INFO review_fresh odoo.modules.loading: Modules loaded.
+2026-11-02 08:26:26,423 1 INFO review_fresh odoo.registry: Registry loaded in 0.295s
+2026-11-02 08:26:26,423 1 INFO review_fresh odoo.addons.base.models.ir_qweb: Pregenerating assets bundles
+2026-11-02 08:26:28,050 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/34939c2/api_doc.assets.min.js (id:70)
+2026-11-02 08:26:28,085 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/084158e/bus.websocket_worker_assets.min.js (id:71)
+2026-11-02 08:26:28,095 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/fb2d7ce/html_editor.assets_history_diff.min.js (id:72)
+2026-11-02 08:26:28,104 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/8fc7220/html_editor.assets_image_cropper.min.js (id:73)
+2026-11-02 08:26:28,133 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/dd8b77e/mail.assets_discuss_public_test_tours.min.js (id:74)
+2026-11-02 08:26:28,144 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/aa7930e/mail.assets_lamejs.min.js (id:75)
+2026-11-02 08:26:28,339 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/d2e5141/mail.assets_odoo_sfu.min.js (id:76)
+2026-11-02 08:26:29,755 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/2a5558e/mail.assets_public.min.js (id:77)
+2026-11-02 08:26:30,075 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/bd3d620/portal.assets_chatter.min.js (id:78)
+2026-11-02 08:26:30,151 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/871d0dc/survey.survey_assets.min.js (id:79)
+2026-11-02 08:26:30,159 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/63c1ec4/survey.survey_user_input_session_assets.min.js (id:80)
+2026-11-02 08:26:30,292 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/b3b5028/web.__assets_tests_call__.min.js (id:81)
+2026-11-02 08:26:30,319 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/0bc0633/web.ace_lib.min.js (id:82)
+2026-11-02 08:26:30,340 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/a81437c/web.assets_clickbot.min.js (id:83)
+2026-11-02 08:26:30,505 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/03b4964/web.assets_emoji.min.js (id:84)
+2026-11-02 08:26:30,701 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/4a9da15/web.assets_frontend_lazy.min.js (id:85)
+2026-11-02 08:26:30,711 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/b753540/web.assets_frontend_minimal.min.js (id:86)
+2026-11-02 08:26:30,721 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/6fafd01/web.assets_tests.min.js (id:87)
+2026-11-02 08:26:36,259 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/ffb0296/web.assets_unit_tests.min.js (id:88)
+2026-11-02 08:26:38,571 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/16b1eb0/web.assets_unit_tests_setup.min.js (id:89)
+2026-11-02 08:26:39,070 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/ae77c57/web.assets_web.min.js (id:90)
+2026-11-02 08:26:39,079 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/e6fc179/web.chartjs_lib.min.js (id:91)
+2026-11-02 08:26:39,104 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/4b72ca1/web.fullcalendar_lib.min.js (id:92)
+2026-11-02 08:26:39,110 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web.material_symbols_outlined.min.js (id:93)
+2026-11-02 08:26:39,113 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web.odoo_ui_icons.min.js (id:94)
+2026-11-02 08:26:39,143 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/d3eb072/web.report_assets_common.min.js (id:95)
+2026-11-02 08:26:39,146 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web.report_assets_pdf.min.js (id:96)
+2026-11-02 08:26:39,154 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/e4f090d/web_tour.interactive.min.js (id:97)
+2026-11-02 08:26:39,171 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/af15882/web_tour.recorder.min.js (id:98)
+2026-11-02 08:26:39,173 1 INFO review_fresh odoo.addons.base.models.ir_qweb: JS Assets bundles generated in 11.871135711669922 seconds
+2026-11-02 08:26:39,185 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/6a3f7ef/web.material_symbols_outlined.min.woff2 (id:99)
+2026-11-02 08:26:39,190 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/b22a093/web.odoo_ui_icons.min.woff2 (id:100)
+2026-11-02 08:26:39,191 1 INFO review_fresh odoo.addons.base.models.ir_qweb: Binary Assets bundles generated in 0.017722606658935547 seconds
+2026-11-02 08:26:39,852 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/f2d77e8/api_doc.assets.min.css (id:101)
+2026-11-02 08:26:39,855 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/bus.websocket_worker_assets.min.css (id:102)
+2026-11-02 08:26:39,864 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/684f69b/html_editor.assets_history_diff.min.css (id:103)
+2026-11-02 08:26:39,868 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/8392e75/html_editor.assets_image_cropper.min.css (id:104)
+2026-11-02 08:26:39,871 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/mail.assets_discuss_public_test_tours.min.css (id:105)
+2026-11-02 08:26:39,873 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/mail.assets_lamejs.min.css (id:106)
+2026-11-02 08:26:39,878 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/46eb1b3/mail.assets_markdown.min.css (id:107)
+2026-11-02 08:26:39,880 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/mail.assets_odoo_sfu.min.css (id:108)
+2026-11-02 08:26:40,671 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cc1e702/mail.assets_public.min.css (id:109)
+2026-11-02 08:26:40,776 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/5c18e99/portal.assets_chatter.min.css (id:110)
+2026-11-02 08:26:40,865 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/8f198ac/survey.survey_assets.min.css (id:111)
+2026-11-02 08:26:40,870 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/survey.survey_user_input_session_assets.min.css (id:112)
+2026-11-02 08:26:40,873 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web.__assets_tests_call__.min.css (id:113)
+2026-11-02 08:26:40,875 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web.ace_lib.min.css (id:114)
+2026-11-02 08:26:40,877 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web.assets_clickbot.min.css (id:115)
+2026-11-02 08:26:40,880 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web.assets_emoji.min.css (id:116)
+2026-11-02 08:26:41,760 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/78bf916/web.assets_frontend.min.css (id:117)
+2026-11-02 08:26:42,522 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/78bf916/web.assets_frontend_lazy.min.css (id:118)
+2026-11-02 08:26:42,524 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web.assets_frontend_minimal.min.css (id:119)
+2026-11-02 08:26:42,526 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web.assets_tests.min.css (id:120)
+2026-11-02 08:26:42,541 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/51da1a7/web.assets_unit_tests.min.css (id:121)
+2026-11-02 08:26:44,254 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/7e4d3bf/web.assets_unit_tests_setup.min.css (id:122)
+2026-11-02 08:26:45,745 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/3883e5f/web.assets_web.min.css (id:123)
+2026-11-02 08:26:47,180 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/4c5e1a9/web.assets_web_dark.min.css (id:124)
+2026-11-02 08:26:48,654 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/2fc0fd1/web.assets_web_print.min.css (id:125)
+2026-11-02 08:26:48,667 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web.chartjs_lib.min.css (id:126)
+2026-11-02 08:26:48,672 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web.fullcalendar_lib.min.css (id:127)
+2026-11-02 08:26:48,681 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/30b0281/web.material_symbols_outlined.min.css (id:128)
+2026-11-02 08:26:48,687 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/08fd4ec/web.odoo_ui_icons.min.css (id:129)
+2026-11-02 08:26:49,542 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/933d732/web.report_assets_common.min.css (id:130)
+2026-11-02 08:26:49,547 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/451acf8/web.report_assets_pdf.min.css (id:131)
+2026-11-02 08:26:49,549 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web_tour.interactive.min.css (id:132)
+2026-11-02 08:26:49,551 1 INFO review_fresh odoo.addons.base.models.assetsbundle: Generating a new asset bundle attachment /web/assets/cf83e13/web_tour.recorder.min.css (id:133)
+2026-11-02 08:26:49,552 1 INFO review_fresh odoo.addons.base.models.ir_qweb: CSS Assets bundles generated in 10.360465288162231 seconds
+2026-11-02 08:26:49,772 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:26:50,046 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:26:50,143 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:26:50,235 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:26:50,347 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:26:50,417 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:26:50,488 1 INFO review_fresh odoo.addons.base_report_wkhtmltox.models.ir_actions_report: Will use the Wkhtmltopdf binary at /usr/local/bin/wkhtmltopdf
+2026-11-02 08:26:50,539 1 INFO review_fresh odoo.addons.base_report_wkhtmltox.models.ir_actions_report: Will use the Wkhtmltoimage binary at /usr/local/bin/wkhtmltoimage
+2026-11-02 08:26:52,238 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s08_quality> to <s.s@example.com>
+2026-11-02 08:26:52,405 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s08_other_quality> to <s.s@example.com>
+2026-11-02 08:26:52,456 1 INFO review_fresh odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_client_download_cannot_select_private_filename_field ...
+2026-11-02 08:26:52,717 1 INFO review_fresh odoo.addons.training_management.models.training_security: Training file prepared: uid=11 company=1 model=training.document record=1 privileged=False
+2026-11-02 08:26:54,183 1 INFO review_fresh odoo.addons.training_management.models.training_security: Training file prepared: uid=11 company=1 model=training.document record=2 privileged=False
+2026-11-02 08:26:54,188 1 INFO review_fresh odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_company_client_and_enrollment_scope ...
+2026-11-02 08:26:54,499 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s08_outside> to <s.s@example.com>
+2026-11-02 08:26:54,527 1 INFO review_fresh odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_completion_snapshot_tracks_the_actual_submission ...
+2026-11-02 08:26:57,476 1 INFO review_fresh odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_dedicated_assessment_and_completion_not_mock_success ...
+2026-11-02 08:27:00,641 1 INFO review_fresh odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_export_scope_manifest_and_direct_permissions ...
+2026-11-02 08:27:01,052 1 INFO review_fresh odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_incomplete_dossier_exemptions_and_closed_freeze ...
+2026-11-02 08:27:01,388 1 INFO review_fresh odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_participation_actual_duration_and_retained_pdf ...
+2026-11-02 08:27:04,580 1 INFO review_fresh odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_provenance_versions_immutable_policy_and_server_fields ...
+2026-11-02 08:27:04,714 1 INFO review_fresh odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.proof operation=read uid=11 records=[23]
+2026-11-02 08:27:04,781 1 INFO review_fresh odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_quality_archive_preserves_criteria_without_client_disclosure ...
+2026-11-02 08:27:06,473 1 INFO review_fresh odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_sensitive_evidence_native_form_and_field_token_scope ...
+2026-11-02 08:27:06,659 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 79 checked, 6 removed
+2026-11-02 08:27:06,717 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:27:06,937 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:27:07,034 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:27:07,123 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:27:07,200 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:27:07,268 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:27:08,970 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s052_peer> to <s.s@example.com>
+2026-11-02 08:27:08,973 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_cross_enrollment_company_account_and_message_forgery ...
+2026-11-02 08:27:09,189 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_exact_mission_and_private_help_including_internal_coordinator ...
+2026-11-02 08:27:09,356 1 INFO review_fresh odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.learning.entry operation=read uid=13 records=[4]
+2026-11-02 08:27:09,381 1 INFO review_fresh odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.learning.entry operation=read uid=14 records=[4]
+2026-11-02 08:27:09,407 1 INFO review_fresh odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.learning.entry operation=read uid=15 records=[4]
+2026-11-02 08:27:09,472 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_file_tokens_mutation_relational_export_and_private_mail ...
+2026-11-02 08:27:09,626 1 INFO review_fresh odoo.models: Access Denied by ACLs for operation: read, uid: 13, model: training.learning.progress, field: latest_submission_id
+2026-11-02 08:27:09,653 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_generic_notice_queue_checks_recipient_at_transport_and_retry ...
+2026-11-02 08:27:09,803 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_idempotency_and_stale_submission_rejected ...
+2026-11-02 08:27:10,009 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_internal_author_loses_native_message_and_file_access_on_suspension ...
+2026-11-02 08:27:10,190 1 INFO review_fresh odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.learning.entry operation=read uid=15 records=[9]
+2026-11-02 08:27:10,211 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_native_activity_form_criteria_optional_and_cycles ...
+2026-11-02 08:27:10,410 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_no_recipient_is_journaled_and_old_reminders_cannot_burst_on_retry ...
+2026-11-02 08:27:10,559 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_only_optional_or_completed_work_does_not_trigger_reminder ...
+2026-11-02 08:27:10,654 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_postponement_keeps_work_without_transferring_private_evidence ...
+2026-11-02 08:27:10,819 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_reminders_offer_deadline_optional_suspension_completion_and_repeat ...
+2026-11-02 08:27:11,014 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_submission_criterion_and_authoritative_evaluation_hook ...
+2026-11-02 08:27:11,145 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_submission_review_and_new_versions_keep_native_messages_and_files ...
+2026-11-02 08:27:11,334 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_tutor_common_supports_and_ordinary_native_messages ...
+2026-11-02 08:27:11,479 1 INFO review_fresh odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_uploaded_image_keeps_original_bytes_and_hash ...
+2026-11-02 08:27:11,599 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 12 checked, 8 removed
+2026-11-02 08:27:11,637 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:27:11,816 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:27:11,903 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:27:12,001 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:27:12,096 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:27:12,165 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:27:13,661 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s052_peer> to <s.s@example.com>
+2026-11-02 08:27:13,662 1 INFO review_fresh odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_acquired_later_step_keeps_existing_access_without_prior_step ...
+2026-11-02 08:27:15,275 1 INFO review_fresh odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_active_enrollment_cannot_be_silently_blocked ...
+2026-11-02 08:27:16,792 1 INFO review_fresh odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_french_native_labels_and_server_error ...
+2026-11-02 08:27:16,806 1 INFO review_fresh odoo.addons.base.models.ir_module: module base: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,011 1 INFO review_fresh odoo.addons.base.models.ir_module: module web: loading translation file /usr/lib/python3/dist-packages/odoo/addons/web/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,188 1 INFO review_fresh odoo.addons.base.models.ir_module: module base_setup: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_setup/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,196 1 INFO review_fresh odoo.addons.base.models.ir_module: module bus: loading translation file /usr/lib/python3/dist-packages/odoo/addons/bus/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,199 1 INFO review_fresh odoo.addons.base.models.ir_module: module web_tour: loading translation file /usr/lib/python3/dist-packages/odoo/addons/web_tour/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,204 1 INFO review_fresh odoo.addons.base.models.ir_module: module html_editor: loading translation file /usr/lib/python3/dist-packages/odoo/addons/html_editor/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,221 1 INFO review_fresh odoo.addons.base.models.ir_module: module mail: loading translation file /usr/lib/python3/dist-packages/odoo/addons/mail/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,336 1 INFO review_fresh odoo.addons.base.models.ir_module: module resource: loading translation file /usr/lib/python3/dist-packages/odoo/addons/resource/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,348 1 INFO review_fresh odoo.addons.base.models.ir_module: module auth_signup: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_signup/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,359 1 INFO review_fresh odoo.addons.base.models.ir_module: module base_address_extended: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_address_extended/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,363 1 INFO review_fresh odoo.addons.base.models.ir_module: module http_routing: loading translation file /usr/lib/python3/dist-packages/odoo/addons/http_routing/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,366 1 INFO review_fresh odoo.addons.base.models.ir_module: module portal: loading translation file /usr/lib/python3/dist-packages/odoo/addons/portal/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,381 1 INFO review_fresh odoo.addons.base.models.ir_module: module base_report_wkhtmltox: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_report_wkhtmltox/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,383 1 INFO review_fresh odoo.addons.base.models.ir_module: module training_management: loading translation file /mnt/extra-addons/training_management/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,473 1 INFO review_fresh odoo.addons.base.models.ir_module: module gamification: loading translation file /usr/lib/python3/dist-packages/odoo/addons/gamification/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,502 1 INFO review_fresh odoo.addons.base.models.ir_module: module digest: loading translation file /usr/lib/python3/dist-packages/odoo/addons/digest/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,510 1 INFO review_fresh odoo.addons.base.models.ir_module: module survey: loading translation file /usr/lib/python3/dist-packages/odoo/addons/survey/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,552 1 INFO review_fresh odoo.addons.base.models.ir_module: module api_doc: loading translation file /usr/lib/python3/dist-packages/odoo/addons/api_doc/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,555 1 INFO review_fresh odoo.addons.base.models.ir_module: module auth_passkey: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_passkey/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,558 1 INFO review_fresh odoo.addons.base.models.ir_module: module auth_passkey_portal: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_passkey_portal/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,561 1 INFO review_fresh odoo.addons.base.models.ir_module: module auth_totp: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_totp/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,568 1 INFO review_fresh odoo.addons.base.models.ir_module: module auth_totp_mail: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_totp_mail/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,575 1 INFO review_fresh odoo.addons.base.models.ir_module: module auth_totp_portal: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_totp_portal/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,578 1 INFO review_fresh odoo.addons.base.models.ir_module: module base_import: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_import/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,586 1 INFO review_fresh odoo.addons.base.models.ir_module: module base_import_module: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_import_module/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,591 1 INFO review_fresh odoo.addons.base.models.ir_module: module base_install_request: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_install_request/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,594 1 INFO review_fresh odoo.addons.base.models.ir_module: module google_gmail: loading translation file /usr/lib/python3/dist-packages/odoo/addons/google_gmail/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,599 1 INFO review_fresh odoo.addons.base.models.ir_module: module iap: loading translation file /usr/lib/python3/dist-packages/odoo/addons/iap/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,605 1 INFO review_fresh odoo.addons.base.models.ir_module: module iap_mail: loading translation file /usr/lib/python3/dist-packages/odoo/addons/iap_mail/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,609 1 INFO review_fresh odoo.addons.base.models.ir_module: module mail_bot: loading translation file /usr/lib/python3/dist-packages/odoo/addons/mail_bot/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,613 1 INFO review_fresh odoo.addons.base.models.ir_module: module microsoft_outlook: loading translation file /usr/lib/python3/dist-packages/odoo/addons/microsoft_outlook/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,617 1 INFO review_fresh odoo.addons.base.models.ir_module: module mysubscription: loading translation file /usr/lib/python3/dist-packages/odoo/addons/mysubscription/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,620 1 INFO review_fresh odoo.addons.base.models.ir_module: module partner_autocomplete: loading translation file /usr/lib/python3/dist-packages/odoo/addons/partner_autocomplete/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,624 1 INFO review_fresh odoo.addons.base.models.ir_module: module portal_discuss: loading translation file /usr/lib/python3/dist-packages/odoo/addons/portal_discuss/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,628 1 INFO review_fresh odoo.addons.base.models.ir_module: module privacy_lookup: loading translation file /usr/lib/python3/dist-packages/odoo/addons/privacy_lookup/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,633 1 INFO review_fresh odoo.addons.base.models.ir_module: module resource_mail: loading translation file /usr/lib/python3/dist-packages/odoo/addons/resource_mail/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,635 1 INFO review_fresh odoo.addons.base.models.ir_module: module rpc: loading translation file /usr/lib/python3/dist-packages/odoo/addons/rpc/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,639 1 INFO review_fresh odoo.addons.base.models.ir_module: module phone_validation: loading translation file /usr/lib/python3/dist-packages/odoo/addons/phone_validation/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,644 1 INFO review_fresh odoo.addons.base.models.ir_module: module sms: loading translation file /usr/lib/python3/dist-packages/odoo/addons/sms/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,664 1 INFO review_fresh odoo.addons.base.models.ir_module: module training_management_survey: loading translation file /mnt/extra-addons/training_management_survey/i18n/fr.po for language fr_FR
+2026-11-02 08:27:17,678 1 INFO review_fresh odoo.addons.base.models.ir_module: module web_unsplash: loading translation file /usr/lib/python3/dist-packages/odoo/addons/web_unsplash/i18n/fr.po for language fr_FR
+2026-11-02 08:27:22,535 1 INFO review_fresh odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_missing_required_step_blocks_even_direct_access ...
+2026-11-02 08:27:24,015 1 INFO review_fresh odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_native_form_and_frozen_definition ...
+2026-11-02 08:27:25,612 1 INFO review_fresh odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_prerequisites_existing_acquis_and_no_duplicate_work ...
+2026-11-02 08:27:27,381 1 INFO review_fresh odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_real_restricted_users_and_company_isolation ...
+2026-11-02 08:27:28,948 1 INFO review_fresh odoo.models: Access Denied by ACLs for operation: read, uid: 20, model: training.path, field: assignment_ids
+2026-11-02 08:27:28,967 1 INFO review_fresh odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.path operation=read uid=19 records=[10]
+2026-11-02 08:27:28,970 1 INFO review_fresh odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_recommended_order_explicit_prerequisite_and_equivalence ...
+2026-11-02 08:27:30,508 1 INFO review_fresh odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_withdrawal_is_audited_repeatable_and_releases_only_its_constraint ...
+2026-11-02 08:27:32,029 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 17 checked, 13 removed
+2026-11-02 08:27:32,085 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:27:32,300 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:27:32,402 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:27:32,503 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:27:32,598 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:27:32,665 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:27:34,122 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s052_peer> to <s.s@example.com>
+2026-11-02 08:27:34,124 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_attempt: Starting TestAttempt.test_atomic_savepoint_and_retry_after_failure ...
+2026-11-02 08:27:34,304 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_attempt: Starting TestAttempt.test_resume_retry_idempotence_and_conflicts ...
+2026-11-02 08:27:34,488 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 8 checked, 4 removed
+2026-11-02 08:27:34,605 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_author> to <e.e@example.com>
+2026-11-02 08:27:34,711 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_coord> to <e.e@example.com>
+2026-11-02 08:27:34,787 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_portal> to <e.e@example.com>
+2026-11-02 08:27:34,822 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_content_security: Starting TestContentSecurity.test_h5p_version_numbers_from_export ...
+2026-11-02 08:27:34,826 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_content_security: Starting TestContentSecurity.test_hostile_archives ...
+2026-11-02 08:27:34,836 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_content_security: Starting TestContentSecurity.test_immutable_bytes_and_native_bypass ...
+2026-11-02 08:27:34,875 1 INFO review_fresh odoo.models: Access Denied by ACLs for operation: read, uid: 31, model: training.elearning.file, field: data
+2026-11-02 08:27:34,883 1 INFO review_fresh odoo.models: Access Denied by ACLs for operation: read, uid: 32, model: training.elearning.file, field: data
+2026-11-02 08:27:34,890 1 INFO review_fresh odoo.models: Access Denied by ACLs for operation: read, uid: 33, model: training.elearning.file, field: data
+2026-11-02 08:27:34,904 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_content_security: Starting TestContentSecurity.test_lease_current_rights_and_withdrawal ...
+2026-11-02 08:27:34,961 1 INFO review_fresh odoo.models.unlink: User #1 deleted discuss.channel.member records with IDs: [18]
+2026-11-02 08:27:35,019 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 2 checked, 2 removed
+2026-11-02 08:27:35,056 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:27:35,228 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:27:35,311 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:27:35,393 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:27:35,464 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:27:35,526 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:27:36,998 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s052_peer> to <s.s@example.com>
+2026-11-02 08:27:37,000 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_editorial: Starting TestEditorial.test_reuse_frozen_versions_rules_and_history ...
+2026-11-02 08:27:37,196 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 8 checked, 4 removed
+2026-11-02 08:27:37,237 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:27:37,425 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:27:37,515 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:27:37,603 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:27:37,678 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:27:37,755 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:27:39,115 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_enriched: Starting TestEnriched.test_exact_partial_wrong_empty_and_resume ...
+2026-11-02 08:27:39,230 1 INFO review_fresh odoo.models.unlink: User #40 deleted survey.question.answer records with IDs: [1, 2]
+2026-11-02 08:27:39,265 1 INFO review_fresh odoo.models.unlink: User #40 deleted survey.question.answer records with IDs: [3, 4, 5]
+2026-11-02 08:27:39,668 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_enriched: Starting TestEnriched.test_invalid_edges_cross_actor_and_deadline ...
+2026-11-02 08:27:39,747 1 INFO review_fresh odoo.models.unlink: User #40 deleted survey.question.answer records with IDs: [24, 25]
+2026-11-02 08:27:39,780 1 INFO review_fresh odoo.models.unlink: User #40 deleted survey.question.answer records with IDs: [26, 27, 28]
+2026-11-02 08:27:40,063 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_enriched: Starting TestEnriched.test_malformed_configuration_and_native_publication_checks ...
+2026-11-02 08:27:40,302 1 INFO review_fresh odoo.models.unlink: User #40 deleted survey.question.answer records with IDs: [67, 68]
+2026-11-02 08:27:40,322 1 INFO review_fresh odoo.models.unlink: User #40 deleted survey.question.answer records with IDs: [72]
+2026-11-02 08:27:40,379 1 INFO review_fresh odoo.models.unlink: User #40 deleted survey.question.answer records with IDs: [76, 77]
+2026-11-02 08:27:40,414 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_enriched: Starting TestEnriched.test_publication_freeze_revision_and_safe_render_data ...
+2026-11-02 08:27:40,502 1 INFO review_fresh odoo.models.unlink: User #40 deleted survey.question.answer records with IDs: [85, 86]
+2026-11-02 08:27:40,536 1 INFO review_fresh odoo.models.unlink: User #40 deleted survey.question.answer records with IDs: [87, 88, 89]
+2026-11-02 08:27:40,756 1 INFO review_fresh odoo.models.unlink: User #40 deleted survey.question.answer records with IDs: [108, 109, 110, 111, 112, 113, 114, 115, 116]
+2026-11-02 08:27:40,816 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 8 checked, 4 removed
+2026-11-02 08:27:40,993 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <e00_author> to <e.e@example.com>
+2026-11-02 08:27:41,153 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <e00_portal> to <e.e@example.com>
+2026-11-02 08:27:41,207 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:27:41,328 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_foundation: Starting TestFoundation.test_company_and_portal_boundaries ...
+2026-11-02 08:27:41,382 1 INFO review_fresh odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.elearning.resource operation=read uid=45 records=[5]
+2026-11-02 08:27:41,394 1 INFO review_fresh odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.elearning.resource operation=create uid=45 records=[6]
+2026-11-02 08:27:41,396 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_foundation: Starting TestFoundation.test_native_form_identity_and_archive ...
+2026-11-02 08:27:41,457 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_foundation: Starting TestFoundation.test_no_competing_learning_or_runtime ...
+2026-11-02 08:27:41,467 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 5 checked, 1 removed
+2026-11-02 08:27:41,518 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:27:41,751 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:27:41,889 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:27:41,985 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:27:42,053 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:27:42,119 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:27:43,608 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s052_peer> to <s.s@example.com>
+2026-11-02 08:27:43,610 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_progression: Starting TestFormativeProgress.test_independent_rules_retry_invalidation_and_human_criterion ...
+2026-11-02 08:27:43,885 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_progression: Starting TestFormativeProgress.test_path_cache_x_y_and_atomic_projection ...
+2026-11-02 08:27:45,464 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 9 checked, 5 removed
+2026-11-02 08:27:45,590 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_author> to <e.e@example.com>
+2026-11-02 08:27:45,695 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_coord> to <e.e@example.com>
+2026-11-02 08:27:45,765 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_portal> to <e.e@example.com>
+2026-11-02 08:27:45,792 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewContent.test_h5p_assets_and_runtime_graph ...
+2026-11-02 08:27:45,796 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewContent.test_h5p_missing_runtime_and_malformed_shapes ...
+2026-11-02 08:27:45,802 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewContent.test_lease_cleanup_preserves_live_authorizations ...
+2026-11-02 08:27:45,834 1 INFO review_fresh odoo.models.unlink: User #1 deleted training.elearning.lease records with IDs: [2]
+2026-11-02 08:27:45,838 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewContent.test_withdrawal_keeps_first_decision ...
+2026-11-02 08:27:45,887 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 2 checked, 2 removed
+2026-11-02 08:27:45,927 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:27:46,103 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:27:46,191 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:27:46,285 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:27:46,359 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:27:46,425 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:27:47,873 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s052_peer> to <s.s@example.com>
+2026-11-02 08:27:47,874 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewRuntime.test_defaults_cannot_forge_internal_records ...
+2026-11-02 08:27:48,005 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewRuntime.test_extreme_numeric_result_is_validation_error ...
+2026-11-02 08:27:48,130 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 8 checked, 4 removed
+2026-11-02 08:27:48,168 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:27:48,347 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:27:48,436 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:27:48,529 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:27:48,602 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:27:48,664 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:27:50,059 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewQuestions.test_configuration_failure_is_atomic ...
+2026-11-02 08:27:50,141 1 INFO review_fresh odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewQuestions.test_enriched_definition_cannot_publish_as_regular_question ...
+2026-11-02 08:27:50,218 1 INFO review_fresh odoo.models.unlink: User #62 deleted survey.question.answer records with IDs: [135, 136]
+2026-11-02 08:27:50,252 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 8 checked, 4 removed
+2026-11-02 08:27:50,291 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:27:50,475 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:27:50,572 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:27:50,672 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:27:50,745 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:27:50,811 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:27:52,295 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s08_quality> to <s.s@example.com>
+2026-11-02 08:27:52,394 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s08_other_quality> to <s.s@example.com>
+2026-11-02 08:27:52,430 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_closure: Starting TestMockClosure.test_successful_mock_does_not_issue_achievement_certificate ...
+2026-11-02 08:27:54,018 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 10 checked, 6 removed
+2026-11-02 08:27:54,066 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:27:54,262 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:27:54,354 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:27:54,440 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:27:54,515 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:27:54,578 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:27:55,933 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_18_of_24_inclusive_threshold_exact_qcm_and_native_storage ...
+2026-11-02 08:27:56,164 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_access_expiry_allows_finishing_only_the_authorized_active_attempt ...
+2026-11-02 08:27:56,526 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_empty_section_unclassified_and_hidden_revision_resource ...
+2026-11-02 08:27:56,742 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_expired_access_retains_results_but_forbids_retake ...
+2026-11-02 08:27:56,932 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_generic_certification_report_rejects_mock_exam_attempts ...
+2026-11-02 08:27:57,212 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_legacy_public_exam_attachment_cannot_bypass_parent_access ...
+2026-11-02 08:27:57,402 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s06_file_other_company> to <s.s@example.com>
+2026-11-02 08:27:57,499 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_native_editor_models_and_publish_validation ...
+2026-11-02 08:27:57,732 1 INFO review_fresh odoo.models.unlink: User #74 deleted mail.message records with IDs: [990]
+2026-11-02 08:27:57,781 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_native_exam_attachments_cannot_be_published_or_detached ...
+2026-11-02 08:27:57,957 1 INFO review_fresh odoo.models.unlink: User #74 deleted ir.attachment records with IDs: [460]
+2026-11-02 08:27:57,958 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_native_revision_wizard_preserves_original_and_rejects_forgery ...
+2026-11-02 08:27:58,183 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_native_survey_role_and_other_company_cannot_read_private_exams ...
+2026-11-02 08:27:58,484 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s06_native_manager> to <s.s@example.com>
+2026-11-02 08:27:58,574 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s06_other_company> to <s.s@example.com>
+2026-11-02 08:27:58,597 1 INFO review_fresh odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [26], uid: 80, model: survey.survey
+2026-11-02 08:27:58,609 1 INFO review_fresh odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [48], uid: 80, model: survey.question
+2026-11-02 08:27:58,626 1 INFO review_fresh odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [201], uid: 80, model: survey.question.answer
+2026-11-02 08:27:58,639 1 INFO review_fresh odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [15], uid: 80, model: survey.user_input
+2026-11-02 08:27:58,651 1 INFO review_fresh odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [28], uid: 80, model: survey.user_input.line
+2026-11-02 08:27:58,668 1 INFO review_fresh odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [26], uid: 81, model: survey.survey
+2026-11-02 08:27:58,683 1 INFO review_fresh odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [48], uid: 81, model: survey.question
+2026-11-02 08:27:58,709 1 INFO review_fresh odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [201], uid: 81, model: survey.question.answer
+2026-11-02 08:27:58,725 1 INFO review_fresh odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [15], uid: 81, model: survey.user_input
+2026-11-02 08:27:58,740 1 INFO review_fresh odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [28], uid: 81, model: survey.user_input.line
+2026-11-02 08:27:58,778 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_native_threshold_constraint_and_publication_boundaries ...
+2026-11-02 08:27:58,892 1 ERROR review_fresh odoo.sql_db: bad query: b'INSERT INTO "survey_survey" ("access_mode", "access_token", "active", "attempts_limit", "certification", "certification_report_layout", "color", "create_date", "create_uid", "orientation_revision", "progression_mode", "questions_layout", "questions_selection", "scoring_success_min", "scoring_type", "session_code", "session_question_can_answer", "survey_type", "time_limit", "title", "training_program_id", "training_state", "training_version", "user_id", "write_date", "write_uid") VALUES (\'public\', \'0b6e0aba-4b33-4f94-a05b-0ebd7553c1ad\', true, 1, false, \'modern_company\', 0, \'2026-11-02T08:27:54.021288\'::timestamp, 74, 0, \'percent\', \'page_per_question\', \'all\',  -1.0, \'scoring_with_answers\', \'5024\', true, \'custom\', 60.0, \'{"en_US": "Fictional mock exam"}\', 21, \'draft\', \'1\', 74, \'2026-11-02T08:27:54.021288\'::timestamp, 74) RETURNING "id"'
+ERROR: new row for relation "survey_survey" violates check constraint "survey_survey_scoring_success_min_check"
+DETAIL:  Failing row contains (31, 0, 74, 1, null, null, null, null, 74, 74, custom, null, page_per_question, all, percent, public, 0b6e0aba-4b33-4f94-a05b-0ebd7553c1ad, scoring_with_answers, modern_company, null, 5024, {"en_US": "Fictional mock exam"}, null, null, t, null, null, null, null, f, null, t, null, null, null, 2026-11-02 08:27:54.021288, 2026-11-02 08:27:54.021288, -1, 60, 21, null, null, null, null, null, 0, draft, 1, null, null, null).
+
+2026-11-02 08:27:58,896 1 ERROR review_fresh odoo.sql_db: bad query: b'INSERT INTO "survey_survey" ("access_mode", "access_token", "active", "attempts_limit", "certification", "certification_report_layout", "color", "create_date", "create_uid", "orientation_revision", "progression_mode", "questions_layout", "questions_selection", "scoring_success_min", "scoring_type", "session_code", "session_question_can_answer", "survey_type", "time_limit", "title", "training_program_id", "training_state", "training_version", "user_id", "write_date", "write_uid") VALUES (\'public\', \'e4338236-6d0d-45b9-800f-21a75661f8b5\', true, 1, false, \'modern_company\', 0, \'2026-11-02T08:27:54.021288\'::timestamp, 74, 0, \'percent\', \'page_per_question\', \'all\', 101.0, \'scoring_with_answers\', \'7309\', true, \'custom\', 60.0, \'{"en_US": "Fictional mock exam"}\', 21, \'draft\', \'1\', 74, \'2026-11-02T08:27:54.021288\'::timestamp, 74) RETURNING "id"'
+ERROR: new row for relation "survey_survey" violates check constraint "survey_survey_scoring_success_min_check"
+DETAIL:  Failing row contains (32, 0, 74, 1, null, null, null, null, 74, 74, custom, null, page_per_question, all, percent, public, e4338236-6d0d-45b9-800f-21a75661f8b5, scoring_with_answers, modern_company, null, 7309, {"en_US": "Fictional mock exam"}, null, null, t, null, null, null, null, f, null, t, null, null, null, 2026-11-02 08:27:54.021288, 2026-11-02 08:27:54.021288, 101, 60, 21, null, null, null, null, null, 0, draft, 1, null, null, null).
+
+2026-11-02 08:27:58,897 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_native_timer_ten_minutes_reload_expiry_late_save_and_cron ...
+2026-11-02 08:27:59,084 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_published_images_are_immutable_through_native_attachments ...
+2026-11-02 08:27:59,208 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_qcm_partial_empty_and_exact_are_zero_zero_full ...
+2026-11-02 08:27:59,444 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_restricted_identity_native_rpc_exports_and_suspension ...
+2026-11-02 08:27:59,854 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_retake_twice_after_100_percent_preserves_every_result ...
+2026-11-02 08:28:00,246 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_revision_version_history_and_theme_totals ...
+2026-11-02 08:28:00,607 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_unrelated_native_survey_is_unaffected ...
+2026-11-02 08:28:00,639 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_wrong_question_forged_choices_native_creation_and_finished_edits ...
+2026-11-02 08:28:00,971 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 17 checked, 13 removed
+2026-11-02 08:28:01,065 1 INFO review_fresh odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:28:01,343 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:28:01,473 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:28:01,575 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:28:01,658 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:28:01,720 1 INFO review_fresh odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:28:03,179 1 INFO review_fresh odoo.addons.training_management_survey.tests.test_path: Starting TestPathExam.test_acquired_exam_step_with_private_correction_resource ...
+2026-11-02 08:28:03,669 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 9 checked, 5 removed
+2026-11-02 08:28:03,689 1 INFO review_fresh odoo.tests.suite: Auto retry disabled for test_unit_desktop (odoo.addons.web.tests.test_js.WebSuite.test_unit_desktop)
+2026-11-02 08:28:03,692 1 INFO review_fresh odoo.addons.web.tests.test_js: Starting WebSuite.test_unit_desktop ...
+2026-11-02 08:28:03,709 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 0 checked, 0 removed
+2026-11-02 08:28:03,724 1 INFO review_fresh odoo.tests.suite: Auto retry disabled for test_unit_mobile (odoo.addons.web.tests.test_js.MobileWebSuite.test_unit_mobile)
+2026-11-02 08:28:03,725 1 INFO review_fresh odoo.addons.web.tests.test_js: Starting MobileWebSuite.test_unit_mobile ...
+2026-11-02 08:28:03,732 1 INFO review_fresh odoo.addons.base.models.ir_attachment: filestore gc 0 checked, 0 removed
+2026-11-02 08:28:03,736 1 INFO review_fresh odoo.service.server: 81 post-tests in 97.66s, 32169 queries
+2026-11-02 08:28:03,739 1 INFO review_fresh odoo.tests.stats: training_management: 40 tests 42.35s 12425 queries
+2026-11-02 08:28:03,739 1 INFO review_fresh odoo.tests.stats: training_management_elearning: 42 tests 18.21s 10474 queries
+2026-11-02 08:28:03,739 1 INFO review_fresh odoo.tests.stats: training_management_survey: 27 tests 13.41s 8752 queries
+2026-11-02 08:28:03,739 1 INFO review_fresh odoo.tests.stats: web: 6 tests 0.06s 14 queries
+2026-11-02 08:28:03,741 1 INFO review_fresh odoo.tests.result: 0 failed, 0 error(s) of 81 tests when loading database 'review_fresh'
+2026-11-02 08:28:03,742 1 INFO review_fresh odoo.service.server.ThreadedServer: Initiating shutdown
+2026-11-02 08:28:03,742 1 INFO review_fresh odoo.service.server.ThreadedServer: Hit CTRL-C again or send a second signal to force the shutdown.
+2026-11-02 08:28:03,743 1 INFO review_fresh odoo.addons.bus.websocket: Disconnecting 0 websockets
+2026-11-02 08:28:03,848 1 INFO review_fresh odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 2 connections 

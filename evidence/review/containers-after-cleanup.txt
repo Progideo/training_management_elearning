@@ -1,0 +1,14 @@
+tm_suite_human_v2_20261029_relay running
+tm_suite_human_v2_20261029_acceptance_odoo running
+tm_suite_human_v2_20261029_acceptance_pg running
+aur71-unit exited
+aur71-integ exited
+aur71-redis running
+aur71-pg running
+tm_suite_c06_launch_20261026_local_pg running
+tm_suite_m01_neopro_only_20261025_acceptance_pg exited
+tm_suite_m01_real_20261025_acceptance_pg exited
+auralynt-question-redis running
+auralynt-question-pg running
+tm-s02-odoo exited
+tm-s02-pg exited

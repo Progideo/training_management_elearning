@@ -3,8 +3,6 @@ import json
 import mimetypes
 import uuid
 from pathlib import Path
-from datetime import timedelta
-from odoo import fields
 from odoo import http
 from odoo.http import request
 from odoo.exceptions import AccessError, ValidationError
@@ -163,7 +161,7 @@ class Content(http.Controller):
                 raise ValidationError('Invalid report')
             receipt=request.env['training.elearning.attempt'].browse(attempt_id)._save(data.get('key'),data.get('revision'),data.get('data'))
             return request.make_json_response(receipt,headers=[('Cache-Control','no-store')])
-        except (ValueError,TypeError,ValidationError) as error:
+        except (ValueError,TypeError,RecursionError,ValidationError) as error:
             return request.make_json_response({'ok':False,'error':str(error)},status=409,headers=[('Cache-Control','no-store')])
         except AccessError:
             raise Forbidden() from None

@@ -129,8 +129,8 @@ class Attempt(models.Model):
                     raise ValidationError('Invalid result schema')
                 score,maximum=result['score'],result['maximum']
                 if (type(score) not in (int,float) or type(maximum) not in (int,float)
-                        or not math.isfinite(score) or not math.isfinite(maximum)
-                        or not 0 <= score <= maximum <= 100000 or type(result['completed']) is not bool):
+                        or not 0 <= score <= maximum <= 100000
+                        or not math.isfinite(score) or not math.isfinite(maximum) or type(result['completed']) is not bool):
                     raise ValidationError('Invalid formative result')
                 if attempt.version_id.resource_id.format == 'h5p' and (score not in (0,1) or maximum != 1):
                     raise ValidationError('TrueFalse requires a whole-content result out of one')

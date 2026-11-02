@@ -18,8 +18,7 @@ def package(extra=None):
     return stream.getvalue()
 
 
-@tagged('post_install', '-at_install')
-class TestContentSecurity(TransactionCase):
+class ContentCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -33,6 +32,9 @@ class TestContentSecurity(TransactionCase):
     def version(self):
         return self.env['training.elearning.version'].with_user(self.author)._import(self.resource, '1', package(), 'Fictional', 'Test')
 
+
+@tagged('post_install', '-at_install')
+class TestContentSecurity(ContentCase):
     def test_hostile_archives(self):
         for name in ('../escape.js', '/absolute', 'a/../b', 'a\\b', 'a//b', 'a%2fb', 'nested.zip'):
             with self.subTest(name=name), self.assertRaises(ValueError):
@@ -54,7 +56,9 @@ class TestContentSecurity(TransactionCase):
         stream = io.BytesIO()
         with zipfile.ZipFile(stream, 'w') as archive:
             archive.writestr('h5p.json', json.dumps({'mainLibrary':'H5P.TrueFalse', 'preloadedDependencies':[{'machineName':'H5P.TrueFalse','majorVersion':'1','minorVersion':'8'}]}))
-            archive.writestr('content/content.json', json.dumps({'correct':'true'}))
+            archive.writestr('content/content.json', json.dumps({'correct':'true','question':'Fictional question'}))
+            archive.writestr('H5P.TrueFalse-1.8/library.json', json.dumps({'machineName':'H5P.TrueFalse','majorVersion':1,'minorVersion':8,'preloadedJs':[{'path':'test.js'}]}))
+            archive.writestr('H5P.TrueFalse-1.8/test.js', '// Fictional runtime file')
         self.assertEqual(parse_package(stream.getvalue(), 'h5p')['entrypoint'], 'h5p.json')
 
     def test_immutable_bytes_and_native_bypass(self):

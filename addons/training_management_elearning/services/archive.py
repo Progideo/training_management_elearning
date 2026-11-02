@@ -5,6 +5,7 @@ import json
 import re
 import stat
 import zipfile
+import zlib
 from lxml import etree
 
 MAX_ARCHIVE = 20 * 1024 * 1024
@@ -20,6 +21,74 @@ def safe_path(path):
             or any(part in ('', '.', '..') or part.endswith((' ', '.')) for part in path.split('/'))):
         raise ValueError('Unsafe package path')
     return path
+
+
+def json_object(raw):
+    if len(raw) > 1024 * 1024:
+        raise ValueError('JSON metadata too large')
+    result = json.loads(raw)
+    if not isinstance(result, dict):
+        raise ValueError('JSON object required')
+    return result
+
+
+def dependency_key(value):
+    if not isinstance(value, dict):
+        raise ValueError('Invalid H5P dependency')
+    name = value.get('machineName')
+    versions = [str(value.get(k)) for k in ('majorVersion', 'minorVersion')]
+    if (not isinstance(name, str) or not re.fullmatch(r'[A-Za-z][A-Za-z0-9.]{0,99}', name)
+            or any(not re.fullmatch(r'[0-9]{1,4}', v) for v in versions)):
+        raise ValueError('Invalid H5P library identity')
+    return name + '-' + '.'.join(versions)
+
+
+def validate_h5p(files):
+    config = json_object(files.get('h5p.json', b''))
+    dependencies = config.get('preloadedDependencies')
+    if not isinstance(dependencies, list) or not 1 <= len(dependencies) <= 64:
+        raise ValueError('Invalid H5P runtime dependencies')
+    keys = [dependency_key(d) for d in dependencies]
+    if (config.get('mainLibrary') != 'H5P.TrueFalse' or 'H5P.TrueFalse-1.8' not in keys
+            or len({d['machineName'] for d in dependencies}) != len(keys)):
+        raise ValueError('Only H5P TrueFalse 1.8 is qualified')
+    graph = {}
+    for key in keys:
+        library = json_object(files.get(key + '/library.json', b''))
+        if dependency_key(library) != key:
+            raise ValueError('H5P library identity mismatch')
+        if key == 'H5P.TrueFalse-1.8' and not library.get('preloadedJs'):
+            raise ValueError('Missing H5P main runtime')
+        for kind in ('preloadedJs', 'preloadedCss'):
+            assets = library.get(kind, [])
+            if not isinstance(assets, list):
+                raise ValueError('Invalid H5P assets')
+            for asset in assets:
+                if not isinstance(asset, dict):
+                    raise ValueError('Invalid H5P asset')
+                path = key + '/' + safe_path(asset.get('path'))
+                if path not in files:
+                    raise ValueError('Missing H5P runtime asset')
+        nested = library.get('preloadedDependencies', [])
+        if not isinstance(nested, list):
+            raise ValueError('Invalid H5P dependencies')
+        graph[key] = [dependency_key(d) for d in nested]
+        if not set(graph[key]) <= set(keys):
+            raise ValueError('Incomplete H5P runtime dependency list')
+    def visit(key, visiting, done):
+        if key in visiting:
+            raise ValueError('Cyclic H5P dependencies')
+        if key not in done:
+            for child in graph[key]:
+                visit(child, visiting | {key}, done)
+            done.add(key)
+    done = set()
+    for key in keys:
+        visit(key, set(), done)
+    content = json_object(files.get('content/content.json', b''))
+    if (type(content.get('correct')) is not str or content['correct'] not in ('true', 'false')
+            or not isinstance(content.get('question'), str) or not content['question'].strip()):
+        raise ValueError('Invalid TrueFalse content')
 
 
 def parse_package(raw, kind):
@@ -54,6 +123,8 @@ def parse_package(raw, kind):
             if len(manifest) > 1024 * 1024 or b'<!DOCTYPE' in manifest.upper() or b'<!ENTITY' in manifest.upper():
                 raise ValueError('Unsafe manifest')
             root = etree.fromstring(manifest, etree.XMLParser(resolve_entities=False, no_network=True))
+            if root.getroottree().docinfo.doctype:
+                raise ValueError('Unsafe manifest')
             versions = root.xpath('//*[local-name()="schemaversion"]/text()')
             resources = root.xpath('//*[local-name()="resource"]')
             if versions != ['1.2'] or len(resources) != 1:
@@ -68,19 +139,8 @@ def parse_package(raw, kind):
                 if safe_path(node.get('href', '')) not in files:
                     raise ValueError('Missing manifest file')
         else:
-            manifest = files.get('h5p.json', b'')
-            if len(manifest) > 1024 * 1024:
-                raise ValueError('Manifest too large')
-            config = json.loads(manifest)
-            dependencies = config.get('preloadedDependencies', [])
-            if (config.get('mainLibrary') != 'H5P.TrueFalse'
-                    or not any(d.get('machineName') == 'H5P.TrueFalse' and str(d.get('majorVersion')) == '1'
-                               and str(d.get('minorVersion')) == '8' for d in dependencies)):
-                raise ValueError('Only H5P TrueFalse 1.8 is qualified')
-            content = json.loads(files.get('content/content.json', b''))
-            if type(content.get('correct')) is not str or content['correct'] not in ('true', 'false'):
-                raise ValueError('Invalid TrueFalse content')
+            validate_h5p(files)
             entry = 'h5p.json'
         return {'sha256': hashlib.sha256(raw).hexdigest(), 'entrypoint': entry, 'files': files}
-    except (zipfile.BadZipFile, RuntimeError, KeyError, TypeError, json.JSONDecodeError, etree.XMLSyntaxError) as error:
+    except (zipfile.BadZipFile, RuntimeError, KeyError, TypeError, json.JSONDecodeError, etree.XMLSyntaxError, UnicodeError, RecursionError, zlib.error, EOFError) as error:
         raise ValueError('Invalid package archive or manifest') from error

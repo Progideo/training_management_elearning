@@ -22,6 +22,8 @@ class Version(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('published', 'Published'), ('withdrawn', 'Withdrawn')], default='draft', required=True, readonly=True)
     published_at = fields.Datetime(readonly=True)
     published_by_id = fields.Many2one('res.users', readonly=True, ondelete='restrict')
+    withdrawn_at = fields.Datetime(readonly=True)
+    withdrawn_by_id = fields.Many2one('res.users', readonly=True, ondelete='restrict')
     withdrawal_reason = fields.Text(readonly=True)
     license_note = fields.Char(required=True, readonly=True)
     provenance = fields.Text(required=True, readonly=True)
@@ -76,7 +78,11 @@ class Version(models.Model):
         if not self.env.user.has_group(COORDINATOR) or not reason.strip():
             raise AccessError(self.env._('Coordination and a reason are required.'))
         self.lock_for_update()
-        return super().write({'state': 'withdrawn', 'withdrawal_reason': reason})
+        self.invalidate_recordset()
+        if any(version.state == 'withdrawn' for version in self):
+            raise ValidationError(self.env._('The original withdrawal decision must be preserved.'))
+        return super().write({'state': 'withdrawn', 'withdrawal_reason': reason.strip(),
+            'withdrawn_at': fields.Datetime.now(), 'withdrawn_by_id': self.env.uid})
 
     def action_preview(self):
         self.ensure_one()

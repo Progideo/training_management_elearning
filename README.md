@@ -21,8 +21,10 @@ métier TM ni cœur Odoo modifié. Les lecteurs tiers embarqués gardent leurs l
 | E06 | Charge 50 participants, restauration et exploitation | [E06](docs/E06.md), [preuves](evidence/e06/REVIEW.md) |
 | Q00–Q01 | Appariement et ordre, correction serveur, versions et historique Surveys | [Contrat](docs/Q00.md), [livraison](docs/Q01.md), [preuves](evidence/q01/REVIEW.md) |
 
+[Revue et corrections du 2 novembre](docs/REVIEW_2026-11-02.md) ·
 [Banc reproductible](bench/README.md) · [Revue finale](evidence/FINAL_REVIEW.md).
-Branche `feat/e01-e06-elearning`, commits locaux prêts pour revue. Aucune fusion,
+Livraison initiale sur `feat/e01-e06-elearning` ; revue corrective sur
+`fix/review-elearning-20261102`, commits locaux prêts pour revue. Aucune fusion,
 publication distante ou mise en production effectuée.
 
 ## Périmètre qualifié

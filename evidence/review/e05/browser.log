@@ -1,0 +1,7 @@
+H5P_BODY Deux plus deux font quatre.
+
+Yes
+No
+Check
+PASS: H5P answer restored immediately after its confirmed result.
+PASS: H5P answer, SCORM prerequisite, state resume, completed score, new attempt empty, native return and mobile keyboard

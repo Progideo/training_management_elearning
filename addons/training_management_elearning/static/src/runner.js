@@ -11,26 +11,32 @@
             frameCss:base+'/vendor/h5p/styles/h5p.css',saveFreq:5,
             contentUserData:{0:{state:JSON.stringify(cfg.state)}}
         });
-        H5P.externalDispatcher.on('xAPI',event=>{
-            const s=event.data.statement, result=s.result;
-            // Initial allow-list is a single TrueFalse question, never composite content.
-            if(s.verb?.id==='http://adlnet.gov/expapi/verbs/answered' && result?.completion===true
-                && result.score?.max===1 && [0,1].includes(result.score.raw)) {
-                report({result:{score:result.score.raw,maximum:1,completed:true}});
-            }
-        });
-        setInterval(()=>{
+        const currentState=()=>{
             const frames=[window,...Array.from(document.querySelectorAll('iframe')).map(f=>f.contentWindow)];
             for(const w of frames) {
                 try {
                     const instance=w.H5P?.instances?.find(i=>typeof i.getCurrentState==='function');
-                    if(!instance) continue;
-                    const state=instance.getCurrentState(), encoded=JSON.stringify(state);
-                    if(state && encoded!==previous) {previous=encoded;report({state});}
-                    break;
+                    if(instance) return instance.getCurrentState();
                 } catch(e) {notify('error',{message:'État du contenu indisponible.'});}
             }
-        },3000);
+        };
+        const saveState=()=>{
+            const state=currentState(),encoded=JSON.stringify(state);
+            if(state&&encoded!==previous) {previous=encoded;report({state});}
+        };
+        H5P.externalDispatcher.on('xAPI',event=>{
+            const s=event.data.statement, result=s.result;
+            if(s.verb?.id==='http://adlnet.gov/expapi/verbs/answered' && result?.completion===true
+                && result.score?.max===1 && [0,1].includes(result.score.raw)) {
+                // A confirmed result must also retain the answer, even on immediate exit.
+                const state=currentState();
+                if(state) previous=JSON.stringify(state);
+                report({...(state?{state}:{}),result:{score:result.score.raw,maximum:1,completed:true}});
+            } else if(s.verb?.id==='http://adlnet.gov/expapi/verbs/interacted') {
+                saveState();
+            }
+        });
+        setInterval(saveState,3000);
     } else {
         window.API=new Scorm12API({autocommit:false,logLevel:5});
         if(Object.keys(cfg.state).length) {window.API.loadFromJSON(cfg.state);window.API.cmi.core.entry='resume';}

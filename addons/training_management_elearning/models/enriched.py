@@ -52,6 +52,8 @@ class Question(models.Model):
                 group=answers.filtered(lambda a:a.training_option_key==key)
                 if len(set(group.mapped('training_option_label')))!=1 or not group[0].training_option_label:
                     raise ValidationError(self.env._('Keep a single non-empty label per option.'))
+            if any(a.value != a.training_row_label + ' → ' + a.training_option_label for a in answers):
+                raise ValidationError(self.env._('Keep the correction labels consistent with the interaction; reconfigure the question.'))
             correct=answers.filtered('is_correct')
             if len(correct)!=len(rows) or set(correct.mapped('training_row_key'))!=rows or set(correct.mapped('training_option_key'))!=options:
                 raise ValidationError(self.env._('The solution must use each item exactly once.'))
@@ -76,6 +78,8 @@ class Question(models.Model):
             pairs=[('Position %s'%(i+1),line) for i,line in enumerate(lines)]
         if any(len(v)>160 for pair in pairs for v in pair):
             raise ValidationError(self.env._('Keep item labels under 160 characters.'))
+        if len({left for left, right in pairs}) != len(pairs) or len({right for left, right in pairs}) != len(pairs):
+            raise ValidationError(self.env._('Use distinct row and option labels.'))
         options=[(secrets.token_hex(12),right) for left,right in pairs]
         # Random identifiers and alphabetic display disclose no solution index.
         definitions=[]
@@ -84,9 +88,10 @@ class Question(models.Model):
                 definitions.append(Command.create({'value':left+' → '+label,'is_correct':label==right,
                     'training_row_key':'r%02d'%i,'training_row_label':left,
                     'training_option_key':key,'training_option_label':label}))
-        self.write({'question_type':'multiple_choice','training_interaction':kind,
-            'suggested_answer_ids':[*[Command.delete(a.id) for a in self.suggested_answer_ids],*definitions]})
-        self._validate_interaction()
+        with self.env.cr.savepoint():
+            self.write({'question_type':'multiple_choice','training_interaction':kind,
+                'suggested_answer_ids':[*[Command.delete(a.id) for a in self.suggested_answer_ids],*definitions]})
+            self._validate_interaction()
         return True
 
 
@@ -102,6 +107,7 @@ class Survey(models.Model):
     _inherit = 'survey.survey'
 
     def action_training_publish(self):
+        self._training_edit()
         self.question_ids._validate_interaction()
         return super().action_training_publish()
 

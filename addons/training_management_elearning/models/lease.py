@@ -83,5 +83,10 @@ class Lease(models.Model):
         self.lock_for_update()
         return super().write({'expires_at':fields.Datetime.now()+timedelta(minutes=5)})
 
+    @api.autovacuum
+    def _gc_expired(self):
+        # Leases are transient read capabilities, never the retained learning evidence.
+        self.sudo().search([('expires_at', '<', fields.Datetime.now()-timedelta(days=1))]).unlink()
+
     def write(self, vals):
         raise AccessError('Immutable launch authorization')

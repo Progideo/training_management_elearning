@@ -1,0 +1,2 @@
+PASS: deeply nested JSON and oversized numeric score refused without HTTP 500 or revision consumption.
+{"checks":["cross-user page and attempt denied","participant preview denied","CSRF required","no content cookie","sandbox CSP","simultaneous revisions resolved explicitly"],"concurrent_statuses":[200,409],"attempt":15,"expected_revision":2}

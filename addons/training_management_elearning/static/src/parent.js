@@ -11,9 +11,11 @@
         busy=true;
         const item=queue[0];
         if(!item.revision) item.revision=revision+1;
+        const controller=new AbortController();
+        const timeout=setTimeout(()=>controller.abort(),15000);
         try {
             const form=new URLSearchParams({csrf_token:cfg.csrf,payload:JSON.stringify({key:item.key,revision:item.revision,data:item.data})});
-            const response=await fetch('/training/interactive/attempt/'+cfg.attempt+'/save',{method:'POST',body:form,credentials:'same-origin'});
+            const response=await fetch('/training/interactive/attempt/'+cfg.attempt+'/save',{method:'POST',body:form,credentials:'same-origin',signal:controller.signal});
             if(!response.ok||response.redirected) throw new Error('Sauvegarde refusée ('+response.status+').');
             const receipt=await response.json();
             if(!receipt.ok) throw new Error('Sauvegarde non confirmée.');
@@ -23,7 +25,7 @@
         } catch(error) {
             failed=true;retry.hidden=false;
             status.textContent=error.message+' Les données en attente restent dans cet onglet. En cas de conflit, rechargez le lecteur.';
-        } finally {busy=false;if(!failed) flush();}
+        } finally {clearTimeout(timeout);busy=false;if(!failed) flush();}
     }
     retry.onclick=()=>{failed=false;retry.hidden=true;flush();};
     window.addEventListener('message',event=>{
@@ -32,7 +34,7 @@
         if(!message||typeof message!=='object'||message.nonce!==cfg.nonce) return;
         let size;try{size=JSON.stringify(message).length;}catch(e){return;}
         if(size>131072) return;
-        if(message.type==='ready') status.textContent='Contenu chargé dans son espace isolé.';
+        if(message.type==='ready'&&!queue.length&&!failed) status.textContent='Contenu chargé dans son espace isolé.';
         if(message.type==='error') status.textContent='Le lecteur signale une erreur. Rechargez ou contactez la coordination.';
         if(message.type==='report'&&cfg.attempt&&typeof message.key==='string'&&message.key.length<=80
                 &&message.data&&typeof message.data==='object'&&!seen.has(message.key)) {
@@ -41,11 +43,14 @@
         }
     });
     if(cfg.attempt) setInterval(async()=>{
+        const controller=new AbortController();
+        const timeout=setTimeout(()=>controller.abort(),15000);
         try {
             const response=await fetch('/training/interactive/attempt/'+cfg.attempt+'/renew',{
-                method:'POST',credentials:'same-origin',body:new URLSearchParams({csrf_token:cfg.csrf,lease:String(cfg.lease)})});
+                method:'POST',credentials:'same-origin',signal:controller.signal,body:new URLSearchParams({csrf_token:cfg.csrf,lease:String(cfg.lease)})});
             if(!response.ok||response.redirected) throw new Error();
         } catch(e) {status.textContent='Autorisation indisponible. Rechargez le lecteur pour reprendre.';frame.remove();}
+        finally {clearTimeout(timeout);}
     },120000);
     window.addEventListener('beforeunload',event=>{if(queue.length){event.preventDefault();event.returnValue='';}});
 })();

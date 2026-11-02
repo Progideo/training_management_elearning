@@ -1,0 +1,17 @@
+AssertionError [ERR_ASSERTION]: A stalled save must have a bounded timeout
+    at /Users/jbcrouigneau/Documents/ChatGPT/Formations/training_management_elearning/bench/review/parent.test.cjs:19:2
+    at Object.<anonymous> (/Users/jbcrouigneau/Documents/ChatGPT/Formations/training_management_elearning/bench/review/parent.test.cjs:29:3)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: undefined,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

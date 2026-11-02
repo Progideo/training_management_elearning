@@ -1,0 +1,463 @@
+ Container tm-review-20261102-odb-1 Running 
+ Container tm-review-20261102-odb-1 Waiting 
+ Container tm-review-20261102-odb-1 Healthy 
+ Container tm-review-20261102-odoo-run-b60c12e991d4 Creating 
+ Container tm-review-20261102-odoo-run-b60c12e991d4 Created 
+2026-11-02 08:32:15,665 1 INFO ? odoo: Odoo version 20.0-20261015
+2026-11-02 08:32:15,666 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf
+2026-11-02 08:32:15,666 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/20.0', '/mnt/extra-addons', '/mnt/qualification-addons', '/usr/lib/python3/dist-packages/addons'])
+2026-11-02 08:32:15,666 1 INFO ? odoo: database: odoo@odb:5432
+2026-11-02 08:32:16,385 1 INFO ? odoo.service.server: HTTP service running on 0.0.0.0:8069
+2026-11-02 08:32:16,392 1 INFO e01 odoo.tests.common: Importing test framework
+2026-11-02 08:32:16,521 1 INFO e01 odoo.modules.loading: loading 1 modules...
+2026-11-02 08:32:16,528 1 INFO e01 odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra)
+2026-11-02 08:32:16,556 1 INFO e01 odoo.modules.loading: updating modules list
+2026-11-02 08:32:16,561 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a
+2026-11-02 08:32:17,454 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['Training Management', 'Training Management — eLearning', 'Training Management — Mock Exams'] to user __system__ #1 via n/a
+2026-11-02 08:32:17,455 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['Training Management', 'Training Management — eLearning', 'Training Management — Mock Exams'] to user __system__ #1 via n/a
+2026-11-02 08:32:17,806 1 INFO e01 odoo.addons.base.models.ir_module: ALLOW access to module.button_install on [] to user __system__ #1 via n/a
+2026-11-02 08:32:17,882 1 INFO e01 odoo.modules.loading: loading 42 modules...
+2026-11-02 08:32:18,154 1 WARNING e01 odoo.addons.mail.controllers.attachment: markdown2 is not installed, markdown will not be rendered
+2026-11-02 08:32:18,293 1 INFO e01 odoo.modules.loading: Loading module training_management (39/42)
+2026-11-02 08:32:18,695 1 INFO e01 odoo.registry: module training_management: creating or updating database tables
+2026-11-02 08:32:19,404 1 WARNING e01 odoo.addons.base.models.ir_model: Two fields (record_label, record_id) of training.operation() have the same label: Record. [Modules: training_management and training_management]
+2026-11-02 08:32:19,405 1 WARNING e01 odoo.addons.base.models.ir_model: Two fields (intra_version_ids, intra_version_id) of training.delivery() have the same label: Intra Version. [Modules: training_management and training_management]
+2026-11-02 08:32:19,405 1 WARNING e01 odoo.addons.base.models.ir_model: Two fields (period_label, period_key) of training.attendance() have the same label: Half-day. [Modules: training_management and training_management]
+2026-11-02 08:32:19,406 1 WARNING e01 odoo.addons.base.models.ir_model: Two fields (participant_name, name) of training.evaluation.assignment() have the same label: Name. [Modules: training_management and training_management]
+2026-11-02 08:32:19,832 1 INFO e01 odoo.modules.loading: loading training_management/security/training_security.xml
+2026-11-02 08:32:19,982 1 INFO e01 odoo.modules.loading: loading training_management/security/ir.access.csv
+2026-11-02 08:32:21,268 1 INFO e01 odoo.modules.loading: loading training_management/views/training_notification_settings.xml
+2026-11-02 08:32:21,326 1 INFO e01 odoo.modules.loading: loading training_management/wizard/training_program_new_version_views.xml
+2026-11-02 08:32:21,334 1 INFO e01 odoo.modules.loading: loading training_management/views/training_category_views.xml
+2026-11-02 08:32:21,353 1 INFO e01 odoo.modules.loading: loading training_management/views/training_course_views.xml
+2026-11-02 08:32:21,372 1 INFO e01 odoo.modules.loading: loading training_management/views/training_program_views.xml
+2026-11-02 08:32:21,417 1 INFO e01 odoo.modules.loading: loading training_management/report/programme_pdf.xml
+2026-11-02 08:32:21,434 1 INFO e01 odoo.modules.loading: loading training_management/views/training_menus.xml
+2026-11-02 08:32:21,453 1 INFO e01 odoo.modules.loading: loading training_management/views/training_path_views.xml
+2026-11-02 08:32:21,480 1 INFO e01 odoo.modules.loading: loading training_management/views/training_delivery_views.xml
+2026-11-02 08:32:21,546 1 INFO e01 odoo.modules.loading: loading training_management/wizard/training_enrollment_operation_views.xml
+2026-11-02 08:32:21,565 1 INFO e01 odoo.modules.loading: loading training_management/wizard/training_action_reason_views.xml
+2026-11-02 08:32:21,572 1 INFO e01 odoo.modules.loading: loading training_management/views/training_enrollment_actions.xml
+2026-11-02 08:32:21,653 1 INFO e01 odoo.modules.loading: loading training_management/views/training_preparation_views.xml
+2026-11-02 08:32:21,741 1 INFO e01 odoo.modules.loading: loading training_management/views/training_frontend_templates.xml
+2026-11-02 08:32:21,763 1 INFO e01 odoo.modules.loading: loading training_management/views/training_portal_home.xml
+2026-11-02 08:32:21,782 1 INFO e01 odoo.modules.loading: loading training_management/views/trainer_portal_templates.xml
+2026-11-02 08:32:21,802 1 INFO e01 odoo.modules.loading: loading training_management/views/training_material_views.xml
+2026-11-02 08:32:21,842 1 INFO e01 odoo.modules.loading: loading training_management/views/material_portal_templates.xml
+2026-11-02 08:32:21,864 1 INFO e01 odoo.modules.loading: loading training_management/views/path_portal_templates.xml
+2026-11-02 08:32:21,892 1 INFO e01 odoo.modules.loading: loading training_management/views/training_learning_views.xml
+2026-11-02 08:32:21,931 1 INFO e01 odoo.modules.loading: loading training_management/views/learning_portal_templates.xml
+2026-11-02 08:32:21,972 1 INFO e01 odoo.modules.loading: loading training_management/data/learning_cron.xml
+2026-11-02 08:32:21,975 1 INFO e01 odoo.modules.loading: loading training_management/views/training_attendance_views.xml
+2026-11-02 08:32:22,030 1 INFO e01 odoo.modules.loading: loading training_management/report/training_certificate.xml
+2026-11-02 08:32:22,039 1 INFO e01 odoo.modules.loading: loading training_management/views/training_closure_views.xml
+2026-11-02 08:32:22,068 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/extra-addons/training_management/views/training_closure_views.xml',
+ 'line': 16,
+ 'name': 'training.closure.form',
+ 'view': ir.ui.view(683,),
+ 'view.model': 'training.closure',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': 'training_management.view_training_closure_form'}
+2026-11-02 08:32:22,107 1 INFO e01 odoo.modules.loading: loading training_management/views/training_certificate_verification_views.xml
+2026-11-02 08:32:22,125 1 INFO e01 odoo.modules.loading: loading training_management/wizard/training_certificate_change_views.xml
+2026-11-02 08:32:22,131 1 INFO e01 odoo.modules.loading: loading training_management/wizard/training_closure_change_views.xml
+2026-11-02 08:32:22,137 1 INFO e01 odoo.modules.loading: loading training_management/views/training_evaluation_views.xml
+2026-11-02 08:32:22,216 1 INFO e01 odoo.modules.loading: loading training_management/report/training_evaluation.xml
+2026-11-02 08:32:22,225 1 INFO e01 odoo.modules.loading: loading training_management/views/training_feedback_views.xml
+2026-11-02 08:32:22,255 1 INFO e01 odoo.modules.loading: loading training_management/data/feedback_cron.xml
+2026-11-02 08:32:22,257 1 INFO e01 odoo.modules.loading: loading training_management/report/training_feedback.xml
+2026-11-02 08:32:22,270 1 INFO e01 odoo.modules.loading: loading training_management/views/training_quality_views.xml
+2026-11-02 08:32:22,329 1 INFO e01 odoo.modules.loading: loading training_management/views/quality_portal_templates.xml
+2026-11-02 08:32:22,355 1 INFO e01 odoo.modules.loading: loading training_management/report/training_quality.xml
+2026-11-02 08:32:22,368 1 INFO e01 odoo.modules.loading: loading training_management/views/training_provider_views.xml
+2026-11-02 08:32:22,434 1 INFO e01 odoo.modules.loading: loading training_management/data/training_notification_data.xml
+2026-11-02 08:32:22,435 1 INFO e01 odoo.modules.loading: loading training_management/views/training_dashboard_views.xml
+2026-11-02 08:32:22,467 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/extra-addons/training_management/views/training_dashboard_views.xml',
+ 'line': 5,
+ 'name': 'training.pdf.accessibility.review.form',
+ 'view': ir.ui.view(736,),
+ 'view.model': 'training.pdf.accessibility.review',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': 'training_management.view_pdf_accessibility_review_form'}
+2026-11-02 08:32:22,476 1 INFO e01 odoo.modules.loading: loading training_management/views/training_dashboard_templates.xml
+2026-11-02 08:32:22,503 1 INFO e01 odoo.modules.loading: loading training_management/views/training_security_views.xml
+2026-11-02 08:32:22,516 1 INFO e01 odoo.modules.loading: loading training_management/views/training_attendance_matrix.xml
+2026-11-02 08:32:22,551 1 INFO e01 odoo.modules.loading: loading training_management/views/public_catalogue_templates.xml
+2026-11-02 08:32:22,564 1 INFO e01 odoo.modules.loading: loading training_management/views/training_company_views.xml
+2026-11-02 08:32:22,630 1 INFO e01 odoo.modules.loading: loading training_management/views/company_portal_templates.xml
+2026-11-02 08:32:22,649 1 INFO e01 odoo.modules.loading: loading training_management/views/training_practice_views.xml
+2026-11-02 08:32:22,676 1 INFO e01 odoo.modules.loading: loading training_management/views/practice_portal_templates.xml
+2026-11-02 08:32:22,701 1 INFO e01 odoo.modules.loading: loading training_management/data/practice_cron.xml
+2026-11-02 08:32:22,703 1 INFO e01 odoo.modules.loading: loading training_management/views/training_project_views.xml
+2026-11-02 08:32:22,743 1 INFO e01 odoo.modules.loading: loading training_management/views/training_tutoring_views.xml
+2026-11-02 08:32:22,772 1 INFO e01 odoo.modules.loading: loading training_management/views/tutoring_portal_templates.xml
+2026-11-02 08:32:22,800 1 INFO e01 odoo.modules.loading: loading training_management/views/training_publication_views.xml
+2026-11-02 08:32:22,867 1 INFO e01 odoo.modules.loading: loading training_management/views/publication_portal_templates.xml
+2026-11-02 08:32:22,902 1 INFO e01 odoo.modules.loading: loading training_management/views/training_session_publication_views.xml
+2026-11-02 08:32:22,991 1 INFO e01 odoo.modules.loading: loading training_management/views/session_publication_templates.xml
+2026-11-02 08:32:23,189 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:32:23,351 1 INFO e01 odoo.modules.loading: Module training_management loaded in 5.06s, 7954 queries (+7954 other)
+2026-11-02 08:32:23,368 1 INFO e01 odoo.modules.loading: Loading module training_management_survey (41/42)
+2026-11-02 08:32:23,565 1 INFO e01 odoo.registry: module training_management_survey: creating or updating database tables
+2026-11-02 08:32:24,096 1 WARNING e01 odoo.addons.base.models.ir_model: Two fields (record_label, record_id) of training.operation() have the same label: Record. [Modules: training_management and training_management]
+2026-11-02 08:32:24,096 1 WARNING e01 odoo.addons.base.models.ir_model: Two fields (intra_version_ids, intra_version_id) of training.delivery() have the same label: Intra Version. [Modules: training_management and training_management]
+2026-11-02 08:32:24,096 1 WARNING e01 odoo.addons.base.models.ir_model: Two fields (period_label, period_key) of training.attendance() have the same label: Half-day. [Modules: training_management and training_management]
+2026-11-02 08:32:24,096 1 WARNING e01 odoo.addons.base.models.ir_model: Two fields (participant_name, name) of training.evaluation.assignment() have the same label: Name. [Modules: training_management and training_management]
+2026-11-02 08:32:24,431 1 INFO e01 odoo.modules.loading: loading training_management_survey/security/groups.xml
+2026-11-02 08:32:24,463 1 INFO e01 odoo.modules.loading: loading training_management_survey/security/ir.access.csv
+2026-11-02 08:32:24,649 1 INFO e01 odoo.modules.loading: loading training_management_survey/views/exam_views.xml
+2026-11-02 08:32:24,750 1 INFO e01 odoo.modules.loading: loading training_management_survey/views/evaluation_views.xml
+2026-11-02 08:32:24,762 1 INFO e01 odoo.modules.loading: loading training_management_survey/views/feedback_views.xml
+2026-11-02 08:32:24,798 1 INFO e01 odoo.modules.loading: loading training_management_survey/views/exam_templates.xml
+2026-11-02 08:32:24,867 1 INFO e01 odoo.modules.loading: loading training_management_survey/views/orientation_views.xml
+2026-11-02 08:32:24,904 1 INFO e01 odoo.models.unlink: User #1 deleted ir.actions.act_window.view records with IDs: [30, 31]
+2026-11-02 08:32:24,914 1 INFO e01 odoo.modules.loading: loading training_management_survey/views/orientation_templates.xml
+2026-11-02 08:32:24,933 1 INFO e01 odoo.modules.loading: loading training_management_survey/data/cron.xml
+2026-11-02 08:32:25,069 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:32:25,265 1 INFO e01 odoo.modules.loading: Module training_management_survey loaded in 1.90s, 3870 queries (+3870 other)
+2026-11-02 08:32:25,265 1 INFO e01 odoo.modules.loading: Loading module training_management_elearning (42/42)
+2026-11-02 08:32:25,314 1 INFO e01 odoo.registry: module training_management_elearning: creating or updating database tables
+2026-11-02 08:32:25,461 1 INFO e01 odoo.modules.loading: loading training_management_elearning/security/groups.xml
+2026-11-02 08:32:25,492 1 INFO e01 odoo.modules.loading: loading training_management_elearning/security/ir.access.csv
+2026-11-02 08:32:25,627 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/resource_views.xml
+2026-11-02 08:32:25,659 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/resource_views.xml',
+ 'line': 1,
+ 'name': 'training.elearning.resource.form',
+ 'view': ir.ui.view(902,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': 'training_management_elearning.resource_form'}
+2026-11-02 08:32:25,669 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/editorial_views.xml
+2026-11-02 08:32:25,702 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/editorial_views.xml',
+ 'line': 2,
+ 'name': 'elearning.resource.editorial',
+ 'view': ir.ui.view(908,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(902,),
+ 'xmlid': 'training_management_elearning.resource_editorial'}
+2026-11-02 08:32:25,705 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/editorial_views.xml',
+ 'line': 1,
+ 'name': 'elearning.resource.editorial',
+ 'view': ir.ui.view(908,),
+ 'view.model': 'training.elearning.resource',
+ 'view.parent': ir.ui.view(902,),
+ 'xmlid': 'training_management_elearning.resource_editorial'}
+2026-11-02 08:32:25,725 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/runtime_views.xml
+2026-11-02 08:32:25,756 1 WARNING e01 odoo.addons.base.models.ir_ui_view: An alert (class alert-*) must have an alert, alertdialog or status role or an alert-link class. Please use alert and alertdialog only for what expects to stop any activity to be read immediately.
+View error context:
+{'file': '/mnt/qualification-addons/training_management_elearning/views/runtime_views.xml',
+ 'line': 2,
+ 'name': 'elearning.attempt.form',
+ 'view': ir.ui.view(913,),
+ 'view.model': 'training.elearning.attempt',
+ 'view.parent': ir.ui.view(),
+ 'xmlid': 'training_management_elearning.attempt_form'}
+2026-11-02 08:32:25,778 1 INFO e01 odoo.modules.loading: loading training_management_elearning/views/enriched_views.xml
+2026-11-02 08:32:25,847 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:32:25,864 1 INFO e01 odoo.modules.loading: Module training_management_elearning loaded in 0.60s, 842 queries (+842 other)
+2026-11-02 08:32:25,864 1 INFO e01 odoo.modules.loading: 42 modules loaded in 7.98s, 12666 queries (+12666 extra)
+2026-11-02 08:32:26,475 1 INFO e01 odoo.modules.loading: Modules loaded.
+2026-11-02 08:32:26,492 1 INFO e01 odoo.registry: Registry changed, signaling through the database
+2026-11-02 08:32:26,500 1 INFO e01 odoo.registry: Registry loaded in 10.114s
+2026-11-02 08:32:26,503 1 INFO e01 odoo.service.server: Starting post tests
+2026-11-02 08:32:26,660 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:32:26,916 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:32:27,009 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:32:27,098 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:32:27,195 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:32:27,260 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:32:27,317 1 INFO e01 odoo.addons.base_report_wkhtmltox.models.ir_actions_report: Will use the Wkhtmltopdf binary at /usr/local/bin/wkhtmltopdf
+2026-11-02 08:32:27,422 1 INFO e01 odoo.addons.base_report_wkhtmltox.models.ir_actions_report: Will use the Wkhtmltoimage binary at /usr/local/bin/wkhtmltoimage
+2026-11-02 08:32:29,328 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s08_quality> to <s.s@example.com>
+2026-11-02 08:32:29,438 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s08_other_quality> to <s.s@example.com>
+2026-11-02 08:32:29,506 1 INFO e01 odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_client_download_cannot_select_private_filename_field ...
+2026-11-02 08:32:29,747 1 INFO e01 odoo.addons.training_management.models.training_security: Training file prepared: uid=123 company=1 model=training.document record=1 privileged=False
+2026-11-02 08:32:31,180 1 INFO e01 odoo.addons.training_management.models.training_security: Training file prepared: uid=123 company=1 model=training.document record=2 privileged=False
+2026-11-02 08:32:31,181 1 INFO e01 odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_company_client_and_enrollment_scope ...
+2026-11-02 08:32:31,388 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s08_outside> to <s.s@example.com>
+2026-11-02 08:32:31,407 1 INFO e01 odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_completion_snapshot_tracks_the_actual_submission ...
+2026-11-02 08:32:34,255 1 INFO e01 odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_dedicated_assessment_and_completion_not_mock_success ...
+2026-11-02 08:32:37,180 1 INFO e01 odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_export_scope_manifest_and_direct_permissions ...
+2026-11-02 08:32:37,394 1 INFO e01 odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_incomplete_dossier_exemptions_and_closed_freeze ...
+2026-11-02 08:32:37,658 1 INFO e01 odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_participation_actual_duration_and_retained_pdf ...
+2026-11-02 08:32:40,603 1 INFO e01 odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_provenance_versions_immutable_policy_and_server_fields ...
+2026-11-02 08:32:40,703 1 INFO e01 odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.proof operation=read uid=123 records=[23]
+2026-11-02 08:32:40,751 1 INFO e01 odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_quality_archive_preserves_criteria_without_client_disclosure ...
+2026-11-02 08:32:42,218 1 INFO e01 odoo.addons.training_management.tests.test_closure: Starting TestClosure.test_sensitive_evidence_native_form_and_field_token_scope ...
+2026-11-02 08:32:42,366 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 26 checked, 7 removed
+2026-11-02 08:32:42,416 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:32:42,604 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:32:42,697 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:32:42,788 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:32:42,860 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:32:42,924 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:32:44,394 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s052_peer> to <s.s@example.com>
+2026-11-02 08:32:44,396 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_cross_enrollment_company_account_and_message_forgery ...
+2026-11-02 08:32:44,644 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_exact_mission_and_private_help_including_internal_coordinator ...
+2026-11-02 08:32:44,833 1 INFO e01 odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.learning.entry operation=read uid=125 records=[4]
+2026-11-02 08:32:44,862 1 INFO e01 odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.learning.entry operation=read uid=126 records=[4]
+2026-11-02 08:32:44,890 1 INFO e01 odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.learning.entry operation=read uid=127 records=[4]
+2026-11-02 08:32:44,968 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_file_tokens_mutation_relational_export_and_private_mail ...
+2026-11-02 08:32:45,139 1 INFO e01 odoo.models: Access Denied by ACLs for operation: read, uid: 125, model: training.learning.progress, field: latest_submission_id
+2026-11-02 08:32:45,174 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_generic_notice_queue_checks_recipient_at_transport_and_retry ...
+2026-11-02 08:32:45,336 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_idempotency_and_stale_submission_rejected ...
+2026-11-02 08:32:45,487 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_internal_author_loses_native_message_and_file_access_on_suspension ...
+2026-11-02 08:32:45,666 1 INFO e01 odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.learning.entry operation=read uid=127 records=[9]
+2026-11-02 08:32:45,681 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_native_activity_form_criteria_optional_and_cycles ...
+2026-11-02 08:32:45,861 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_no_recipient_is_journaled_and_old_reminders_cannot_burst_on_retry ...
+2026-11-02 08:32:46,008 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_only_optional_or_completed_work_does_not_trigger_reminder ...
+2026-11-02 08:32:46,135 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_postponement_keeps_work_without_transferring_private_evidence ...
+2026-11-02 08:32:46,307 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_reminders_offer_deadline_optional_suspension_completion_and_repeat ...
+2026-11-02 08:32:46,511 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_submission_criterion_and_authoritative_evaluation_hook ...
+2026-11-02 08:32:46,642 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_submission_review_and_new_versions_keep_native_messages_and_files ...
+2026-11-02 08:32:46,851 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_tutor_common_supports_and_ordinary_native_messages ...
+2026-11-02 08:32:47,009 1 INFO e01 odoo.addons.training_management.tests.test_learning: Starting TestLearning.test_uploaded_image_keeps_original_bytes_and_hash ...
+2026-11-02 08:32:47,129 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 12 checked, 8 removed
+2026-11-02 08:32:47,167 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:32:47,337 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:32:47,427 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:32:47,511 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:32:47,585 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:32:47,646 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:32:49,185 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s052_peer> to <s.s@example.com>
+2026-11-02 08:32:49,187 1 INFO e01 odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_acquired_later_step_keeps_existing_access_without_prior_step ...
+2026-11-02 08:32:50,784 1 INFO e01 odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_active_enrollment_cannot_be_silently_blocked ...
+2026-11-02 08:32:52,364 1 INFO e01 odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_french_native_labels_and_server_error ...
+2026-11-02 08:32:52,384 1 INFO e01 odoo.addons.base.models.ir_module: module base: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,588 1 INFO e01 odoo.addons.base.models.ir_module: module web: loading translation file /usr/lib/python3/dist-packages/odoo/addons/web/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,763 1 INFO e01 odoo.addons.base.models.ir_module: module base_setup: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_setup/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,771 1 INFO e01 odoo.addons.base.models.ir_module: module bus: loading translation file /usr/lib/python3/dist-packages/odoo/addons/bus/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,773 1 INFO e01 odoo.addons.base.models.ir_module: module web_tour: loading translation file /usr/lib/python3/dist-packages/odoo/addons/web_tour/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,777 1 INFO e01 odoo.addons.base.models.ir_module: module html_editor: loading translation file /usr/lib/python3/dist-packages/odoo/addons/html_editor/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,793 1 INFO e01 odoo.addons.base.models.ir_module: module mail: loading translation file /usr/lib/python3/dist-packages/odoo/addons/mail/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,928 1 INFO e01 odoo.addons.base.models.ir_module: module resource: loading translation file /usr/lib/python3/dist-packages/odoo/addons/resource/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,940 1 INFO e01 odoo.addons.base.models.ir_module: module auth_signup: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_signup/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,953 1 INFO e01 odoo.addons.base.models.ir_module: module base_address_extended: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_address_extended/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,958 1 INFO e01 odoo.addons.base.models.ir_module: module http_routing: loading translation file /usr/lib/python3/dist-packages/odoo/addons/http_routing/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,962 1 INFO e01 odoo.addons.base.models.ir_module: module portal: loading translation file /usr/lib/python3/dist-packages/odoo/addons/portal/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,978 1 INFO e01 odoo.addons.base.models.ir_module: module base_report_wkhtmltox: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_report_wkhtmltox/i18n/fr.po for language fr_FR
+2026-11-02 08:32:52,980 1 INFO e01 odoo.addons.base.models.ir_module: module training_management: loading translation file /mnt/extra-addons/training_management/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,068 1 INFO e01 odoo.addons.base.models.ir_module: module gamification: loading translation file /usr/lib/python3/dist-packages/odoo/addons/gamification/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,100 1 INFO e01 odoo.addons.base.models.ir_module: module digest: loading translation file /usr/lib/python3/dist-packages/odoo/addons/digest/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,108 1 INFO e01 odoo.addons.base.models.ir_module: module survey: loading translation file /usr/lib/python3/dist-packages/odoo/addons/survey/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,161 1 INFO e01 odoo.addons.base.models.ir_module: module api_doc: loading translation file /usr/lib/python3/dist-packages/odoo/addons/api_doc/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,165 1 INFO e01 odoo.addons.base.models.ir_module: module auth_passkey: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_passkey/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,170 1 INFO e01 odoo.addons.base.models.ir_module: module auth_passkey_portal: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_passkey_portal/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,172 1 INFO e01 odoo.addons.base.models.ir_module: module auth_totp: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_totp/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,179 1 INFO e01 odoo.addons.base.models.ir_module: module auth_totp_mail: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_totp_mail/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,185 1 INFO e01 odoo.addons.base.models.ir_module: module auth_totp_portal: loading translation file /usr/lib/python3/dist-packages/odoo/addons/auth_totp_portal/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,188 1 INFO e01 odoo.addons.base.models.ir_module: module base_import: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_import/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,196 1 INFO e01 odoo.addons.base.models.ir_module: module base_import_module: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_import_module/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,200 1 INFO e01 odoo.addons.base.models.ir_module: module base_install_request: loading translation file /usr/lib/python3/dist-packages/odoo/addons/base_install_request/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,204 1 INFO e01 odoo.addons.base.models.ir_module: module google_gmail: loading translation file /usr/lib/python3/dist-packages/odoo/addons/google_gmail/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,208 1 INFO e01 odoo.addons.base.models.ir_module: module iap: loading translation file /usr/lib/python3/dist-packages/odoo/addons/iap/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,214 1 INFO e01 odoo.addons.base.models.ir_module: module iap_mail: loading translation file /usr/lib/python3/dist-packages/odoo/addons/iap_mail/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,221 1 INFO e01 odoo.addons.base.models.ir_module: module mail_bot: loading translation file /usr/lib/python3/dist-packages/odoo/addons/mail_bot/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,225 1 INFO e01 odoo.addons.base.models.ir_module: module microsoft_outlook: loading translation file /usr/lib/python3/dist-packages/odoo/addons/microsoft_outlook/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,230 1 INFO e01 odoo.addons.base.models.ir_module: module mysubscription: loading translation file /usr/lib/python3/dist-packages/odoo/addons/mysubscription/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,235 1 INFO e01 odoo.addons.base.models.ir_module: module partner_autocomplete: loading translation file /usr/lib/python3/dist-packages/odoo/addons/partner_autocomplete/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,239 1 INFO e01 odoo.addons.base.models.ir_module: module portal_discuss: loading translation file /usr/lib/python3/dist-packages/odoo/addons/portal_discuss/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,242 1 INFO e01 odoo.addons.base.models.ir_module: module privacy_lookup: loading translation file /usr/lib/python3/dist-packages/odoo/addons/privacy_lookup/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,247 1 INFO e01 odoo.addons.base.models.ir_module: module resource_mail: loading translation file /usr/lib/python3/dist-packages/odoo/addons/resource_mail/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,249 1 INFO e01 odoo.addons.base.models.ir_module: module rpc: loading translation file /usr/lib/python3/dist-packages/odoo/addons/rpc/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,250 1 INFO e01 odoo.addons.base.models.ir_module: module phone_validation: loading translation file /usr/lib/python3/dist-packages/odoo/addons/phone_validation/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,256 1 INFO e01 odoo.addons.base.models.ir_module: module sms: loading translation file /usr/lib/python3/dist-packages/odoo/addons/sms/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,274 1 INFO e01 odoo.addons.base.models.ir_module: module training_management_survey: loading translation file /mnt/extra-addons/training_management_survey/i18n/fr.po for language fr_FR
+2026-11-02 08:32:53,291 1 INFO e01 odoo.addons.base.models.ir_module: module web_unsplash: loading translation file /usr/lib/python3/dist-packages/odoo/addons/web_unsplash/i18n/fr.po for language fr_FR
+2026-11-02 08:32:56,675 1 INFO e01 odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_missing_required_step_blocks_even_direct_access ...
+2026-11-02 08:32:58,234 1 INFO e01 odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_native_form_and_frozen_definition ...
+2026-11-02 08:32:59,798 1 INFO e01 odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_prerequisites_existing_acquis_and_no_duplicate_work ...
+2026-11-02 08:33:01,483 1 INFO e01 odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_real_restricted_users_and_company_isolation ...
+2026-11-02 08:33:02,971 1 INFO e01 odoo.models: Access Denied by ACLs for operation: read, uid: 132, model: training.path, field: assignment_ids
+2026-11-02 08:33:02,984 1 INFO e01 odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.path operation=read uid=131 records=[12]
+2026-11-02 08:33:02,985 1 INFO e01 odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_recommended_order_explicit_prerequisite_and_equivalence ...
+2026-11-02 08:33:04,464 1 INFO e01 odoo.addons.training_management.tests.test_path: Starting TestTrainingPath.test_withdrawal_is_audited_repeatable_and_releases_only_its_constraint ...
+2026-11-02 08:33:06,000 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 17 checked, 13 removed
+2026-11-02 08:33:06,054 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:33:06,263 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:33:06,350 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:33:06,441 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:33:06,533 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:33:06,606 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:33:08,078 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s052_peer> to <s.s@example.com>
+2026-11-02 08:33:08,080 1 INFO e01 odoo.addons.training_management_elearning.tests.test_attempt: Starting TestAttempt.test_atomic_savepoint_and_retry_after_failure ...
+2026-11-02 08:33:08,282 1 INFO e01 odoo.addons.training_management_elearning.tests.test_attempt: Starting TestAttempt.test_resume_retry_idempotence_and_conflicts ...
+2026-11-02 08:33:08,489 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 8 checked, 4 removed
+2026-11-02 08:33:08,609 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_author> to <e.e@example.com>
+2026-11-02 08:33:08,718 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_coord> to <e.e@example.com>
+2026-11-02 08:33:08,790 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_portal> to <e.e@example.com>
+2026-11-02 08:33:08,811 1 INFO e01 odoo.addons.training_management_elearning.tests.test_content_security: Starting TestContentSecurity.test_h5p_version_numbers_from_export ...
+2026-11-02 08:33:08,816 1 INFO e01 odoo.addons.training_management_elearning.tests.test_content_security: Starting TestContentSecurity.test_hostile_archives ...
+2026-11-02 08:33:08,830 1 INFO e01 odoo.addons.training_management_elearning.tests.test_content_security: Starting TestContentSecurity.test_immutable_bytes_and_native_bypass ...
+2026-11-02 08:33:08,842 1 INFO e01 odoo.models: Access Denied by ACLs for operation: read, uid: 143, model: training.elearning.file, field: data
+2026-11-02 08:33:08,852 1 INFO e01 odoo.models: Access Denied by ACLs for operation: read, uid: 144, model: training.elearning.file, field: data
+2026-11-02 08:33:08,857 1 INFO e01 odoo.models: Access Denied by ACLs for operation: read, uid: 145, model: training.elearning.file, field: data
+2026-11-02 08:33:08,872 1 INFO e01 odoo.addons.training_management_elearning.tests.test_content_security: Starting TestContentSecurity.test_lease_current_rights_and_withdrawal ...
+2026-11-02 08:33:08,913 1 INFO e01 odoo.models.unlink: User #1 deleted discuss.channel.member records with IDs: [53]
+2026-11-02 08:33:08,950 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 2 checked, 2 removed
+2026-11-02 08:33:08,989 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:33:09,167 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:33:09,261 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:33:09,357 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:33:09,432 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:33:09,492 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:33:10,982 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s052_peer> to <s.s@example.com>
+2026-11-02 08:33:10,983 1 INFO e01 odoo.addons.training_management_elearning.tests.test_editorial: Starting TestEditorial.test_reuse_frozen_versions_rules_and_history ...
+2026-11-02 08:33:11,175 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 8 checked, 4 removed
+2026-11-02 08:33:11,217 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:33:11,391 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:33:11,483 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:33:11,578 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:33:11,649 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:33:11,713 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:33:13,067 1 INFO e01 odoo.addons.training_management_elearning.tests.test_enriched: Starting TestEnriched.test_exact_partial_wrong_empty_and_resume ...
+2026-11-02 08:33:13,196 1 INFO e01 odoo.models.unlink: User #152 deleted survey.question.answer records with IDs: [171, 172]
+2026-11-02 08:33:13,236 1 INFO e01 odoo.models.unlink: User #152 deleted survey.question.answer records with IDs: [173, 174, 175]
+2026-11-02 08:33:13,666 1 INFO e01 odoo.addons.training_management_elearning.tests.test_enriched: Starting TestEnriched.test_invalid_edges_cross_actor_and_deadline ...
+2026-11-02 08:33:13,746 1 INFO e01 odoo.models.unlink: User #152 deleted survey.question.answer records with IDs: [194, 195]
+2026-11-02 08:33:13,781 1 INFO e01 odoo.models.unlink: User #152 deleted survey.question.answer records with IDs: [196, 197, 198]
+2026-11-02 08:33:14,081 1 INFO e01 odoo.addons.training_management_elearning.tests.test_enriched: Starting TestEnriched.test_malformed_configuration_and_native_publication_checks ...
+2026-11-02 08:33:14,308 1 INFO e01 odoo.models.unlink: User #152 deleted survey.question.answer records with IDs: [237, 238]
+2026-11-02 08:33:14,327 1 INFO e01 odoo.models.unlink: User #152 deleted survey.question.answer records with IDs: [242]
+2026-11-02 08:33:14,386 1 INFO e01 odoo.models.unlink: User #152 deleted survey.question.answer records with IDs: [246, 247]
+2026-11-02 08:33:14,415 1 INFO e01 odoo.addons.training_management_elearning.tests.test_enriched: Starting TestEnriched.test_publication_freeze_revision_and_safe_render_data ...
+2026-11-02 08:33:14,489 1 INFO e01 odoo.models.unlink: User #152 deleted survey.question.answer records with IDs: [255, 256]
+2026-11-02 08:33:14,522 1 INFO e01 odoo.models.unlink: User #152 deleted survey.question.answer records with IDs: [257, 258, 259]
+2026-11-02 08:33:14,738 1 INFO e01 odoo.models.unlink: User #152 deleted survey.question.answer records with IDs: [278, 279, 280, 281, 282, 283, 284, 285, 286]
+2026-11-02 08:33:14,792 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 8 checked, 4 removed
+2026-11-02 08:33:14,901 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e00_author> to <e.e@example.com>
+2026-11-02 08:33:14,991 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e00_portal> to <e.e@example.com>
+2026-11-02 08:33:15,048 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:33:15,136 1 INFO e01 odoo.addons.training_management_elearning.tests.test_foundation: Starting TestFoundation.test_company_and_portal_boundaries ...
+2026-11-02 08:33:15,175 1 INFO e01 odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.elearning.resource operation=read uid=157 records=[23]
+2026-11-02 08:33:15,184 1 INFO e01 odoo.addons.training_management.models.training_quality_access: Training access denied: model=training.elearning.resource operation=create uid=157 records=[24]
+2026-11-02 08:33:15,185 1 INFO e01 odoo.addons.training_management_elearning.tests.test_foundation: Starting TestFoundation.test_native_form_identity_and_archive ...
+2026-11-02 08:33:15,230 1 INFO e01 odoo.addons.training_management_elearning.tests.test_foundation: Starting TestFoundation.test_no_competing_learning_or_runtime ...
+2026-11-02 08:33:15,236 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 5 checked, 1 removed
+2026-11-02 08:33:15,271 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:33:15,442 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:33:15,534 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:33:15,626 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:33:15,700 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:33:15,769 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:33:17,256 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s052_peer> to <s.s@example.com>
+2026-11-02 08:33:17,258 1 INFO e01 odoo.addons.training_management_elearning.tests.test_progression: Starting TestFormativeProgress.test_independent_rules_retry_invalidation_and_human_criterion ...
+2026-11-02 08:33:17,535 1 INFO e01 odoo.addons.training_management_elearning.tests.test_progression: Starting TestFormativeProgress.test_path_cache_x_y_and_atomic_projection ...
+2026-11-02 08:33:19,115 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 9 checked, 5 removed
+2026-11-02 08:33:19,248 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_author> to <e.e@example.com>
+2026-11-02 08:33:19,402 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_coord> to <e.e@example.com>
+2026-11-02 08:33:19,492 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <e01_portal> to <e.e@example.com>
+2026-11-02 08:33:19,520 1 INFO e01 odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewContent.test_h5p_assets_and_runtime_graph ...
+2026-11-02 08:33:19,524 1 INFO e01 odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewContent.test_h5p_missing_runtime_and_malformed_shapes ...
+2026-11-02 08:33:19,527 1 INFO e01 odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewContent.test_lease_cleanup_preserves_live_authorizations ...
+2026-11-02 08:33:19,548 1 INFO e01 odoo.models.unlink: User #1 deleted training.elearning.lease records with IDs: [60]
+2026-11-02 08:33:19,552 1 INFO e01 odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewContent.test_withdrawal_keeps_first_decision ...
+2026-11-02 08:33:19,572 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 2 checked, 2 removed
+2026-11-02 08:33:19,616 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:33:19,794 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:33:19,881 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:33:19,977 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:33:20,046 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:33:20,110 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:33:21,577 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s052_peer> to <s.s@example.com>
+2026-11-02 08:33:21,579 1 INFO e01 odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewRuntime.test_defaults_cannot_forge_internal_records ...
+2026-11-02 08:33:21,708 1 INFO e01 odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewRuntime.test_extreme_numeric_result_is_validation_error ...
+2026-11-02 08:33:21,846 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 8 checked, 4 removed
+2026-11-02 08:33:21,890 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:33:22,086 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:33:22,181 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:33:22,274 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:33:22,341 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:33:22,406 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:33:23,776 1 INFO e01 odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewQuestions.test_configuration_failure_is_atomic ...
+2026-11-02 08:33:23,857 1 INFO e01 odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewQuestions.test_enriched_definition_cannot_publish_as_regular_question ...
+2026-11-02 08:33:23,955 1 INFO e01 odoo.models.unlink: User #174 deleted survey.question.answer records with IDs: [305, 306]
+2026-11-02 08:33:23,983 1 INFO e01 odoo.addons.training_management_elearning.tests.test_review: Starting TestReviewQuestions.test_publication_rejects_conflicting_correction_labels ...
+2026-11-02 08:33:24,062 1 INFO e01 odoo.models.unlink: User #174 deleted survey.question.answer records with IDs: [314, 315]
+2026-11-02 08:33:24,104 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 8 checked, 4 removed
+2026-11-02 08:33:24,146 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:33:24,330 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:33:24,420 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:33:24,509 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:33:24,585 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:33:24,650 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:33:26,136 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s08_quality> to <s.s@example.com>
+2026-11-02 08:33:26,229 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s08_other_quality> to <s.s@example.com>
+2026-11-02 08:33:26,261 1 INFO e01 odoo.addons.training_management_survey.tests.test_closure: Starting TestMockClosure.test_successful_mock_does_not_issue_achievement_certificate ...
+2026-11-02 08:33:27,832 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 10 checked, 6 removed
+2026-11-02 08:33:27,873 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:33:28,059 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:33:28,226 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:33:28,377 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:33:28,477 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:33:28,550 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:33:30,009 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_18_of_24_inclusive_threshold_exact_qcm_and_native_storage ...
+2026-11-02 08:33:30,286 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_access_expiry_allows_finishing_only_the_authorized_active_attempt ...
+2026-11-02 08:33:30,631 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_empty_section_unclassified_and_hidden_revision_resource ...
+2026-11-02 08:33:30,851 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_expired_access_retains_results_but_forbids_retake ...
+2026-11-02 08:33:31,017 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_generic_certification_report_rejects_mock_exam_attempts ...
+2026-11-02 08:33:31,391 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_legacy_public_exam_attachment_cannot_bypass_parent_access ...
+2026-11-02 08:33:31,595 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s06_file_other_company> to <s.s@example.com>
+2026-11-02 08:33:31,698 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_native_editor_models_and_publish_validation ...
+2026-11-02 08:33:31,921 1 INFO e01 odoo.models.unlink: User #186 deleted mail.message records with IDs: [1604]
+2026-11-02 08:33:31,977 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_native_exam_attachments_cannot_be_published_or_detached ...
+2026-11-02 08:33:32,132 1 INFO e01 odoo.models.unlink: User #186 deleted ir.attachment records with IDs: [643]
+2026-11-02 08:33:32,133 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_native_revision_wizard_preserves_original_and_rejects_forgery ...
+2026-11-02 08:33:32,339 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_native_survey_role_and_other_company_cannot_read_private_exams ...
+2026-11-02 08:33:32,590 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s06_native_manager> to <s.s@example.com>
+2026-11-02 08:33:32,678 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s06_other_company> to <s.s@example.com>
+2026-11-02 08:33:32,702 1 INFO e01 odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [41], uid: 192, model: survey.survey
+2026-11-02 08:33:32,715 1 INFO e01 odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [78], uid: 192, model: survey.question
+2026-11-02 08:33:32,733 1 INFO e01 odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [380], uid: 192, model: survey.question.answer
+2026-11-02 08:33:32,747 1 INFO e01 odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [21], uid: 192, model: survey.user_input
+2026-11-02 08:33:32,760 1 INFO e01 odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [62], uid: 192, model: survey.user_input.line
+2026-11-02 08:33:32,780 1 INFO e01 odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [41], uid: 193, model: survey.survey
+2026-11-02 08:33:32,796 1 INFO e01 odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [78], uid: 193, model: survey.question
+2026-11-02 08:33:32,823 1 INFO e01 odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [380], uid: 193, model: survey.question.answer
+2026-11-02 08:33:32,839 1 INFO e01 odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [21], uid: 193, model: survey.user_input
+2026-11-02 08:33:32,859 1 INFO e01 odoo.addons.base.models.ir_access: Access Denied for operation: read on record ids: [62], uid: 193, model: survey.user_input.line
+2026-11-02 08:33:32,905 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_native_threshold_constraint_and_publication_boundaries ...
+2026-11-02 08:33:33,017 1 ERROR e01 odoo.sql_db: bad query: b'INSERT INTO "survey_survey" ("access_mode", "access_token", "active", "attempts_limit", "certification", "certification_report_layout", "color", "create_date", "create_uid", "orientation_revision", "progression_mode", "questions_layout", "questions_selection", "scoring_success_min", "scoring_type", "session_code", "session_question_can_answer", "survey_type", "time_limit", "title", "training_program_id", "training_state", "training_version", "user_id", "write_date", "write_uid") VALUES (\'public\', \'1fbc4a59-3ad9-4dab-a3b6-d4b7be5682c5\', true, 1, false, \'modern_company\', 0, \'2026-11-02T08:33:27.833993\'::timestamp, 186, 0, \'percent\', \'page_per_question\', \'all\',  -1.0, \'scoring_with_answers\', \'4639\', true, \'custom\', 60.0, \'{"en_US": "Fictional mock exam"}\', 33, \'draft\', \'1\', 186, \'2026-11-02T08:33:27.833993\'::timestamp, 186) RETURNING "id"'
+ERROR: new row for relation "survey_survey" violates check constraint "survey_survey_scoring_success_min_check"
+DETAIL:  Failing row contains (46, 0, 186, 1, null, null, null, null, 186, 186, custom, null, page_per_question, all, percent, public, 1fbc4a59-3ad9-4dab-a3b6-d4b7be5682c5, scoring_with_answers, modern_company, null, 4639, {"en_US": "Fictional mock exam"}, null, null, t, null, null, null, null, f, null, t, null, null, null, 2026-11-02 08:33:27.833993, 2026-11-02 08:33:27.833993, -1, 60, 33, null, null, null, null, null, 0, draft, 1, null, null, null).
+
+2026-11-02 08:33:33,022 1 ERROR e01 odoo.sql_db: bad query: b'INSERT INTO "survey_survey" ("access_mode", "access_token", "active", "attempts_limit", "certification", "certification_report_layout", "color", "create_date", "create_uid", "orientation_revision", "progression_mode", "questions_layout", "questions_selection", "scoring_success_min", "scoring_type", "session_code", "session_question_can_answer", "survey_type", "time_limit", "title", "training_program_id", "training_state", "training_version", "user_id", "write_date", "write_uid") VALUES (\'public\', \'23f0c237-f5b7-4a0d-b164-cc5dddc685d3\', true, 1, false, \'modern_company\', 0, \'2026-11-02T08:33:27.833993\'::timestamp, 186, 0, \'percent\', \'page_per_question\', \'all\', 101.0, \'scoring_with_answers\', \'5415\', true, \'custom\', 60.0, \'{"en_US": "Fictional mock exam"}\', 33, \'draft\', \'1\', 186, \'2026-11-02T08:33:27.833993\'::timestamp, 186) RETURNING "id"'
+ERROR: new row for relation "survey_survey" violates check constraint "survey_survey_scoring_success_min_check"
+DETAIL:  Failing row contains (47, 0, 186, 1, null, null, null, null, 186, 186, custom, null, page_per_question, all, percent, public, 23f0c237-f5b7-4a0d-b164-cc5dddc685d3, scoring_with_answers, modern_company, null, 5415, {"en_US": "Fictional mock exam"}, null, null, t, null, null, null, null, f, null, t, null, null, null, 2026-11-02 08:33:27.833993, 2026-11-02 08:33:27.833993, 101, 60, 33, null, null, null, null, null, 0, draft, 1, null, null, null).
+
+2026-11-02 08:33:33,024 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_native_timer_ten_minutes_reload_expiry_late_save_and_cron ...
+2026-11-02 08:33:33,217 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_published_images_are_immutable_through_native_attachments ...
+2026-11-02 08:33:33,341 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_qcm_partial_empty_and_exact_are_zero_zero_full ...
+2026-11-02 08:33:33,629 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_restricted_identity_native_rpc_exports_and_suspension ...
+2026-11-02 08:33:34,176 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_retake_twice_after_100_percent_preserves_every_result ...
+2026-11-02 08:33:34,458 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_revision_version_history_and_theme_totals ...
+2026-11-02 08:33:34,782 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_unrelated_native_survey_is_unaffected ...
+2026-11-02 08:33:34,819 1 INFO e01 odoo.addons.training_management_survey.tests.test_exam: Starting TestMockExam.test_wrong_question_forged_choices_native_creation_and_finished_edits ...
+2026-11-02 08:33:35,107 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 16 checked, 12 removed
+2026-11-02 08:33:35,174 1 INFO e01 odoo.addons.base.models.res_users: Group change: user 1 with IP n/a changed groups of user 1 who belonged to [25, 10, 9, 18, 5, 15] with changes [(<Command.LINK: 4>, 6, 0)]
+2026-11-02 08:33:35,392 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_coord> to <s.s@example.com>
+2026-11-02 08:33:35,484 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_reader> to <s.s@example.com>
+2026-11-02 08:33:35,583 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_internal> to <s.s@example.com>
+2026-11-02 08:33:35,674 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_participant> to <s.s@example.com>
+2026-11-02 08:33:35,739 1 INFO e01 odoo.addons.auth_signup.models.res_users: Signup email sent for user <s03_other_participant> to <s.s@example.com>
+2026-11-02 08:33:37,284 1 INFO e01 odoo.addons.training_management_survey.tests.test_path: Starting TestPathExam.test_acquired_exam_step_with_private_correction_resource ...
+2026-11-02 08:33:37,749 1 INFO e01 odoo.addons.base.models.ir_attachment: filestore gc 9 checked, 5 removed
+2026-11-02 08:33:37,753 1 INFO e01 odoo.service.server: 80 post-tests in 71.25s, 31462 queries
+2026-11-02 08:33:37,754 1 INFO e01 odoo.tests.stats: training_management: 40 tests 39.46s 12335 queries
+2026-11-02 08:33:37,754 1 INFO e01 odoo.tests.stats: training_management_elearning: 43 tests 18.10s 10411 queries
+2026-11-02 08:33:37,754 1 INFO e01 odoo.tests.stats: training_management_survey: 27 tests 13.64s 8716 queries
+2026-11-02 08:33:37,755 1 INFO e01 odoo.tests.result: 0 failed, 0 error(s) of 80 tests when loading database 'e01'
+2026-11-02 08:33:37,756 1 INFO e01 odoo.service.server.ThreadedServer: Initiating shutdown
+2026-11-02 08:33:37,756 1 INFO e01 odoo.service.server.ThreadedServer: Hit CTRL-C again or send a second signal to force the shutdown.
+2026-11-02 08:33:37,757 1 INFO e01 odoo.addons.bus.websocket: Disconnecting 0 websockets
+2026-11-02 08:33:37,864 1 INFO e01 odoo.sql_db: ConnectionPool(read/write;used=0/count=0/max=64): Closed 1 connections 

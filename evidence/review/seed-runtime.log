@@ -1,0 +1,23 @@
+ Container tm-review-20261102-odb-1 Running 
+ Container tm-review-20261102-odb-1 Waiting 
+ Container tm-review-20261102-odb-1 Healthy 
+ Container tm-review-20261102-odoo-run-c2b4bff83f93 Creating 
+ Container tm-review-20261102-odoo-run-c2b4bff83f93 Created 
+2026-11-02 08:26:39,706 1 INFO ? odoo: Odoo version 20.0-20261015
+2026-11-02 08:26:39,707 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf
+2026-11-02 08:26:39,707 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/20.0', '/mnt/extra-addons', '/mnt/qualification-addons', '/usr/lib/python3/dist-packages/addons'])
+2026-11-02 08:26:39,707 1 INFO ? odoo: database: odoo@odb:5432
+2026-11-02 08:26:40,399 1 INFO ? odoo.service.server.ThreadedServer: Initiating shutdown
+2026-11-02 08:26:40,399 1 INFO ? odoo.service.server.ThreadedServer: Hit CTRL-C again or send a second signal to force the shutdown.
+2026-11-02 08:26:40,549 1 INFO e01 odoo.modules.loading: loading 1 modules...
+2026-11-02 08:26:40,556 1 INFO e01 odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra)
+2026-11-02 08:26:40,583 1 INFO e01 odoo.modules.loading: loading 42 modules...
+2026-11-02 08:26:40,947 1 WARNING e01 odoo.addons.mail.controllers.attachment: markdown2 is not installed, markdown will not be rendered
+2026-11-02 08:26:41,645 1 INFO e01 odoo.modules.loading: 42 modules loaded in 1.06s, 0 queries (+0 extra)
+2026-11-02 08:26:41,785 1 INFO e01 odoo.modules.loading: Modules loaded.
+2026-11-02 08:26:41,837 1 INFO e01 odoo.registry: Registry loaded in 1.434s
+2026-11-02 08:26:41,875 1 INFO e01 odoo.tests.common: Importing test framework
+2026-11-02 08:26:46,267 1 INFO e01 odoo.addons.base_report_wkhtmltox.models.ir_actions_report: Will use the Wkhtmltopdf binary at /usr/local/bin/wkhtmltopdf
+2026-11-02 08:26:46,336 1 INFO e01 odoo.addons.base_report_wkhtmltox.models.ir_actions_report: Will use the Wkhtmltoimage binary at /usr/local/bin/wkhtmltoimage
+2026-11-02 08:26:50,598 1 INFO e01 odoo.registry: Caches invalidated, signaling through the database: ['default']
+E05_IDS={"enrollments": {"X_e05_learner": 15, "X_e05_peer": 16, "Y_e05_learner": 17}, "usages": {"X_h5p": 12, "X_scorm12": 13, "Y_scorm12": 14}, "path": 2, "versions": {"h5p": 16, "scorm12": 17}, "coord": 63, "learner": 64, "peer": 65}

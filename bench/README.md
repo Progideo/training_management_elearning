@@ -92,3 +92,17 @@ identifiants de session dans les copies de journaux. Après vérification :
 `./bench/e01/run down -v --remove-orphans`, suppression du seul dossier temporaire
 de secrets/dump, contrôle de l’absence des ressources de ce projet et de l’état
 inchangé des autres conteneurs. Ne pas toucher aux autres bancs.
+
+## Revue corrective du 2 novembre 2026
+
+La branche de revue utilise `bench/review/run` (projet `tm-review-20261102`, dossier
+secret `/private/tmp/tm-review-20261102-secrets`) et les mêmes images épinglées et
+montages métier en lecture seule. Créer le secret temporaire comme ci-dessus.
+`bench/review/test-tags` sélectionne l’extension et les classes serveur complètes
+S05/P09/S08/Surveys retenues. `bench/review/browser.cjs` réutilise les recettes déjà
+livrées avec une destination de preuves distincte et ajoute la reprise H5P immédiate
+et les entrées HTTP excessives. Les identifiants sont extraits des nouveaux seeds.
+Les deux scripts `parent.test.cjs` et `runner.test.cjs` reproduisent les défauts du
+courtier de sauvegarde et de la reprise H5P sans dépendance de temps réel.
+`checkpoint.py` complète le checkpoint E06 avec les réponses/résultats Surveys.
+Ne pas écraser les preuves de la livraison initiale lors d’un nouveau passage.

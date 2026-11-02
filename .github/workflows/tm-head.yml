@@ -1,0 +1,41 @@
+name: Contrat avec Training Management
+on:
+  schedule:
+    - cron: "37 3 * * *"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - .github/workflows/tm-head.yml
+permissions:
+  contents: read
+concurrency:
+  group: elearning-tm-head
+  cancel-in-progress: true
+jobs:
+  tm-head:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Progideo/training_management
+          ref: main
+          path: .dependencies/training_management
+          persist-credentials: false
+      - name: Installation et mise à jour Odoo avec la tête de Training Management
+        env:
+          TM_HEAD_CHECK: "1"
+          TM_ADDONS_DIR: ${{ github.workspace }}/.dependencies/training_management/addons
+          LMS_SECRET_DIR: ${{ runner.temp }}/elearning-secrets
+          LMS_COMPOSE_PROJECT: elearning-tm-head-${{ github.run_id }}-${{ github.run_attempt }}
+        run: bash ci/validate.sh
+      - name: Journaux de validation
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: validation-tm-head
+          path: ci-results/
+          if-no-files-found: error

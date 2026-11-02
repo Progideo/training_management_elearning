@@ -1,0 +1,13 @@
+{
+  "odoo_major": 20,
+  "odoo_image": "odoo@sha256:61e3c71b0503c5f658e604c3e340bede20b97d05f726179fa006eae50a32fd23",
+  "training_management": {
+    "repository": "Progideo/training_management",
+    "commit": "9c9fdcd0bff5ce282602b819fe7165fa6dd4e2d5"
+  },
+  "required_addons": [
+    "training_management",
+    "training_management_survey"
+  ],
+  "elearning_version": "20.0.2.1.0"
+}

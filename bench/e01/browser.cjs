@@ -1,8 +1,8 @@
-const {chromium}=require('/Users/jbcrouigneau/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('playwright');
 const fs=require('node:fs'), assert=require('node:assert/strict');
 (async()=>{
  const ids=JSON.parse(fs.readFileSync('evidence/e01/ids.json','utf8'));
- const password=fs.readFileSync('/private/tmp/tm-e01-20261101-secrets/db_password','utf8');
+ const password=fs.readFileSync(require('node:path').join(process.env.LMS_SECRET_DIR, 'db_password'),'utf8');
  const browser=await chromium.launch({headless:true,executablePath:chromium.executablePath()});
  const context=await browser.newContext(); const page=await context.newPage();
  const base='http://127.0.0.1:18269';
@@ -27,7 +27,7 @@ const fs=require('node:fs'), assert=require('node:assert/strict');
  await page.evaluate(()=>window.postMessage({type:'ready',nonce:'FORGED'},location.origin));
  assert.equal(await page.locator('#status').textContent(),oldStatus);
  await page.screenshot({path:'evidence/e01/isolation.png',fullPage:true});
- fs.writeFileSync('/private/tmp/tm-e01-20261101-secrets/lease-url',contentBase+'/file/private.txt');
+ fs.writeFileSync(require('node:path').join(process.env.LMS_SECRET_DIR, 'lease-url'),contentBase+'/file/private.txt');
  console.log(JSON.stringify({passed:result,checks:['isolated preview','subfile authorization','portal host refusal','content RPC/login refusal','native binary refusal','forged message ignored']}));
  await browser.close();
 })().catch(e=>{console.error(e);process.exit(1)});

@@ -1,4 +1,5 @@
 """Compare persisted checkpoints and the read-only business checkout."""
+import os
 import hashlib
 import json
 import subprocess
@@ -15,7 +16,7 @@ for name in ('before-update', 'after-update-1', 'after-update-2'):
     checkpoints.append(value)
     (evidence / (name + '.json')).write_text(json.dumps(value, indent=2) + '\n')
 assert checkpoints[0] == checkpoints[1] == checkpoints[2], 'Persistent history changed'
-tm = Path('/Users/jbcrouigneau/.codex/.chatgpt-projects/g-p-6abcef897d6c81918e54a1836d958518/training_management')
+tm = Path(os.environ['TM_ADDONS_DIR']).resolve().parent
 files = subprocess.check_output(['git', '-C', str(tm), 'ls-files', '-z']).decode().split('\0')
 after = {f: hashlib.sha256((tm / f).read_bytes()).hexdigest() for f in files if (tm / f).is_file()}
 assert after == json.loads((evidence / 'tm-before.json').read_text()), 'TM changed'

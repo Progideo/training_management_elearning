@@ -1,10 +1,10 @@
-const {request}=require('/Users/jbcrouigneau/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {request}=require('playwright');
 const fs=require('node:fs'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const base='http://127.0.0.1:18269';
 const percentile=(values,p)=>[...values].sort((a,b)=>a-b)[Math.ceil(values.length*p)-1];
 (async()=>{
  const users=JSON.parse(fs.readFileSync('evidence/e06/users.json'));
- const password=fs.readFileSync('/private/tmp/tm-e01-20261101-secrets/db_password','utf8');
+ const password=fs.readFileSync(require('node:path').join(process.env.LMS_SECRET_DIR, 'db_password'),'utf8');
  const clients=[];
  for(let offset=0;offset<users.length;offset+=5){await Promise.all(users.slice(offset,offset+5).map(async user=>{
   const context=await request.newContext({timeout:60000});

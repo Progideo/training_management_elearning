@@ -8,8 +8,11 @@ Ne pas réutiliser ce nom si un banc de ce nom existe déjà.
 
 Créer un répertoire de secrets temporaires hors dépôt, mode 0700, et un fichier
 `db_password` aléatoire, mode 0600. Exporter `LMS_SECRET_DIR` et `TM_ADDONS_DIR`
-vers ce dossier et les addons métier. `run` contient les chemins locaux par défaut
-de la qualification ; ils peuvent être remplacés par ces variables.
+vers ce dossier et les addons métier. Ces variables sont obligatoires.
+`LMS_COMPOSE_PROJECT` permet de choisir un nom de banc isolé. Pour les recettes
+navigateur, installer Playwright dans un environnement Node local et le rendre
+accessible via `NODE_PATH`, puis installer Chromium avec cette même version.
+Les scripts lisent les secrets uniquement dans `LMS_SECRET_DIR`.
 
 Depuis la racine du dépôt :
 

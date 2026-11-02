@@ -1,8 +1,8 @@
-const {chromium}=require('/Users/jbcrouigneau/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('playwright');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 (async()=>{
  const ids=JSON.parse(fs.readFileSync('evidence/q01/ids.json','utf8'));
- const password=fs.readFileSync('/private/tmp/tm-e01-20261101-secrets/db_password','utf8');
+ const password=fs.readFileSync(require('node:path').join(process.env.LMS_SECRET_DIR, 'db_password'),'utf8');
  const browser=await chromium.launch({headless:true,executablePath:chromium.executablePath()});
  const context=await browser.newContext({viewport:{width:390,height:844}}),page=await context.newPage();
  const errors=[];page.on('pageerror',e=>{errors.push(e.message);console.log('PAGEERROR',e.message)});page.on('console',m=>{if(m.type()==='error')console.log('CONSOLE',m.text())});

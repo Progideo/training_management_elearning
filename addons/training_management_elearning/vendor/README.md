@@ -6,11 +6,11 @@ Unmodified release artifacts already qualified locally:
 
 Only these distributions are bundled; no prototype addon code is deployed.
 
-Open point: `h5p/frame.bundle.js` embeds H5P core JavaScript (`H5P.jQuery`, `H5P.Tooltip`).
-The h5p-standalone MIT notice does not name it. Upstream `h5p/h5p-php-library` ships a GPL-3.0
-`LICENSE.txt`, while the [H5P JavaScript API documentation](https://h5p.org/documentation/api/index.html)
-carries an MIT notice from Joubel AS without naming what it covers. The license of that bundled
-code must be confirmed with H5P Group before external distribution.
+`h5p/frame.bundle.js` embeds H5P core JavaScript (`H5P.jQuery`, `H5P.Tooltip`) under the MIT terms retained by
+the operator on 2 November 2026. [H5P licensing](https://h5p.org/licensing) says H5P uses MIT wherever possible and that the
+GPL requirement comes from third-party purification code in the PHP library, which is not bundled here. The
+[JavaScript API documentation](https://h5p.org/documentation/api/index.html) carries an MIT notice from Joubel AS.
+Upstream `h5p/h5p-php-library` still ships a GPL-3.0 `LICENSE.txt` and no source states the license of its `js/` files by name.
 
 Content libraries inside uploaded H5P packages retain their own licenses,
 which the author must declare at import. Supported initial content: TrueFalse 1.8,

@@ -8,7 +8,7 @@ L’option fiscale reste facultative à son emplacement actuel. L’extraction f
 
 ## Compatibilité et validation
 
-`compatibility.json` fixe le commit TM, les addons requis et l’image Odoo qualifiés. Le workflow `Validation eLearning` récupère cette révision en lecture seule, exécute les régressions JavaScript, puis une installation vierge et une mise à jour avec les tests eLearning et les contrats natifs sélectionnés. Les résumés Odoo doivent être présents, non vides et sans échec. Les journaux sont conservés comme artefacts GitHub.
+`compatibility.json` fixe le commit TM, les addons requis et l’image Odoo qualifiés. Le workflow `Validation eLearning` récupère cette révision en lecture seule, exécute les régressions JavaScript, puis une installation vierge et une mise à jour avec les tests eLearning et les contrats natifs sélectionnés. Une troisième base installe Website, dont le gabarit de portail diffère, et rejoue les tests eLearning. Les résumés Odoo doivent être présents, non vides et sans échec. Les journaux sont conservés comme artefacts GitHub.
 
 Ce contrôle ne remplace ni les recettes navigateur et de charge, ni une répétition de restauration ou une migration sur copie des données de l’environnement cible. Ces procédures restent dans `bench/README.md` et la documentation des lots.
 

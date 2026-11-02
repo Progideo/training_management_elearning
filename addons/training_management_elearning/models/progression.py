@@ -86,6 +86,13 @@ class Service(models.AbstractModel):
     _inherit = 'training.learning.service'
 
     @api.private
+    def _required_for_certificate(self,activity):
+        if activity.criterion!='elearning_formative':
+            return super()._required_for_certificate(activity)
+        usage=self.env['training.elearning.usage'].sudo().search([('activity_id','=',activity.id)],limit=1)
+        return usage.assignment_id.counts_for_completion
+
+    @api.private
     def _certificate_origin(self,enrollment,activity):
         origin=super()._certificate_origin(enrollment,activity)
         if activity.criterion=='elearning_formative':

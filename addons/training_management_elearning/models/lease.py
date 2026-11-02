@@ -79,7 +79,10 @@ class Lease(models.Model):
     @api.private
     def _renew(self):
         self.ensure_one()
-        self.attempt_id.with_user(self.user_id)._authorize()
+        if self.attempt_id:
+            self.attempt_id.with_user(self.user_id)._authorize()
+        else:
+            self.with_user(self.user_id)._preview_access(self.version_id.with_user(self.user_id))
         self.lock_for_update()
         return super().write({'expires_at':fields.Datetime.now()+timedelta(minutes=5)})
 

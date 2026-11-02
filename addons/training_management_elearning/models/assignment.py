@@ -19,6 +19,8 @@ class Assignment(models.Model):
     objective = fields.Text(required=True)
     rule = fields.Selection([('completed', 'Completed'), ('score', 'Completed with score')], default='completed', required=True)
     threshold = fields.Float(default=70)
+    counts_for_completion = fields.Boolean(string='Counts for the completion certificate', default=False,
+        help='The result is declared by the browser. By default a human evidence decides the certificate.')
     state = fields.Selection([('draft','Draft'), ('validated','Validated')], default='draft', required=True, readonly=True)
     usage_ids = fields.One2many('training.elearning.usage', 'assignment_id', readonly=True)
     _threshold_valid = models.Constraint('CHECK(threshold >= 0 AND threshold <= 100)', 'Threshold must be between 0 and 100.')

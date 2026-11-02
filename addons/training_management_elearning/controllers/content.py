@@ -38,9 +38,24 @@ class Content(http.Controller):
         lease, token = service._issue(version)
         return self._parent(version, lease, token, portal, content)
 
+    @http.route('/training/interactive/preview/<int:version_id>/renew', auth='user', type='http', methods=['POST'])
+    def preview_renew(self, version_id, **values):
+        if origin() != request.env['training.elearning.lease']._origins()[0]:
+            raise Forbidden()
+        try:
+            lease = request.env['training.elearning.lease'].sudo().browse(int(values.get('lease', '0'))).exists()
+        except ValueError:
+            raise Forbidden() from None
+        if not lease or lease.user_id != request.env.user or lease.attempt_id or lease.version_id.id != version_id:
+            raise Forbidden()
+        lease._renew()
+        return request.make_json_response({'ok': True}, headers=[('Cache-Control', 'no-store')])
+
     def _parent(self, version, lease, token, portal, content, attempt=None):
+        renew = '/training/interactive/attempt/%s/renew' % attempt.id if attempt else '/training/interactive/preview/%s/renew' % version.id
         config = {'origin': content, 'nonce': lease.nonce, 'csrf': request.csrf_token(),
-                  'attempt': attempt.id if attempt else None, 'revision': attempt.sudo().revision if attempt else 0, 'lease':lease.id}
+                  'attempt': attempt.id if attempt else None, 'revision': attempt.sudo().revision if attempt else 0,
+                  'lease':lease.id, 'renew':renew}
         source = content + '/tm-content/' + token + '/launch'
         page = '<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Contenu interactif</title><h1>%s</h1>' % html.escape(version.resource_id.name)
         page += '<p>Activité formative — aucune attestation automatique.</p><p id="status" role="status">Chargement…</p>'
@@ -108,7 +123,7 @@ class Content(http.Controller):
         data=(Path(__file__).resolve().parents[1]/'static/src/runner.js').read_bytes()
         return request.make_response(data,headers=headers('application/javascript',portal,content))
 
-    @http.route('/training/interactive/<int:enrollment_id>/<int:usage_id>',auth='user',type='http',methods=['GET'])
+    @http.route('/training/interactive/<int:enrollment_id>/<int:usage_id>',auth='user',type='http',website=True,methods=['GET'])
     def entry(self,enrollment_id,usage_id,**kw):
         portal,content=request.env['training.elearning.lease']._origins()
         if origin()!=portal:

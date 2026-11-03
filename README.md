@@ -4,11 +4,13 @@ Extension Odoo 20 Community : ressources formatives privées H5P/SCORM,
 publication versionnée, affectations, tentatives et reprise, progression native TM,
 portail et deux types d’examen blanc — appariement et mise en ordre.
 
-Un seul addon `training_management_elearning`, LGPL-3.0-only. Il dépend de
-`training_management` et, depuis Q01, de `training_management_survey`. Aucun fichier
-métier TM ni cœur Odoo modifié. Les lecteurs tiers embarqués gardent leurs licences.
+L’addon historique `training_management_elearning`, LGPL-3.0-only, raccorde la
+bibliothèque `training_interactive` à TM et à son adaptateur Survey. La nouvelle
+application autonome reste à réaliser. Voir [la tranche J1](docs/J1-shared-interactive.md)
+et la composition exacte de `compatibility.json`. Les lecteurs embarqués gardent
+leurs licences ; aucun cœur Odoo n'est modifié.
 
-## Fonctions livrées
+## Références historiques livrées
 
 | Lot | Fonction livrée | Documentation et preuves |
 | --- | --- | --- |
@@ -30,7 +32,7 @@ sont conservées. [Vérifications de fusion](evidence/merge/verification.txt).
 Dépôt public : [Progideo/training_management_elearning](https://github.com/Progideo/training_management_elearning).
 Voir [organisation et validation](docs/ORGANIZATION.md) et [versions compatibles](compatibility.json).
 
-## Périmètre qualifié
+## Qualification historique
 
 H5P TrueFalse 1.8 via H5PStandalone 3.8.2 ; SCORM 1.2 mono-SCO via scorm-again
 3.5.0. Pas de prise en charge générale H5P, SCORM 2004 ou multi-SCO revendiquée.
@@ -38,7 +40,11 @@ Ces résultats sont formatifs, sans valeur de preuve d’examen inviolable ni é
 automatique d’attestation. Les examens blancs conservent la correction serveur
 native, avec barème exact pour les deux interactions ajoutées.
 
-La charge valide 50 sessions HTTP simultanées, avec sauvegardes p95 de 1,23 s,
+La campagne historique E06 a éprouvé 50 sessions HTTP simultanées, avec sauvegardes p95 de 1,23 s,
 ainsi que leur persistance. Elle ne représente pas 50 navigateurs H5P complets ni
 un dimensionnement de production. Pas d’audit d’accessibilité exhaustif, de
 migration réelle, de banque partagée ou de types complémentaires Q02/Q03.
+
+La cible consolidée du 3 novembre 2026 retient quelques utilisateurs et la
+concurrence ciblée ; les mesures E06 ne sont pas des critères de lancement validés
+pour les nouvelles applications séparées.

@@ -47,7 +47,7 @@ for phase in install update; do
   modules=training_management_elearning
   if [[ "$phase" == update ]]; then
     flag=-u
-    modules=training_management,training_management_survey,training_management_elearning
+    modules=training_catalog,training_interactive,training_management,training_management_survey,training_management_elearning
   fi
   ./bench/e01/run run --rm -T odoo odoo -d elearning_ci \
     --addons-path=/mnt/extra-addons,/mnt/qualification-addons \

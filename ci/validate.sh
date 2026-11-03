@@ -8,7 +8,10 @@ python3 - <<'CHECK'
 import ast, json, os, pathlib, subprocess
 c = json.load(open('compatibility.json'))
 tm = pathlib.Path(os.environ['TM_ADDONS_DIR']).resolve().parent
-assert subprocess.check_output(['git', '-C', str(tm), 'rev-parse', 'HEAD'], text=True).strip() == c['training_management']['commit']
+head = subprocess.check_output(['git', '-C', str(tm), 'rev-parse', 'HEAD'], text=True).strip()
+# TM_HEAD_CHECK: daily contract check against the current Training Management, never a release qualification.
+assert os.environ.get('TM_HEAD_CHECK') == '1' or head == c['training_management']['commit']
+print('Training Management', head, 'pinned', c['training_management']['commit'])
 assert not subprocess.check_output(['git', '-C', str(tm), 'status', '--porcelain']).strip()
 m = ast.literal_eval(pathlib.Path('addons/training_management_elearning/__manifest__.py').read_text())
 assert m['version'] == c['elearning_version']

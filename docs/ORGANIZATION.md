@@ -10,6 +10,8 @@ L’option fiscale reste facultative à son emplacement actuel. L’extraction f
 
 `compatibility.json` fixe le commit TM, les addons requis et l’image Odoo qualifiés. Le workflow `Validation eLearning` récupère cette révision en lecture seule, exécute les régressions JavaScript, puis une installation vierge et une mise à jour avec les tests eLearning et les contrats natifs sélectionnés. Une troisième base installe Website, dont le gabarit de portail diffère, et rejoue les tests eLearning. Les résumés Odoo doivent être présents, non vides et sans échec. Les journaux sont conservés comme artefacts GitHub.
 
+Le workflow `Contrat avec Training Management` valide chaque nuit le module contre la tête de `main` de TM. Un échec signale une rupture à traiter avant de relever `compatibility.json` ; une réussite ne qualifie aucune version.
+
 Ce contrôle ne remplace ni les recettes navigateur et de charge, ni une répétition de restauration ou une migration sur copie des données de l’environnement cible. Ces procédures restent dans `bench/README.md` et la documentation des lots.
 
 Chaque changement de compatibilité passe par une branche et une revue. Les livraisons conservent les noms techniques des addons. Un déploiement choisit des commits exacts des deux dépôts ; une branche `main` mobile n’est pas une référence de déploiement.

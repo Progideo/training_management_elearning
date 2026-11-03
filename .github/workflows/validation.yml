@@ -38,6 +38,10 @@ jobs:
           LMS_SECRET_DIR: ${{ runner.temp }}/elearning-secrets
           LMS_COMPOSE_PROJECT: elearning-ci-${{ github.run_id }}-${{ github.run_attempt }}
         run: bash ci/validate.sh
+      - name: Cours autonomes sans TM — installation et conservation
+        env:
+          TM_ADDONS_DIR: ${{ github.workspace }}/.dependencies/training_management/addons
+        run: python3 ci/validate-autonomous.py
       - name: Journaux de validation
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

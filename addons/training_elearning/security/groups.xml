@@ -1,0 +1,5 @@
+<odoo>
+ <record id="privilege_elearning" model="res.groups.privilege"><field name="name">Training eLearning</field><field name="category_id" ref="base.module_category_services"/></record>
+ <record id="group_elearning_author" model="res.groups"><field name="name">eLearning Author</field><field name="privilege_id" ref="privilege_elearning"/><field name="implied_ids" eval="[(4, ref('website_slides.group_website_slides_officer')), (4, ref('training_catalog.group_catalog_reader')), (4, ref('training_interactive.group_interactive_author'))]"/></record>
+ <record id="group_elearning_manager" model="res.groups"><field name="name">eLearning Coordinator</field><field name="privilege_id" ref="privilege_elearning"/><field name="implied_ids" eval="[(4, ref('group_elearning_author')), (4, ref('website_slides.group_website_slides_manager'))]"/></record>
+</odoo>

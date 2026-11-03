@@ -10,3 +10,5 @@ restent dans le dépôt propriétaire du moteur et de l’adaptateur TM.
 `compatibility.json` épingle la composition associée ; les preuves réelles restent
 dans les PR. Le socle autonome `training_elearning` et son adaptateur Survey restent
 à livrer : cette compatibilité ne vaut pas qualification des offres autonomes.
+
+Le [raccordement aux offres autonomes](J3-autonomous-exam-offers.md) poursuit cette tranche sur les modèles Community natifs, sans dépendance métier à TM.

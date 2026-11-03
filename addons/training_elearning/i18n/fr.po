@@ -1,0 +1,212 @@
+msgid ""
+msgstr ""
+"Language: fr_FR\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "eLearning coordination permission is required."
+msgstr "Le droit de coordination eLearning est requis."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+#: code:addons/training_elearning/models/course.py:0
+msgid "Use courses in your active companies."
+msgstr "Utilisez les cours de vos sociétés actives."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "Publish the course through its controlled action."
+msgstr "Publiez le cours avec son action dédiée."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "Create a new course edition instead of changing its identity."
+msgstr "Créez une nouvelle édition pour changer l’identité du cours."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "Use the controlled course actions."
+msgstr "Utilisez les actions dédiées du cours."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "Keep this course private and on controlled invitation."
+msgstr "Conservez le cours privé avec activation contrôlée des accès."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+#: code:addons/training_elearning/models/course.py:0
+#: code:addons/training_elearning/models/course.py:0
+msgid "Create a new edition for changed content or obligations."
+msgstr "Créez une nouvelle édition pour modifier les contenus ou obligations."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "Check the course identity, active state and prerequisites."
+msgstr "Vérifiez la formation, l’état actif et les prérequis du cours."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "Choose supported published course activities."
+msgstr "Choisissez des activités publiées prises en charge."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Use controlled learner access actions."
+msgstr "Utilisez les actions dédiées des accès apprenants."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Provide a reason and a future access end."
+msgstr "Indiquez un motif et une date de fin d’accès future."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Publish an active course before activation."
+msgstr "Publiez un cours actif avant d’activer les accès."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Choose the active Odoo account of this learner."
+msgstr "Choisissez le compte Odoo actif de cet apprenant."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "An activated membership keeps its learner identity."
+msgstr "Un accès déjà activé conserve son compte apprenant."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Renewal cannot shorten active access."
+msgstr "Un renouvellement ne peut pas raccourcir un accès actif."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Provide an access change reason."
+msgstr "Indiquez le motif de modification de l’accès."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "This private course is unavailable."
+msgstr "Ce cours privé est indisponible."
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel__training_course_id
+msgid "Training Course"
+msgstr "Formation du catalogue"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel__learning_company_id
+msgid "Learning Company"
+msgstr "Société exploitante"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel__learning_state
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel_partner__learning_state
+msgid "Learning State"
+msgstr "État de l’accès"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel_partner__learning_user_id
+msgid "Learning User"
+msgstr "Compte apprenant"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel_partner__learning_started_at
+msgid "Learning Started At"
+msgstr "Accès ouvert le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel_partner__learning_ends_at
+msgid "Learning Ends At"
+msgstr "Fin de l’accès"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_access__membership_id
+msgid "Membership"
+msgstr "Accès apprenant"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_access__user_id
+msgid "User"
+msgstr "Compte Odoo"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_access__ends_at
+msgid "Ends At"
+msgstr "Fin de l’accès"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_access__reason
+msgid "Reason"
+msgstr "Motif"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_access__operation
+msgid "Operation"
+msgstr "Opération"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel__learning_state__draft
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel__learning_state__published
+msgid "Published"
+msgstr "Publié"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel_partner__learning_state__pending
+msgid "Pending"
+msgstr "En attente"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel_partner__learning_state__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel_partner__learning_state__suspended
+msgid "Suspended"
+msgstr "Suspendu"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel_partner__learning_state__revoked
+msgid "Revoked"
+msgstr "Révoqué"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_access__operation__activate
+msgid "Activate or Renew"
+msgstr "Activer ou renouveler"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_access__operation__suspend
+msgid "Suspend"
+msgstr "Suspendre"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_access__operation__revoke
+msgid "Revoke"
+msgstr "Révoquer"

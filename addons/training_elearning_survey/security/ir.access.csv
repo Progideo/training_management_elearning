@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+requirement_reader,Autonomous frozen exam obligations,training.elearning.exam.requirement,training_elearning_survey.group_learning_exam_reader,r,
+requirement_scope,Autonomous obligation company,training.elearning.exam.requirement,,crud,"[('company_id', 'in', company_ids)] if user.active else [('id', '=', 0)]"
+attempt_reader,Autonomous native exam history,survey.user_input,training_elearning_survey.group_learning_exam_reader,r,"[('learning_membership_id', '!=', False)]"
+answer_reader,Autonomous native answers,survey.user_input.line,training_elearning_survey.group_learning_exam_reader,r,"[('user_input_id.learning_membership_id', '!=', False)]"

@@ -8,7 +8,8 @@ L’addon historique `training_management_elearning`, LGPL-3.0-only, raccorde la
 bibliothèque `training_interactive` à TM et à son adaptateur Survey. La nouvelle
 application autonome reste à réaliser. Les [lecteurs et examens communs](docs/J1-shared-readers-exams.md)
 poursuivent cette extraction. Le [moteur de passation commun](docs/J1-shared-exam-runtime.md)
-porte désormais le chronométrage et les réponses. Voir [la tranche J1](docs/J1-shared-interactive.md)
+porte désormais le chronométrage et les réponses. Les [obligations des offres TM](docs/J2-shared-exam-obligations.md)
+sont figées par inscription. Voir [la tranche J1](docs/J1-shared-interactive.md)
 et la composition exacte de `compatibility.json`. Les lecteurs embarqués gardent
 leurs licences ; aucun cœur Odoo n'est modifié.
 

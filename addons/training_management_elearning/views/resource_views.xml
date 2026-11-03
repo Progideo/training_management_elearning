@@ -4,7 +4,7 @@
     <field name="arch" type="xml"><list><field name="name"/><field name="format"/><field name="company_id" groups="base.group_multi_company"/><field name="active"/></list></field>
   </record>
   <record id="resource_form" model="ir.ui.view">
-    <field name="name">training.elearning.resource.form</field><field name="model">training.elearning.resource</field>
+    <field name="name">training.elearning.resource.form</field><field name="priority">5</field><field name="model">training.elearning.resource</field>
     <field name="arch" type="xml"><form><sheet>
       <div class="alert alert-info">Editorial inventory only. Package import, publication and playback are not available yet.</div>
       <group><field name="name"/><field name="identifier"/><field name="format" readonly="id"/><field name="company_id" readonly="id" groups="base.group_multi_company"/><field name="active"/><field name="license_note"/><field name="provenance"/></group>

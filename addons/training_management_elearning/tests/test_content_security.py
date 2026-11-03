@@ -74,10 +74,23 @@ class TestContentSecurity(ContentCase):
             binary._get_stream_from(resolved, 'data')
         with self.assertRaises(ValidationError):
             version.write({'entrypoint':'hostile.html'})
-        with self.assertRaises(AccessError):
-            version.action_publish()
-        version.with_user(self.coord).action_publish()
+        # D32: the habilitated author now publishes directly.
+        version.action_publish()
+        with self.assertRaises(ValidationError):
+            version.with_user(self.coord).action_publish()
         self.assertEqual(version.state, 'published')
+
+    def test_shared_library_author_preview_without_tm_role(self):
+        author = new_test_user(self.env, login='shared_library_preview_author',
+                               groups='training_interactive.group_interactive_author')
+        version = self.version()
+        self.assertFalse(author.has_group('training_management.group_training_coordinator'))
+        self.assertFalse(author.has_group('training_management_elearning.group_elearning_author'))
+        service = self.env['training.elearning.lease'].with_user(author)
+        lease, token = service._issue(version.with_user(author))
+        self.assertEqual(service._resolve(token), lease)
+        self.assertEqual(lease.sudo().version_id, version)
+        self.assertEqual(version.resource_id, self.resource)
 
     def test_lease_current_rights_and_withdrawal(self):
         version = self.version()

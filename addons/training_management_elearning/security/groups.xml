@@ -2,6 +2,9 @@
   <record id="group_elearning_author" model="res.groups">
     <field name="name">Interactive Content Author</field>
     <field name="privilege_id" ref="training_management.privilege_training"/>
-    <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    <field name="implied_ids" eval="[(4, ref('base.group_user')), (4, ref('training_interactive.group_interactive_author'))]"/>
+  </record>
+  <record id="training_management.group_training_coordinator" model="res.groups">
+    <field name="implied_ids" eval="[(4, ref('training_interactive.group_interactive_manager'))]"/>
   </record>
 </odoo>

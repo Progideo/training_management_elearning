@@ -1,3 +1,5 @@
+import json
+from odoo.addons.training_management.tests.test_closure import ClosureCase
 from unittest.mock import patch
 from odoo import Command
 from odoo.tests import tagged
@@ -74,3 +76,40 @@ class TestFormativeProgress(RuntimeCase):
         counted_usage=counted._apply(self.delivery())
         self.assertTrue(service._required_for_certificate(counted_usage.activity_id))
 
+
+
+@tagged('post_install', '-at_install')
+class TestInteractiveCertificate(ClosureCase):
+    def test_real_issuance_respects_explicit_formative_obligation(self):
+        enrollment, usage = RuntimeCase.setup_runtime(self)
+        dossier = self.dossier(enrollment)
+        self.validate(self.proof(dossier, 'completion'))
+        quality = enrollment.with_user(self.quality)
+        quality.action_certificate_completion()
+        first = self.document(dossier, 'completion')
+        self.assertNotIn(usage.activity_id.id,
+                         [row.get('activity') for row in json.loads(first.snapshot)['origins']])
+
+        counted = self.env['training.elearning.assignment'].with_user(self.coordinator).create({
+            'name': 'Explicitly required formative activity', 'program_id': self.program.id,
+            'version_id': usage.version_id.id, 'objective': 'Practice', 'rule': 'completed',
+            'counts_for_completion': True})
+        counted.action_validate()
+        required = counted._apply(enrollment.delivery_id)
+        with self.assertRaises(ValidationError):
+            quality.action_certificate_completion()
+        attempt = RuntimeCase.start(self, enrollment, required)
+        attempt._save('completed', 1, {'result': {'score': 80, 'maximum': 100, 'completed': True}})
+        quality.action_certificate_completion()
+        issued = self.document(dossier, 'completion')
+        snapshot = json.loads(issued.snapshot)
+        origin = next(row for row in snapshot['origins'] if row.get('activity') == required.activity_id.id)
+        self.assertEqual(origin['formative']['content_version'], usage.version_id.id)
+        self.assertNotEqual(issued, first)
+        self.assertFalse(self.document(dossier, 'participation'))
+
+        self.env['training.learning.activity'].with_user(self.coordinator).create({
+            'name': 'Human review remains required', 'delivery_id': enrollment.delivery_id.id,
+            'criterion': 'validation'})
+        with self.assertRaises(ValidationError):
+            quality.action_certificate_completion()

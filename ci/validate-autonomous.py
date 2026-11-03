@@ -98,14 +98,18 @@ with Database("autonomous", folder) as db:
     text = checked(
         command(
             "-i",
-            "training_management_survey",
+            "training_management_survey,training_management_sale",
+            "-u",
+            "training_elearning_sale",
             "--without-demo",
             "--stop-after-init",
             "--test-enable",
-            "--test-tags=/training_management_survey:TestExamRequirements.test_coexisting_autonomous_offer_keeps_evidence_and_reader_scope_separate",
+            "--test-tags=/training_management_survey:TestExamRequirements.test_coexisting_autonomous_offer_keeps_evidence_and_reader_scope_separate,/training_management_sale,/training_elearning_sale,-/web",
         ),
         folder / "coexistence.log",
         allow_tracebacks=True,
     )
-    assert_tests_ran(text, ["training_management_survey"])
+    assert_tests_ran(text, ["training_management_survey", "training_management_sale", "training_elearning_sale"])
+    with (ROOT / "ci/probe-sales-coexistence.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "coexistence-preserved.log", stdin=data)
 (folder / "success.json").write_text('{"autonomous": "success"}\n')

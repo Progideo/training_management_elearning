@@ -1,9 +1,10 @@
+const sharedAddons = process.env.TM_ADDONS_DIR;
 const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
 (async()=>{
  const callbacks={},timers=new Map(),bodies=[];
  let timerId=0,calls=0;
  const status={textContent:'',after(){}},retry={hidden:true},frame={contentWindow:{postMessage(){}},remove(){}};
- const cfg={origin:'https://content.test',nonce:'nonce',csrf:'fictitious',attempt:1,revision:0,lease:1};
+ const cfg={origin:'https://content.test',nonce:'nonce',csrf:'fictitious',attempt:1,revision:0,lease:1,save:'/training/interactive/attempt/1/save'};
  const document={getElementById:id=>({config:{textContent:JSON.stringify(cfg)},status,content:frame})[id],createElement:()=>retry};
  const context={document,window:{addEventListener:(key,callback)=>callbacks[key]=callback},URLSearchParams,AbortController,
   setTimeout:(callback,ms)=>{timers.set(++timerId,{callback,ms});return timerId},clearTimeout:id=>timers.delete(id),setInterval:()=>0,
@@ -12,8 +13,15 @@ const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/st
    if(calls===1)return new Promise((resolve,reject)=>options.signal?.addEventListener('abort',()=>reject(new Error('timeout'))));
    return {ok:true,redirected:false,json:async()=>({ok:true,attempt:1,revision:1})};
   }};
- vm.runInNewContext(fs.readFileSync('addons/training_management_elearning/static/src/parent.js','utf8'),context);
+ vm.runInNewContext(fs.readFileSync(sharedAddons+'/training_interactive/static/src/parent.js','utf8'),context);
  const message=data=>callbacks.message({origin:cfg.origin,source:frame.contentWindow,data:{nonce:cfg.nonce,...data}});
+ // A foreign origin, frame or nonce must never trigger a save.
+ for (const invalid of [
+  {origin:'https://foreign.test',source:frame.contentWindow,data:{nonce:cfg.nonce,type:'report',key:'bad',data:{}}},
+  {origin:cfg.origin,source:{},data:{nonce:cfg.nonce,type:'report',key:'bad',data:{}}},
+  {origin:cfg.origin,source:frame.contentWindow,data:{nonce:'forged',type:'report',key:'bad',data:{}}},
+ ]) callbacks.message(invalid);
+ assert.equal(calls,0,'Cross-context messages must not save');
  message({type:'report',key:'stable-key',data:{state:{step:2}}});
  const timeout=[...timers.values()].find(t=>t.ms===15000);
  assert(timeout,'A stalled save must have a bounded timeout');timeout.callback();

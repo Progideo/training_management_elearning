@@ -3,12 +3,13 @@
   "odoo_image": "odoo@sha256:61e3c71b0503c5f658e604c3e340bede20b97d05f726179fa006eae50a32fd23",
   "training_management": {
     "repository": "Progideo/training_management",
-    "commit": "71483e4e6881c97b0f62248676abe5dbccdf8e32"
+    "commit": "39ad822c0a2af808cef99a32b41218fab1281308"
   },
   "required_addons": [
     "training_interactive",
+    "training_mock_exam",
     "training_management",
     "training_management_survey"
   ],
-  "elearning_version": "20.0.3.0.0"
+  "elearning_version": "20.0.3.1.0"
 }

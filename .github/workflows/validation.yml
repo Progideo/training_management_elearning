@@ -27,6 +27,8 @@ jobs:
           path: .dependencies/training_management
           persist-credentials: false
       - name: Régressions JavaScript
+        env:
+          TM_ADDONS_DIR: ${{ github.workspace }}/.dependencies/training_management/addons
         run: |
           node bench/review/parent.test.cjs
           node bench/review/runner.test.cjs

@@ -81,7 +81,7 @@ class Requirement(models.Model):
                 "exam_id": slide.survey_id.id,
                 "obligation": slide.learning_exam_obligation,
             }
-            for slide in membership.channel_id.slide_ids
+            for slide in membership.sudo().channel_id.slide_ids
             if not slide.is_category and slide.is_published
         ]
         if vals:
@@ -95,7 +95,9 @@ class Membership(models.Model):
     @api.private
     def _learning_freeze(self):
         result = super()._learning_freeze()
-        self.channel_id.slide_ids._learning_check_exam()
+        # Coordination can activate a preconfigured course without gaining the
+        # author role on its questions or the reader role on exam responses.
+        self.sudo().channel_id.slide_ids._learning_check_exam()
         self.env["training.elearning.exam.requirement"]._capture(self)
         return result
 

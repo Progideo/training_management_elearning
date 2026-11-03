@@ -4,7 +4,7 @@ Suite de [J2](J2-shared-exam-obligations.md), issue [#12](https://github.com/Pro
 
 ## Composition livrée
 
-`training_elearning` étend les cours, contenus et adhésions natifs : `slide.channel`, `slide.slide`, `slide.channel.partner`. Il dépend du catalogue et de la bibliothèque interactive communs, sans modèle métier TM. `training_elearning_survey` ajoute les examens via `training_mock_exam` et l’intégration native `website_slides_survey`. L’adaptateur historique reste séparé. L’intégration Sales autonome n’est pas livrée par cette tranche.
+`training_elearning` étend les cours, contenus et adhésions natifs : `slide.channel`, `slide.slide`, `slide.channel.partner`. Il dépend du catalogue et de la bibliothèque interactive communs, sans modèle métier TM. `training_elearning_survey` ajoute les examens via `training_mock_exam` et l’intégration native `website_slides_survey`. L’adaptateur historique reste séparé. Le [raccordement aux ventes](J4-autonomous-sales.md) poursuit cette tranche.
 
 Une édition référence une formation du catalogue, reste privée et peut contenir plusieurs versions publiées d’examens de cette formation et société. La même version sert plusieurs offres et les deux applications. Les questions, réponses et identités ne sont pas copiées par offre. La publication refuse les contenus non encore pris en charge : cette tranche livre des cours composés d’examens ; les autres supports restent à raccorder.
 

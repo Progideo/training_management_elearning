@@ -1,0 +1,1 @@
+<odoo><record id="group_learning_exam_reader" model="res.groups"><field name="name">Autonomous Exam Coordinator</field><field name="implied_ids" eval="[(4, ref('training_elearning.group_elearning_manager')), (4, ref('training_mock_exam.group_mock_exam_author'))]"/></record></odoo>

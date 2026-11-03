@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+course_author,Private course authors,slide.channel,training_elearning.group_elearning_author,crud,"[('training_course_id', '!=', False)]"
+course_scope,Private managed courses,slide.channel,,crud,"['|', ('training_course_id', '=', False), ('learning_company_id', 'in', company_ids)] if user.active and user.has_group('training_elearning.group_elearning_author') else [('training_course_id', '=', False)]"
+slide_author,Private lesson authors,slide.slide,training_elearning.group_elearning_author,crud,"[('channel_id.training_course_id', '!=', False)]"
+slide_scope,Private managed lessons,slide.slide,,crud,"['|', ('channel_id.training_course_id', '=', False), ('channel_id.learning_company_id', 'in', company_ids)] if user.active and user.has_group('training_elearning.group_elearning_author') else [('channel_id.training_course_id', '=', False)]"
+member_manager,Managed learner administration,slide.channel.partner,training_elearning.group_elearning_manager,crud,"[('channel_id.training_course_id', '!=', False)]"
+member_scope,Managed learner privacy,slide.channel.partner,,crud,"['|', ('channel_id.training_course_id', '=', False), ('channel_id.learning_company_id', 'in', company_ids)] if user.active and user.has_group('training_elearning.group_elearning_manager') else [('channel_id.training_course_id', '=', False)]"
+progress_scope,Managed native lesson evidence,slide.slide.partner,,crud,"['|', ('channel_id.training_course_id', '=', False), ('channel_id.learning_company_id', 'in', company_ids)] if user.active and user.has_group('training_elearning.group_elearning_manager') else [('channel_id.training_course_id', '=', False)]"
+access_wizard,Managed access action,training.elearning.access,training_elearning.group_elearning_manager,crud,

@@ -6,7 +6,8 @@ portail et deux types d’examen blanc — appariement et mise en ordre.
 
 L’addon historique `training_management_elearning`, LGPL-3.0-only, raccorde la
 bibliothèque `training_interactive` à TM et à son adaptateur Survey. La nouvelle
-application autonome reste à réaliser. Voir [la tranche J1](docs/J1-shared-interactive.md)
+application autonome reste à réaliser. Les [lecteurs et examens communs](docs/J1-shared-readers-exams.md)
+poursuivent cette extraction. Voir [la tranche J1](docs/J1-shared-interactive.md)
 et la composition exacte de `compatibility.json`. Les lecteurs embarqués gardent
 leurs licences ; aucun cœur Odoo n'est modifié.
 

@@ -1,5 +1,8 @@
 # Raccordement à la bibliothèque interactive commune
 
+La [tranche suivante](J1-shared-readers-exams.md) extrait les lecteurs et définitions
+d’examens ; cette page conserve le contrat de la première tranche.
+
 Suite de [eLearning #12](https://github.com/Progideo/training_management_elearning/issues/12),
 cadrage consolidé du 3 novembre 2026. L'addon historique reste un adaptateur de TM
 pendant cette tranche. L'application autonome `training_elearning` et ses deux

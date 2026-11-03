@@ -1,5 +1,8 @@
 # Adaptateur des lecteurs et examens communs
 
+La [tranche suivante](J1-shared-exam-runtime.md) raccorde le moteur de passation
+et le chronométrage serveur.
+
 Suite de [J1 #12](https://github.com/Progideo/training_management_elearning/issues/12).
 La [définition de la frontière](https://github.com/Progideo/training_management/blob/feat/j1-shared-readers-exams/docs/j1-shared-readers-exams.md)
 reste dans TM, propriétaire des bibliothèques communes.

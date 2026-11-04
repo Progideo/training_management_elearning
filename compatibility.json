@@ -3,7 +3,7 @@
   "odoo_image": "odoo@sha256:61e3c71b0503c5f658e604c3e340bede20b97d05f726179fa006eae50a32fd23",
   "training_management": {
     "repository": "Progideo/training_management",
-    "commit": "ff9431bf1d13e8543cf966a55bbdcc88bb2936ba"
+    "commit": "5e0c9bf04c43ff79b8d9e984b5900e28011c8662"
   },
   "autonomous_addons": {
     "training_elearning": "20.0.1.14.0",
@@ -21,5 +21,9 @@
   "module_relocation_baseline": {
     "tm_commit": "a56ab67f957e519b61d7c7263fe45bfb2b11d293",
     "elearning_commit": "5a01ff5bacdf56c6dcd8b4115774d6cbd9bf2a2b"
+  },
+  "legacy_release_baseline": {
+    "tm_commit": "616d2a342540eb7a7dbb8e48d6ecd084bc2fc926",
+    "elearning_commit": "d7d3b976d07831bca2de3c75d6c159308adf7f0d"
   }
 }

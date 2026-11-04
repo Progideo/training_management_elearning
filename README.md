@@ -79,3 +79,5 @@ Suite : [invalidation motivée des acquis](docs/J18-motivated-acquisition-invali
 Suite : [notifications ciblées et rappels contractuels](docs/J19-scoped-learning-notifications.md).
 
 Suite : [invitations natives et transport confiné](docs/J20-native-invitations-and-confined-mail.md).
+
+Suite : [composition complète et preuves de restauration](docs/J21-final-release-qualification.md).

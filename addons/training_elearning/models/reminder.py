@@ -16,6 +16,7 @@ POLICY = {
     "learning_notice_correction_days",
 }
 KINDS = [
+    ("resource_withdrawal", "Shared Resource Withdrawn"),
     ("invitation", "Native Beneficiary Invitation"),
     ("activation", "Learner Access Activated"),
     ("invalidation", "Acquisition Decision"),
@@ -59,6 +60,7 @@ class Reminder(models.Model):
     membership_id = fields.Many2one("slide.channel.partner", readonly=True, ondelete="restrict", index=True)
     activation_id = fields.Many2one("training.elearning.path.activation", readonly=True, ondelete="restrict")
     queue_id = fields.Many2one("training.elearning.review.queue", readonly=True, ondelete="restrict")
+    interactive_version_id = fields.Many2one("training.elearning.version", readonly=True, ondelete="restrict")
     invalidation_id = fields.Many2one("training.elearning.acquisition.invalidation", readonly=True, ondelete="restrict")
     deadline = fields.Datetime(readonly=True)
     due_at = fields.Datetime(required=True, readonly=True, index=True)
@@ -138,11 +140,24 @@ class Reminder(models.Model):
             if user.partner_id != activation.registration_id.partner_id:
                 return False
             return {"user": user, "company": activation.company_id, "deadline": False, "url": "/web/login"}
+        if item.kind == "resource_withdrawal":
+            version = item.interactive_version_id
+            if (
+                not version
+                or version.state != "withdrawn"
+                or version.company_id != member.channel_id.learning_company_id
+                or item.source_event != str(version.id)
+                or not any(
+                    row.get("kind") == "interactive" and row.get("version") == version.id
+                    for row in member._learning_plan()["slides"]
+                )
+            ):
+                return False
         if item.kind == "invalidation":
             event = item.invalidation_id
             if not event or event.membership_id != member or event.request_key != item.source_event:
                 return False
-        if item.kind in ("activation", "invalidation", "course_end"):
+        if item.kind in ("activation", "invalidation", "course_end", "resource_withdrawal"):
             user = member.learning_user_id
             if not member.learning_started_at or user.partner_id != member.partner_id:
                 return False
@@ -154,14 +169,19 @@ class Reminder(models.Model):
                 or member.channel_id.learning_state != "published"
             ):
                 return False
-            if item.kind in ("course_end", "activation") and member.learning_ends_at <= fields.Datetime.now():
+            if (
+                item.kind in ("course_end", "activation", "resource_withdrawal")
+                and member.learning_ends_at <= fields.Datetime.now()
+            ):
                 return False
             if item.kind == "activation" and item.source_event != str(len(member.learning_access_log or [])):
                 return False
             return {
                 "user": user,
                 "company": company,
-                "deadline": member.learning_ends_at if item.kind != "invalidation" else False,
+                "deadline": member.learning_ends_at
+                if item.kind not in ("invalidation", "resource_withdrawal")
+                else False,
                 "url": "/my/learning/%s/history" % member.id
                 if item.kind == "invalidation"
                 else "/my/learning/%s" % member.id,
@@ -252,7 +272,9 @@ class Reminder(models.Model):
         }.get(source._name)
 
     @api.private
-    def _enqueue(self, kind, source, *, offset=0, event=None, recipient=None, existing_mail=None):
+    def _enqueue(
+        self, kind, source, *, offset=0, event=None, recipient=None, existing_mail=None, resource_version=None
+    ):
         """Only private checked hooks/scanners call this factory; no caller defaults survive."""
         field = self._source_field(source)
         if not field:
@@ -260,6 +282,8 @@ class Reminder(models.Model):
         values = {"kind": kind, field: source.id, "offset_days": offset, "source_event": str(event or "")}
         if source._name in ("training.elearning.review.queue", "training.elearning.acquisition.invalidation"):
             values["membership_id"] = source.sudo().membership_id.id
+        if resource_version:
+            values["interactive_version_id"] = resource_version.id
         if recipient:
             values["user_id"] = recipient.id
         draft = self.sudo().new(values)

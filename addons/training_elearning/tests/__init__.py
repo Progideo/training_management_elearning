@@ -14,3 +14,4 @@ from . import test_acquisition
 from . import test_reminders
 from . import test_native_mail_boundary
 from . import test_native_invitation
+from . import test_resource_withdrawal

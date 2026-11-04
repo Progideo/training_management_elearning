@@ -3,11 +3,11 @@
   "odoo_image": "odoo@sha256:61e3c71b0503c5f658e604c3e340bede20b97d05f726179fa006eae50a32fd23",
   "training_management": {
     "repository": "Progideo/training_management",
-    "commit": "5e0c9bf04c43ff79b8d9e984b5900e28011c8662"
+    "commit": "1956704a4dbadde54a93b553e1406fa2b9a06ce5"
   },
   "autonomous_addons": {
-    "training_elearning": "20.0.1.14.0",
-    "training_elearning_survey": "20.0.1.7.0",
+    "training_elearning": "20.0.1.15.0",
+    "training_elearning_survey": "20.0.1.8.0",
     "training_elearning_sale": "20.0.1.10.0"
   },
   "previous_elearning_commit": "6d6b9609801eaae6a53babefd941d457367d0243",
@@ -17,7 +17,7 @@
     "training_management",
     "training_management_survey"
   ],
-  "tm_interactive_version": "20.0.3.5.1",
+  "tm_interactive_version": "20.0.3.5.2",
   "module_relocation_baseline": {
     "tm_commit": "a56ab67f957e519b61d7c7263fe45bfb2b11d293",
     "elearning_commit": "5a01ff5bacdf56c6dcd8b4115774d6cbd9bf2a2b"

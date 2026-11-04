@@ -139,6 +139,7 @@ class Invalidation(models.Model):
             if withdraw_certificates:
                 for document in documents:
                     document.with_env(self.env(su=False))._change("withdrawn", reason.strip())
+            self.env["training.elearning.reminder"]._enqueue("invalidation", event, event=event.request_key)
             return event
 
     @api.private

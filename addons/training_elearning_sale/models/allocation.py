@@ -185,9 +185,10 @@ class Allocation(models.Model):
                     raise ValidationError(
                         self.env._("Check the beneficiary email before sending the access notification.")
                     )
-                mail_id = self.env.ref("training_elearning_sale.access_notification").send_mail(
-                    self.id, force_send=False
+                notice = self.env["training.elearning.reminder"]._enqueue(
+                    "activation", self.membership_id, event=len(self.membership_id.learning_access_log or [])
                 )
+                mail_id = notice.mail_id.id if notice else False
                 if not mail_id:
                     raise ValidationError(self.env._("The access notification was not queued."))
                 self._store({"notification_mail_id": mail_id, "notification_state": "queued"})

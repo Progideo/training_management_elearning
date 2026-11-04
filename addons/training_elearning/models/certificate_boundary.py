@@ -5,6 +5,7 @@ from odoo.exceptions import AccessError
 from odoo.fields import Domain
 
 MODELS = (
+    "training.elearning.reminder",
     "training.elearning.certificate",
     "training.elearning.certificate.consent",
     "training.elearning.certificate.notice",

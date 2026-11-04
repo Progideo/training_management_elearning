@@ -139,6 +139,16 @@ class Membership(models.Model):
             }
         )
         self._learning_sync_progress()
+        from .reminder import SUPPRESS_ACTIVATION  # Local import avoids model initialization cycles.
+
+        reminders = self.env["training.elearning.reminder"]
+        if not SUPPRESS_ACTIVATION.get():
+            reminders._enqueue("activation", self, event=len(log))
+        for days in {
+            self.channel_id.learning_company_id.learning_notice_long_days,
+            self.channel_id.learning_company_id.learning_notice_short_days,
+        } - {0}:
+            reminders._enqueue("course_end", self, offset=days)
         return True
 
     @api.private

@@ -131,6 +131,7 @@ class Queue(models.Model):
             queue = super(Queue, self.sudo().with_context({})).create(values)
         submission._store({"review_queue_id": queue.id})
         self.env["training.elearning.review.notice"]._assignment(queue)
+        self.env["training.elearning.reminder"]._schedule_queue(queue)
         return queue
 
     def action_prepare_review(self):

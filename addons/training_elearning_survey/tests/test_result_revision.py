@@ -54,6 +54,11 @@ class TestAutonomousResultRevision(AutonomousCase):
         first = revisions._record(
             attempt, {str(question.id): 2}, "Fictional first motivated correction", request_key=key, expected_previous=0
         )
+        notice = self.env["training.elearning.reminder"].sudo().search([("result_revision_id", "=", first.id)])
+        self.assertEqual(notice.state, "queued")
+        self.assertEqual(notice.partner_id, self.learner.partner_id)
+        self.assertNotIn(first.reason, str(notice.mail_id.body_html))
+        self.assertNotIn("PRIVATE FINAL CORRECTION", str(notice.mail_id.body_html))
         self.assertEqual(service._result(attempt)["percentage"], 100)
         self.assertEqual(member.completion, 100)
         leaf = (

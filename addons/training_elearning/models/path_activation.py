@@ -128,6 +128,11 @@ class Activation(models.Model):
             self.env["training.elearning.path.item"]._create_item(activation, course, plan["plans"][str(course)])
         activation.item_ids._start_ready()
         self.env["training.elearning.path.notice"]._queue(activation)
+        for days in {
+            activation.company_id.learning_notice_long_days,
+            activation.company_id.learning_notice_short_days,
+        } - {0}:
+            self.env["training.elearning.reminder"]._enqueue("path_start", activation, offset=days)
         return activation
 
     def action_adjust(self):
@@ -286,11 +291,18 @@ class Item(models.Model):
         union_end = max(end, member.learning_ends_at) if member.learning_started_at else end
         member = member or model.create({"channel_id": item.course_id.id, "partner_id": registration.partner_id.id})
         item._store({"membership_id": member.id})
-        member.action_learning_activate(
-            union_end,
-            registration.user_id.id,
-            self.env._("Authorized curriculum course activation %s", item.id),
-        )
+        # The existing typed curriculum notice owns this opening event.
+        from .reminder import SUPPRESS_ACTIVATION
+
+        token = SUPPRESS_ACTIVATION.set(True)
+        try:
+            member.action_learning_activate(
+                union_end,
+                registration.user_id.id,
+                self.env._("Authorized curriculum course activation %s", item.id),
+            )
+        finally:
+            SUPPRESS_ACTIVATION.reset(token)
         item._store(
             {
                 "activated_at": now,

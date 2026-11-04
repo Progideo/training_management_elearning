@@ -75,3 +75,5 @@ Suite : [présentation générale des offres autonomes](docs/J16-general-public-
 Suite : [résultats révisés et bilans de période](docs/J17-motivated-exam-results.md).
 
 Suite : [invalidation motivée des acquis](docs/J18-motivated-acquisition-invalidation.md).
+
+Suite : [notifications ciblées et rappels contractuels](docs/J19-scoped-learning-notifications.md).

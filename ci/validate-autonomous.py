@@ -119,6 +119,9 @@ with Database("autonomous", folder) as db:
     with result_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "result-revisions-prepare.log", stdin=data)
     # The global native snapshot includes every fixture created above.
+    reminder_probe = ROOT / "ci/probe-reminders.py"
+    with reminder_probe.open() as data:
+        checked(command("shell", "--no-http"), folder / "reminders-prepare.log", stdin=data)
     probe = ROOT / "ci/probe-autonomous.py"
     with probe.open() as data:
         checked(command("shell", "--no-http"), folder / "prepare.log", stdin=data)
@@ -138,6 +141,8 @@ with Database("autonomous", folder) as db:
         checked(command("shell", "--no-http"), folder / "preserved.log", stdin=data)
     with acquisition_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "acquisitions-preserved.log", stdin=data)
+    with reminder_probe.open() as data:
+        checked(command("shell", "--no-http"), folder / "reminders-preserved.log", stdin=data)
     with result_probe.open() as data:
         text = checked(command("shell", "--no-http"), folder / "result-revisions-preserved.log", stdin=data)
     assert "J17_RESULT_REVISIONS_NATIVE_ANSWERS_CLOCK_AND_FIRST_ACQUISITION_PRESERVED" in text

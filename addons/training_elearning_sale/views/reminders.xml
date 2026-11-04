@@ -1,0 +1,3 @@
+<odoo>
+ <record id="company_report_reminder_policy" model="ir.ui.view"><field name="name">company.learning.report.reminders</field><field name="model">res.company</field><field name="inherit_id" ref="training_elearning.company_reminder_policy"/><field name="arch" type="xml"><field name="learning_notice_correction_days" position="after"><field name="learning_notice_report_days"/></field></field></record>
+</odoo>

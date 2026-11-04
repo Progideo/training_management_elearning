@@ -68,3 +68,5 @@ acquisition_invalidation_pedagogy,Motivated acquisition history,training.elearni
 acquisition_invalidation_company,Acquisition company boundary,training.elearning.acquisition.invalidation,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
 acquisition_invalidate_wizard,Acquisition decision form,training.elearning.acquisition.invalidate,training_elearning.group_elearning_pedagogy_manager,crud,
 acquisition_invalidate_scope,Acquisition decision company,training.elearning.acquisition.invalidate,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+reminder_pedagogy,Private scoped notifications,training.elearning.reminder,training_elearning.group_elearning_pedagogy_manager,r,
+reminder_company,Scoped notification company boundary,training.elearning.reminder,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"

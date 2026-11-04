@@ -2,7 +2,7 @@
 {
     "name": "Training eLearning",
     "summary": "Private native course editions and controlled learner access",
-    "version": "20.0.1.7.0",
+    "version": "20.0.1.8.0",
     "category": "Website/eLearning",
     "author": "Training Management contributors",
     "website": "https://github.com/Progideo/training_management_elearning",
@@ -24,6 +24,10 @@
         "views/path_views.xml",
         "views/path_portal.xml",
         "data/path_notices.xml",
+        "report/certificate.xml",
+        "views/certificate_views.xml",
+        "views/certificate_portal.xml",
+        "data/certificate_notices.xml",
     ],
     "application": True,
 }

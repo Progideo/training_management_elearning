@@ -51,3 +51,11 @@ path_notice_manager,Curriculum private notifications,training.elearning.path.not
 path_notice_scope,Curriculum notification company,training.elearning.path.notice,,crud,"[('company_id','in',company_ids)]"
 path_activate_wizard,Explicit manual curriculum authorization,training.elearning.path.activate,training_elearning.group_elearning_manager,crud,
 path_adjust_wizard,Motivated curriculum start adjustment,training.elearning.path.adjust,training_elearning.group_elearning_manager,crud,
+training_elearning_certificate_consent_pedagogy,Private learning certificate records,training.elearning.certificate.consent,training_elearning.group_elearning_pedagogy_manager,r,
+training_elearning_certificate_consent_company,Learning certificate company boundary,training.elearning.certificate.consent,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+training_elearning_certificate_pedagogy,Private learning certificate records,training.elearning.certificate,training_elearning.group_elearning_pedagogy_manager,r,
+training_elearning_certificate_company,Learning certificate company boundary,training.elearning.certificate,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+certificate_change_wizard,Certificate decision dialogue,training.elearning.certificate.change,training_elearning.group_elearning_pedagogy_manager,crud,
+certificate_replace_wizard,Certificate decision dialogue,training.elearning.certificate.replace,training_elearning.group_elearning_pedagogy_manager,crud,
+certificate_notice_pedagogy,Private certificate notifications,training.elearning.certificate.notice,training_elearning.group_elearning_pedagogy_manager,r,
+certificate_notice_company,Certificate notification company boundary,training.elearning.certificate.notice,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"

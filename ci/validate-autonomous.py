@@ -57,6 +57,8 @@ with Database("autonomous", folder) as db:
         )
     with (ROOT / "ci/probe-paths.py").open() as data:
         checked(command("shell", "--no-http"), folder / "paths-prepare.log", stdin=data)
+    with (ROOT / "ci/probe-certificates.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "certificates-prepare.log", stdin=data)
     text = checked(
         command(
             "-u",
@@ -87,6 +89,8 @@ with Database("autonomous", folder) as db:
 
     with (ROOT / "ci/probe-paths.py").open() as data:
         checked(command("shell", "--no-http"), folder / "paths-preserved.log", stdin=data)
+    with (ROOT / "ci/probe-certificates.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "certificates-preserved.log", stdin=data)
 
     addons = ["training_elearning", "training_elearning_survey", "training_mock_exam"]
     text = checked(

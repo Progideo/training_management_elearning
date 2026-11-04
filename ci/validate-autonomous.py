@@ -203,7 +203,7 @@ with Database("autonomous", folder) as db:
             "--without-demo",
             "--stop-after-init",
             "--test-enable",
-            "--test-tags=/training_management_survey:TestExamRequirements.test_coexisting_autonomous_offer_keeps_evidence_and_reader_scope_separate,/training_management_sale,/training_elearning_sale,/training_management_interactive:TestContextIsolation,-/web",
+            "--test-tags=/training_management_survey:TestExamRequirements.test_coexisting_autonomous_offer_keeps_evidence_and_reader_scope_separate,/training_management_sale,/training_elearning_sale,/training_management_interactive:TestContextIsolation,/training_elearning:TestPublicAutonomousOffers,-/web",
         ),
         folder / "coexistence.log",
         allow_tracebacks=True,

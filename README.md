@@ -69,3 +69,5 @@ Suite : [attestations autonomes vérifiables](docs/J13-verifiable-learning-certi
 Suite : [activités interactives autonomes et historiques personnels](docs/J14-autonomous-interactive.md).
 
 Suite : [trois addons autonomes et déplacement de l’adaptateur TM](docs/J15-module-layout.md).
+
+Suite : [présentation générale des offres autonomes](docs/J16-general-public-offers.md).

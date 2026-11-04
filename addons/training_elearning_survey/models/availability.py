@@ -1,7 +1,7 @@
 """An institution interruption preserves answers without a pass/fail consequence."""
 
 from odoo import api, fields, models
-from odoo.exceptions import AccessError
+from odoo.exceptions import AccessError, ValidationError
 from odoo.fields import Domain
 
 
@@ -81,3 +81,29 @@ class Service(models.AbstractModel):
                 self.env._("An institution-interrupted attempt has no pass/fail result or final correction.")
             )
         return super()._result(answer)
+
+
+class Survey(models.Model):
+    _inherit = "survey.survey"
+
+    def write(self, values):
+        if "active" in values and not values["active"]:
+            self.check_access("write")
+            shared = self.filtered("training_course_id")
+            if shared:
+                shared._mock_editor()
+                obligations = (
+                    self.env["training.elearning.exam.requirement"]
+                    .sudo()
+                    .search(
+                        [
+                            ("exam_id", "in", shared.ids),
+                            ("membership_id.learning_started_at", "!=", False),
+                        ]
+                    )
+                )
+                if obligations.filtered(lambda row: not row.slide_id.learning_withdrawn_at):
+                    raise ValidationError(
+                        self.env._("Close each engaged course activity with a reason before archiving its shared exam.")
+                    )
+        return super().write(values)

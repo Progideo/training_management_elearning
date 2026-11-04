@@ -115,6 +115,9 @@ with Database("autonomous", folder) as db:
     probe = ROOT / "ci/probe-autonomous.py"
     with probe.open() as data:
         checked(command("shell", "--no-http"), folder / "prepare.log", stdin=data)
+    result_probe = ROOT / "ci/probe-result-revisions.py"
+    with result_probe.open() as data:
+        checked(command("shell", "--no-http"), folder / "result-revisions-prepare.log", stdin=data)
     text = checked(
         command(
             "-u",
@@ -129,6 +132,9 @@ with Database("autonomous", folder) as db:
     assert_tests_ran(text, addons)
     with probe.open() as data:
         checked(command("shell", "--no-http"), folder / "preserved.log", stdin=data)
+    with result_probe.open() as data:
+        text = checked(command("shell", "--no-http"), folder / "result-revisions-preserved.log", stdin=data)
+    assert "J17_RESULT_REVISIONS_NATIVE_ANSWERS_CLOCK_AND_FIRST_ACQUISITION_PRESERVED" in text
     text = checked(
         command(
             "-i",
@@ -203,7 +209,7 @@ with Database("autonomous", folder) as db:
             "--without-demo",
             "--stop-after-init",
             "--test-enable",
-            "--test-tags=/training_management_survey:TestExamRequirements.test_coexisting_autonomous_offer_keeps_evidence_and_reader_scope_separate,/training_management_sale,/training_elearning_sale,/training_management_interactive:TestContextIsolation,/training_elearning:TestPublicAutonomousOffers,-/web",
+            "--test-tags=/training_management_survey:TestExamRequirements.test_coexisting_autonomous_offer_keeps_evidence_and_reader_scope_separate,/training_management_sale,/training_elearning_sale,/training_management_interactive:TestContextIsolation,/training_elearning:TestPublicAutonomousOffers,/training_elearning_survey:TestAutonomousResultRevision,/training_elearning:TestAutonomousInteractivePortal,/training_management_interactive:TestPortalHost,/training_management_interactive:TestPreviewRenewal,-/web",
         ),
         folder / "coexistence.log",
         allow_tracebacks=True,

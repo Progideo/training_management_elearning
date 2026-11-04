@@ -1,0 +1,8 @@
+<odoo>
+ <record id="result_revise_action" model="ir.actions.act_window">
+  <field name="name">Réviser le résultat avec motif</field><field name="res_model">training.exam.revise</field>
+  <field name="view_mode">form</field><field name="view_id" ref="training_mock_exam.revise_form"/>
+  <field name="target">new</field><field name="binding_model_id" ref="survey.model_survey_user_input"/>
+  <field name="binding_view_types">form</field><field name="group_ids" eval="[(4, ref('training_elearning_survey.group_learning_exam_reader'))]"/>
+ </record>
+</odoo>

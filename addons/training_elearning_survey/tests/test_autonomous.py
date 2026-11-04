@@ -363,12 +363,17 @@ class TestAutonomousPortal(AutonomousCase, HttpCase):
         service = self.env["training.elearning.exam.service"].with_user(self.learner)
         attempt = service._start(member.id, slides.id)
         service._submit(attempt.id)
+        self.env["training.exam.revision"].with_user(self.manager)._record(
+            attempt, {str(attempt.predefined_question_ids[0].id): 2}, "PRIVATE REVISION REASON WITH PEDAGOGICAL DETAIL"
+        )
         self.authenticate(self.learner.login, self.learner.login)
         history_url = "/my/learning/%s/history" % member.id
         with patch.object(fields.Datetime, "now", return_value=member.learning_ends_at + timedelta(seconds=1)):
             page = self.url_open(history_url)
             self.assertEqual(page.status_code, 200)
             self.assertIn("Score global : 0 / 2", page.text)
+            self.assertIn("Score révisé : 2 / 2", page.text)
+            self.assertNotIn("PRIVATE REVISION REASON WITH PEDAGOGICAL DETAIL", page.text)
             self.assertIn("Unclassified", page.text)
             self.assertNotIn("Fictional fixed choice", page.text)
             self.assertNotIn("PRIVATE FINAL CORRECTION", page.text)

@@ -4,3 +4,7 @@ requirement_scope,Autonomous obligation company,training.elearning.exam.requirem
 attempt_reader,Autonomous native exam history,survey.user_input,training_elearning_survey.group_learning_exam_reader,r,"[('learning_membership_id', '!=', False)]"
 answer_reader,Autonomous native answers,survey.user_input.line,training_elearning_survey.group_learning_exam_reader,r,"[('user_input_id.learning_membership_id', '!=', False)]"
 exam_revision,Shared exam version selection,training.elearning.exam.revision,training_elearning.group_elearning_author,crud,
+result_revision_reader,Autonomous motivated results,training.exam.revision,training_elearning_survey.group_learning_exam_reader,r,"[('attempt_id.learning_membership_id', '!=', False)]"
+result_revision_company,Result revision company,training.exam.revision,,crud,"[('company_id', 'in', company_ids)] if user.active else [('id', '=', 0)]"
+result_revise_wizard,Autonomous result revision wizard,training.exam.revise,training_elearning_survey.group_learning_exam_reader,crud,
+result_revise_line,Autonomous result revision lines,training.exam.revise.line,training_elearning_survey.group_learning_exam_reader,crud,

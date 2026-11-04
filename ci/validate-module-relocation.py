@@ -48,7 +48,7 @@ with Database("module_relocation", folder) as db:
         text = checked(
             command(
                 "-u",
-                "training_catalog,training_management_interactive",
+                "training_catalog,training_interactive,training_mock_exam,training_management,training_management_survey,training_management_interactive",
                 "--test-enable",
                 "--test-tags=/training_management_interactive,-/web",
                 "--stop-after-init",

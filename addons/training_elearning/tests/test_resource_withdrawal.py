@@ -53,7 +53,13 @@ class TestSharedResourceWithdrawal(InteractiveCase):
         )
         self.assertEqual(slide.learning_interactive_version_id, newer)
         self.assertEqual(member.learning_plan["slides"][0]["version"], old.id)
-        self.assertTrue(course.activity_ids.filtered(lambda activity: activity.user_id == self.manager))
+        activities = course.activity_ids.filtered(
+            lambda activity: activity.summary == "Review affected resource, learning paths and contractual dates"
+        )
+        self.assertEqual(len(activities), 1)
+        self.assertTrue(activities.user_id.active)
+        self.assertTrue(activities.user_id.has_group("training_elearning.group_elearning_manager"))
+        self.assertIn(course.learning_company_id, activities.user_id.company_ids)
         self.assertNotIn("Fictional motivated library retirement", str(notices.mail_id.body_html))
         with self.assertRaises(AccessError):
             attempt._save(

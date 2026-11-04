@@ -26,7 +26,7 @@ class TestExamAvailability(AutonomousCase):
         self.assertLess(attempt.end_datetime, deadline)
         self.assertEqual(member.completion, 0)
         stats = attempt.survey_id.sudo()
-        stats._compute_survey_statistic()
+        stats.invalidate_recordset(["answer_count", "answer_done_count", "success_count"])
         self.assertEqual(stats.answer_done_count, 0)
         self.assertEqual(stats.success_count, 0)
         self.assertEqual(self.env["survey.user_input"].sudo().search_count([("id", "=", attempt.id)]), 1)

@@ -3,7 +3,7 @@
 
 import json
 from datetime import timedelta
-from odoo import fields
+from odoo import api, fields
 from odoo.tests import new_test_user
 
 assert env.cr.dbname == "tm_suite_test"
@@ -38,9 +38,45 @@ if not saved:
         .with_user(manager)
         .create({"channel_id": course.id, "partner_id": learner.partner_id.id})
     )
+    company = env.company.with_user(env.ref("base.user_admin"))
+    policy = company.read(["learning_notice_long_days", "learning_notice_short_days"])[0]
+    company.write({"learning_notice_long_days": 0, "learning_notice_short_days": 0})
     member.action_learning_activate(
         fields.Datetime.now() + timedelta(days=60), learner.id, "Fictional retained notice grant"
     )
+    company.write({name: policy[name] for name in ("learning_notice_long_days", "learning_notice_short_days")})
+    member_id = member.id
+    env.cr.commit()
+    with env.registry.cursor() as winning_cr, env.registry.cursor() as old_cr:
+        winning = api.Environment(winning_cr, manager.id, {})
+        old = api.Environment(old_cr, manager.id, {})
+        assert (
+            old["training.elearning.reminder"].search_count(
+                [("membership_id", "=", member_id), ("kind", "=", "course_end")]
+            )
+            == 0
+        )
+        winner = winning["training.elearning.reminder"]._enqueue(
+            "course_end", winning["slide.channel.partner"].browse(member_id), offset=policy["learning_notice_long_days"]
+        )
+        winner_id = winner.id
+        winning_cr.commit()
+        # RR cannot see the newly committed event, while the unique index can.
+        same = old["training.elearning.reminder"]._enqueue(
+            "course_end", old["slide.channel.partner"].browse(member_id), offset=policy["learning_notice_long_days"]
+        )
+        assert not same
+        old_cr.execute("SELECT 1")
+        assert old_cr.fetchone() == (1,)
+        old_cr.commit()
+    env.cr.rollback()
+    env.invalidate_all()
+    assert (
+        env["training.elearning.reminder"]._enqueue("course_end", member, offset=policy["learning_notice_long_days"]).id
+        == winner_id
+    )
+    env["training.elearning.reminder"]._enqueue("course_end", member, offset=policy["learning_notice_short_days"])
+    print("J19_CONTENDED_SCHEDULE_SINGLE_EVENT_AND_BUSINESS_TRANSACTION_RETAINED")
     notices = env["training.elearning.reminder"].sudo().search([("membership_id", "=", member.id)])
     assert len(notices.filtered(lambda notice: notice.kind == "activation" and notice.state == "queued")) == 1
     assert len(notices.filtered(lambda notice: notice.kind == "course_end" and notice.state == "pending")) == 2

@@ -55,3 +55,5 @@ migration réelle, de banque partagée ou de types complémentaires Q02/Q03.
 La cible consolidée du 3 novembre 2026 retient quelques utilisateurs et la
 concurrence ciblée ; les mesures E06 ne sont pas des critères de lancement validés
 pour les nouvelles applications séparées.
+
+Tranche autonome suivante : [TP déclaratifs et dépôts privés](docs/J9-practical-deposits.md).

@@ -11,3 +11,10 @@ editorial_wizard,Audited editorial correction,training.elearning.editorial,train
 availability_wizard,Motivated activity availability,training.elearning.availability,training_elearning.group_elearning_manager,crud,
 notice_manager,Private learning notifications,training.elearning.notice,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
 notice_scope,Private notice company scope,training.elearning.notice,,crud,"[('company_id','in',company_ids)]"
+practical_author,Private practical definitions,training.elearning.practical,training_elearning.group_elearning_author,crud,"[('company_id','in',company_ids)]"
+practical_scope,Practical company scope,training.elearning.practical,,crud,"[('company_id','in',company_ids)]"
+practical_revision,Practical version selection,training.elearning.practical.revision,training_elearning.group_elearning_author,crud,
+submission_manager,Practical submission metadata,training.elearning.submission,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
+submission_scope,Submission company scope,training.elearning.submission,,crud,"[('company_id','in',company_ids)]"
+payload_pedagogy,Private pedagogical work files,training.elearning.submission.payload,training_elearning.group_elearning_pedagogy_manager,r,"[('company_id','in',company_ids)]"
+payload_scope,Private work company scope,training.elearning.submission.payload,,crud,"[('company_id','in',company_ids)]"

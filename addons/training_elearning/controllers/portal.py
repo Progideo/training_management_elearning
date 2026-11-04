@@ -26,7 +26,7 @@ def article_content(slide, membership_id):
     )
     for node in root.xpath(".//img"):
         path = urlsplit(node.get("src", "")).path
-        match = re.fullmatch(r"/web/image/(\d+)(?:/[^/]*)?", path)
+        match = re.fullmatch(r"/web/image/(\d+)(?:-[a-fA-F0-9]+)?(?:/[^/]*)?", path)
         file = (
             request.env["ir.attachment"].sudo().browse(int(match[1])).exists()
             if match
@@ -180,7 +180,7 @@ class Portal(http.Controller):
         try:
             _member, slide, item = request.env["training.elearning.service"]._activity(membership_id, slide_id)
             file = request.env["ir.attachment"].sudo().browse(file_id).exists()
-            reference = r"/web/image/%s(?:[/?\"'])" % file_id
+            reference = r"/web/image/%s(?:-[a-fA-F0-9]+)?(?:[/?\"'])" % file_id
             if (
                 item["kind"] != "article"
                 or not file

@@ -175,7 +175,8 @@ class Membership(models.Model):
 
 
 class LearningService(models.AbstractModel):
-    _inherit = "training.elearning.service"
+    _inherit = "training.elearning.service"  # pylint: disable=consider-merging-classes-inherited
+    # Exam obligations remain separate from closed-history presentation.
 
     @api.private
     def _item_status(self, member, item):
@@ -184,10 +185,12 @@ class LearningService(models.AbstractModel):
         service = self.env["training.elearning.exam.service"]
         row = service._requirement(member, item["id"])
         status = service._requirement_status(row)
-        unavailable = super()._item_status(member, item)["unavailable"]
+        prior = super()._item_status(member, item)
+        complete = prior["complete"] or status["satisfied"]
+        unavailable = prior["unavailable"]
         return {
-            "complete": status["satisfied"],
-            "state": "done" if status["satisfied"] else ("unavailable" if unavailable else "todo"),
+            "complete": complete,
+            "state": "done" if complete else ("unavailable" if unavailable else "todo"),
             "unavailable": unavailable,
             "score": status["score"],
         }
@@ -197,6 +200,53 @@ class LearningService(models.AbstractModel):
         if item["kind"] == "exam":
             return "/my/learning/%s/exams/%s" % (member.id, item["id"])
         return super()._activity_url(member, item)
+
+    @api.private
+    def _period_result_evidence(self, member, item, cutoff):
+        if item["kind"] != "exam":
+            return super()._period_result_evidence(member, item, cutoff)
+        requirement = self.env["training.elearning.exam.service"]._requirement(member, item["id"])
+        attempts = (
+            self.env["survey.user_input"]
+            .sudo()
+            .search(
+                [
+                    ("learning_membership_id", "=", member.id),
+                    ("learning_slide_id", "=", item["id"]),
+                    ("survey_id", "=", requirement.exam_id.id),
+                    ("mock_context_key", "=", "slide.channel.partner:%s" % member.id),
+                    ("state", "=", "done"),
+                    ("end_datetime", "<", cutoff),
+                    ("learning_interrupted_at", "=", False),
+                ]
+            )
+        )
+        dates = []
+        final = cutoff
+        for attempt in attempts:
+            rows = attempt._training_scores()
+            maximum = sum(row["maximum"] for row in rows)
+            original = sum(row["points"] for row in rows)
+            if (
+                requirement.obligation != "pass"
+                or maximum
+                and 100 * original / maximum >= requirement.exam_id.scoring_success_min
+            ):
+                dates.append(attempt.end_datetime)
+            revisions = self.env["training.mock.exam.service"]._result_adjustments(attempt)
+            for revision in revisions:
+                date = revision.revised_at or revision.create_date
+                final = max(final, date)
+                points = sum(revision.points_by_question[str(row["question"].id)] for row in rows)
+                if (
+                    requirement.obligation != "pass"
+                    or maximum
+                    and 100 * points / maximum >= requirement.exam_id.scoring_success_min
+                ):
+                    dates.append(date)
+        # Only aggregates and dates reach the purchase report, not attempts,
+        # questions, points, corrections, authors or another purchase's work.
+        return {"complete": bool(dates), "completed_at": min(dates) if dates else False, "final": final}
 
 
 class Attempt(models.Model):
@@ -226,6 +276,41 @@ class Attempt(models.Model):
     def _training_finish(self):
         result = super()._training_finish()
         self.sudo().learning_membership_id._learning_sync_progress()
+        return result
+
+    @api.private
+    def _mock_revision_scope(self, *, lock=False):
+        self.ensure_one()
+        attempt = self.sudo()
+        if not attempt.learning_membership_id:
+            return super()._mock_revision_scope(lock=lock)
+        user = self.env.user
+        if not user.active or not user.has_group("training_elearning_survey.group_learning_exam_reader"):
+            raise AccessError(self.env._("Exam coordination permission is required."))
+        member = attempt.learning_membership_id
+        course = member.channel_id.with_env(self.env(su=False))
+        course._learning_staff(manager=True)
+        if lock:
+            course.lock_for_update()
+            member.lock_for_update()
+        row = self.env["training.elearning.exam.service"]._requirement(member, attempt.learning_slide_id.id)
+        if (
+            attempt.mock_context_key != "slide.channel.partner:%s" % member.id
+            or attempt.partner_id != member.partner_id
+            or attempt.survey_id != row.exam_id
+            or attempt.learning_interrupted_at
+        ):
+            raise AccessError(self.env._("This completed exam context is unavailable."))
+        return {
+            "company": course.learning_company_id,
+            "reader_group": self.env.ref("training_elearning_survey.group_learning_exam_reader"),
+        }
+
+    @api.private
+    def _mock_revision_project(self):
+        result = super()._mock_revision_project()
+        if self.sudo().learning_membership_id:
+            self.sudo().learning_membership_id._learning_sync_progress()
         return result
 
     @api.ondelete(at_uninstall=False)

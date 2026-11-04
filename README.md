@@ -71,3 +71,5 @@ Suite : [activités interactives autonomes et historiques personnels](docs/J14-a
 Suite : [trois addons autonomes et déplacement de l’adaptateur TM](docs/J15-module-layout.md).
 
 Suite : [présentation générale des offres autonomes](docs/J16-general-public-offers.md).
+
+Suite : [résultats révisés et bilans de période](docs/J17-motivated-exam-results.md).

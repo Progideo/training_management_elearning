@@ -4,7 +4,8 @@ from odoo import api, models
 
 
 class Service(models.AbstractModel):
-    _inherit = "training.elearning.service"
+    _inherit = "training.elearning.service"  # pylint: disable=consider-merging-classes-inherited
+    # Closed history exposes only scalar results, independently of live access.
 
     @api.private
     def _history_entries(self, member, item):
@@ -33,18 +34,32 @@ class Service(models.AbstractModel):
             elif attempt.state != "done":
                 entry["label"] = "Tentative non terminée ; aucun score final disponible"
             else:
-                revisions = service._result_adjustments(attempt)[:1]
-                themes, points, maximum = {}, 0, 0
-                for row in attempt._training_scores():
-                    question = row["question"]
-                    obtained = revisions.points_by_question[str(question.id)] if revisions else row["points"]
-                    theme = question.training_theme or question.page_id.title or self.env._("Unclassified")
-                    totals = themes.setdefault(theme, {"points": 0, "maximum": 0})
-                    totals["points"] += obtained
-                    totals["maximum"] += row["maximum"]
-                    points += obtained
-                    maximum += row["maximum"]
-                entry["label"] = "Score global : %g / %g" % (points, maximum)
-                entry["themes"] = [{"name": name, **totals} for name, totals in themes.items()]
+                revisions = service._result_adjustments(attempt)
+                entry.update(self._exam_history_score(attempt))
+                result.append(entry)
+                for revision in revisions.sorted("id"):
+                    result.append(self._exam_history_score(attempt, revision))
+                continue
             result.append(entry)
         return result
+
+    @api.private
+    def _exam_history_score(self, attempt, revision=None):
+        themes, points, maximum = {}, 0, 0
+        for row in attempt._training_scores():
+            question = row["question"]
+            obtained = revision.points_by_question[str(question.id)] if revision else row["points"]
+            theme = question.training_theme or question.page_id.title or self.env._("Unclassified")
+            totals = themes.setdefault(theme, {"points": 0, "maximum": 0})
+            totals["points"] += obtained
+            totals["maximum"] += row["maximum"]
+            points += obtained
+            maximum += row["maximum"]
+        # A free-text correction reason can contain pedagogical detail. Closed
+        # history keeps only the revision date and global/theme totals.
+        return {
+            "label": ("Score révisé : %g / %g" if revision else "Score global : %g / %g") % (points, maximum),
+            "date": (revision.revised_at or revision.create_date) if revision else attempt.end_datetime,
+            "url": False,
+            "themes": [{"name": name, **totals} for name, totals in themes.items()],
+        }

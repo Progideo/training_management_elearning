@@ -66,3 +66,8 @@ class Service(models.AbstractModel):
                 }
             )
         return {"id": member.id, "title": member.channel_id.name, "rows": rows}
+
+    @api.private
+    def _period_result_evidence(self, member, item, cutoff):
+        """Optional typed result evidence; no purchase or commercial dependency."""
+        return False

@@ -204,6 +204,12 @@ class CourseReport(models.Model):
             stamp = row.learning_completed_at if row else False
             completed = item["id"] in (report.baseline or []) or bool(stamp and stamp < report.ends_at)
             completed_at = max(report.starts_at, stamp) if stamp and completed else report.starts_at
+            period_result = self.env["training.elearning.service"]._period_result_evidence(member, item, report.ends_at)
+            if period_result:
+                completed = completed or period_result["complete"]
+                if period_result["complete"]:
+                    completed_at = max(report.starts_at, period_result["completed_at"])
+                final = max(final, period_result["final"])
             if item.get("kind") == "task":
                 task = self.env["training.elearning.practical"].sudo().browse(item.get("task")).exists()
                 if task.criterion == "human":

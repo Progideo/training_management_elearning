@@ -12,6 +12,8 @@ CONTRACT = {
     "learning_assignment_months",
     "learning_purchase_kind",
     "learning_report_months",
+    "learning_review_days",
+    "learning_revision_days",
 }
 DECISION = {
     "learning_allocation_revision",
@@ -38,6 +40,8 @@ class Product(models.Model):
     learning_access_months = fields.Integer(default=6)
     learning_assignment_months = fields.Integer(default=3)
     learning_report_months = fields.Integer(default=3)
+    learning_review_days = fields.Integer(default=5)
+    learning_revision_days = fields.Integer(default=14)
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -52,6 +56,8 @@ class Product(models.Model):
                 course = self.env["slide.channel"].browse(course_id)
                 course._learning_staff(manager=True)
                 vals.setdefault("company_id", course.learning_company_id.id)
+                vals.setdefault("learning_review_days", course.learning_review_days)
+                vals.setdefault("learning_revision_days", course.learning_revision_days)
         return super().create(vals_list)
 
     def write(self, vals):
@@ -69,6 +75,8 @@ class Product(models.Model):
         "learning_access_months",
         "learning_assignment_months",
         "learning_report_months",
+        "learning_review_days",
+        "learning_revision_days",
         "type",
         "company_id",
     )
@@ -81,6 +89,8 @@ class Product(models.Model):
                 or product.learning_access_months <= 0
                 or product.learning_assignment_months <= 0
                 or product.learning_report_months <= 0
+                or not 0 < product.learning_review_days <= 365
+                or not 0 < product.learning_revision_days <= 365
                 or not course.training_course_id
                 or not course.active
                 or course.learning_state != "published"
@@ -99,6 +109,8 @@ class Line(models.Model):
     learning_access_months = fields.Integer(readonly=True, copy=True)
     learning_assignment_months = fields.Integer(readonly=True, copy=True)
     learning_report_months = fields.Integer(default=3, readonly=True, copy=True)
+    learning_review_days = fields.Integer(default=5, readonly=True, copy=True)
+    learning_revision_days = fields.Integer(default=14, readonly=True, copy=True)
     learning_purchase_kind = fields.Selection(
         [("initial", "Initial Access"), ("renewal", "Renewal")], default="initial"
     )
@@ -138,7 +150,18 @@ class Line(models.Model):
             "learning_access_months": product.learning_access_months if product.learning_channel_id else 0,
             "learning_assignment_months": product.learning_assignment_months if product.learning_channel_id else 0,
             "learning_report_months": product.learning_report_months if product.learning_channel_id else 3,
+            "learning_review_days": product.learning_review_days if product.learning_channel_id else 5,
+            "learning_revision_days": product.learning_revision_days if product.learning_channel_id else 14,
         }
+
+    @api.private
+    def _learning_contract_plan(self):
+        self.ensure_one()
+        plan = self.learning_channel_id.sudo()._learning_plan()
+        for item in plan["slides"]:
+            if item.get("review_calendar"):
+                item.update(review_days=self.learning_review_days, revision_days=self.learning_revision_days)
+        return plan
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -198,6 +221,8 @@ class Line(models.Model):
         "learning_access_months",
         "learning_assignment_months",
         "learning_report_months",
+        "learning_review_days",
+        "learning_revision_days",
         "product_uom_qty",
         "product_uom_id",
         "company_id",
@@ -220,6 +245,8 @@ class Line(models.Model):
                 or line.learning_access_months <= 0
                 or line.learning_assignment_months <= 0
                 or line.learning_report_months <= 0
+                or not 0 < line.learning_review_days <= 365
+                or not 0 < line.learning_revision_days <= 365
             ):
                 raise ValidationError(
                     self.env._("Use a published course in the sale company, whole seats and positive month durations.")
@@ -287,7 +314,7 @@ class Order(models.Model):
                 line.sudo()._learning_store(
                     {
                         "learning_confirmed_at": fields.Datetime.now(),
-                        "learning_plan": line.learning_channel_id.sudo()._learning_plan(),
+                        "learning_plan": line.sudo()._learning_contract_plan(),
                     }
                 )
         return result
@@ -328,7 +355,8 @@ class Course(models.Model):
             )
             if lines:
                 lines.lock_for_update()
-                lines._learning_store({"learning_plan": course._learning_plan()})
+                for line in lines:
+                    line._learning_store({"learning_plan": line._learning_contract_plan()})
         return result
 
     @api.private

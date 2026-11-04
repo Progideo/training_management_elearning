@@ -23,6 +23,11 @@ class PracticalPortal(http.Controller):
                     [("membership_id", "=", member.id), ("slide_id", "=", slide.id)], order="received_at desc,id desc"
                 )
             )
+            queue = (
+                request.env["training.elearning.review.queue"]
+                .sudo()
+                .search([("membership_id", "=", member.id), ("slide_id", "=", slide.id)], limit=1)
+            )
             return private(
                 request.render(
                     "training_elearning.practical_page",
@@ -31,6 +36,7 @@ class PracticalPortal(http.Controller):
                         "slide": slide,
                         "task": task,
                         "submissions": rows,
+                        "queue": queue,
                         "policy": task._policy(),
                         "request_key": str(uuid4()),
                         "accept": ",".join("." + value for value in sorted(extensions(task.upload_extensions))),
@@ -85,7 +91,15 @@ class PracticalPortal(http.Controller):
     def submission(self, submission_id, **kw):
         try:
             row = request.env["training.elearning.practical.service"]._history(submission_id)
-            return private(request.render("training_elearning.practical_submission", {"submission": row}))
+            return private(
+                request.render(
+                    "training_elearning.practical_submission",
+                    {
+                        "submission": row,
+                        "revision_open": bool(row.review_queue_id and row.review_queue_id._revision_open()),
+                    },
+                )
+            )
         except (AccessError, MissingError):
             raise request.not_found() from None
 

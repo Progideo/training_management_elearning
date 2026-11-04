@@ -73,7 +73,7 @@ class Payload(models.Model):
 
     @api.private
     def _authorize_staff(self):
-        if not self.env.user.active or not self.env.user.has_group(PEDAGOGY):
+        if not self.env.user.active or not (self.env.user.has_group(PEDAGOGY) or self._extra_reader()):
             raise AccessError(self.env._("Pedagogical coordination permission is required for practical files."))
         self.check_access("read")
         if any(
@@ -81,6 +81,20 @@ class Payload(models.Model):
             for item in self
         ):
             raise AccessError(self.env._("Use practical files in your active companies."))
+
+    @api.private
+    def _extra_reader(self):
+        return False
+
+    @api.private
+    def _file_read_domain(self):
+        from odoo.fields import Domain
+
+        return (
+            Domain("company_id", "in", (self.env.companies & self.env.user.company_ids).ids)
+            if self.env.user.active and self.env.user.has_group(PEDAGOGY)
+            else Domain.FALSE
+        )
 
     @api.model_create_multi
     def create(self, vals_list):  # pylint: disable=method-required-super
@@ -151,8 +165,8 @@ class PracticalService(models.AbstractModel):
         )
         if previous:
             return previous
-        self._context(membership_id, slide_id)
-        if task.criterion != "deposit":
+        self._deposit_context(membership_id, slide_id)
+        if task.criterion not in ("deposit", "human"):
             raise AccessError(self.env._("Use this practical's own completion criterion."))
         received = fields.Datetime.now()
         try:
@@ -171,9 +185,18 @@ class PracticalService(models.AbstractModel):
             )
             payload = self.env["training.elearning.submission.payload"]._create_files(submission, validated)
             submission._store({"payload_id": payload.id})
-            self.env["slide.slide.partner"]._learning_project(member, slide.id, True)
+            if self._after_deposit(submission, task):
+                self.env["slide.slide.partner"]._learning_project(member, slide.id, True)
             member._learning_sync_progress()
         return submission
+
+    @api.private
+    def _deposit_context(self, membership_id, slide_id):
+        return self._context(membership_id, slide_id)
+
+    @api.private
+    def _after_deposit(self, submission, task):
+        return task.criterion == "deposit"
 
     @api.private
     def _file_error(self, cause, task):

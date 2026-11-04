@@ -48,6 +48,8 @@ with Database("autonomous", folder) as db:
         checked(command("shell", "--no-http"), folder / "lessons-prepare.log", stdin=data)
     with (ROOT / "ci/probe-practicals.py").open() as data:
         checked(command("shell", "--no-http"), folder / "practicals-prepare.log", stdin=data)
+    with (ROOT / "ci/probe-human-practicals.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "human-practicals-prepare.log", stdin=data)
     text = checked(
         command(
             "-u", "training_elearning", "--stop-after-init", "--test-enable", "--test-tags=/training_elearning,-/web"
@@ -61,6 +63,8 @@ with Database("autonomous", folder) as db:
 
     with (ROOT / "ci/probe-practicals.py").open() as data:
         checked(command("shell", "--no-http"), folder / "practicals-preserved.log", stdin=data)
+    with (ROOT / "ci/probe-human-practicals.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "human-practicals-preserved.log", stdin=data)
 
     addons = ["training_elearning", "training_elearning_survey", "training_mock_exam"]
     text = checked(
@@ -175,7 +179,7 @@ with Database("sales_without_survey", folder / "sales-without-survey") as db:
         "--without-demo",
         "--stop-after-init",
         "--test-enable",
-        "--test-tags=/training_elearning_sale:TestNativeCourseSales,-/web",
+        "--test-tags=/training_elearning_sale:TestNativeCourseSales,/training_elearning_sale:TestPracticalSalePolicy,-/web",
         "--addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons,/mnt/elearning-addons",
     )
     index = cmd.index("-e")

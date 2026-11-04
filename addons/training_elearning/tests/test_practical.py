@@ -163,7 +163,18 @@ class TestPracticalWork(PracticalCase):
             )
 
     def test_policies_formats_and_limits_are_checked_before_evidence(self):
-        policy = {"extensions": "txt,csv,png,docx,json,xml", "files": 2, "file_mib": 1, "total_mib": 1}
+        policy = {"extensions": "pdf,txt,csv,png,docx,json,xml", "files": 2, "file_mib": 1, "total_mib": 1}
+        from PIL import Image
+        from odoo.tools.pdf import PdfFileWriter
+
+        pdf = io.BytesIO()
+        writer = PdfFileWriter()
+        writer.add_blank_page(width=200, height=200)
+        writer.write(pdf)
+        self.assertTrue(validate_files([("fictional.pdf", pdf.getvalue())], policy))
+        png = io.BytesIO()
+        Image.new("RGB", (64, 64), (40, 80, 160)).save(png, format="PNG")
+        self.assertEqual(validate_files([("fictional.png", png.getvalue())], policy)[0]["content"], png.getvalue())
         self.assertTrue(validate_files([("large-cell.csv", b"x" * 150000)], policy))
         for files in (
             [("../x.txt", b"x")],

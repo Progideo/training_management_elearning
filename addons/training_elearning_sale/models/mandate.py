@@ -233,7 +233,7 @@ class CompanyPortal(models.AbstractModel):
         if assignable:
             for partner in mandate.beneficiary_ids.sorted("id"):
                 seat = allocated.get(partner.id)
-                if (seat and not seat.activated_at and not seat.assigned_by) or (
+                if (seat and not seat.activated_at) or (
                     not seat and len(seats) < line.product_uom_qty
                 ):
                     choices.append({"id": partner.id, "name": partner.name})

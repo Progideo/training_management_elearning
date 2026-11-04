@@ -133,6 +133,7 @@ class Allocation(models.Model):
         end = start + relativedelta(months=line.learning_access_months)
         if not member:
             member = members.with_context({}).create({"channel_id": course.id, "partner_id": self.partner_id.id})
+        self._store({"membership_id": member.id})
         member.action_learning_activate(end, users.id, self.env._("Authorized sale seat %s", self.id))
         self._store(
             {"membership_id": member.id, "activated_at": now, "access_started_at": start, "access_ends_at": end}
@@ -188,3 +189,31 @@ class Allocation(models.Model):
         self.line_id.lock_for_update()
         if self.filtered("activated_at"):
             raise ValidationError(self.env._("Keep activated seat history; decide access changes explicitly."))
+
+
+class Membership(models.Model):
+    _inherit = "slide.channel.partner"
+
+    @api.private
+    def _learning_plan_source(self):
+        self.ensure_one()
+        pending = (
+            self.env["training.elearning.sale.allocation"]
+            .sudo()
+            .search([("membership_id", "=", self.id), ("activated_at", "=", False)], limit=2)
+        )
+        if not pending:
+            return super()._learning_plan_source()
+        if len(pending) != 1:
+            raise ValidationError(self.env._("Resolve ambiguous pending allocations before activation."))
+        seat = pending.with_env(self.env)
+        require_manager(seat)
+        line = seat.line_id
+        if (
+            seat.partner_id != self.partner_id
+            or line.learning_channel_id != self.channel_id
+            or line.state != "sale"
+            or not line.learning_authorized_at
+        ):
+            raise AccessError(self.env._("Use the authorized allocation of this learner and edition."))
+        return line.sudo().learning_plan or super()._learning_plan_source()

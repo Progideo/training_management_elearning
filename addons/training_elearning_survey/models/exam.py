@@ -102,16 +102,30 @@ class Requirement(models.Model):
     @api.private
     def _capture(self, membership):
         membership.channel_id._learning_staff(manager=True)
-        vals = [
-            {
-                "membership_id": membership.id,
-                "slide_id": slide.id,
-                "exam_id": slide.survey_id.id,
-                "obligation": slide.learning_exam_obligation,
-            }
-            for slide in membership.sudo().channel_id.slide_ids
-            if not slide.is_category and slide.is_published and slide.survey_id
-        ]
+        vals = []
+        for item in membership.sudo().learning_plan["slides"]:
+            if item["kind"] != "exam":
+                continue
+            slide = self.env["slide.slide"].sudo().browse(item["id"]).exists()
+            exam = self.env["survey.survey"].sudo().browse(item["exam"]).exists()
+            if (
+                not slide
+                or slide.channel_id != membership.channel_id
+                or not exam
+                or not exam.active
+                or exam.training_state != "published"
+                or exam.mock_company_id != membership.channel_id.learning_company_id
+                or exam.training_course_id != membership.channel_id.training_course_id
+            ):
+                raise ValidationError(self.env._("Resolve unavailable contracted exam versions before activation."))
+            vals.append(
+                {
+                    "membership_id": membership.id,
+                    "slide_id": slide.id,
+                    "exam_id": exam.id,
+                    "obligation": item["obligation"],
+                }
+            )
         if vals:
             return super(Requirement, self.sudo().with_context({})).create(vals)  # pylint: disable=super-method-mismatch,context-overridden
         return self.browse()

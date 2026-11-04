@@ -14,6 +14,7 @@ CONTRACT = {
     "learning_report_months",
 }
 DECISION = {
+    "learning_plan",
     "learning_confirmed_at",
     "learning_authorized_at",
     "learning_authorized_by",
@@ -91,6 +92,7 @@ class Product(models.Model):
 
 class Line(models.Model):
     _inherit = "sale.order.line"
+    learning_plan = fields.Json(readonly=True, copy=False, groups=MANAGER)
     learning_channel_id = fields.Many2one("slide.channel", ondelete="restrict", copy=True, readonly=True)
     learning_access_months = fields.Integer(readonly=True, copy=True)
     learning_assignment_months = fields.Integer(readonly=True, copy=True)
@@ -256,12 +258,21 @@ class Order(models.Model):
     def action_confirm(self):
         # Same locks as edition editing and activation: sold exam obligations cannot drift.
         courses = self.sudo().order_line.learning_channel_id
-        courses.lock_for_update()
+        courses._learning_lock_graph()
+        courses._learning_check_contents()
         self.order_line.filtered("learning_channel_id")._learning_check_contract()
         result = super().action_confirm()
+        courses._learning_bind_graph()
         for line in self.order_line.filtered("learning_channel_id"):
             if not line.learning_confirmed_at:
-                line._learning_store({"learning_confirmed_at": fields.Datetime.now()})
+                # Native sales may confirm a configured product. The private
+                # snapshot does not grant them access to its pedagogical data.
+                line.sudo()._learning_store(
+                    {
+                        "learning_confirmed_at": fields.Datetime.now(),
+                        "learning_plan": line.learning_channel_id.sudo()._learning_plan(),
+                    }
+                )
         return result
 
     def write(self, vals):
@@ -282,6 +293,28 @@ class Course(models.Model):
     _inherit = "slide.channel"
 
     @api.private
+    def _learning_before_revision(self):
+        result = super()._learning_before_revision()
+        # Earlier generation sold lines had no plan JSON. Capture their actual
+        # references only on an explicit revision, never during module update.
+        for course in self:
+            lines = (
+                self.env["sale.order.line"]
+                .sudo()
+                .search(
+                    [
+                        ("learning_channel_id", "=", course.id),
+                        ("learning_confirmed_at", "!=", False),
+                        ("learning_plan", "=", False),
+                    ]
+                )
+            )
+            if lines:
+                lines.lock_for_update()
+                lines._learning_store({"learning_plan": course._learning_plan()})
+        return result
+
+    @api.private
     def _learning_frozen(self):
         frozen = super()._learning_frozen()
         return frozen or bool(
@@ -289,7 +322,7 @@ class Course(models.Model):
             .sudo()
             .search_count(
                 [
-                    ("learning_channel_id", "in", self.ids),
+                    ("learning_channel_id", "in", self._learning_related_courses().ids),
                     "|",
                     ("state", "=", "sale"),
                     "|",

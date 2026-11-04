@@ -19,4 +19,4 @@ Chaque route de contenu, image, fichier ou déclaration recontrôle compte, soci
 5. Expirer ou suspendre l’adhésion, puis utiliser un autre compte : vérifier les refus du texte, PDF et images, y compris les URL natives.
 6. Mettre à jour le socle puis ajouter les intégrations : conserver les preuves, dates d’audit, obligations et octets privés.
 
-Les TP, parcours, raccordements interactifs autonomes, corrections éditoriales tracées et bilans contractuels suivent dans les incréments de #19. Cette tranche ne constitue pas une mise en service du périmètre complet.
+Les corrections éditoriales et plans vendus sont complétés dans [J7](J7-edition-revisions.md). Les TP, parcours, raccordements interactifs autonomes et bilans contractuels suivent dans les incréments de #19. Cette tranche ne constitue pas une mise en service du périmètre complet.

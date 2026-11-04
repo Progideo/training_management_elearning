@@ -93,6 +93,23 @@ with Database("autonomous", folder) as db:
     assert_tests_ran(text, ["training_elearning_sale", "training_elearning_survey"])
     with sales_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "sales-preserved.log", stdin=data)
+    mandates_probe = ROOT / "ci/probe-mandates.py"
+    with mandates_probe.open() as data:
+        checked(command("shell", "--no-http"), folder / "mandates-prepare.log", stdin=data)
+    text = checked(
+        command(
+            "-u",
+            "training_elearning_sale",
+            "--stop-after-init",
+            "--test-enable",
+            "--test-tags=/training_elearning_sale,-/web",
+        ),
+        folder / "mandates-update.log",
+        allow_tracebacks=True,
+    )
+    assert_tests_ran(text, ["training_elearning_sale"])
+    with mandates_probe.open() as data:
+        checked(command("shell", "--no-http"), folder / "mandates-preserved.log", stdin=data)
     # A separate final phase intentionally adds TM and checks cross-app context
     # isolation. Independence was asserted before adding any TM business model.
     text = checked(
@@ -112,4 +129,6 @@ with Database("autonomous", folder) as db:
     assert_tests_ran(text, ["training_management_survey", "training_management_sale", "training_elearning_sale"])
     with (ROOT / "ci/probe-sales-coexistence.py").open() as data:
         checked(command("shell", "--no-http"), folder / "coexistence-preserved.log", stdin=data)
+    with mandates_probe.open() as data:
+        checked(command("shell", "--no-http"), folder / "mandates-coexistence-preserved.log", stdin=data)
 (folder / "success.json").write_text('{"autonomous": "success"}\n')

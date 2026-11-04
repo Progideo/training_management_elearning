@@ -9,7 +9,8 @@ bibliothèque `training_interactive` à TM et à son adaptateur Survey. Les nouv
 addons `training_elearning` et `training_elearning_survey` livrent les
 [offres autonomes composées d’examens](docs/J3-autonomous-exam-offers.md), sur les
 cours et adhésions natifs sans dépendance métier à TM. Le [raccordement aux ventes](docs/J4-autonomous-sales.md) ajoute les sièges nominatifs,
-l’autorisation commerciale et le renouvellement. Les autres supports restent à raccorder. Les [lecteurs et examens communs](docs/J1-shared-readers-exams.md)
+l’autorisation commerciale et le renouvellement. Le [portail entreprise](docs/J5-company-mandates.md)
+limite consultation et attribution aux achats explicitement mandatés. Les autres supports restent à raccorder. Les [lecteurs et examens communs](docs/J1-shared-readers-exams.md)
 poursuivent cette extraction. Le [moteur de passation commun](docs/J1-shared-exam-runtime.md)
 porte désormais le chronométrage et les réponses. Les [obligations des offres TM](docs/J2-shared-exam-obligations.md)
 sont figées par inscription. Voir [la tranche J1](docs/J1-shared-interactive.md)

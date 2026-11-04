@@ -6,7 +6,13 @@ from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError
 
 MANAGER = "training_elearning_sale.group_learning_sales_manager"
-CONTRACT = {"learning_channel_id", "learning_access_months", "learning_assignment_months", "learning_purchase_kind"}
+CONTRACT = {
+    "learning_channel_id",
+    "learning_access_months",
+    "learning_assignment_months",
+    "learning_purchase_kind",
+    "learning_report_months",
+}
 DECISION = {
     "learning_confirmed_at",
     "learning_authorized_at",
@@ -29,6 +35,7 @@ class Product(models.Model):
     learning_channel_id = fields.Many2one("slide.channel", ondelete="restrict", copy=True)
     learning_access_months = fields.Integer(default=6)
     learning_assignment_months = fields.Integer(default=3)
+    learning_report_months = fields.Integer(default=3)
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -55,7 +62,14 @@ class Product(models.Model):
             vals = {"company_id": course.learning_company_id.id, **vals}
         return super().write(vals)
 
-    @api.constrains("learning_channel_id", "learning_access_months", "learning_assignment_months", "type", "company_id")
+    @api.constrains(
+        "learning_channel_id",
+        "learning_access_months",
+        "learning_assignment_months",
+        "learning_report_months",
+        "type",
+        "company_id",
+    )
     def _learning_check_product(self):
         for product in self.filtered("learning_channel_id"):
             course = product.learning_channel_id
@@ -64,6 +78,7 @@ class Product(models.Model):
                 product.type != "service"
                 or product.learning_access_months <= 0
                 or product.learning_assignment_months <= 0
+                or product.learning_report_months <= 0
                 or not course.training_course_id
                 or not course.active
                 or course.learning_state != "published"
@@ -79,6 +94,7 @@ class Line(models.Model):
     learning_channel_id = fields.Many2one("slide.channel", ondelete="restrict", copy=True, readonly=True)
     learning_access_months = fields.Integer(readonly=True, copy=True)
     learning_assignment_months = fields.Integer(readonly=True, copy=True)
+    learning_report_months = fields.Integer(default=3, readonly=True, copy=True)
     learning_purchase_kind = fields.Selection(
         [("initial", "Initial Access"), ("renewal", "Renewal")], default="initial"
     )
@@ -107,6 +123,7 @@ class Line(models.Model):
             "learning_channel_id": product.learning_channel_id.id,
             "learning_access_months": product.learning_access_months if product.learning_channel_id else 0,
             "learning_assignment_months": product.learning_assignment_months if product.learning_channel_id else 0,
+            "learning_report_months": product.learning_report_months if product.learning_channel_id else 3,
         }
 
     @api.model_create_multi
@@ -114,15 +131,21 @@ class Line(models.Model):
         for vals in vals_list:
             if DECISION & vals.keys() or any("default_" + k in self.env.context for k in DECISION):
                 raise AccessError(self.env._("Use the commercial authorization action."))
-            if any(vals.get(key) for key in CONTRACT - {"learning_purchase_kind"}) and not self.env.user.has_group(
-                MANAGER
-            ):
+            if any(
+                vals.get(key) for key in CONTRACT - {"learning_purchase_kind", "learning_report_months"}
+            ) and not self.env.user.has_group(MANAGER):
                 raise AccessError(self.env._("Use the configured autonomous product."))
             if any("default_" + key in self.env.context for key in CONTRACT) and not self.env.user.has_group(MANAGER):
                 raise AccessError(self.env._("Use the configured autonomous product."))
             product_id = vals.get("product_id") or self.env.context.get("default_product_id")
             if product_id:
                 defaults = self._learning_defaults(product_id)
+                if (
+                    "learning_report_months" in vals
+                    and not self.env.user.has_group(MANAGER)
+                    and vals["learning_report_months"] != defaults["learning_report_months"]
+                ):
+                    raise AccessError(self.env._("Use the configured autonomous product."))
                 for key, value in defaults.items():
                     vals.setdefault(key, value)
         return super().create(vals_list)
@@ -160,6 +183,7 @@ class Line(models.Model):
         "learning_channel_id",
         "learning_access_months",
         "learning_assignment_months",
+        "learning_report_months",
         "product_uom_qty",
         "product_uom_id",
         "company_id",
@@ -181,6 +205,7 @@ class Line(models.Model):
                 or line.product_uom_qty != int(line.product_uom_qty)
                 or line.learning_access_months <= 0
                 or line.learning_assignment_months <= 0
+                or line.learning_report_months <= 0
             ):
                 raise ValidationError(
                     self.env._("Use a published course in the sale company, whole seats and positive month durations.")

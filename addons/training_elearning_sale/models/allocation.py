@@ -8,6 +8,8 @@ from odoo.tools import email_normalize
 from .offer import require_manager
 
 PROTECTED = {
+    "assigned_by",
+    "assigned_mandate_id",
     "membership_id",
     "activated_at",
     "access_started_at",
@@ -25,6 +27,10 @@ class Allocation(models.Model):
     line_id = fields.Many2one("sale.order.line", required=True, ondelete="restrict", index=True)
     company_id = fields.Many2one(related="line_id.company_id", store=True)
     partner_id = fields.Many2one("res.partner", required=True, ondelete="restrict", tracking=True)
+    assigned_by = fields.Many2one("res.users", readonly=True, copy=False, ondelete="restrict")
+    assigned_mandate_id = fields.Many2one(
+        "training.elearning.sale.mandate", readonly=True, copy=False, ondelete="restrict"
+    )
     membership_id = fields.Many2one("slide.channel.partner", readonly=True, copy=False, ondelete="restrict")
     activated_at = fields.Datetime(readonly=True, copy=False)
     access_started_at = fields.Datetime(readonly=True, copy=False)

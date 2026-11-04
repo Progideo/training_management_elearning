@@ -175,6 +175,7 @@ class Membership(models.Model):
 class LessonEvidence(models.Model):
     _inherit = "slide.slide.partner"
     learning_completed_at = fields.Datetime(readonly=True, copy=False)
+    learning_valid_completed_at = fields.Datetime(readonly=True, copy=False)
 
     @api.private
     def _learning_project(self, member, slide_id, complete):
@@ -189,20 +190,28 @@ class LessonEvidence(models.Model):
                     "partner_id": member.partner_id.id,
                     "completed": bool(complete),
                     "learning_completed_at": fields.Datetime.now() if complete else False,
+                    "learning_valid_completed_at": fields.Datetime.now() if complete else False,
                 }
             )
         elif row.completed != bool(complete):
             values = {"completed": bool(complete)}
+            if complete:
+                values["learning_valid_completed_at"] = fields.Datetime.now()
             if complete and not row.learning_completed_at:
                 values["learning_completed_at"] = fields.Datetime.now()
             super(LessonEvidence, row).write(values)  # pylint: disable=super-method-mismatch
+        if complete:
+            self.env["training.elearning.acquisition.invalidation"]._restore(
+                member, slide_id, row.learning_valid_completed_at or row.learning_completed_at
+            )
         return row
 
     @api.model_create_multi
     def create(self, vals_list):
         if (
-            any("learning_completed_at" in values for values in vals_list)
+            any({"learning_completed_at", "learning_valid_completed_at"} & values.keys() for values in vals_list)
             or "default_learning_completed_at" in self.env.context
+            or "default_learning_valid_completed_at" in self.env.context
         ):
             raise AccessError(self.env._("Completion timestamps are recorded by the learning evidence service."))
         slides = (
@@ -215,7 +224,7 @@ class LessonEvidence(models.Model):
         return super().create(vals_list)
 
     def write(self, vals):
-        if "learning_completed_at" in vals:
+        if {"learning_completed_at", "learning_valid_completed_at"} & vals.keys():
             raise AccessError(self.env._("Keep the first server completion timestamp."))
         target = self.env["slide.slide"].sudo().browse(vals.get("slide_id"))
         if (self.sudo().channel_id | target.channel_id).filtered("training_course_id"):

@@ -56,12 +56,15 @@ class Service(models.AbstractModel):
                     limit=1,
                 )
             )
+            event = self.env["training.elearning.acquisition.invalidation"]._latest(member, item["id"])
             rows.append(
                 {
                     "title": item["title"],
                     "required": item["required"],
                     "complete": self._item_status(member, item)["complete"],
                     "acquired_at": evidence.learning_completed_at,
+                    "invalidated_at": event.invalidated_at if event else False,
+                    "restored_at": event.restored_at if event else False,
                     "entries": self._history_entries(member, item),
                 }
             )

@@ -73,3 +73,5 @@ Suite : [trois addons autonomes et déplacement de l’adaptateur TM](docs/J15-m
 Suite : [présentation générale des offres autonomes](docs/J16-general-public-offers.md).
 
 Suite : [résultats révisés et bilans de période](docs/J17-motivated-exam-results.md).
+
+Suite : [invalidation motivée des acquis](docs/J18-motivated-acquisition-invalidation.md).

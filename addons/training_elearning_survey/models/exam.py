@@ -189,6 +189,7 @@ class LearningService(models.AbstractModel):
         complete = prior["complete"] or status["satisfied"]
         unavailable = prior["unavailable"]
         return {
+            **prior,
             "complete": complete,
             "state": "done" if complete else ("unavailable" if unavailable else "todo"),
             "unavailable": unavailable,
@@ -200,6 +201,27 @@ class LearningService(models.AbstractModel):
         if item["kind"] == "exam":
             return "/my/learning/%s/exams/%s" % (member.id, item["id"])
         return super()._activity_url(member, item)
+
+    @api.private
+    def _acquisition_barrier(self, member, item):
+        result = super()._acquisition_barrier(member, item)
+        if item["kind"] == "exam":
+            attempts = (
+                self.env["survey.user_input"]
+                .sudo()
+                .search(
+                    [
+                        ("learning_membership_id", "=", member.id),
+                        ("survey_id", "=", item["exam"]),
+                        ("mock_context_key", "=", "slide.channel.partner:%s" % member.id),
+                        ("state", "=", "done"),
+                    ]
+                )
+            )
+            result.update(
+                exam_done_ids=attempts.ids, exam_revision_max=max(attempts.training_adjustment_ids.ids, default=0)
+            )
+        return result
 
     @api.private
     def _period_result_evidence(self, member, item, cutoff):
@@ -221,29 +243,42 @@ class LearningService(models.AbstractModel):
                 ]
             )
         )
+        event = self.env["training.elearning.acquisition.invalidation"]._latest(member, item["id"])
+        barrier = event.barrier or {} if event else {}
+        invalid_attempts = barrier.get("exam_done_ids", [])
+        invalid_revision = barrier.get("exam_revision_max", 0)
+        previous_barrier = barrier.get("previous_barrier", {})
         dates = []
         final = cutoff
         for attempt in attempts:
             rows = attempt._training_scores()
             maximum = sum(row["maximum"] for row in rows)
             original = sum(row["points"] for row in rows)
-            if (
+            original_pass = (
                 requirement.obligation != "pass"
                 or maximum
                 and 100 * original / maximum >= requirement.exam_id.scoring_success_min
-            ):
-                dates.append(attempt.end_datetime)
+            )
+            if original_pass:
+                if attempt.id not in invalid_attempts:
+                    dates.append(attempt.end_datetime)
+                elif event and attempt.id not in previous_barrier.get("exam_done_ids", []):
+                    final = max(final, event.invalidated_at)
             revisions = self.env["training.mock.exam.service"]._result_adjustments(attempt)
             for revision in revisions:
                 date = revision.revised_at or revision.create_date
-                final = max(final, date)
                 points = sum(revision.points_by_question[str(row["question"].id)] for row in rows)
-                if (
+                passed = (
                     requirement.obligation != "pass"
                     or maximum
                     and 100 * points / maximum >= requirement.exam_id.scoring_success_min
-                ):
-                    dates.append(date)
+                )
+                if revision.id > invalid_revision:
+                    final = max(final, date)
+                    if passed:
+                        dates.append(date)
+                elif passed and event and revision.id > previous_barrier.get("exam_revision_max", 0):
+                    final = max(final, event.invalidated_at)
         # Only aggregates and dates reach the purchase report, not attempts,
         # questions, points, corrections, authors or another purchase's work.
         return {"complete": bool(dates), "completed_at": min(dates) if dates else False, "final": final}
@@ -346,7 +381,21 @@ class ExamService(models.AbstractModel):
             "slide.channel.partner:%s" % row.membership_id.id,
             row.membership_id.partner_id.id,
             row.obligation,
+            attempt_domain=self._acquisition_attempt_domain(row),
         )
+
+    @api.private
+    def _acquisition_attempt_domain(self, row):
+        domain = [("learning_interrupted_at", "=", False)]
+        event = self.env["training.elearning.acquisition.invalidation"]._latest(row.membership_id, row.slide_id.id)
+        if event:
+            barrier = event.barrier or {}
+            domain += [
+                "|",
+                ("id", "not in", barrier.get("exam_done_ids", [])),
+                ("training_adjustment_ids.id", ">", barrier.get("exam_revision_max", 0)),
+            ]
+        return domain
 
     @api.private
     def _start(self, membership_id, slide_id):

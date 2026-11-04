@@ -74,16 +74,6 @@ class Service(models.AbstractModel):
     _inherit = "training.elearning.exam.service"
 
     @api.private
-    def _requirement_status(self, row):
-        return self._obligation_status(
-            row.exam_id,
-            "slide.channel.partner:%s" % row.membership_id.id,
-            row.membership_id.partner_id.id,
-            row.obligation,
-            attempt_domain=[("learning_interrupted_at", "=", False)],
-        )
-
-    @api.private
     def _result(self, attempt):
         answer = self._attempt(attempt.id)
         if answer.learning_interrupted_at:

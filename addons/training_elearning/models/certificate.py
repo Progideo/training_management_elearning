@@ -99,6 +99,23 @@ class Consent(models.Model):
             self.sudo().registration_id.path_id.lock_for_update()
         source = self.sudo().membership_id or self.sudo().registration_id
         source.lock_for_update()
+        if self.sudo().registration_id:
+            registration = self.sudo().registration_id
+            members = (
+                self.env["slide.channel.partner"]
+                .sudo()
+                .with_context(active_test=False)
+                .search(
+                    [
+                        ("channel_id", "in", [item["course"] for item in registration.composition]),
+                        ("partner_id", "=", registration.partner_id.id),
+                        ("learning_user_id", "=", registration.user_id.id),
+                    ]
+                )
+            )
+            members.channel_id.sorted("id").lock_for_update()
+            members.sorted("id").lock_for_update()
+            members.invalidate_recordset()
         self.lock_for_update()
         self.invalidate_recordset()
 

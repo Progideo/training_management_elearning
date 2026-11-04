@@ -206,10 +206,13 @@ class Service(models.AbstractModel):
         )
         slide = self.env["slide.slide"].sudo().browse(item["id"]).exists()
         unavailable = not slide or not slide._learning_available()
+        invalidation = self.env["training.elearning.acquisition.invalidation"]._latest(member, item["id"])
         return {
             "complete": bool(row.completed),
             "state": "done" if row.completed else ("unavailable" if unavailable else "todo"),
             "unavailable": unavailable,
+            "acquisition_invalidated": bool(invalidation and not invalidation.restored_at),
+            "invalidated_at": invalidation.invalidated_at if invalidation else False,
         }
 
     @api.private

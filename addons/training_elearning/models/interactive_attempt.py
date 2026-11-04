@@ -65,6 +65,9 @@ class Attempt(models.Model):
         if not attempt or attempt.actor_id != self.env.user:
             raise AccessError(self.env._("This formative attempt is unavailable."))
         member, slide, item, version = self._scope(attempt.membership_id.id, attempt.slide_id.id, lock=lock)
+        event = self.env["training.elearning.acquisition.invalidation"]._latest(member, slide.id)
+        if event and attempt.id <= (event.barrier or {}).get("interactive_max_id", 0):
+            raise AccessError(self.env._("Start a new formative attempt after this acquisition decision."))
         if attempt.version_id != version:
             raise AccessError(self.env._("Keep the frozen lesson version of this attempt."))
         return member, slide, item, version
@@ -84,7 +87,9 @@ class Attempt(models.Model):
             latest = self.sudo().search(
                 [("membership_id", "=", member.id), ("slide_id", "=", slide.id)], order="number desc", limit=1
             )
-            if latest and not new:
+            event = self.env["training.elearning.acquisition.invalidation"]._latest(member, slide_id)
+            excluded = (event.barrier or {}).get("interactive_max_id", 0) if event else 0
+            if latest and latest.id > excluded and not new:
                 return latest.with_user(self.env.user)
             attempt = super(Attempt, self.sudo().with_context({})).create(
                 {

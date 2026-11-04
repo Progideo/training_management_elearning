@@ -64,3 +64,7 @@ interactive_attempt_company,Formative company boundary,training.elearning.intera
 interactive_event_pedagogy,Private formative evidence,training.elearning.interactive.event,training_elearning.group_elearning_pedagogy_manager,r,
 interactive_event_company,Formative company boundary,training.elearning.interactive.event,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
 interactive_revision_author,Interactive version revision dialogue,training.elearning.interactive.revision,training_elearning.group_elearning_author,crud,
+acquisition_invalidation_pedagogy,Motivated acquisition history,training.elearning.acquisition.invalidation,training_elearning.group_elearning_pedagogy_manager,r,
+acquisition_invalidation_company,Acquisition company boundary,training.elearning.acquisition.invalidation,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+acquisition_invalidate_wizard,Acquisition decision form,training.elearning.acquisition.invalidate,training_elearning.group_elearning_pedagogy_manager,crud,
+acquisition_invalidate_scope,Acquisition decision company,training.elearning.acquisition.invalidate,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"

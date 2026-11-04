@@ -104,7 +104,11 @@ class Service(models.AbstractModel):
                 )
             )
             if queue:
-                status["state"] = queue.state
+                status["state"] = (
+                    "invalidated"
+                    if status.get("acquisition_invalidated") and queue.state == "validated"
+                    else queue.state
+                )
                 status["waiting_correction"] = queue.state == "pending"
                 status["revision_requested"] = queue.state in ("revision", "delivery")
         return status

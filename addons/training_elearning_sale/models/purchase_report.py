@@ -142,8 +142,16 @@ class CourseReport(models.Model):
                 eligible |= row
                 late = True
         reviews = eligible.review_id
-        complete = reviews.filtered(lambda review: review.outcome == "validated")
+        event = self.env["training.elearning.acquisition.invalidation"]._latest(self.membership_id, slide_id)
+        barrier = (event.barrier or {}).get("human_review_max_id", 0)
+        validated = reviews.filtered(lambda review: review.outcome == "validated")
+        complete = validated.filtered(lambda review: review.id > barrier)
         final = self.ends_at
+        previous_barrier = (event.barrier or {}).get("previous_barrier", {}) if event else {}
+        if event and validated.filtered(
+            lambda review: previous_barrier.get("human_review_max_id", 0) < review.id <= barrier
+        ):
+            final = max(final, event.invalidated_at)
         waiting = False
         for review in reviews:
             review._sync_delivery()
@@ -201,8 +209,18 @@ class CourseReport(models.Model):
         final = report.ends_at
         for item in items:
             row = evidence.get(item["id"])
-            stamp = row.learning_completed_at if row else False
-            completed = item["id"] in (report.baseline or []) or bool(stamp and stamp < report.ends_at)
+            stamp = (row.learning_valid_completed_at or row.learning_completed_at) if row else False
+            event = self.env["training.elearning.acquisition.invalidation"]._latest(member, item["id"])
+            baseline = item["id"] in (report.baseline or [])
+            completed = bool(row and row.completed and ((baseline and not event) or stamp and stamp < report.ends_at))
+            if event and (
+                event.previous_valid_at
+                and event.previous_valid_at < report.ends_at
+                or baseline
+                and not event.previous_valid_at
+                and "previous_barrier" not in (event.barrier or {})
+            ):
+                final = max(final, event.invalidated_at)
             completed_at = max(report.starts_at, stamp) if stamp and completed else report.starts_at
             period_result = self.env["training.elearning.service"]._period_result_evidence(member, item, report.ends_at)
             if period_result:

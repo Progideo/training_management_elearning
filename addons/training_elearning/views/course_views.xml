@@ -13,6 +13,8 @@
           <group>
             <field name="name" />
             <field name="training_course_id" readonly="id" required="1" />
+            <field name="learning_public_catalogue"/>
+            <field name="learning_public_conditions" invisible="not learning_public_catalogue"/>
             <field name="learning_company_id" readonly="1" />
             <field name="active" />
             <field name="prerequisite_channel_ids" widget="many2many_tags" domain="[('training_course_id','!=',False)]" />

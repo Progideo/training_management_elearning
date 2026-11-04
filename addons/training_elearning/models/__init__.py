@@ -11,3 +11,4 @@ from . import certificate, certificate_service, certificate_boundary, certificat
 from . import interactive, interactive_attempt, interactive_lease
 
 from . import history
+from . import public_catalogue

@@ -107,6 +107,18 @@ class SalesCase(TransactionCase):
 
 @tagged("post_install", "-at_install")
 class TestAutonomousSales(SalesCase):
+    def test_native_state_write_cannot_fake_confirmed_contract_or_authorize_retired_offer(self):
+        _course, _slide, product = self.offer()
+        order, line = self.order(product)
+        order.write({"state": "sale"})
+        self.assertFalse(line.learning_confirmed_at)
+        with self.assertRaises(ValidationError):
+            line.action_learning_authorize("Fictional forged native state without confirmation")
+        retired_order, _retired_line = self.order(product)
+        product.write({"active": False})
+        with self.assertRaises(ValidationError):
+            retired_order.action_confirm()
+
     def test_confirmation_authorization_named_access_and_frozen_contract(self):
         course, slide, product = self.offer()
         order, line = self.order(product, 2)

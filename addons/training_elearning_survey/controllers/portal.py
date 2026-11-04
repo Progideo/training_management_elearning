@@ -53,6 +53,8 @@ class Portal(http.Controller):
         try:
             service = request.env["training.elearning.exam.service"]
             answer = service._attempt(attempt_id)
+            if answer.learning_interrupted_at:
+                return private(request.render("training_elearning_survey.interrupted", {"attempt": answer}))
             return private(
                 request.render(
                     "training_mock_exam.exam_attempt",

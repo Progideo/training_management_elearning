@@ -1,6 +1,7 @@
 """Autonomous sales also operate when the optional Survey adapter is absent."""
 
 from odoo import Command
+from odoo.exceptions import ValidationError
 from odoo.tests import TransactionCase, new_test_user, tagged
 
 
@@ -65,3 +66,8 @@ class TestNativeCourseSales(TransactionCase):
         self.env["training.elearning.service"].with_user(learner)._declare(member.id, slide.id)
         self.assertEqual(member.completion, 100)
         self.assertTrue(course.learning_bound_at)
+        product.write({"active": False})
+        self.env["training.elearning.service"].with_user(learner)._activity(member.id, slide.id)
+        self.assertEqual(member.completion, 100)
+        with self.assertRaises(ValidationError):
+            course.write({"active": False})

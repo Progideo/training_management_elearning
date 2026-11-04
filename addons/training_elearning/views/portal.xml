@@ -23,7 +23,7 @@
           <li t-foreach="rows" t-as="row">
             <strong t-out="row['title']" /> · <span t-if="row['required']">Obligatoire</span>
             <span t-else="">Facultatif</span> · <span t-if="row['status']['complete']">Terminé selon le critère prévu</span>
-            <span t-else="">À réaliser</span>
+            <span t-elif="row['status'].get('unavailable')">Activité temporairement indisponible ; obligation conservée</span><span t-else="">À réaliser</span>
             <span t-if="row['status'].get('score') is not None"> · Meilleur score : <t t-out="round(row['status']['score'],2)" /> %</span>
             <a t-if="row['available']" class="btn btn-outline-primary ms-2" t-att-href="row['url']">Ouvrir l’activité</a>
             <span t-elif="not expired" class="ms-2">Accès soumis aux prérequis ou à la disponibilité de l’activité.</span>

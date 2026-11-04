@@ -18,3 +18,22 @@ submission_manager,Practical submission metadata,training.elearning.submission,t
 submission_scope,Submission company scope,training.elearning.submission,,crud,"[('company_id','in',company_ids)]"
 payload_pedagogy,Private pedagogical work files,training.elearning.submission.payload,training_elearning.group_elearning_pedagogy_manager,r,"[('company_id','in',company_ids)]"
 payload_scope,Private work company scope,training.elearning.submission.payload,,crud,"[('company_id','in',company_ids)]"
+rubric_author,Practical rubric author,training.elearning.practical.rubric,training_elearning.group_elearning_author,crud,"[('company_id','in',company_ids)]"
+rubric_reviewer,Assigned practical rubric,training.elearning.practical.rubric,training_elearning.group_elearning_reviewer,r,"[('practical_id.review_queue_ids.reviewer_id','=',user.id)]"
+rubric_scope,Practical rubric company,training.elearning.practical.rubric,,crud,"[('company_id','in',company_ids)]"
+practical_reviewer,Assigned practical definition,training.elearning.practical,training_elearning.group_elearning_reviewer,r,"[('review_queue_ids.reviewer_id','=',user.id)]"
+queue_reviewer,Assigned correction queue,training.elearning.review.queue,training_elearning.group_elearning_reviewer,r,"[('reviewer_id','=',user.id)]"
+queue_pedagogy,Pedagogical correction queue,training.elearning.review.queue,training_elearning.group_elearning_pedagogy_manager,r,"[('company_id','in',company_ids)]"
+queue_scope,Review queue company,training.elearning.review.queue,,crud,"[('company_id','in',company_ids)]"
+submission_reviewer,Assigned practical receipts,training.elearning.submission,training_elearning.group_elearning_reviewer,r,"[('review_queue_id.reviewer_id','=',user.id)]"
+payload_reviewer,Assigned practical files,training.elearning.submission.payload,training_elearning.group_elearning_reviewer,r,"[('submission_id.review_queue_id.reviewer_id','=',user.id),('submission_id.membership_id.learning_user_id','!=',user.id)]"
+review_reviewer,Assigned private judgements,training.elearning.review,training_elearning.group_elearning_reviewer,r,"[('queue_id.reviewer_id','=',user.id)]"
+review_pedagogy,Pedagogical private judgements,training.elearning.review,training_elearning.group_elearning_pedagogy_manager,r,"[('company_id','in',company_ids)]"
+review_scope,Private judgement company,training.elearning.review,,crud,"[('company_id','in',company_ids)]"
+review_wizard,Current reviewer judgement,training.elearning.review.wizard,training_elearning.group_elearning_reviewer,crud,
+review_wizard_line,Current reviewer criteria,training.elearning.review.wizard.line,training_elearning.group_elearning_reviewer,crud,
+review_reassign,Pedagogical reviewer reassignment,training.elearning.review.reassign,training_elearning.group_elearning_pedagogy_manager,crud,
+reviewer_setup,Pedagogical reviewer configuration,training.elearning.reviewer.setup,training_elearning.group_elearning_pedagogy_manager,crud,
+review_notice_pedagogy,Private practical delivery evidence,training.elearning.review.notice,training_elearning.group_elearning_pedagogy_manager,r,"[('company_id','in',company_ids)]"
+review_notice_scope,Practical delivery company,training.elearning.review.notice,,crud,"[('company_id','in',company_ids)]"
+review_delivery,Practical delivery resolution,training.elearning.review.delivery,training_elearning.group_elearning_pedagogy_manager,crud,

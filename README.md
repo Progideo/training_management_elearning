@@ -57,3 +57,5 @@ concurrence ciblée ; les mesures E06 ne sont pas des critères de lancement val
 pour les nouvelles applications séparées.
 
 Tranche autonome suivante : [TP déclaratifs et dépôts privés](docs/J9-practical-deposits.md).
+
+Suite : [correction humaine et révision ciblée des TP](docs/J10-human-practical-review.md).

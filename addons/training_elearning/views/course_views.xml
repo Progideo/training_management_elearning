@@ -107,7 +107,7 @@
     <field name="view_id" ref="member_form" />
     <field name="domain">[('channel_id.training_course_id','!=',False)]</field>
   </record>
-  <menuitem id="learning_root" name="Apprentissage autonome" sequence="60" groups="training_elearning.group_elearning_author" />
-  <menuitem id="learning_courses" name="Cours autonomes" parent="learning_root" action="course_action" />
+  <menuitem id="learning_root" name="Apprentissage autonome" sequence="60" groups="training_elearning.group_elearning_author,training_elearning.group_elearning_reviewer" />
+  <menuitem id="learning_courses" name="Cours autonomes" parent="learning_root" action="course_action" groups="training_elearning.group_elearning_author" />
   <menuitem id="learning_members" name="Accès apprenants" parent="learning_root" action="member_action" groups="training_elearning.group_elearning_manager" />
 </odoo>

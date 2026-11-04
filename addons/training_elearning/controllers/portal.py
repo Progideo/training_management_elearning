@@ -76,7 +76,10 @@ class Portal(http.Controller):
             for item in member._learning_plan()["slides"]:
                 available = True
                 try:
-                    service._activity(member.id, item["id"])
+                    if item["kind"] == "task":
+                        request.env["training.elearning.practical.service"]._context(member.id, item["id"])
+                    else:
+                        service._activity(member.id, item["id"])
                 except AccessError:
                     available = False
                 rows.append(

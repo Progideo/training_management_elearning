@@ -89,9 +89,12 @@ class Attachment(models.Model):
             or member.partner_id != user.partner_id
             or not user.active
             or member.channel_id.learning_company_id not in user.company_ids
-            or payload.submission_id.received_at >= member.learning_ends_at
         ):
             raise AccessError(self.env._("Use the receivable deposit of this learner's course context."))
+        if payload.submission_id.received_at >= member.learning_ends_at:
+            self.env["training.elearning.practical.service"]._deposit_context(
+                member.id, payload.submission_id.slide_id.id
+            )
         return super(Attachment, self.sudo().with_context({}, image_no_postprocess=True)).create(
             {
                 "name": item["name"],
@@ -112,7 +115,15 @@ class Attachment(models.Model):
         for model, group in ((TASK, AUTHOR), (PAYLOAD, PEDAGOGY)):
             allowed = self.env.user.active and self.env.user.has_group(group)
             companies = (self.env.companies & self.env.user.company_ids).ids if allowed else []
-            blocked = self.env[model].sudo()._search(Domain("company_id", "not in", companies))
+            blocked = (
+                self.env[model]
+                .sudo()
+                ._search(
+                    ~self.env[model]._file_read_domain()
+                    if model == PAYLOAD
+                    else Domain("company_id", "not in", companies)
+                )
+            )
             domain &= ~(Domain("res_model", "=", model) & Domain("res_id", "any!", blocked))
         return domain
 

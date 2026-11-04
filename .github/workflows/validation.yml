@@ -78,3 +78,46 @@ jobs:
           name: validation-elearning
           path: ci-results/
           if-no-files-found: error
+
+  release_qualification:
+    name: Composition complète et restauration
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Lire la composition et la génération précédente
+        id: release
+        run: python3 -c 'import json; c=json.load(open("compatibility.json")); print("tm=" + c["training_management"]["commit"]); print("legacy_tm=" + c["legacy_release_baseline"]["tm_commit"]); print("legacy_el=" + c["legacy_release_baseline"]["elearning_commit"])' >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Progideo/training_management
+          ref: ${{ steps.release.outputs.tm }}
+          path: .dependencies/training_management
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Progideo/training_management
+          ref: ${{ steps.release.outputs.legacy_tm }}
+          path: .dependencies/tm_release_previous
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Progideo/training_management_elearning
+          ref: ${{ steps.release.outputs.legacy_el }}
+          path: .dependencies/el_release_previous
+          persist-credentials: false
+      - name: Installer tous les addons, mettre à jour et restaurer leurs fichiers
+        env:
+          TM_ADDONS_DIR: ${{ github.workspace }}/.dependencies/training_management/addons
+          PREVIOUS_RELEASE_TM_ADDONS_DIR: ${{ github.workspace }}/.dependencies/tm_release_previous/addons
+          PREVIOUS_RELEASE_EL_ADDONS_DIR: ${{ github.workspace }}/.dependencies/el_release_previous/addons
+        run: python3 ci/validate-final-release.py
+      - name: Preuves de qualification et restauration
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qualification-complete-restauration
+          path: ci-results/final-release/
+          if-no-files-found: error

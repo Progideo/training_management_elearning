@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: LGPL-3.0-only
 from odoo.tests import TransactionCase, new_test_user, tagged, Form
 from odoo.exceptions import AccessError, ValidationError
+from odoo.modules.module import get_manifest
 
 
 @tagged('post_install', '-at_install')
@@ -41,6 +42,12 @@ class TestFoundation(TransactionCase):
         self.assertFalse(self.author.has_group('base.group_system'))
 
     def test_no_competing_learning_or_runtime(self):
-        self.assertNotIn('slide.channel', self.env.registry)
+        # The November 3 architecture permits the native autonomous app on
+        # this database, while this TM adapter must not depend on it.
+        depends = get_manifest('training_management_elearning')['depends']
+        self.assertNotIn('website_slides', depends)
+        self.assertNotIn('training_elearning', depends)
+        if 'slide.channel' in self.env.registry:
+            self.assertEqual(self.env.ref('website_slides.model_slide_channel').model, 'slide.channel')
         self.assertNotIn('runtime_formative', dict(self.env['training.learning.activity']._fields['criterion']._description_selection(self.env)))
         self.assertNotIn('data', self.Resource._fields)

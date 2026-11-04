@@ -7,3 +7,5 @@ from . import test_human_practical
 from . import test_path
 
 from . import test_certificate
+
+from . import test_interactive

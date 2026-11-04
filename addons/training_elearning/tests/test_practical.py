@@ -250,6 +250,11 @@ class TestPracticalPortal(PracticalCase, HttpCase):
         self.authenticate(self.learner.login, self.learner.login)
         with patch.object(fields.Datetime, "now", return_value=member.learning_ends_at + timedelta(seconds=1)):
             self.assertEqual(self.url_open(path).status_code, 404)
+            history = self.url_open(f"/my/learning/{member.id}/history")
+            self.assertEqual(history.status_code, 200)
+            self.assertIn(f"/my/learning-submissions/{row.id}", history.text)
+            self.assertNotIn("PRIVATE FICTIONAL INSTRUCTIONS", history.text)
+            self.assertIn("Mon historique pédagogique", self.url_open(f"/my/learning/{member.id}").text)
             response = self.url_open(download)
             self.assertEqual(response.content, b"PRIVATE FICTIONAL SUBMISSION")
             self.assertEqual(response.headers["Cache-Control"], "no-store")

@@ -225,6 +225,9 @@ class Slide(models.Model):
             "article": {"name", "html_content"},
             "document": {"name", "binary_content", "learning_filename"},
             "video": {"name", "video_url"},
+            "learning_interactive": {"name"},
+            "learning_task": {"name"},
+            "certification": {"name"},
         }.get(self.slide_category, set())
         if not values or set(values) - allowed or not self.active:
             raise ValidationError(

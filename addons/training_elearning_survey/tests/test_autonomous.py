@@ -357,6 +357,26 @@ class TestAutonomousExams(AutonomousCase):
 
 @tagged("post_install", "-at_install")
 class TestAutonomousPortal(AutonomousCase, HttpCase):
+    def test_expired_history_has_global_theme_scores_without_questions_or_correction(self):
+        course, slides = self.offer(obligations=["complete"])
+        member = self.member(course)
+        service = self.env["training.elearning.exam.service"].with_user(self.learner)
+        attempt = service._start(member.id, slides.id)
+        service._submit(attempt.id)
+        self.authenticate(self.learner.login, self.learner.login)
+        history_url = "/my/learning/%s/history" % member.id
+        with patch.object(fields.Datetime, "now", return_value=member.learning_ends_at + timedelta(seconds=1)):
+            page = self.url_open(history_url)
+            self.assertEqual(page.status_code, 200)
+            self.assertIn("Score global : 0 / 2", page.text)
+            self.assertIn("Unclassified", page.text)
+            self.assertNotIn("Fictional fixed choice", page.text)
+            self.assertNotIn("PRIVATE FINAL CORRECTION", page.text)
+            self.assertNotIn(">Expected<", page.text)
+            self.assertEqual(self.url_open("/my/learning-exams/%s" % attempt.id).status_code, 404)
+        self.authenticate(self.other.login, self.other.login)
+        self.assertEqual(self.url_open(history_url).status_code, 404)
+
     def test_private_native_bypass_csrf_and_correction(self):
         course, slides = self.offer()
         member = self.member(course)

@@ -65,3 +65,5 @@ Suite : [parcours natifs et offres partielles](docs/J11-native-learning-paths.md
 Suite : [bilans propres à chaque achat](docs/J12-purchase-scoped-reports.md).
 
 Suite : [attestations autonomes vérifiables](docs/J13-verifiable-learning-certificates.md).
+
+Suite : [activités interactives autonomes et historiques personnels](docs/J14-autonomous-interactive.md).

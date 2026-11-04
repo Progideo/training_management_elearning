@@ -1,18 +1,15 @@
 import hashlib
 import json
-import math
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError
+from odoo.addons.training_interactive.services.events import encode_report, validate_result
 
 
 def encode(value):
     try:
-        result=json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False)
-    except (ValueError, TypeError, RecursionError) as error:
-        raise ValidationError('Invalid JSON report') from error
-    if len(result.encode()) > 128 * 1024:
-        raise ValidationError('Report exceeds 128 KiB')
-    return result
+        return encode_report(value)
+    except ValueError as error:
+        raise ValidationError(str(error)) from error
 
 
 class Attempt(models.Model):
@@ -125,15 +122,11 @@ class Attempt(models.Model):
                 values['state_json']=encode(payload['state'])
             if 'result' in payload:
                 result=payload['result']
-                if not isinstance(result,dict) or set(result) != {'score','maximum','completed'}:
-                    raise ValidationError('Invalid result schema')
+                try:
+                    validate_result(result, attempt.version_id.resource_id.format)
+                except ValueError as error:
+                    raise ValidationError(str(error)) from error
                 score,maximum=result['score'],result['maximum']
-                if (type(score) not in (int,float) or type(maximum) not in (int,float)
-                        or not 0 <= score <= maximum <= 100000
-                        or not math.isfinite(score) or not math.isfinite(maximum) or type(result['completed']) is not bool):
-                    raise ValidationError('Invalid formative result')
-                if attempt.version_id.resource_id.format == 'h5p' and (score not in (0,1) or maximum != 1):
-                    raise ValidationError('TrueFalse requires a whole-content result out of one')
                 values.update(score=score,maximum=maximum,completed=result['completed'],result_json=encode(result))
             super(Attempt,attempt).write(values)
             receipt={'ok':True,'attempt':attempt.id,'revision':revision}

@@ -5,3 +5,5 @@ from . import test_enriched
 from . import test_review
 
 from . import test_portal_host
+
+from . import test_context_isolation

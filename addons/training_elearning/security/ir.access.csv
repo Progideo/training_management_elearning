@@ -59,3 +59,8 @@ certificate_change_wizard,Certificate decision dialogue,training.elearning.certi
 certificate_replace_wizard,Certificate decision dialogue,training.elearning.certificate.replace,training_elearning.group_elearning_pedagogy_manager,crud,
 certificate_notice_pedagogy,Private certificate notifications,training.elearning.certificate.notice,training_elearning.group_elearning_pedagogy_manager,r,
 certificate_notice_company,Certificate notification company boundary,training.elearning.certificate.notice,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+interactive_attempt_pedagogy,Private formative evidence,training.elearning.interactive.attempt,training_elearning.group_elearning_pedagogy_manager,r,
+interactive_attempt_company,Formative company boundary,training.elearning.interactive.attempt,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+interactive_event_pedagogy,Private formative evidence,training.elearning.interactive.event,training_elearning.group_elearning_pedagogy_manager,r,
+interactive_event_company,Formative company boundary,training.elearning.interactive.event,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+interactive_revision_author,Interactive version revision dialogue,training.elearning.interactive.revision,training_elearning.group_elearning_author,crud,

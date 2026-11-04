@@ -59,6 +59,8 @@ with Database("autonomous", folder) as db:
         checked(command("shell", "--no-http"), folder / "paths-prepare.log", stdin=data)
     with (ROOT / "ci/probe-certificates.py").open() as data:
         checked(command("shell", "--no-http"), folder / "certificates-prepare.log", stdin=data)
+    with (ROOT / "ci/probe-interactive-lessons.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "interactive-lessons-prepare.log", stdin=data)
     text = checked(
         command(
             "-u",
@@ -91,6 +93,8 @@ with Database("autonomous", folder) as db:
         checked(command("shell", "--no-http"), folder / "paths-preserved.log", stdin=data)
     with (ROOT / "ci/probe-certificates.py").open() as data:
         checked(command("shell", "--no-http"), folder / "certificates-preserved.log", stdin=data)
+    with (ROOT / "ci/probe-interactive-lessons.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "interactive-lessons-preserved.log", stdin=data)
 
     addons = ["training_elearning", "training_elearning_survey", "training_mock_exam"]
     text = checked(
@@ -199,7 +203,7 @@ with Database("autonomous", folder) as db:
             "--without-demo",
             "--stop-after-init",
             "--test-enable",
-            "--test-tags=/training_management_survey:TestExamRequirements.test_coexisting_autonomous_offer_keeps_evidence_and_reader_scope_separate,/training_management_sale,/training_elearning_sale,-/web",
+            "--test-tags=/training_management_survey:TestExamRequirements.test_coexisting_autonomous_offer_keeps_evidence_and_reader_scope_separate,/training_management_sale,/training_elearning_sale,/training_management_elearning:TestContextIsolation,-/web",
         ),
         folder / "coexistence.log",
         allow_tracebacks=True,

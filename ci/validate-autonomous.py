@@ -112,12 +112,14 @@ with Database("autonomous", folder) as db:
         allow_tracebacks=True,
     )
     assert_tests_ran(text, addons)
-    probe = ROOT / "ci/probe-autonomous.py"
-    with probe.open() as data:
-        checked(command("shell", "--no-http"), folder / "prepare.log", stdin=data)
     result_probe = ROOT / "ci/probe-result-revisions.py"
     with result_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "result-revisions-prepare.log", stdin=data)
+    # This probe snapshots entire native tables: capture only after all other
+    # committed fixtures have been prepared, keeping the exact comparison.
+    probe = ROOT / "ci/probe-autonomous.py"
+    with probe.open() as data:
+        checked(command("shell", "--no-http"), folder / "prepare.log", stdin=data)
     text = checked(
         command(
             "-u",

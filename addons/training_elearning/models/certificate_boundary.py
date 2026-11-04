@@ -8,6 +8,8 @@ MODELS = (
     "training.elearning.certificate",
     "training.elearning.certificate.consent",
     "training.elearning.certificate.notice",
+    "training.elearning.acquisition.invalidation",
+    "training.elearning.acquisition.invalidate",
 )
 
 

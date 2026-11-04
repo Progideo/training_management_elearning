@@ -222,3 +222,63 @@ class TestPurchaseReports(HumanCase):
                     "url": "https://example.invalid/private",
                 }
             )
+
+    def test_invalidation_rectifies_old_snapshot_without_later_funder_credit(self):
+        course = self.course()
+        slide = self.article(course)
+        course.action_learning_publish()
+        first = self.buy(course)
+        end = first.access_ends_at
+        service = self.env["training.elearning.service"].with_user(self.learner)
+        with patch.object(fields.Datetime, "now", return_value=end - timedelta(days=2)):
+            second = self.buy(course, 6)
+            service._declare(first.membership_id.id, slide.id)
+        with patch.object(fields.Datetime, "now", return_value=end + timedelta(days=1)):
+            old = first._purchase_summary()
+            self.assertTrue(old["complete"])
+        invalidated = end + timedelta(days=2)
+        with patch.object(fields.Datetime, "now", return_value=invalidated):
+            self.env["training.elearning.acquisition.invalidation"].with_user(self.pedagogy)._invalidate(
+                first.membership_id, slide.id, "Fictional corrected acquisition", str(uuid4())
+            )
+            revised = first._purchase_summary()
+            self.assertFalse(revised["complete"])
+            self.assertEqual(revised["closed_at"], invalidated)
+            history = first.report_course_ids.sudo().snapshot_history
+            self.assertEqual(history[-1]["summary"]["complete"], True)
+            self.assertEqual(history[-1]["at"], fields.Datetime.to_string(end))
+        with patch.object(fields.Datetime, "now", return_value=end + timedelta(days=3)):
+            service._declare(first.membership_id.id, slide.id)
+            self.assertEqual(first._purchase_summary(), revised)
+            self.assertTrue(second._purchase_summary()["complete"])
+        with patch.object(fields.Datetime, "now", return_value=end + timedelta(days=4)):
+            self.env["training.elearning.acquisition.invalidation"].with_user(self.pedagogy)._invalidate(
+                first.membership_id, slide.id, "Fictional later funding decision", str(uuid4())
+            )
+            self.assertEqual(first._purchase_summary(), revised)
+            self.assertFalse(second._purchase_summary()["complete"])
+
+    def test_human_invalidation_keeps_pending_candidate_and_due_date(self):
+        course, slide, _task, member = self.human()
+        seat = self.buy(course)
+        service = self.env["training.elearning.practical.service"].with_user(self.learner)
+        original = service._deposit(member.id, slide.id, [("first.txt", b"Fictional original")], str(uuid4()))
+        review = self.publish(original.review_queue_id, outcome="validated", passed=True)
+        self.sent(review.delivery_notice_id)
+        self.assertTrue(seat._purchase_summary()["complete"])
+        candidate = service._deposit(member.id, slide.id, [("next.txt", b"Fictional pending candidate")], str(uuid4()))
+        queue = candidate.review_queue_id
+        clock = queue.read(["first_received_at", "due_at", "submission_id", "state"])
+        event = (
+            self.env["training.elearning.acquisition.invalidation"]
+            .with_user(self.pedagogy)
+            ._invalidate(member, slide.id, "Fictional human validation decision", str(uuid4()))
+        )
+        self.assertEqual(queue.read(["first_received_at", "due_at", "submission_id", "state"]), clock)
+        self.assertFalse(seat._purchase_summary()["complete"])
+        self.assertEqual(member.completion, 0)
+        new_review = self.publish(queue, outcome="validated", passed=True)
+        self.sent(new_review.delivery_notice_id)
+        self.assertTrue(seat._purchase_summary()["complete"])
+        self.assertTrue(event.restored_at)
+        self.assertTrue(original.review_id)

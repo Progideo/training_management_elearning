@@ -10,3 +10,4 @@ from . import test_certificate
 
 from . import test_interactive
 from . import test_public_catalogue
+from . import test_acquisition

@@ -118,9 +118,8 @@ class Portal(http.Controller):
             data = request.env["training.elearning.service"]._history(membership_id)
             tz = request.env.user.tz or "UTC"
             for row in data["rows"]:
-                row["acquired_at"] = (
-                    format_datetime(request.env, row["acquired_at"], tz=tz) if row["acquired_at"] else False
-                )
+                for key in ("acquired_at", "invalidated_at", "restored_at"):
+                    row[key] = format_datetime(request.env, row[key], tz=tz) if row[key] else False
                 for entry in row["entries"]:
                     entry["date"] = format_datetime(request.env, entry["date"], tz=tz) if entry["date"] else False
             return private(request.render("training_elearning.learning_history", {"history": data, "timezone": tz}))

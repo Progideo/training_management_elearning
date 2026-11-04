@@ -112,11 +112,13 @@ with Database("autonomous", folder) as db:
         allow_tracebacks=True,
     )
     assert_tests_ran(text, addons)
+    acquisition_probe = ROOT / "ci/probe-acquisitions.py"
+    with acquisition_probe.open() as data:
+        checked(command("shell", "--no-http"), folder / "acquisitions-prepare.log", stdin=data)
     result_probe = ROOT / "ci/probe-result-revisions.py"
     with result_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "result-revisions-prepare.log", stdin=data)
-    # This probe snapshots entire native tables: capture only after all other
-    # committed fixtures have been prepared, keeping the exact comparison.
+    # The global native snapshot includes every fixture created above.
     probe = ROOT / "ci/probe-autonomous.py"
     with probe.open() as data:
         checked(command("shell", "--no-http"), folder / "prepare.log", stdin=data)
@@ -134,6 +136,8 @@ with Database("autonomous", folder) as db:
     assert_tests_ran(text, addons)
     with probe.open() as data:
         checked(command("shell", "--no-http"), folder / "preserved.log", stdin=data)
+    with acquisition_probe.open() as data:
+        checked(command("shell", "--no-http"), folder / "acquisitions-preserved.log", stdin=data)
     with result_probe.open() as data:
         text = checked(command("shell", "--no-http"), folder / "result-revisions-preserved.log", stdin=data)
     assert "J17_RESULT_REVISIONS_NATIVE_ANSWERS_CLOCK_AND_FIRST_ACQUISITION_PRESERVED" in text

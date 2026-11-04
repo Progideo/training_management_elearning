@@ -59,3 +59,5 @@ pour les nouvelles applications séparées.
 Tranche autonome suivante : [TP déclaratifs et dépôts privés](docs/J9-practical-deposits.md).
 
 Suite : [correction humaine et révision ciblée des TP](docs/J10-human-practical-review.md).
+
+Suite : [parcours natifs et offres partielles](docs/J11-native-learning-paths.md).

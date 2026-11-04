@@ -24,7 +24,8 @@ with Database("autonomous", folder) as db:
 
     def command(*args):
         cmd = db.odoo(
-            *args, "--addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons,/mnt/elearning-addons"
+            *args,
+            "--addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons,/mnt/elearning-addons",
         )
         index = cmd.index("-e")
         cmd[index:index] = ["-v", f"{ROOT / 'addons'}:/mnt/elearning-addons:ro"]
@@ -49,10 +50,20 @@ with Database("autonomous", folder) as db:
     with (ROOT / "ci/probe-practicals.py").open() as data:
         checked(command("shell", "--no-http"), folder / "practicals-prepare.log", stdin=data)
     with (ROOT / "ci/probe-human-practicals.py").open() as data:
-        checked(command("shell", "--no-http"), folder / "human-practicals-prepare.log", stdin=data)
+        checked(
+            command("shell", "--no-http"),
+            folder / "human-practicals-prepare.log",
+            stdin=data,
+        )
+    with (ROOT / "ci/probe-paths.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "paths-prepare.log", stdin=data)
     text = checked(
         command(
-            "-u", "training_elearning", "--stop-after-init", "--test-enable", "--test-tags=/training_elearning,-/web"
+            "-u",
+            "training_elearning",
+            "--stop-after-init",
+            "--test-enable",
+            "--test-tags=/training_elearning,-/web",
         ),
         folder / "lessons-update.log",
         allow_tracebacks=True,
@@ -62,9 +73,20 @@ with Database("autonomous", folder) as db:
         checked(command("shell", "--no-http"), folder / "lessons-preserved.log", stdin=data)
 
     with (ROOT / "ci/probe-practicals.py").open() as data:
-        checked(command("shell", "--no-http"), folder / "practicals-preserved.log", stdin=data)
+        checked(
+            command("shell", "--no-http"),
+            folder / "practicals-preserved.log",
+            stdin=data,
+        )
     with (ROOT / "ci/probe-human-practicals.py").open() as data:
-        checked(command("shell", "--no-http"), folder / "human-practicals-preserved.log", stdin=data)
+        checked(
+            command("shell", "--no-http"),
+            folder / "human-practicals-preserved.log",
+            stdin=data,
+        )
+
+    with (ROOT / "ci/probe-paths.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "paths-preserved.log", stdin=data)
 
     addons = ["training_elearning", "training_elearning_survey", "training_mock_exam"]
     text = checked(
@@ -113,9 +135,17 @@ with Database("autonomous", folder) as db:
     )
     assert_tests_ran(text, ["training_elearning_sale"])
     with probe.open() as data:
-        checked(command("shell", "--no-http"), folder / "sales-existing-preserved.log", stdin=data)
+        checked(
+            command("shell", "--no-http"),
+            folder / "sales-existing-preserved.log",
+            stdin=data,
+        )
     with (ROOT / "ci/probe-capacity.py").open() as data:
-        checked(command("shell", "--no-http"), folder / "capacity-concurrency.log", stdin=data)
+        checked(
+            command("shell", "--no-http"),
+            folder / "capacity-concurrency.log",
+            stdin=data,
+        )
     sales_probe = ROOT / "ci/probe-sales.py"
     with sales_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "sales-prepare.log", stdin=data)
@@ -166,11 +196,26 @@ with Database("autonomous", folder) as db:
         folder / "coexistence.log",
         allow_tracebacks=True,
     )
-    assert_tests_ran(text, ["training_management_survey", "training_management_sale", "training_elearning_sale"])
+    assert_tests_ran(
+        text,
+        [
+            "training_management_survey",
+            "training_management_sale",
+            "training_elearning_sale",
+        ],
+    )
     with (ROOT / "ci/probe-sales-coexistence.py").open() as data:
-        checked(command("shell", "--no-http"), folder / "coexistence-preserved.log", stdin=data)
+        checked(
+            command("shell", "--no-http"),
+            folder / "coexistence-preserved.log",
+            stdin=data,
+        )
     with mandates_probe.open() as data:
-        checked(command("shell", "--no-http"), folder / "mandates-coexistence-preserved.log", stdin=data)
+        checked(
+            command("shell", "--no-http"),
+            folder / "mandates-coexistence-preserved.log",
+            stdin=data,
+        )
 # The sales bridge must not smuggle in the optional Survey integration.
 with Database("sales_without_survey", folder / "sales-without-survey") as db:
     cmd = db.odoo(
@@ -179,7 +224,7 @@ with Database("sales_without_survey", folder / "sales-without-survey") as db:
         "--without-demo",
         "--stop-after-init",
         "--test-enable",
-        "--test-tags=/training_elearning_sale:TestNativeCourseSales,/training_elearning_sale:TestPracticalSalePolicy,-/web",
+        "--test-tags=/training_elearning_sale:TestNativeCourseSales,/training_elearning_sale:TestPracticalSalePolicy,/training_elearning_sale:TestPathSales,-/web",
         "--addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons,/mnt/elearning-addons",
     )
     index = cmd.index("-e")

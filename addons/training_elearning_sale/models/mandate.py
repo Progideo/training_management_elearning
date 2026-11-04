@@ -3,7 +3,7 @@
 
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
-from odoo.exceptions import AccessError, ValidationError
+from odoo.exceptions import AccessError, ValidationError, LockError
 from .offer import require_manager, MANAGER
 
 AUDIT = {"state", "granted_at", "granted_by", "revoked_at", "revoked_by"}
@@ -21,7 +21,10 @@ class Mandate(models.Model):
     beneficiary_ids = fields.Many2many("res.partner", string="Validated Beneficiaries")
     reason = fields.Text(required=True)
     state = fields.Selection(
-        [("draft", "Draft"), ("active", "Active"), ("revoked", "Revoked")], default="draft", readonly=True, copy=False
+        [("draft", "Draft"), ("active", "Active"), ("revoked", "Revoked")],
+        default="draft",
+        readonly=True,
+        copy=False,
     )
     granted_at = fields.Datetime(readonly=True, copy=False)
     granted_by = fields.Many2one("res.users", readonly=True, copy=False, ondelete="restrict")
@@ -67,7 +70,7 @@ class Mandate(models.Model):
         if self.state != "draft":
             raise ValidationError(self.env._("Only a prepared mandate can be granted."))
         if (
-            not line.learning_channel_id
+            not line._learning_managed_lines()
             or not line.learning_confirmed_at
             or line.state not in ("sale", "cancel")
             or not user.active
@@ -83,7 +86,13 @@ class Mandate(models.Model):
                     "Check the enterprise purchase, named active account, end date, reason and validated beneficiaries."
                 )
             )
-        return self._store({"state": "active", "granted_at": fields.Datetime.now(), "granted_by": self.env.uid})
+        return self._store(
+            {
+                "state": "active",
+                "granted_at": fields.Datetime.now(),
+                "granted_by": self.env.uid,
+            }
+        )
 
     def action_revoke(self):
         self.ensure_one()
@@ -93,7 +102,13 @@ class Mandate(models.Model):
         self.invalidate_recordset()
         if self.state != "active" or not (self.revocation_reason or "").strip():
             raise ValidationError(self.env._("Provide a reason to revoke an active mandate."))
-        return self._store({"state": "revoked", "revoked_at": fields.Datetime.now(), "revoked_by": self.env.uid})
+        return self._store(
+            {
+                "state": "revoked",
+                "revoked_at": fields.Datetime.now(),
+                "revoked_by": self.env.uid,
+            }
+        )
 
     @api.ondelete(at_uninstall=False)
     def _keep_history(self):
@@ -169,6 +184,36 @@ class CompanyPortal(models.AbstractModel):
         return result
 
     @api.private
+    def _seat_row(self, seat, now):
+        if not seat.activated_at:
+            state = "En attente de finalisation"
+        elif now < seat.access_started_at:
+            state = "Renouvellement programmé"
+        elif now >= seat.access_ends_at:
+            state = "Période financée terminée"
+        else:
+            member = seat.membership_id
+            state = {
+                "active": "Actif",
+                "suspended": "Suspendu",
+                "revoked": "Révoqué",
+                "pending": "En attente",
+            }.get(member.learning_state, "À vérifier")
+            if (
+                not member.active
+                or not member.channel_id.active
+                or not member.learning_user_id.active
+                or member.channel_id.learning_state != "published"
+            ):
+                state = "Indisponible"
+        return {
+            "beneficiary": seat.partner_id.name,
+            "start": seat.access_started_at,
+            "end": seat.access_ends_at,
+            "state": state,
+        }
+
+    @api.private
     def _view(self, mandate_id):
         mandate = self._mandate(mandate_id)
         line = mandate.line_id
@@ -176,32 +221,7 @@ class CompanyPortal(models.AbstractModel):
         now = fields.Datetime.now()
         rows = []
         for seat in seats:
-            if not seat.activated_at:
-                state = "En attente de finalisation"
-            elif now < seat.access_started_at:
-                state = "Renouvellement programmé"
-            elif now >= seat.access_ends_at:
-                state = "Période financée terminée"
-            else:
-                member = seat.membership_id
-                state = {"active": "Actif", "suspended": "Suspendu", "revoked": "Révoqué", "pending": "En attente"}.get(
-                    member.learning_state, "À vérifier"
-                )
-                if (
-                    not member.active
-                    or not member.channel_id.active
-                    or not member.learning_user_id.active
-                    or member.channel_id.learning_state != "published"
-                ):
-                    state = "Indisponible"
-            rows.append(
-                {
-                    "beneficiary": seat.partner_id.name,
-                    "start": seat.access_started_at,
-                    "end": seat.access_ends_at,
-                    "state": state,
-                }
-            )
+            rows.append(self._seat_row(seat, now))
         assignable = bool(
             mandate.can_assign
             and line.state == "sale"
@@ -248,21 +268,24 @@ class CompanyPortal(models.AbstractModel):
             .with_context(allowed_company_ids=line.company_id.ids)
         )
         existing = allocations.search([("line_id", "=", line.id), ("partner_id", "=", partner_id)], limit=1)
-        if existing and (existing.activated_at or existing.assigned_by):
+        if existing and existing.activated_at:
             return True
         seat = existing or allocations.with_context({"allowed_company_ids": line.company_id.ids}).create(
             {"line_id": line.id, "partner_id": partner_id}
         )  # pylint: disable=context-overridden  # strip all portal-supplied defaults
-        seat._store({"assigned_by": self.env.uid, "assigned_mandate_id": mandate.id})
+        if not seat.assigned_by:
+            seat._store({"assigned_by": self.env.uid, "assigned_mandate_id": mandate.id})
         try:
             with self.env.cr.savepoint():
                 seat.action_learning_activate()
-        except ValidationError:
-            # Identity ambiguity, missing native account or a renewal requiring
-            # coordination never discloses the learner's other relationships.
-            seat.activity_schedule(
-                "mail.mail_activity_data_todo",
-                user_id=issuer.id,
-                summary=self.env._("Finalize the mandated learner assignment"),
-            )
+        except (ValidationError, LockError):
+            # A retry can finalize this same prepared seat; no duplicate
+            # reservation or loss of the original delegated attribution.
+            if not seat.assignment_activity_id:
+                activity = seat.activity_schedule(
+                    "mail.mail_activity_data_todo",
+                    user_id=issuer.id,
+                    summary=self.env._("Finalize the mandated learner assignment"),
+                )
+                seat._store({"assignment_activity_id": activity.id})
         return True

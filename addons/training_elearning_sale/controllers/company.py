@@ -1,4 +1,4 @@
-from odoo import http
+from odoo import fields, http
 from odoo.http import request
 from odoo.exceptions import AccessError, MissingError, ValidationError, LockError
 from odoo.tools import format_datetime
@@ -24,6 +24,12 @@ def presentation(data):
         )
         for row in data["rows"]
     ]
+    for row in data["rows"]:
+        summary = row.get("summary", {})
+        if summary.get("completed_at"):
+            summary["completed_at"] = format_datetime(
+                request.env, fields.Datetime.to_datetime(summary["completed_at"]), tz=request.env.user.tz or "UTC"
+            )
     data["timezone"] = request.env.user.tz or "UTC"
     return data
 
@@ -71,3 +77,70 @@ class CompanyPortalHome(CustomerPortal):
             purchases = request.env["training.elearning.company.service"]._list()
             return "training.elearning.sale.mandate", [("id", "in", [p["id"] for p in purchases])], "sudo"
         return super()._prepare_portal_counter_values(counter)
+
+
+class PurchaseReportExport(http.Controller):
+    @http.route(
+        "/my/learning-purchases/<int:mandate_id>/summary.csv",
+        type="http",
+        auth="user",
+        website=True,
+        methods=["GET"],
+    )
+    def summary_csv(self, mandate_id, **kw):
+        import csv
+        import io
+
+        try:
+            # Recheck the exact live mandate at download; no attachment token
+            # or previously rendered page grants a durable download right.
+            data = presentation(request.env["training.elearning.company.service"]._view(mandate_id))
+        except (AccessError, MissingError):
+            raise request.not_found() from None
+        output = io.StringIO(newline="")
+        writer = csv.writer(output)
+
+        def safe(value):
+            value = str(value) if value is not None and value is not False else ""
+            return "'" + value if value.lstrip().startswith(("=", "+", "-", "@", "\t", "\r", "\n")) else value
+
+        writer.writerow(
+            [
+                "Achat",
+                "Date de l’export",
+                "Fuseau",
+                "Bénéficiaire",
+                "Depuis",
+                "Jusqu’au",
+                "État",
+                "Progression des cours financés (%)",
+                "Achevé",
+                "Date d’achèvement",
+                "Bilan figé",
+            ]
+        )
+        for row in data["rows"]:
+            summary = row.get("summary", {})
+            values = [
+                data["reference"],
+                format_datetime(request.env, fields.Datetime.now(), tz=request.env.user.tz or "UTC"),
+                data["timezone"],
+                row["beneficiary"],
+                row["start"],
+                row["end"],
+                row["state"],
+                summary.get("percentage", ""),
+                "Oui" if summary.get("complete") else "Non",
+                summary.get("completed_at") or "",
+                "Oui" if summary.get("closed_at") else "Non",
+            ]
+            writer.writerow([safe(value) for value in values])
+        return private(
+            request.make_response(
+                "\ufeff" + output.getvalue(),
+                headers=[
+                    ("Content-Type", "text/csv; charset=utf-8"),
+                    ("Content-Disposition", 'attachment; filename="bilan-achat.csv"'),
+                ],
+            )
+        )

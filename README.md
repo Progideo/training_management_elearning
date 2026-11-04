@@ -61,3 +61,5 @@ Tranche autonome suivante : [TP déclaratifs et dépôts privés](docs/J9-practi
 Suite : [correction humaine et révision ciblée des TP](docs/J10-human-practical-review.md).
 
 Suite : [parcours natifs et offres partielles](docs/J11-native-learning-paths.md).
+
+Suite : [bilans propres à chaque achat](docs/J12-purchase-scoped-reports.md).

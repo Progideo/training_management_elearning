@@ -19,6 +19,8 @@
         <a href="/my/learning">Mes cours</a>
         <h1 t-out="member.channel_id.name" />
         <p>Progression : <t t-out="progress['percentage']" /> %</p>
+        <p>Accès ouvert depuis le <t t-out="access_started_at"/> ; consultation autorisée jusqu’au <t t-out="access_ends_at"/> · fuseau : <t t-out="timezone"/>.</p>
+        <p>Plusieurs achats peuvent cumuler vos droits sur cette édition tout en conservant un suivi pédagogique unique. Les acquis antérieurs de cette édition restent pris en compte ; chaque financeur voit uniquement le bilan de son achat.</p>
         <p t-if="expired">L’accès pédagogique est terminé. Vos états et scores sont conservés.</p>
         <ul>
           <li t-foreach="rows" t-as="row">

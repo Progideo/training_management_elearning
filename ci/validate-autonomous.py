@@ -146,6 +146,8 @@ with Database("autonomous", folder) as db:
             folder / "capacity-concurrency.log",
             stdin=data,
         )
+    with (ROOT / "ci/probe-purchase-reports.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "purchase-reports-prepare.log", stdin=data)
     sales_probe = ROOT / "ci/probe-sales.py"
     with sales_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "sales-prepare.log", stdin=data)
@@ -163,6 +165,8 @@ with Database("autonomous", folder) as db:
     assert_tests_ran(text, ["training_elearning_sale", "training_elearning_survey"])
     with sales_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "sales-preserved.log", stdin=data)
+    with (ROOT / "ci/probe-purchase-reports.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "purchase-reports-preserved.log", stdin=data)
     mandates_probe = ROOT / "ci/probe-mandates.py"
     with mandates_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "mandates-prepare.log", stdin=data)
@@ -224,7 +228,7 @@ with Database("sales_without_survey", folder / "sales-without-survey") as db:
         "--without-demo",
         "--stop-after-init",
         "--test-enable",
-        "--test-tags=/training_elearning_sale:TestNativeCourseSales,/training_elearning_sale:TestPracticalSalePolicy,/training_elearning_sale:TestPathSales,-/web",
+        "--test-tags=/training_elearning_sale:TestNativeCourseSales,/training_elearning_sale:TestPracticalSalePolicy,/training_elearning_sale:TestPathSales,/training_elearning_sale:TestPurchaseReports,-/web",
         "--addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons,/mnt/elearning-addons",
     )
     index = cmd.index("-e")

@@ -18,6 +18,7 @@ PROTECTED = {
     "notification_state",
     "path_activation_id",
     "assignment_activity_id",
+    "report_course_ids",
 }
 
 

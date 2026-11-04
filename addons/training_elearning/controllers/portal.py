@@ -8,7 +8,7 @@ from odoo import http, fields
 from odoo.exceptions import AccessError, MissingError
 from odoo.http import request
 from odoo.http.stream import content_disposition
-from odoo.tools import html_sanitize
+from odoo.tools import html_sanitize, format_datetime
 
 
 def private(response):
@@ -99,6 +99,13 @@ class Portal(http.Controller):
                         "rows": rows,
                         "progress": member._learning_progress(),
                         "expired": member.learning_ends_at <= fields.Datetime.now(),
+                        "access_started_at": format_datetime(
+                            request.env, member.learning_started_at, tz=request.env.user.tz or "UTC"
+                        ),
+                        "access_ends_at": format_datetime(
+                            request.env, member.learning_ends_at, tz=request.env.user.tz or "UTC"
+                        ),
+                        "timezone": request.env.user.tz or "UTC",
                     },
                 )
             )

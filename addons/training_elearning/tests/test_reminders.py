@@ -16,6 +16,28 @@ class TestScopedReminders(HumanCase):
             domain.append(("kind", "=", kind))
         return self.env["training.elearning.reminder"].sudo().search(domain)
 
+    def test_template_reload_retains_obsolete_notifications_without_link_or_delivery(self):
+        course = self.course()
+        self.article(course)
+        course.action_learning_publish()
+        member = self.member(course)
+        obsolete = self.notices(member, "activation")
+        member.action_learning_activate(
+            fields.Datetime.now() + timedelta(days=60), self.learner.id, "Fictional second financed grant"
+        )
+        self.assertFalse(obsolete._target())
+        template = self.env.ref("training_elearning.scoped_reminder_template")
+        # Odoo validates an existing model record when XML reloads the template.
+        template.write({"body_html": template.body_html})
+        body = template._render_field("body_html", obsolete.ids)[obsolete.id]
+        self.assertNotIn('href=', body)
+        self.assertFalse(obsolete.mail_id._learning_delivery_allowed())
+        self.assertEqual(obsolete.state, "cancelled")
+        current = self.notices(member, "activation") - obsolete
+        self.assertEqual(len(current), 1)
+        self.assertIn("/my/learning/%s" % member.id, template._render_field("body_html", current.ids)[current.id])
+        self.assertTrue(current.mail_id._learning_delivery_allowed())
+
     def test_activation_uses_native_queue_and_live_identity_before_smtp(self):
         course = self.course()
         self.article(course)

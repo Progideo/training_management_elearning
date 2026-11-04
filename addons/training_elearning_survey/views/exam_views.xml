@@ -5,7 +5,7 @@
     <field name="inherit_id" ref="training_elearning.course_form" />
     <field name="arch" type="xml">
       <xpath expr="//field[@name='slide_ids']/form/group[@name='learning_content']" position="inside">
-        <field name="survey_id" groups="training_mock_exam.group_mock_exam_author" domain="[('training_state','=','published'),('training_course_id','=',parent.training_course_id)]" options="{'no_create':True}" invisible="slide_category != 'certification'" />
+        <field name="survey_id" context="{'form_view_ref': 'survey.survey_survey_view_form'}" groups="training_mock_exam.group_mock_exam_author" domain="[('training_state','=','published'),('training_course_id','=',parent.training_course_id)]" options="{'no_create':True}" invisible="slide_category != 'certification'" />
         <field name="learning_exam_obligation" invisible="slide_category != 'certification'" />
       </xpath>
       <xpath expr="//field[@name='slide_ids']/form/group/field[@name='learning_optional']" position="attributes">

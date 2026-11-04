@@ -41,6 +41,23 @@ if not saved:
     company = env.company.with_user(env.ref("base.user_admin"))
     policy = company.read(["learning_notice_long_days", "learning_notice_short_days"])[0]
     company.write({"learning_notice_long_days": 0, "learning_notice_short_days": 0})
+    # A template update must also validate against an older event whose target
+    # became obsolete after a second grant, without changing its retained mail.
+    earlier_learner = new_test_user(env, login="fictional_retained_obsolete_learner", groups="base.group_portal")
+    earlier_member = env["slide.channel.partner"].with_user(manager).create(
+        {"channel_id": course.id, "partner_id": earlier_learner.partner_id.id}
+    )
+    earlier_member.action_learning_activate(
+        fields.Datetime.now() + timedelta(days=30), earlier_learner.id, "Fictional first retained grant"
+    )
+    obsolete = env["training.elearning.reminder"].search(
+        [("membership_id", "=", earlier_member.id), ("kind", "=", "activation")]
+    )
+    earlier_member.action_learning_activate(
+        fields.Datetime.now() + timedelta(days=60), earlier_learner.id, "Fictional second retained grant"
+    )
+    assert len(obsolete) == 1 and not obsolete._target()
+    assert not obsolete.mail_id._learning_delivery_allowed() and obsolete.state == "cancelled"
     member.action_learning_activate(
         fields.Datetime.now() + timedelta(days=60), learner.id, "Fictional retained notice grant"
     )
@@ -81,7 +98,9 @@ if not saved:
     assert len(notices.filtered(lambda notice: notice.kind == "activation" and notice.state == "queued")) == 1
     assert len(notices.filtered(lambda notice: notice.kind == "course_end" and notice.state == "pending")) == 2
     assert all(notice._allowed() for notice in notices)
-    data = {"member": member.id, "notices": notices.ids, "mails": notices.mail_id.ids}
+    retained = notices | env["training.elearning.reminder"].search([("membership_id", "=", earlier_member.id)])
+    data = {"member": member.id, "earlier_member": earlier_member.id, "obsolete": obsolete.id,
+            "notices": retained.ids, "mails": retained.mail_id.ids}
 else:
     data = json.loads(saved)
 
@@ -92,7 +111,7 @@ def snapshot():
     for table, ids in (
         ("training_elearning_reminder", data["notices"]),
         ("mail_mail", data["mails"]),
-        ("slide_channel_partner", [data["member"]]),
+        ("slide_channel_partner", [data["member"], data["earlier_member"]]),
     ):
         env.cr.execute(f"SELECT to_jsonb(t) FROM {table} t WHERE id=ANY(%s) ORDER BY id", [ids])
         result[table] = [row[0] for row in env.cr.fetchall()]
@@ -118,4 +137,6 @@ if not saved:
     print("J19_FUTURE_REMINDERS_AND_NATIVE_ENVELOPES_PREPARED")
 else:
     assert snapshot() == data["snapshot"]
+    obsolete = env["training.elearning.reminder"].browse(data["obsolete"])
+    assert obsolete.state == "cancelled" and not obsolete._target()
     print("J19_FUTURE_REMINDERS_AND_NATIVE_ENVELOPES_PRESERVED")

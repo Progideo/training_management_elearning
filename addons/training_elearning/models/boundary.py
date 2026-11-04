@@ -1,7 +1,7 @@
 """Native discovery, completion and binary links never bypass the managed grant."""
 
 from odoo import api, models
-from odoo.exceptions import AccessError
+from odoo.exceptions import AccessError, ValidationError
 from odoo.fields import Domain
 from odoo.http import request
 from werkzeug.exceptions import NotFound
@@ -51,6 +51,42 @@ class Binary(models.AbstractModel):
 
 class Attachment(models.Model):
     _inherit = "ir.attachment"
+
+    @api.private
+    def _learning_protect_lesson_files(self, vals=None):
+        vals = vals or {}
+        slides = self.env["slide.slide"]
+        for file in self.sudo():
+            if file.res_model == "slide.slide":
+                slides |= slides.browse(file.res_id)
+            if vals.get("res_model", file.res_model) == "slide.slide":
+                slides |= slides.browse(vals.get("res_id", file.res_id))
+        if not self and vals.get("res_model") == "slide.slide":
+            slides |= slides.browse(vals.get("res_id"))
+        courses = slides.sudo().exists().channel_id.filtered("training_course_id").with_env(self.env)
+        if courses:
+            courses._learning_staff()
+            if courses._learning_frozen():
+                raise ValidationError(self.env._("Keep the files of activated or sold course editions."))
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            self.browse()._learning_protect_lesson_files(
+                {
+                    "res_model": vals.get("res_model", self.env.context.get("default_res_model")),
+                    "res_id": vals.get("res_id", self.env.context.get("default_res_id")),
+                }
+            )
+        return super().create(vals_list)
+
+    def write(self, vals):
+        self._learning_protect_lesson_files(vals)
+        return super().write(vals)
+
+    @api.ondelete(at_uninstall=False)
+    def _learning_keep_lesson_files(self):
+        self._learning_protect_lesson_files()
 
     @api.model
     def _access_domain(self, operation):

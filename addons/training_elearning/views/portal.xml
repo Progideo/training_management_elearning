@@ -1,0 +1,59 @@
+<odoo>
+  <template id="workspace" name="My autonomous courses">
+    <t t-call="portal.portal_layout">
+      <div class="container py-4">
+        <h1>Mes cours autonomes</h1>
+        <p t-if="not memberships">Aucun accès activé.</p>
+        <ul>
+          <li t-foreach="memberships" t-as="member">
+            <a t-att-href="'/my/learning/%s' % member.id" t-out="member.channel_id.name" />
+          </li>
+        </ul>
+      </div>
+    </t>
+  </template>
+  <template id="course" name="Private autonomous course">
+    <t t-call="portal.portal_layout">
+      <div class="container py-4">
+        <a href="/my/learning">Mes cours</a>
+        <h1 t-out="member.channel_id.name" />
+        <p>Progression : <t t-out="progress['percentage']" /> %</p>
+        <p t-if="expired">L’accès pédagogique est terminé. Vos états et scores sont conservés.</p>
+        <ul>
+          <li t-foreach="rows" t-as="row">
+            <strong t-out="row['title']" /> · <span t-if="row['required']">Obligatoire</span>
+            <span t-else="">Facultatif</span> · <span t-if="row['status']['complete']">Terminé selon le critère prévu</span>
+            <span t-else="">À réaliser</span>
+            <span t-if="row['status'].get('score') is not None"> · Meilleur score : <t t-out="round(row['status']['score'],2)" /> %</span>
+            <a t-if="row['available']" class="btn btn-outline-primary ms-2" t-att-href="row['url']">Ouvrir l’activité</a>
+            <span t-elif="not expired" class="ms-2">Accès soumis aux prérequis ou à la disponibilité de l’activité.</span>
+          </li>
+        </ul>
+        <p>Aucune attestation ou certification n’est délivrée automatiquement par un résultat d’examen.</p>
+      </div>
+    </t>
+  </template>
+  <template id="activity" name="Private learning activity">
+    <t t-call="portal.portal_layout">
+      <div class="container py-4">
+        <a t-att-href="'/my/learning/%s' % member.id">Mon cours</a>
+        <h1 t-out="item['title']" />
+        <div t-if="item['kind']=='article'" t-out="content" />
+        <p t-if="item['kind']=='pdf'">
+          <a class="btn btn-outline-primary" t-att-href="'/my/learning/%s/activities/%s/pdf' % (member.id,slide.id)">Télécharger le PDF</a>
+        </p>
+        <t t-if="item['kind']=='video'">
+          <p>Cette vidéo est hébergée sur un service public externe.</p>
+          <iframe t-if="video" t-att-src="video" title="Vidéo pédagogique publique" class="w-100" height="400" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-presentation" allowfullscreen="allowfullscreen" />
+          <p t-else="">Cette vidéo est indisponible.</p>
+        </t>
+        <p>Ouvrir cette activité ne la termine pas. Votre déclaration confirme sa complétion ; elle ne constitue pas une évaluation de maîtrise.</p>
+        <p t-if="status['complete']">Complétion déjà déclarée.</p>
+        <form t-else="" method="post" t-att-action="'/my/learning/%s/activities/%s/complete' % (member.id,slide.id)">
+          <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+          <button type="submit" class="btn btn-primary">Je déclare avoir terminé cette activité</button>
+        </form>
+      </div>
+    </t>
+  </template>
+</odoo>

@@ -30,15 +30,44 @@ with Database("autonomous", folder) as db:
         cmd[index:index] = ["-v", f"{ROOT / 'addons'}:/mnt/elearning-addons:ro"]
         return cmd
 
-    addons = ["training_elearning_survey", "training_mock_exam"]
+    # Prove that declarative lessons do not require Survey, Sales or TM.
+    text = checked(
+        command(
+            "-i",
+            "training_elearning",
+            "--without-demo",
+            "--stop-after-init",
+            "--test-enable",
+            "--test-tags=/training_elearning,-/web",
+        ),
+        folder / "lessons-install.log",
+        allow_tracebacks=True,
+    )
+    assert_tests_ran(text, ["training_elearning"])
+    with (ROOT / "ci/probe-lessons.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "lessons-prepare.log", stdin=data)
+    text = checked(
+        command(
+            "-u", "training_elearning", "--stop-after-init", "--test-enable", "--test-tags=/training_elearning,-/web"
+        ),
+        folder / "lessons-update.log",
+        allow_tracebacks=True,
+    )
+    assert_tests_ran(text, ["training_elearning"])
+    with (ROOT / "ci/probe-lessons.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "lessons-preserved.log", stdin=data)
+
+    addons = ["training_elearning", "training_elearning_survey", "training_mock_exam"]
     text = checked(
         command(
             "-i",
             "training_elearning_survey",
+            "-u",
+            "training_elearning",
             "--without-demo",
             "--stop-after-init",
             "--test-enable",
-            "--test-tags=/training_elearning_survey,/training_mock_exam,-/web",
+            "--test-tags=/training_elearning,/training_elearning_survey,/training_mock_exam,-/web",
         ),
         folder / "install.log",
         allow_tracebacks=True,
@@ -53,7 +82,7 @@ with Database("autonomous", folder) as db:
             "training_elearning,training_elearning_survey,training_mock_exam",
             "--stop-after-init",
             "--test-enable",
-            "--test-tags=/training_elearning_survey,/training_mock_exam,-/web",
+            "--test-tags=/training_elearning,/training_elearning_survey,/training_mock_exam,-/web",
         ),
         folder / "update.log",
         allow_tracebacks=True,

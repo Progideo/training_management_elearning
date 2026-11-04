@@ -100,8 +100,9 @@ class Course(models.Model):
         self._learning_staff()
         self.lock_for_update()
         for course in self:
-            if not course.training_course_id or not course.active or course.prerequisite_channel_ids:
+            if not course.training_course_id or not course.active:
                 raise ValidationError(self.env._("Check the course identity, active state and prerequisites."))
+            course._learning_check_graph()
             contents = course.slide_ids.filtered(lambda slide: not slide.is_category)
             if not contents or any(not slide._learning_supported() for slide in contents):
                 raise ValidationError(self.env._("Choose supported published course activities."))

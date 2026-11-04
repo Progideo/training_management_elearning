@@ -24,7 +24,13 @@ class Slide(models.Model):
 
     @api.constrains("survey_id", "channel_id", "learning_exam_obligation", "is_published", "slide_category")
     def _learning_check_exam(self):
-        for slide in self.filtered(lambda s: s.channel_id.training_course_id and not s.is_category):
+        for slide in self.filtered(
+            lambda s: (
+                s.channel_id.training_course_id
+                and not s.is_category
+                and (s.survey_id or s.slide_category == "certification")
+            )
+        ):
             if (
                 not slide.survey_id
                 or slide.survey_id.training_course_id != slide.channel_id.training_course_id
@@ -38,7 +44,29 @@ class Slide(models.Model):
     @api.private
     def _learning_supported(self):
         self.ensure_one()
-        return bool(self.survey_id.training_course_id and self.is_published and self.learning_exam_obligation)
+        if self.slide_category == "certification" or self.survey_id:
+            # Classification only: coordination does not acquire question access.
+            return bool(
+                self.sudo().survey_id.training_course_id
+                and self.is_published
+                and self.active
+                and self.learning_exam_obligation
+            )
+        return super()._learning_supported()
+
+    @api.private
+    def _learning_plan_item(self):
+        if not self.survey_id:
+            return super()._learning_plan_item()
+        return {
+            "id": self.id,
+            "kind": "exam",
+            "required": self.learning_exam_obligation != "optional",
+            "exam": self.survey_id.id,
+            "obligation": self.learning_exam_obligation,
+            "prerequisites": self.learning_prerequisite_ids.ids,
+            "title": self.name,
+        }
 
     def _generate_certification_url(self):
         if self.sudo().channel_id.filtered("training_course_id"):
@@ -82,7 +110,7 @@ class Requirement(models.Model):
                 "obligation": slide.learning_exam_obligation,
             }
             for slide in membership.sudo().channel_id.slide_ids
-            if not slide.is_category and slide.is_published
+            if not slide.is_category and slide.is_published and slide.survey_id
         ]
         if vals:
             return super(Requirement, self.sudo().with_context({})).create(vals)  # pylint: disable=super-method-mismatch,context-overridden
@@ -102,18 +130,57 @@ class Membership(models.Model):
         return result
 
     @api.private
-    def _learning_progress(self):
-        self.ensure_one()
+    def _learning_plan(self):
+        plan = super()._learning_plan()
+        # Existing typed obligations remain authoritative on update. No native
+        # membership or answer is rewritten to populate the new plan field.
         requirements = self.env["training.elearning.exam.requirement"].sudo().search([("membership_id", "=", self.id)])
-        required = requirements.filtered(lambda r: r.obligation != "optional")
+        frozen = {row.slide_id.id: row for row in requirements}
+        if not self.learning_plan:
+            # Pre-existing memberships only had typed exam obligations. An
+            # archived source must not silently erase their required evidence.
+            present = {item["id"] for item in plan["slides"]}
+            plan["slides"].extend(
+                {
+                    "id": row.slide_id.id,
+                    "kind": "exam",
+                    "title": row.slide_id.name,
+                    "required": row.obligation != "optional",
+                    "exam": row.exam_id.id,
+                    "obligation": row.obligation,
+                    "prerequisites": [],
+                }
+                for row in requirements
+                if row.slide_id.id not in present
+            )
+        for item in plan["slides"]:
+            if item["kind"] == "exam" and item["id"] in frozen:
+                row = frozen[item["id"]]
+                item.update(exam=row.exam_id.id, obligation=row.obligation, required=row.obligation != "optional")
+        return plan
+
+
+class LearningService(models.AbstractModel):
+    _inherit = "training.elearning.service"
+
+    @api.private
+    def _item_status(self, member, item):
+        if item["kind"] != "exam":
+            return super()._item_status(member, item)
         service = self.env["training.elearning.exam.service"]
-        satisfied = sum(service._requirement_status(row)["satisfied"] for row in required)
+        row = service._requirement(member, item["id"])
+        status = service._requirement_status(row)
         return {
-            "required": len(required),
-            "satisfied": satisfied,
-            "percentage": round(100 * satisfied / len(required)) if required else 100,
-            "complete": satisfied == len(required),
+            "complete": status["satisfied"],
+            "state": "done" if status["satisfied"] else "todo",
+            "score": status["score"],
         }
+
+    @api.private
+    def _activity_url(self, member, item):
+        if item["kind"] == "exam":
+            return "/my/learning/%s/exams/%s" % (member.id, item["id"])
+        return super()._activity_url(member, item)
 
 
 class Attempt(models.Model):
@@ -182,7 +249,7 @@ class ExamService(models.AbstractModel):
 
     @api.private
     def _start(self, membership_id, slide_id):
-        member = self.env["training.elearning.service"]._membership(membership_id, lock=True)
+        member, _slide, _item = self.env["training.elearning.service"]._activity(membership_id, slide_id, lock=True)
         row = self._requirement(member, slide_id)
         attempt = self._start_native(
             row.exam_id,
@@ -215,8 +282,10 @@ class ExamService(models.AbstractModel):
             attempt.invalidate_recordset()
             if attempt.state != "done":
                 attempt._training_finish()
-        elif mutate or attempt.state != "done":
-            attempt._mock_close_if_expired()
+        else:
+            self.env["training.elearning.service"]._activity(member.id, attempt.learning_slide_id.id)
+            if mutate or attempt.state != "done":
+                attempt._mock_close_if_expired()
         return attempt
 
     @api.private

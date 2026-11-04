@@ -10,7 +10,7 @@
     "training_elearning_survey": "20.0.1.8.1",
     "training_elearning_sale": "20.0.1.10.1"
   },
-  "previous_elearning_commit": "1e1b89392b327e9072944fa67f93b3342dc132c2",
+  "previous_elearning_commit": "6d6b9609801eaae6a53babefd941d457367d0243",
   "required_tm_interactive_addons": [
     "training_interactive",
     "training_mock_exam",

@@ -13,3 +13,5 @@ from . import interactive, interactive_attempt, interactive_lease
 from . import history
 from . import public_catalogue
 from . import acquisition
+
+from . import reminder

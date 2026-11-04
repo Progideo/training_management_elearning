@@ -214,6 +214,7 @@ class ReviewNotice(models.Model):
                 item for item in queue.membership_id._learning_plan()["slides"] if item["id"] == queue.slide_id.id
             )
             queue._store({"state": "revision", "revision_until": at + timedelta(days=item.get("revision_days", 14))})
+            self.env["training.elearning.reminder"]._schedule_queue(queue)
         elif review.outcome == "revision" and queue.state == "delivery":
             queue._store({"state": "closed"})
 

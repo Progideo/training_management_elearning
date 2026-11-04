@@ -1,7 +1,7 @@
 """Native mail queue with a live authorization check immediately before SMTP."""
 
 import logging
-from odoo import api, fields, models
+from odoo import api, fields, models, Command
 from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
@@ -118,7 +118,18 @@ class Notice(models.Model):
             try:
                 with self.env.cr.savepoint():
                     mail = (
-                        self.env.ref("training_elearning.activity_notice").sudo().send_mail(notice.id, force_send=False)
+                        self.env.ref("training_elearning.activity_notice")
+                        .sudo()
+                        .send_mail(
+                            notice.id,
+                            force_send=False,
+                            email_values={
+                                "recipient_ids": [Command.set(notice.membership_id.learning_user_id.partner_id.ids)],
+                                "email_to": False,
+                                "email_cc": False,
+                                "attachment_ids": [Command.clear()],
+                            },
+                        )
                     )
                     if not mail:
                         raise AccessError(self.env._("The native notification was not queued."))
@@ -166,7 +177,14 @@ class Mail(models.Model):
     def _learning_delivery_allowed(self):
         self.ensure_one()
         notice = self.env["training.elearning.notice"].sudo().search([("mail_id", "=", self.id)], limit=1)
-        if notice and not notice._recipient_allowed():
+        mail = self.sudo()
+        if notice and (
+            not notice._recipient_allowed()
+            or mail.recipient_ids != notice.membership_id.learning_user_id.partner_id
+            or mail.email_to
+            or mail.email_cc
+            or mail.attachment_ids
+        ):
             notice._store({"state": "cancelled"})
             return False
         return True

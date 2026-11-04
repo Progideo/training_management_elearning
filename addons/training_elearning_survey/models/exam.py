@@ -346,6 +346,9 @@ class Attempt(models.Model):
         result = super()._mock_revision_project()
         if self.sudo().learning_membership_id:
             self.sudo().learning_membership_id._learning_sync_progress()
+            revision = self.sudo().training_adjustment_ids.sorted("id", reverse=True)[:1]
+            if revision:
+                self.env["training.elearning.reminder"]._enqueue("exam_revision", revision, event=revision.id)
         return result
 
     @api.ondelete(at_uninstall=False)

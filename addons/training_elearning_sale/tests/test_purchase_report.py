@@ -20,7 +20,7 @@ class TestPurchaseReports(HumanCase):
         )
         cls.buyer = cls.env["res.partner"].create({"name": "Fictional report purchaser"})
 
-    def buy(self, course, months=1, **policy):
+    def buy(self, course, months=1, quantity=1, **policy):
         product = (
             self.env["product.product"]
             .with_user(self.commercial)
@@ -40,7 +40,7 @@ class TestPurchaseReports(HumanCase):
             .create(
                 {
                     "partner_id": self.buyer.id,
-                    "order_line": [Command.create({"product_id": product.id, "product_uom_qty": 1})],
+                    "order_line": [Command.create({"product_id": product.id, "product_uom_qty": quantity})],
                 }
             )
         )
@@ -282,3 +282,72 @@ class TestPurchaseReports(HumanCase):
         self.assertTrue(seat._purchase_summary()["complete"])
         self.assertTrue(event.restored_at)
         self.assertTrue(original.review_id)
+
+    def test_enterprise_reminders_recheck_mandate_seats_and_no_detail_in_email(self):
+        course = self.course()
+        self.article(course)
+        course.action_learning_publish()
+        seat = self.buy(course, quantity=2)
+        representative = new_test_user(self.env, login="fictional_reminder_representative", groups="base.group_portal")
+        mandate = (
+            self.env["training.elearning.sale.mandate"]
+            .with_user(self.commercial)
+            .create(
+                {
+                    "line_id": seat.line_id.id,
+                    "user_id": representative.id,
+                    "valid_until": seat.access_ends_at + timedelta(days=500),
+                    "can_assign": True,
+                    "beneficiary_ids": [Command.set(self.other.partner_id.ids)],
+                    "reason": "Fictional scoped reminder mandate",
+                }
+            )
+        )
+        mandate.action_grant()
+        reminders = self.env["training.elearning.reminder"]
+        warning = reminders._enqueue("assignment_end", mandate, offset=7)
+        self.assertTrue(warning)
+        self.assertEqual(warning.user_id, representative)
+        with patch.object(fields.Datetime, "now", return_value=warning.due_at):
+            warning._process()
+        self.assertEqual(warning.state, "queued")
+        self.assertNotIn(self.learner.partner_id.name, str(warning.mail_id.body_html))
+        self.assertFalse(warning.mail_id.attachment_ids)
+        mandate.revocation_reason = "Fictional reminder withdrawal"
+        mandate.action_revoke()
+        self.assertFalse(warning.mail_id._learning_delivery_allowed())
+
+    def test_report_available_and_closing_notice_follow_own_final_closure(self):
+        course = self.course()
+        self.article(course)
+        course.action_learning_publish()
+        seat = self.buy(course)
+        representative = new_test_user(
+            self.env, login="fictional_report_notice_representative", groups="base.group_portal"
+        )
+        mandate = (
+            self.env["training.elearning.sale.mandate"]
+            .with_user(self.commercial)
+            .create(
+                {
+                    "line_id": seat.line_id.id,
+                    "user_id": representative.id,
+                    "valid_until": seat.access_ends_at + timedelta(days=500),
+                    "reason": "Fictional report notice mandate",
+                }
+            )
+        )
+        mandate.action_grant()
+        reminders = self.env["training.elearning.reminder"]
+        self.assertFalse(reminders._enqueue("report_end", mandate, offset=7))
+        with patch.object(fields.Datetime, "now", return_value=seat.access_ends_at + timedelta(days=1)):
+            reminders._scan_sources()
+            ready = reminders.search([("mandate_id", "=", mandate.id), ("kind", "=", "report_ready")])
+            warning = reminders.search([("mandate_id", "=", mandate.id), ("kind", "=", "report_end")])
+            self.assertEqual(ready.state, "queued")
+            self.assertEqual(warning.state, "pending")
+            self.assertEqual(warning.deadline, seat.access_ends_at + relativedelta(months=3))
+            self.assertFalse(ready.mail_id.attachment_ids)
+            self.assertNotIn("percentage", str(ready.mail_id.body_html))
+            reminders._scan_sources()
+            self.assertEqual(len(reminders.search([("mandate_id", "=", mandate.id), ("kind", "=", "report_ready")])), 1)

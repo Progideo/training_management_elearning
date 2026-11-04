@@ -6,17 +6,20 @@ from odoo.fields import Domain
 from odoo.http import request
 from werkzeug.exceptions import NotFound
 from .course import AUTHOR, MANAGER
+from .revision_scope import editing_lesson
 
 MODELS = ("slide.channel", "slide.slide", "slide.channel.partner", "slide.slide.partner")
 
 
 def course_for(record):
     target = record.sudo()
-    if target._name == "ir.attachment" and target.res_model in MODELS:
+    if target._name == "ir.attachment" and target.res_model in (*MODELS, "training.elearning.editorial"):
         target = record.env[target.res_model].sudo().browse(target.res_id).exists()
     course = (
         target
         if target._name == "slide.channel"
+        else target.course_id
+        if target._name == "training.elearning.editorial"
         else target.channel_id
         if target._name in MODELS
         else record.env["slide.channel"]
@@ -66,8 +69,10 @@ class Attachment(models.Model):
         courses = slides.sudo().exists().channel_id.filtered("training_course_id").with_env(self.env)
         if courses:
             courses._learning_staff()
-            if courses._learning_frozen():
-                raise ValidationError(self.env._("Keep the files of activated or sold course editions."))
+            for course in courses:
+                protected = slides.with_env(self.env).filtered(lambda slide: slide.channel_id == course)
+                if course._learning_frozen() and any(not editing_lesson(slide) for slide in protected):
+                    raise ValidationError(self.env._("Keep the files of activated or sold course editions."))
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -105,6 +110,16 @@ class Attachment(models.Model):
                 else self.env[model].sudo()._search(Domain("channel_id", "any!", courses), active_test=False)
             )
             domain &= ~(Domain("res_model", "=", model) & Domain("res_id", "any!", records))
+        drafts = (
+            self.env["training.elearning.editorial"]
+            .sudo()
+            ._search(
+                Domain("course_id.learning_company_id", "not in", self.env.companies.ids)
+                if self.env.user.active and self.env.user.has_group(AUTHOR)
+                else Domain.TRUE
+            )
+        )
+        domain &= ~(Domain("res_model", "=", "training.elearning.editorial") & Domain("res_id", "any!", drafts))
         return domain
 
     def _to_http_stream(self):

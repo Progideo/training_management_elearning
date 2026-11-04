@@ -160,4 +160,33 @@ with Database("autonomous", folder) as db:
         checked(command("shell", "--no-http"), folder / "coexistence-preserved.log", stdin=data)
     with mandates_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "mandates-coexistence-preserved.log", stdin=data)
+# The sales bridge must not smuggle in the optional Survey integration.
+with Database("sales_without_survey", folder / "sales-without-survey") as db:
+    cmd = db.odoo(
+        "-i",
+        "training_elearning_sale",
+        "--without-demo",
+        "--stop-after-init",
+        "--test-enable",
+        "--test-tags=/training_elearning_sale:TestNativeCourseSales,-/web",
+        "--addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons,/mnt/elearning-addons",
+    )
+    index = cmd.index("-e")
+    cmd[index:index] = ["-v", f"{ROOT / 'addons'}:/mnt/elearning-addons:ro"]
+    text = checked(cmd, folder / "sales-without-survey/install.log", allow_tracebacks=True)
+    assert_tests_ran(text, ["training_elearning_sale"])
+    probe = (
+        "assert 'survey.survey' not in env; assert 'training.enrollment' not in env; print('SALES_WITHOUT_SURVEY_OK')"
+    )
+    with (folder / "sales-without-survey/probe.py").open("w") as script:
+        script.write(probe + "\n")
+    cmd = db.odoo(
+        "shell",
+        "--no-http",
+        "--addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons,/mnt/elearning-addons",
+    )
+    index = cmd.index("-e")
+    cmd[index:index] = ["-v", f"{ROOT / 'addons'}:/mnt/elearning-addons:ro"]
+    with (folder / "sales-without-survey/probe.py").open() as script:
+        checked(cmd, folder / "sales-without-survey/independence.log", stdin=script)
 (folder / "success.json").write_text('{"autonomous": "success"}\n')

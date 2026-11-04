@@ -7,3 +7,4 @@ member_manager,Managed learner administration,slide.channel.partner,training_ele
 member_scope,Managed learner privacy,slide.channel.partner,,crud,"['|', ('channel_id.training_course_id', '=', False), ('channel_id.learning_company_id', 'in', company_ids)] if user.active and user.has_group('training_elearning.group_elearning_manager') else [('channel_id.training_course_id', '=', False)]"
 progress_scope,Managed native lesson evidence,slide.slide.partner,,crud,"['|', ('channel_id.training_course_id', '=', False), ('channel_id.learning_company_id', 'in', company_ids)] if user.active and user.has_group('training_elearning.group_elearning_manager') else [('channel_id.training_course_id', '=', False)]"
 access_wizard,Managed access action,training.elearning.access,training_elearning.group_elearning_manager,crud,
+editorial_wizard,Audited editorial correction,training.elearning.editorial,training_elearning.group_elearning_author,crud,

@@ -5,7 +5,7 @@
     <field name="priority">100</field>
     <field name="arch" type="xml">
       <form string="Édition de cours autonome">
-        <header>
+        <header><button name="action_learning_editorial" type="object" string="Correction éditoriale" groups="training_elearning.group_elearning_author" invisible="learning_state != 'published'"/>
           <button name="action_learning_publish" type="object" string="Publier l’édition" class="btn-primary" invisible="learning_state != 'draft'" groups="training_elearning.group_elearning_author" />
           <field name="learning_state" widget="statusbar" />
         </header>
@@ -37,7 +37,7 @@
                     <field name="learning_optional" />
                     <field name="learning_prerequisite_ids" widget="many2many_tags" domain="[('channel_id','=',channel_id),('is_category','=',False)]" />
                   </group>
-                  <group name="learning_content">
+                  <group name="learning_content"><button name="action_learning_editorial" type="object" string="Correction éditoriale tracée" invisible="not id or slide_category not in ('article','document','video')"/>
                     <field name="html_content" widget="html" invisible="slide_category != 'article'" />
                     <field name="source_type" invisible="slide_category != 'document'" />
                     <field name="learning_filename" invisible="1" />
@@ -53,6 +53,7 @@
             </page>
           </notebook>
         </sheet>
+        <chatter/>
       </form>
     </field>
   </record>

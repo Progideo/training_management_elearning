@@ -258,6 +258,25 @@ class TestNativeLessons(LessonCase):
             other.write({"res_model": "slide.slide", "res_id": slide.id})
         self.assertEqual(file.raw.content, original)
 
+    def test_started_dependent_binds_its_prerequisite_edition_and_new_copy_is_draft(self):
+        parent = self.course(name="Fictional bound prerequisite")
+        parent_slide = self.article(parent)
+        parent.action_learning_publish()
+        child = self.course(prerequisite_channel_ids=[Command.set(parent.ids)])
+        self.article(child)
+        child.action_learning_publish()
+        self.member(child)
+        self.assertTrue(parent.learning_bound_at)
+        with self.assertRaises(ValidationError):
+            parent_slide.write({"html_content": "<p>Changed prerequisite content</p>"})
+        with self.assertRaises(AccessError):
+            parent.write({"learning_bound_at": False})
+        edition = parent.copy({"name": "Fictional next substantive edition"})
+        self.assertFalse(edition.learning_bound_at)
+        self.assertEqual(edition.learning_state, "draft")
+        self.assertFalse(edition.channel_partner_ids)
+        self.assertEqual(edition.training_course_id, parent.training_course_id)
+
     def test_company_identity_and_snapshot_are_protected(self):
         course = self.course()
         slide = self.article(course)
@@ -329,6 +348,43 @@ class TestNativeLessonPortal(LessonCase, HttpCase):
         self.assertNotEqual(self.url_open("/web/image/%s" % image.id).content, image.raw.content)
         self.authenticate(self.other.login, self.other.login)
         self.assertEqual(self.url_open(path + "/images/%s" % image.id).status_code, 404)
+
+    def test_pending_editorial_upload_is_private_even_with_native_attachment_token(self):
+        course = self.course()
+        slide = self.pdf(course)
+        course.action_learning_publish()
+        self.member(course)
+        wizard = (
+            self.env["training.elearning.editorial"]
+            .with_user(self.manager)
+            .create(
+                {
+                    "course_id": course.id,
+                    "slide_id": slide.id,
+                    "name": slide.name,
+                    "category": "accessibility",
+                    "reason": "Fictional pending editorial file",
+                }
+            )
+        )
+        file = (
+            self.env["ir.attachment"]
+            .with_user(self.manager)
+            .create(
+                {
+                    "name": "Fictional private editorial upload",
+                    "res_model": "training.elearning.editorial",
+                    "res_id": wizard.id,
+                    "raw": b"PRIVATE PENDING EDITORIAL BYTES",
+                    "public": True,
+                }
+            )
+        )
+        token = file.generate_access_token()[0]
+        self.authenticate(self.learner.login, self.learner.login)
+        response = self.url_open("/web/content/%s?access_token=%s" % (file.id, token))
+        self.assertIn(response.status_code, (403, 404))
+        self.assertNotIn(b"PRIVATE PENDING EDITORIAL BYTES", response.content)
 
     def test_private_files_direct_prerequisite_csrf_and_expiry(self):
         course = self.course()

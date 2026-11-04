@@ -11,6 +11,27 @@ class Course(models.Model):
     _inherit = "slide.channel"  # pylint: disable=consider-merging-classes-inherited  # lesson semantics are separate from the native boundary
 
     @api.private
+    def _learning_related_courses(self, *, ancestors=False):
+        result = self.sudo().with_context(active_test=False)
+        frontier = result
+        while frontier:
+            adjacent = (
+                frontier.prerequisite_channel_ids
+                if ancestors
+                else self.sudo()
+                .with_context(active_test=False)
+                .search([("training_course_id", "!=", False), ("prerequisite_channel_ids", "in", frontier.ids)])
+            )
+            frontier = adjacent - result
+            result |= frontier
+        return result
+
+    @api.private
+    def _learning_lock_graph(self):
+        self.lock_for_update()
+        self._learning_related_courses(ancestors=True).lock_for_update()
+
+    @api.private
     def _learning_check_graph(self):
         for course in self:
             slides = course.slide_ids.filtered(lambda s: not s.is_category)
@@ -125,16 +146,25 @@ class Membership(models.Model):
     @api.private
     def _learning_plan(self):
         self.ensure_one()
-        return copy.deepcopy(self.sudo().learning_plan or self.sudo().channel_id._learning_plan())
+        plan = copy.deepcopy(self.sudo().learning_plan or self.sudo().channel_id._learning_plan())
+        slides = self.env["slide.slide"].sudo().browse([item["id"] for item in plan["slides"]]).exists()
+        titles = {slide.id: slide.name for slide in slides}
+        for item in plan["slides"]:
+            item["title"] = titles.get(item["id"], item["title"])
+        return plan
 
     @api.private
     def _learning_freeze(self):
-        self.channel_id._learning_check_graph()
-        if any(not slide._learning_supported() for slide in self.channel_id.slide_ids if not slide.is_category):
-            raise ValidationError(self.env._("Publish supported activities before activation."))
+        self.channel_id._learning_lock_graph()
+        self.channel_id._learning_check_contents()
+        self.channel_id._learning_bind_graph()
         result = super()._learning_freeze()
-        self._learning_store({"learning_plan": self.channel_id._learning_plan()})
+        self._learning_store({"learning_plan": self._learning_plan_source()})
         return result
+
+    @api.private
+    def _learning_plan_source(self):
+        return self.channel_id._learning_plan()
 
     @api.private
     def _learning_progress(self):

@@ -40,6 +40,7 @@ msgstr "Attribuable jusqu’au"
 #. module: training_elearning_sale
 #: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_allocation__line_id
 #: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_authorization__line_id
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_mandate__line_id
 msgid "Line"
 msgstr "Ligne de vente"
 
@@ -75,6 +76,7 @@ msgstr "Notification"
 
 #. module: training_elearning_sale
 #: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_authorization__reason
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_mandate__reason
 msgid "Reason"
 msgstr "Motif"
 
@@ -139,3 +141,85 @@ msgstr "Vérifier la notification d’accès apprenant"
 #: code:addons/training_elearning_sale/models/offer.py:0
 msgid "Provide the payment verification or commercial agreement reason."
 msgstr "Indiquez la vérification du règlement ou le motif de l’accord commercial."
+
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_mandate__user_id
+msgid "User"
+msgstr "Compte représentant"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_mandate__valid_until
+msgid "Valid Until"
+msgstr "Fin du mandat"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_mandate__can_assign
+msgid "Can Assign"
+msgstr "Peut attribuer"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_mandate__beneficiary_ids
+msgid "Validated Beneficiaries"
+msgstr "Bénéficiaires validés"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_mandate__state
+msgid "State"
+msgstr "État"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_mandate__granted_at
+msgid "Granted At"
+msgstr "Accordé le"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_mandate__granted_by
+msgid "Granted By"
+msgstr "Accordé par"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_mandate__revocation_reason
+msgid "Revocation Reason"
+msgstr "Motif de révocation"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_mandate__revoked_at
+msgid "Revoked At"
+msgstr "Révoqué le"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_mandate__revoked_by
+msgid "Revoked By"
+msgstr "Révoqué par"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_allocation__assigned_by
+msgid "Assigned By"
+msgstr "Attribution par"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_allocation__assigned_mandate_id
+msgid "Assigned Mandate"
+msgstr "Mandat d’attribution"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_product_template__learning_report_months
+#: model:ir.model.fields,field_description:training_elearning_sale.field_sale_order_line__learning_report_months
+msgid "Learning Report Months"
+msgstr "Consultation entreprise (mois)"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields.selection,name:training_elearning_sale.selection__training_elearning_sale_mandate__state__draft
+msgid "Draft"
+msgstr "Préparé"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields.selection,name:training_elearning_sale.selection__training_elearning_sale_mandate__state__active
+msgid "Active"
+msgstr "Accordé"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields.selection,name:training_elearning_sale.selection__training_elearning_sale_mandate__state__revoked
+msgid "Revoked"
+msgstr "Révoqué"

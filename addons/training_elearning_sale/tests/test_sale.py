@@ -8,8 +8,7 @@ from odoo.exceptions import AccessError, ValidationError
 from odoo.tests import TransactionCase, new_test_user, tagged
 
 
-@tagged("post_install", "-at_install")
-class TestAutonomousSales(TransactionCase):
+class SalesCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -105,6 +104,9 @@ class TestAutonomousSales(TransactionCase):
             .create({"line_id": line.id, "partner_id": (learner or self.learner).partner_id.id})
         )
 
+
+@tagged("post_install", "-at_install")
+class TestAutonomousSales(SalesCase):
     def test_confirmation_authorization_named_access_and_frozen_contract(self):
         course, slide, product = self.offer()
         order, line = self.order(product, 2)

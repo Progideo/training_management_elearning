@@ -13,9 +13,9 @@ head = subprocess.check_output(['git', '-C', str(tm), 'rev-parse', 'HEAD'], text
 assert os.environ.get('TM_HEAD_CHECK') == '1' or head == c['training_management']['commit']
 print('Training Management', head, 'pinned', c['training_management']['commit'])
 assert not subprocess.check_output(['git', '-C', str(tm), 'status', '--porcelain']).strip()
-m = ast.literal_eval(pathlib.Path('addons/training_management_elearning/__manifest__.py').read_text())
-assert m['version'] == c['elearning_version']
-assert m['depends'] == c['required_addons']
+m = ast.literal_eval((tm / 'addons/training_management_interactive/__manifest__.py').read_text())
+assert m['version'] == c['tm_interactive_version']
+assert m['depends'] == c['required_tm_interactive_addons']
 assert c['odoo_image'] in pathlib.Path('bench/e01/compose.yaml').read_text()
 CHECK
 mkdir -p ci-results
@@ -44,10 +44,10 @@ trap cleanup EXIT
 ./bench/e01/run up -d --wait odb
 for phase in install update; do
   flag=-i
-  modules=training_management_elearning
+  modules=training_management_interactive
   if [[ "$phase" == update ]]; then
     flag=-u
-    modules=training_catalog,training_interactive,training_mock_exam,training_management,training_management_survey,training_management_elearning
+    modules=training_catalog,training_interactive,training_mock_exam,training_management,training_management_survey,training_management_interactive
   fi
   ./bench/e01/run run --rm -T odoo odoo -d elearning_ci \
     --addons-path=/mnt/extra-addons,/mnt/qualification-addons \
@@ -61,7 +61,7 @@ done
 ./bench/e01/run run --rm -T odoo odoo -d elearning_ci_website \
   --addons-path=/mnt/extra-addons,/mnt/qualification-addons \
   --without-demo=all --workers=0 --max-cron-threads=0 \
-  -i website,training_management_website,training_management_elearning --test-enable \
-  --test-tags /training_management_elearning --stop-after-init \
+  -i website,training_management_interactive --test-enable \
+  --test-tags /training_management_interactive --stop-after-init \
   2>&1 | tee ci-results/website.log
 python3 ci/check_results.py ci-results/website.log

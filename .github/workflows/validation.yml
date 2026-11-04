@@ -19,7 +19,7 @@ jobs:
           persist-credentials: false
       - name: Lire la version compatible
         id: compatibility
-        run: python3 -c 'import json; c=json.load(open("compatibility.json")); print("commit=" + c["training_management"]["commit"]); print("previous=" + c["previous_elearning_commit"])' >> "$GITHUB_OUTPUT"
+        run: python3 -c 'import json; c=json.load(open("compatibility.json")); print("commit=" + c["training_management"]["commit"]); print("previous=" + c["previous_elearning_commit"]); print("relocation_tm=" + c["module_relocation_baseline"]["tm_commit"]); print("relocation_el=" + c["module_relocation_baseline"]["elearning_commit"])' >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           repository: Progideo/training_management
@@ -31,6 +31,18 @@ jobs:
           repository: Progideo/training_management_elearning
           ref: ${{ steps.compatibility.outputs.previous }}
           path: .dependencies/elearning_previous
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Progideo/training_management
+          ref: ${{ steps.compatibility.outputs.relocation_tm }}
+          path: .dependencies/tm_relocation_previous
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Progideo/training_management_elearning
+          ref: ${{ steps.compatibility.outputs.relocation_el }}
+          path: .dependencies/adapter_previous
           persist-credentials: false
       - name: Régressions JavaScript
         env:
@@ -53,6 +65,12 @@ jobs:
           TM_ADDONS_DIR: ${{ github.workspace }}/.dependencies/training_management/addons
           PREVIOUS_EL_ADDONS_DIR: ${{ github.workspace }}/.dependencies/elearning_previous/addons
         run: python3 ci/validate-generations.py
+      - name: Déplacement technique de l’adaptateur TM et conservation
+        env:
+          TM_ADDONS_DIR: ${{ github.workspace }}/.dependencies/training_management/addons
+          PREVIOUS_TM_ADDONS_DIR: ${{ github.workspace }}/.dependencies/tm_relocation_previous/addons
+          PREVIOUS_ADAPTER_ADDONS_DIR: ${{ github.workspace }}/.dependencies/adapter_previous/addons
+        run: python3 ci/validate-module-relocation.py
       - name: Journaux de validation
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

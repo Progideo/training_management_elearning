@@ -10,7 +10,7 @@ models = {
  'training.learning.progress': ['enrollment_id','activity_id','completed','revision'],
 }
 data = {model: env[model].with_context(active_test=False).search([],order='id').read(fields) for model, fields in models.items()}
-data['addon_xmlids'] = env['ir.model.data'].search([('module','=','training_management_elearning')],order='name').read(['name','model','res_id'])
+data['addon_xmlids'] = env['ir.model.data'].search([('module','=','training_management_interactive')],order='name').read(['name','model','res_id'])
 assert len(data['training.elearning.resource']) == 1
 assert len(data['training.enrollment']) == 1
 assert len(data['training.learning.activity']) == 2

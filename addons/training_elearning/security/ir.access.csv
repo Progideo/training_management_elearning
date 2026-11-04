@@ -37,3 +37,17 @@ reviewer_setup,Pedagogical reviewer configuration,training.elearning.reviewer.se
 review_notice_pedagogy,Private practical delivery evidence,training.elearning.review.notice,training_elearning.group_elearning_pedagogy_manager,r,"[('company_id','in',company_ids)]"
 review_notice_scope,Practical delivery company,training.elearning.review.notice,,crud,"[('company_id','in',company_ids)]"
 review_delivery,Practical delivery resolution,training.elearning.review.delivery,training_elearning.group_elearning_pedagogy_manager,crud,
+path_author,Curriculum author,training.elearning.path,training_elearning.group_elearning_author,crud,"[('company_id','in',company_ids)]"
+path_scope,Curriculum company,training.elearning.path,,crud,"[('company_id','in',company_ids)]"
+path_line_author,Curriculum composition author,training.elearning.path.line,training_elearning.group_elearning_author,crud,"[('company_id','in',company_ids)]"
+path_line_scope,Curriculum composition company,training.elearning.path.line,,crud,"[('company_id','in',company_ids)]"
+path_registration_manager,Curriculum aggregation coordination,training.elearning.path.registration,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
+path_registration_scope,Curriculum learner company,training.elearning.path.registration,,crud,"[('company_id','in',company_ids)]"
+path_activation_manager,Curriculum contractual activations,training.elearning.path.activation,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
+path_activation_scope,Curriculum activation company,training.elearning.path.activation,,crud,"[('company_id','in',company_ids)]"
+path_item_manager,Curriculum native course provenance,training.elearning.path.item,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
+path_item_scope,Curriculum native course company,training.elearning.path.item,,crud,"[('company_id','in',company_ids)]"
+path_notice_manager,Curriculum private notifications,training.elearning.path.notice,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
+path_notice_scope,Curriculum notification company,training.elearning.path.notice,,crud,"[('company_id','in',company_ids)]"
+path_activate_wizard,Explicit manual curriculum authorization,training.elearning.path.activate,training_elearning.group_elearning_manager,crud,
+path_adjust_wizard,Motivated curriculum start adjustment,training.elearning.path.adjust,training_elearning.group_elearning_manager,crud,

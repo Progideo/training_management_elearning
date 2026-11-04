@@ -66,6 +66,49 @@ class TestNativeCourseSales(TransactionCase):
         self.env["training.elearning.service"].with_user(learner)._declare(member.id, slide.id)
         self.assertEqual(member.completion, 100)
         self.assertTrue(course.learning_bound_at)
+        native_end = member.learning_ends_at
+        acquired = member.completion_date
+        shorter = (
+            self.env["product.product"]
+            .with_user(manager)
+            .create(
+                {
+                    "name": "Fictional second independent funding",
+                    "type": "service",
+                    "learning_channel_id": course.id,
+                    "learning_access_months": 3,
+                }
+            )
+        )
+        second_order = (
+            self.env["sale.order"]
+            .with_user(manager)
+            .create(
+                {
+                    "partner_id": buyer.id,
+                    "order_line": [Command.create({"product_id": shorter.id, "product_uom_qty": 1})],
+                }
+            )
+        )
+        second_order.action_confirm()
+        second_order.order_line.action_learning_authorize("Fictional second initial funding agreement")
+        other_seat = (
+            self.env["training.elearning.sale.allocation"]
+            .with_user(manager)
+            .create(
+                {
+                    "line_id": second_order.order_line.id,
+                    "partner_id": learner.partner_id.id,
+                }
+            )
+        )
+        other_seat.action_learning_activate()
+        self.assertEqual(other_seat.membership_id, member)
+        self.assertLess(other_seat.access_ends_at, native_end)
+        self.assertEqual(member.learning_ends_at, native_end)
+        self.assertEqual(member.completion_date, acquired)
+        self.assertEqual(member.completion, 100)
+
         product.write({"active": False})
         self.env["training.elearning.service"].with_user(learner)._activity(member.id, slide.id)
         self.assertEqual(member.completion, 100)

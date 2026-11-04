@@ -3,6 +3,7 @@
     <t t-call="portal.portal_layout">
       <div class="container py-4">
         <h1>Mes cours autonomes</h1>
+        <p><a href="/my/learning-paths">Mes parcours autonomes</a></p>
         <p t-if="not memberships">Aucun accès activé.</p>
         <ul>
           <li t-foreach="memberships" t-as="member">

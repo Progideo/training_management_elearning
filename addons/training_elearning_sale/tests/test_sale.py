@@ -17,12 +17,20 @@ class SalesCase(TransactionCase):
         cls.company = cls.env.company
         cls.company.email = "fictional-sender@example.invalid"
         cls.manager = new_test_user(
-            cls.env, login="fictional_sales_coordinator", groups="training_elearning_sale.group_learning_sales_manager"
+            cls.env,
+            login="fictional_sales_coordinator",
+            groups="training_elearning_sale.group_learning_sales_manager",
         )
         cls.author = new_test_user(
-            cls.env, login="fictional_exam_author", groups="training_elearning_survey.group_learning_exam_reader"
+            cls.env,
+            login="fictional_exam_author",
+            groups="training_elearning_survey.group_learning_exam_reader",
         )
-        cls.salesperson = new_test_user(cls.env, login="fictional_salesperson", groups="sales_team.group_sale_salesman")
+        cls.salesperson = new_test_user(
+            cls.env,
+            login="fictional_salesperson",
+            groups="sales_team.group_sale_salesman",
+        )
         cls.learner = new_test_user(cls.env, login="fictional_sales_learner", groups="base.group_portal")
         cls.other = new_test_user(cls.env, login="fictional_sales_other", groups="base.group_portal")
         cls.buyer = cls.env["res.partner"].create({"name": "Fictional purchasing company", "is_company": True})
@@ -57,7 +65,12 @@ class SalesCase(TransactionCase):
         course = (
             self.env["slide.channel"]
             .with_user(self.author)
-            .create({"name": "Fictional sold edition", "training_course_id": self.catalog.id})
+            .create(
+                {
+                    "name": "Fictional sold edition",
+                    "training_course_id": self.catalog.id,
+                }
+            )
         )
         slide = (
             self.env["slide.slide"]
@@ -92,7 +105,12 @@ class SalesCase(TransactionCase):
             self.env["sale.order.line"]
             .with_user(self.manager)
             .create(
-                {"order_id": order.id, "product_id": product.id, "product_uom_qty": qty, "learning_purchase_kind": kind}
+                {
+                    "order_id": order.id,
+                    "product_id": product.id,
+                    "product_uom_qty": qty,
+                    "learning_purchase_kind": kind,
+                }
             )
         )
         return order, line
@@ -101,13 +119,20 @@ class SalesCase(TransactionCase):
         return (
             self.env["training.elearning.sale.allocation"]
             .with_user(self.manager)
-            .create({"line_id": line.id, "partner_id": (learner or self.learner).partner_id.id})
+            .create(
+                {
+                    "line_id": line.id,
+                    "partner_id": (learner or self.learner).partner_id.id,
+                }
+            )
         )
 
 
 @tagged("post_install", "-at_install")
 class TestAutonomousSales(SalesCase):
-    def test_native_state_write_cannot_fake_confirmed_contract_or_authorize_retired_offer(self):
+    def test_native_state_write_cannot_fake_confirmed_contract_or_authorize_retired_offer(
+        self,
+    ):
         _course, _slide, product = self.offer()
         order, line = self.order(product)
         order.write({"state": "sale"})
@@ -207,15 +232,22 @@ class TestAutonomousSales(SalesCase):
         )
         self.assertEqual(
             self.env["slide.channel.partner"].search_count(
-                [("channel_id", "=", course.id), ("partner_id", "=", self.learner.partner_id.id)]
+                [
+                    ("channel_id", "=", course.id),
+                    ("partner_id", "=", self.learner.partner_id.id),
+                ]
             ),
             1,
         )
         other_order, other_line = self.order(product)
         other_order.action_confirm()
         other_line.action_learning_authorize("Fictional duplicate purchase")
-        with self.assertRaises(ValidationError):
-            self.seat(other_line).action_learning_activate()
+        concurrent = self.seat(other_line)
+        concurrent.action_learning_activate()
+        self.assertEqual(concurrent.membership_id, member)
+        self.assertEqual(member.learning_ends_at, old_end + relativedelta(months=6))
+        self.assertEqual(service._start(member.id, slide.id), attempt)
+        self.assertEqual(attempt.deadline, deadline)
         renewal_order.action_cancel()
         self.assertEqual(member.learning_ends_at, old_end + relativedelta(months=6))
         self.assertEqual(attempt.state, "in_progress")
@@ -257,12 +289,19 @@ class TestAutonomousSales(SalesCase):
             seat.action_learning_activate()
         self.assertFalse(seat.membership_id)
 
-    def test_partial_authorization_and_notification_failure_do_not_open_other_context(self):
+    def test_partial_authorization_and_notification_failure_do_not_open_other_context(
+        self,
+    ):
         first, slide, product = self.offer()
         second = (
             self.env["slide.channel"]
             .with_user(self.author)
-            .create({"name": "Fictional second sold context", "training_course_id": self.catalog.id})
+            .create(
+                {
+                    "name": "Fictional second sold context",
+                    "training_course_id": self.catalog.id,
+                }
+            )
         )
         other_slide = (
             self.env["slide.slide"]
@@ -280,13 +319,25 @@ class TestAutonomousSales(SalesCase):
         other_product = (
             self.env["product.product"]
             .with_user(self.manager)
-            .create({"name": "Fictional second context seat", "type": "service", "learning_channel_id": second.id})
+            .create(
+                {
+                    "name": "Fictional second context seat",
+                    "type": "service",
+                    "learning_channel_id": second.id,
+                }
+            )
         )
         order, line = self.order(product)
         other = (
             self.env["sale.order.line"]
             .with_user(self.manager)
-            .create({"order_id": order.id, "product_id": other_product.id, "product_uom_qty": 1})
+            .create(
+                {
+                    "order_id": order.id,
+                    "product_id": other_product.id,
+                    "product_uom_qty": 1,
+                }
+            )
         )
         order.action_confirm()
         line.action_learning_authorize("Fictional first line only")
@@ -311,7 +362,8 @@ class TestAutonomousSales(SalesCase):
         with self.assertRaises(AccessError):
             service._start(seat.membership_id.id, other_slide.id)
         self.assertEqual(
-            service._start(seat.membership_id.id, slide.id).survey_id, slide.with_user(self.author).survey_id
+            service._start(seat.membership_id.id, slide.id).survey_id,
+            slide.with_user(self.author).survey_id,
         )
         other_attempt = service._start(blocked.membership_id.id, other_slide.id)
         service._submit(other_attempt.id)
@@ -342,7 +394,10 @@ class TestAutonomousSales(SalesCase):
         course, slide, product = self.offer()
         order, line = self.order(product)
         beneficiary = self.env["res.partner"].create(
-            {"name": "Fictional invited beneficiary", "email": "fictional-invited@example.invalid"}
+            {
+                "name": "Fictional invited beneficiary",
+                "email": "fictional-invited@example.invalid",
+            }
         )
         seat = (
             self.env["training.elearning.sale.allocation"]

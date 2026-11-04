@@ -2,7 +2,7 @@
 
 import math
 from dateutil.relativedelta import relativedelta
-from odoo import api, fields, models
+from odoo import api, fields, models, Command
 from odoo.exceptions import AccessError, ValidationError
 
 MANAGER = "training_elearning_sale.group_learning_sales_manager"
@@ -14,6 +14,10 @@ CONTRACT = {
     "learning_report_months",
     "learning_review_days",
     "learning_revision_days",
+    "learning_path_id",
+    "learning_path_course_ids",
+    "learning_path_selection",
+    "learning_path_start_months",
 }
 DECISION = {
     "learning_allocation_revision",
@@ -160,41 +164,73 @@ class Line(models.Model):
         plan = self.learning_channel_id.sudo()._learning_plan()
         for item in plan["slides"]:
             if item.get("review_calendar"):
-                item.update(review_days=self.learning_review_days, revision_days=self.learning_revision_days)
+                item.update(
+                    review_days=self.learning_review_days,
+                    revision_days=self.learning_revision_days,
+                )
         return plan
+
+    @api.private
+    def _learning_managed_lines(self):
+        return self.sudo().filtered(
+            lambda line: line.learning_channel_id or ("learning_path_id" in line._fields and line.learning_path_id)
+        )
+
+    @api.private
+    def _learning_check_defaults(self, vals, defaults):
+        if self.env.user.has_group(MANAGER):
+            return
+        if any("default_" + key in self.env.context for key in CONTRACT):
+            raise AccessError(self.env._("Use the configured autonomous product."))
+        identities = ("learning_channel_id", "learning_path_id")
+        if any(key in vals and (vals[key] or False) != (defaults.get(key) or False) for key in identities):
+            raise AccessError(self.env._("Use the configured autonomous product."))
+        if not any(defaults.get(key) for key in identities):
+            return  # Unmanaged native sales carry no educational grant.
+        for key in CONTRACT - {"learning_purchase_kind", *identities}:
+            if key not in vals or key not in defaults:
+                continue
+            actual, expected = vals[key], defaults[key]
+            if self._fields[key].type == "many2many":
+
+                def identifiers(commands):
+                    if not commands:
+                        return set()
+                    if len(commands) != 1 or commands[0][0] != Command.SET:
+                        raise AccessError(self.env._("Use the configured autonomous course selection."))
+                    return set(commands[0][2])
+
+                actual, expected = identifiers(actual), identifiers(expected)
+            if actual != expected:
+                raise AccessError(self.env._("Use the configured autonomous product."))
+
+    def copy_data(self, default=None):
+        values_list = super().copy_data(default=default)
+        if not self.env.user.has_group(MANAGER):
+            # A native salesperson copies the current configured offer, while
+            # special educational terms remain a coordinator permission.
+            for values in values_list:
+                for key in CONTRACT - {"learning_purchase_kind"}:
+                    values.pop(key, None)
+        return values_list
 
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
             if DECISION & vals.keys() or any("default_" + k in self.env.context for k in DECISION):
                 raise AccessError(self.env._("Use the commercial authorization action."))
-            if any(
-                vals.get(key)
-                for key in CONTRACT
-                - {"learning_purchase_kind", "learning_report_months", "learning_review_days", "learning_revision_days"}
-            ) and not self.env.user.has_group(MANAGER):
-                raise AccessError(self.env._("Use the configured autonomous product."))
-            if any("default_" + key in self.env.context for key in CONTRACT) and not self.env.user.has_group(MANAGER):
-                raise AccessError(self.env._("Use the configured autonomous product."))
             product_id = vals.get("product_id") or self.env.context.get("default_product_id")
-            if product_id:
-                defaults = self._learning_defaults(product_id)
-                if (
-                    defaults["learning_channel_id"]
-                    and not self.env.user.has_group(MANAGER)
-                    and any(
-                        key in vals and vals[key] != defaults[key]
-                        for key in ("learning_report_months", "learning_review_days", "learning_revision_days")
-                    )
-                ):
-                    raise AccessError(self.env._("Use the configured autonomous product."))
-                for key, value in defaults.items():
-                    vals.setdefault(key, value)
+            defaults = self._learning_defaults(product_id) if product_id else {}
+            self._learning_check_defaults(vals, defaults)
+            for key, value in defaults.items():
+                vals.setdefault(key, value)
         return super().create(vals_list)
 
     def write(self, vals):
-        managed = self.sudo().filtered("learning_channel_id")
-        if vals.get("learning_channel_id") and any(line.state == "sale" or line.learning_confirmed_at for line in self):
+        managed = self._learning_managed_lines()
+        if (vals.get("learning_channel_id") or vals.get("learning_path_id")) and any(
+            line.state == "sale" or line.learning_confirmed_at for line in self
+        ):
             raise ValidationError(self.env._("Add a new sale line instead of converting an already sold line."))
         if DECISION & vals.keys():
             raise AccessError(self.env._("Use the commercial authorization action."))
@@ -264,7 +300,7 @@ class Line(models.Model):
         if not (reason or "").strip():
             raise ValidationError(self.env._("Provide the payment verification or commercial agreement reason."))
         for line in self:
-            if not line.learning_channel_id or line.state != "sale" or not line.learning_confirmed_at:
+            if not line._learning_managed_lines() or line.state != "sale" or not line.learning_confirmed_at:
                 raise ValidationError(self.env._("Confirm this autonomous sale line before commercial authorization."))
             line._learning_check_contract()
             if not line.learning_authorized_at:
@@ -328,7 +364,7 @@ class Order(models.Model):
         if {"partner_id", "company_id"} & vals.keys() and any(
             order.order_line.sudo().filtered(
                 lambda line: (
-                    line.learning_channel_id
+                    (line.learning_channel_id or ("learning_path_id" in line._fields and line.learning_path_id))
                     and (line.state == "sale" or line.learning_confirmed_at or line.learning_allocation_ids)
                 )
             )

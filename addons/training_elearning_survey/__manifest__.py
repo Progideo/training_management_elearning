@@ -2,7 +2,7 @@
 {
     "name": "Training eLearning — Shared Mock Exams",
     "summary": "Native course exam obligations and contextual attempts",
-    "version": "20.0.1.2.0",
+    "version": "20.0.1.3.0",
     "category": "Website/eLearning",
     "author": "Training Management contributors",
     "website": "https://github.com/Progideo/training_management_elearning",
@@ -14,5 +14,6 @@
         "views/exam_views.xml",
         "views/revision_views.xml",
         "views/portal.xml",
+        "views/interruption_views.xml",
     ],
 }

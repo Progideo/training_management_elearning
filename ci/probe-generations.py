@@ -81,7 +81,7 @@ if not saved:
     )
     pdf_data = io.BytesIO()
     writer = PdfFileWriter()
-    writer.addBlankPage(width=200, height=200)
+    writer.add_blank_page(width=200, height=200)
     writer.write(pdf_data)
     env["slide.slide"].with_user(author).create(
         {

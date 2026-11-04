@@ -66,11 +66,13 @@ else:
     seat.action_learning_activate()
     assert seat.membership_id == member
     # A second confirmed line with one seat is contested by two separate transactions.
+    contested_order = env["sale.order"].with_user(manager).create({"partner_id": buyer.id})
     contested = (
         env["sale.order.line"]
         .with_user(manager)
-        .create({"order_id": order.id, "product_id": product.id, "product_uom_qty": 1})
+        .create({"order_id": contested_order.id, "product_id": product.id, "product_uom_qty": 1})
     )
+    contested_order.action_confirm()
     contested.action_learning_authorize("Fictional concurrent commercial decision")
     partners = [
         new_test_user(env, login=f"fictional_contested_{i}", groups="base.group_portal").partner_id.id for i in range(2)

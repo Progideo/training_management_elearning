@@ -58,7 +58,7 @@ class LessonCase(TransactionCase):
     def pdf(self, course):
         output = io.BytesIO()
         writer = PdfFileWriter()
-        writer.addBlankPage(width=200, height=200)
+        writer.add_blank_page(width=200, height=200)
         writer.write(output)
         return (
             self.env["slide.slide"]
@@ -385,6 +385,20 @@ class TestNativeLessonPortal(LessonCase, HttpCase):
         response = self.url_open("/web/content/%s?access_token=%s" % (file.id, token))
         self.assertIn(response.status_code, (403, 404))
         self.assertNotIn(b"PRIVATE PENDING EDITORIAL BYTES", response.content)
+
+    def test_motivated_pdf_closure_blocks_previously_authorized_private_download(self):
+        course = self.course()
+        slide = self.pdf(course)
+        course.action_learning_publish()
+        member = self.member(course)
+        self.authenticate(self.learner.login, self.learner.login)
+        path = "/my/learning/%s/activities/%s/pdf" % (member.id, slide.id)
+        self.assertEqual(self.url_open(path).status_code, 200)
+        slide.action_learning_change_availability("Fictional private PDF closure")
+        self.assertEqual(self.url_open(path).status_code, 404)
+        self.assertEqual(self.url_open("/my/learning/%s" % member.id).status_code, 200)
+        slide.action_learning_change_availability("Fictional PDF reopened", reopen=True)
+        self.assertEqual(self.url_open(path).status_code, 200)
 
     def test_private_files_direct_prerequisite_csrf_and_expiry(self):
         course = self.course()

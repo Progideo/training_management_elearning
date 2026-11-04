@@ -44,7 +44,7 @@ if not saved:
     )
     output = io.BytesIO()
     writer = PdfFileWriter()
-    writer.addBlankPage(width=200, height=200)
+    writer.add_blank_page(width=200, height=200)
     writer.write(output)
     pdf = (
         env["slide.slide"]

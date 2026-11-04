@@ -23,4 +23,4 @@ Les preuves, pourcentages et dates d’achèvement ne sont pas remis à zéro. L
 5. Démarrer un cours dépendant : vérifier le gel du prérequis ; copier une édition et vérifier son brouillon sans apprenants.
 6. Installer le commit précédent avec commandes, réponses, fichier privé et siège en attente fictifs. Mettre à jour : comparer chaque ancienne colonne et les octets ; effectuer ensuite une révision explicite et attribuer le siège conservé.
 
-Le retrait exceptionnel et ses notifications restent dans la tranche suivante ; l’archivage technique n’est pas présenté comme ce workflow complet. Les TP, parcours, bilans, attestations et raccordements interactifs restent suivis dans #19.
+Le [retrait motivé et ses notifications](J8-availability-notices.md) complètent cette tranche ; l’archivage technique reste distinct de ce workflow. Les TP, parcours, bilans, attestations et raccordements interactifs restent suivis dans #19.

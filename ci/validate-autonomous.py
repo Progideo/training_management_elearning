@@ -105,6 +105,8 @@ with Database("autonomous", folder) as db:
     assert_tests_ran(text, ["training_elearning_sale"])
     with probe.open() as data:
         checked(command("shell", "--no-http"), folder / "sales-existing-preserved.log", stdin=data)
+    with (ROOT / "ci/probe-capacity.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "capacity-concurrency.log", stdin=data)
     sales_probe = ROOT / "ci/probe-sales.py"
     with sales_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "sales-prepare.log", stdin=data)

@@ -48,6 +48,7 @@ class Allocation(models.Model):
         ):
             raise AccessError(self.env._("Activate the named seat through its controlled action."))
         prepared = {}
+        lines = self.env["sale.order.line"]
         for vals in vals_list:
             line = self.env["sale.order.line"].browse(vals.get("line_id") or self.env.context.get("default_line_id"))
             require_manager(line)
@@ -63,6 +64,8 @@ class Allocation(models.Model):
                 raise ValidationError(self.env._("All seats on this sale line are already allocated."))
             if line.learning_assign_until and fields.Datetime.now() >= line.learning_assign_until:
                 raise ValidationError(self.env._("The seat assignment period has ended."))
+            lines |= line
+        lines._learning_touch_allocations()
         return super().create(vals_list)
 
     def write(self, vals):
@@ -189,6 +192,7 @@ class Allocation(models.Model):
         self.line_id.lock_for_update()
         if self.filtered("activated_at"):
             raise ValidationError(self.env._("Keep activated seat history; decide access changes explicitly."))
+        self.line_id._learning_touch_allocations()
 
 
 class Membership(models.Model):

@@ -14,6 +14,7 @@ CONTRACT = {
     "learning_report_months",
 }
 DECISION = {
+    "learning_allocation_revision",
     "learning_plan",
     "learning_confirmed_at",
     "learning_authorized_at",
@@ -92,6 +93,7 @@ class Product(models.Model):
 
 class Line(models.Model):
     _inherit = "sale.order.line"
+    learning_allocation_revision = fields.Integer(readonly=True, copy=False, groups=MANAGER)
     learning_plan = fields.Json(readonly=True, copy=False, groups=MANAGER)
     learning_channel_id = fields.Many2one("slide.channel", ondelete="restrict", copy=True, readonly=True)
     learning_access_months = fields.Integer(readonly=True, copy=True)
@@ -114,6 +116,16 @@ class Line(models.Model):
     @api.private
     def _learning_store(self, vals):
         return super().write(vals)  # pylint: disable=super-method-mismatch  # checked server transitions only
+
+    @api.private
+    def _learning_touch_allocations(self):
+        require_manager(self)
+        self.lock_for_update()
+        for line in self:
+            line.invalidate_recordset(["learning_allocation_revision"])
+            # A technical revision, not a second seat count. Updating the locked
+            # row forces stale Repeatable Read allocators to retry a fresh view.
+            line._learning_store({"learning_allocation_revision": line.learning_allocation_revision + 1})
 
     @api.model
     def _learning_defaults(self, product_id):
@@ -220,7 +232,7 @@ class Line(models.Model):
         if not (reason or "").strip():
             raise ValidationError(self.env._("Provide the payment verification or commercial agreement reason."))
         for line in self:
-            if not line.learning_channel_id or line.state != "sale":
+            if not line.learning_channel_id or line.state != "sale" or not line.learning_confirmed_at:
                 raise ValidationError(self.env._("Confirm this autonomous sale line before commercial authorization."))
             line._learning_check_contract()
             if not line.learning_authorized_at:
@@ -257,6 +269,11 @@ class Order(models.Model):
 
     def action_confirm(self):
         # Same locks as edition editing and activation: sold exam obligations cannot drift.
+        if any(
+            not line.product_id.active or not line.product_id.sale_ok
+            for line in self.order_line.filtered("learning_channel_id")
+        ):
+            raise ValidationError(self.env._("Use an active commercial offer before confirming a new autonomous sale."))
         courses = self.sudo().order_line.learning_channel_id
         courses._learning_lock_graph()
         courses._learning_check_contents()

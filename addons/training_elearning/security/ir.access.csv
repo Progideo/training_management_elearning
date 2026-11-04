@@ -8,3 +8,6 @@ member_scope,Managed learner privacy,slide.channel.partner,,crud,"['|', ('channe
 progress_scope,Managed native lesson evidence,slide.slide.partner,,crud,"['|', ('channel_id.training_course_id', '=', False), ('channel_id.learning_company_id', 'in', company_ids)] if user.active and user.has_group('training_elearning.group_elearning_manager') else [('channel_id.training_course_id', '=', False)]"
 access_wizard,Managed access action,training.elearning.access,training_elearning.group_elearning_manager,crud,
 editorial_wizard,Audited editorial correction,training.elearning.editorial,training_elearning.group_elearning_author,crud,
+availability_wizard,Motivated activity availability,training.elearning.availability,training_elearning.group_elearning_manager,crud,
+notice_manager,Private learning notifications,training.elearning.notice,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
+notice_scope,Private notice company scope,training.elearning.notice,,crud,"[('company_id','in',company_ids)]"

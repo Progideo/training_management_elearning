@@ -184,9 +184,11 @@ class LearningService(models.AbstractModel):
         service = self.env["training.elearning.exam.service"]
         row = service._requirement(member, item["id"])
         status = service._requirement_status(row)
+        unavailable = super()._item_status(member, item)["unavailable"]
         return {
             "complete": status["satisfied"],
-            "state": "done" if status["satisfied"] else "todo",
+            "state": "done" if status["satisfied"] else ("unavailable" if unavailable else "todo"),
+            "unavailable": unavailable,
             "score": status["score"],
         }
 

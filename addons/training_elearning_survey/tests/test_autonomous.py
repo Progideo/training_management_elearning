@@ -277,7 +277,8 @@ class TestAutonomousExams(AutonomousCase):
         course, slide = self.offer(obligations=["complete"])
         member = self.member(course)
         member._learning_store({"learning_plan": False})
-        slide.with_user(self.manager).write({"active": False})
+        # Restore an older technical archive; current public closures need a reason.
+        slide.with_user(self.manager)._learning_store_version({"active": False})
         self.assertEqual(member._learning_progress()["required"], 1)
         self.assertEqual(member.completion, 0)
         self.assertFalse(member.learning_plan)

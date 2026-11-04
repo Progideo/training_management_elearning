@@ -1,0 +1,11 @@
+<odoo>
+ <record id="input_interruption_form" model="ir.ui.view"><field name="name">learning.input.interruption.form</field><field name="model">survey.user_input</field><field name="inherit_id" ref="survey.survey_user_input_view_form"/><field name="arch" type="xml">
+  <xpath expr="//sheet" position="inside"><field name="learning_interrupted_at" invisible="1"/><widget name="web_ribbon" title="Interrompue par l’organisme" bg_color="text-bg-warning" invisible="not learning_interrupted_at"/></xpath>
+  <xpath expr="//widget[@name='web_ribbon'][@bg_color='text-bg-danger' or not(@bg_color)]|//label[@for='scoring_percentage']|//div[field[@name='scoring_percentage']]|//button[@name='action_print_answers']" position="attributes"><attribute name="invisible" add="learning_interrupted_at" separator=" or "/></xpath>
+ </field></record>
+ <record id="input_interruption_list" model="ir.ui.view"><field name="name">learning.input.interruption.list</field><field name="model">survey.user_input</field><field name="inherit_id" ref="survey.survey_user_input_view_tree"/><field name="arch" type="xml">
+  <xpath expr="//field[@name='state']" position="before"><field name="learning_interrupted_at" string="Interruption organisme" optional="show"/></xpath>
+  <xpath expr="//field[@name='scoring_success']|//field[@name='scoring_percentage']" position="attributes"><attribute name="invisible" add="learning_interrupted_at" separator=" or "/></xpath>
+  <xpath expr="//field[@name='state']" position="attributes"><attribute name="decoration-success">state == 'done' and not learning_interrupted_at</attribute><attribute name="decoration-warning">state == 'in_progress' or learning_interrupted_at</attribute></xpath>
+ </field></record>
+</odoo>

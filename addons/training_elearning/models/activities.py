@@ -204,7 +204,13 @@ class Service(models.AbstractModel):
             .sudo()
             .search([("slide_id", "=", item["id"]), ("partner_id", "=", member.partner_id.id)], limit=1)
         )
-        return {"complete": bool(row.completed), "state": "done" if row.completed else "todo"}
+        slide = self.env["slide.slide"].sudo().browse(item["id"]).exists()
+        unavailable = not slide or not slide._learning_available()
+        return {
+            "complete": bool(row.completed),
+            "state": "done" if row.completed else ("unavailable" if unavailable else "todo"),
+            "unavailable": unavailable,
+        }
 
     @api.private
     def _course_prerequisites(self, member):
@@ -230,6 +236,7 @@ class Service(models.AbstractModel):
             or slide.channel_id != member.channel_id
             or not slide.active
             or not slide.is_published
+            or not slide._learning_available()
             or not self._course_prerequisites(member)
         ):
             raise AccessError(self.env._("This private learning activity is unavailable."))

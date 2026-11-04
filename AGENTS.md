@@ -1,7 +1,7 @@
 # Training Management eLearning
 
-Communiquer en français. L’addon historique reste un adaptateur TM ; cible validée à trois addons
-autonomes dans ce dépôt et sept dans TM. Licence LGPL-3.0-only, Odoo Community 20
+Communiquer en français. L’adaptateur interactif TM réside dans le dépôt TM ; ce dépôt porte trois addons
+autonomes, avec sept addons dans TM. Licence LGPL-3.0-only, Odoo Community 20
 au digest qualifié dans bench/compose.yaml. Lire docs/J1-shared-interactive.md puis les références E00 utiles ; les
 prescriptions historiques contradictoires sont remplacées par le cadrage du 3 novembre.
 Développer sur branche dédiée ; préparer une revue avant fusion. Pas de fusion

@@ -1,16 +1,16 @@
 # Training Management eLearning
 
-Extension Odoo 20 Community : ressources formatives privées H5P/SCORM,
-publication versionnée, affectations, tentatives et reprise, progression native TM,
-portail et deux types d’examen blanc — appariement et mise en ordre.
+Application eLearning autonome Odoo 20 Community, fondée sur les cours natifs.
+Ce dépôt porte trois addons, sans dépendance métier à TM. L’adaptateur historique
+a rejoint le dépôt TM sous `training_management_interactive` ; voir le
+[découpage final](docs/J15-module-layout.md).
 
-L’addon historique `training_management_elearning`, LGPL-3.0-only, raccorde la
-bibliothèque `training_interactive` à TM et à son adaptateur Survey. Les nouveaux
+Les nouveaux
 addons `training_elearning` et `training_elearning_survey` livrent les
 [offres autonomes composées d’examens](docs/J3-autonomous-exam-offers.md), sur les
 cours et adhésions natifs sans dépendance métier à TM. Le [raccordement aux ventes](docs/J4-autonomous-sales.md) ajoute les sièges nominatifs,
 l’autorisation commerciale et le renouvellement. Le [portail entreprise](docs/J5-company-mandates.md)
-limite consultation et attribution aux achats explicitement mandatés. Les [activités natives](docs/J6-native-course-activities.md) ajoutent PDF, articles, vidéos publiques et prérequis explicites. Les [plans vendus et corrections d’édition](docs/J7-edition-revisions.md) conservent les références et acquis antérieurs. Le [retrait motivé](docs/J8-availability-notices.md) ferme les activités sans effacer les preuves. Les ressources interactives autonomes et TP restent à raccorder. Les [lecteurs et examens communs](docs/J1-shared-readers-exams.md)
+limite consultation et attribution aux achats explicitement mandatés. Les [activités natives](docs/J6-native-course-activities.md) ajoutent PDF, articles, vidéos publiques et prérequis explicites. Les [plans vendus et corrections d’édition](docs/J7-edition-revisions.md) conservent les références et acquis antérieurs. Le [retrait motivé](docs/J8-availability-notices.md) ferme les activités sans effacer les preuves. Les activités interactives et TP utilisent les mêmes obligations natives et historiques personnels. Les [lecteurs et examens communs](docs/J1-shared-readers-exams.md)
 poursuivent cette extraction. Le [moteur de passation commun](docs/J1-shared-exam-runtime.md)
 porte désormais le chronométrage et les réponses. Les [obligations des offres TM](docs/J2-shared-exam-obligations.md)
 sont figées par inscription. Voir [la tranche J1](docs/J1-shared-interactive.md)
@@ -67,3 +67,5 @@ Suite : [bilans propres à chaque achat](docs/J12-purchase-scoped-reports.md).
 Suite : [attestations autonomes vérifiables](docs/J13-verifiable-learning-certificates.md).
 
 Suite : [activités interactives autonomes et historiques personnels](docs/J14-autonomous-interactive.md).
+
+Suite : [trois addons autonomes et déplacement de l’adaptateur TM](docs/J15-module-layout.md).

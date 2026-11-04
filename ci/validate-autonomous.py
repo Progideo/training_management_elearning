@@ -119,6 +119,9 @@ with Database("autonomous", folder) as db:
     with result_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "result-revisions-prepare.log", stdin=data)
     # The global native snapshot includes every fixture created above.
+    invitation_probe = ROOT / "ci/probe-native-invitations.py"
+    with invitation_probe.open() as data:
+        checked(command("shell", "--no-http"), folder / "invitations-prepare.log", stdin=data)
     reminder_probe = ROOT / "ci/probe-reminders.py"
     with reminder_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "reminders-prepare.log", stdin=data)
@@ -141,6 +144,8 @@ with Database("autonomous", folder) as db:
         checked(command("shell", "--no-http"), folder / "preserved.log", stdin=data)
     with acquisition_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "acquisitions-preserved.log", stdin=data)
+    with invitation_probe.open() as data:
+        checked(command("shell", "--no-http"), folder / "invitations-preserved.log", stdin=data)
     with reminder_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "reminders-preserved.log", stdin=data)
     with result_probe.open() as data:
@@ -209,6 +214,50 @@ with Database("autonomous", folder) as db:
     assert_tests_ran(text, ["training_elearning_sale"])
     with mandates_probe.open() as data:
         checked(command("shell", "--no-http"), folder / "mandates-preserved.log", stdin=data)
+    # Real native SMTP, confined to an in-memory sink with no external relay.
+    smtp_name = db.name + "_smtp"
+    checked(
+        [
+            "docker",
+            "run",
+            "--rm",
+            "-d",
+            "--name",
+            smtp_name,
+            "--network",
+            db.name,
+            "--network-alias",
+            "learning-smtp",
+            "--read-only",
+            "--cap-drop=ALL",
+            "--security-opt=no-new-privileges",
+            "--memory=64m",
+            "--cpus=0.25",
+            "--entrypoint",
+            "python3",
+            "-v",
+            f"{ROOT / 'ci/confined_smtp.py'}:/tmp/confined_smtp.py:ro",
+            compatibility["odoo_image"],
+            "-B",
+            "/tmp/confined_smtp.py",
+        ],
+        folder / "smtp-start.log",
+    )
+    try:
+        with (ROOT / "ci/probe-notification-smtp.py").open() as data:
+            text = checked(
+                command("shell", "--no-http"), folder / "smtp-delivery.log", stdin=data, allow_tracebacks=True
+            )
+        for marker in (
+            "J20_NATIVE_PORTAL_INVITATION_DELIVERED_TO_CONFINED_SMTP",
+            "J20_REVOKED_NATIVE_INVITATION_CANCELLED_BEFORE_SMTP",
+            "J20_NATIVE_SMTP_REJECTION_AND_SAME_EVENT_RETRY_PRESERVE_ACCESS",
+            "J20_NATIVE_FEEDBACK_SMTP_OPENS_FULL_REVISION_CLOCK_WITHOUT_PEDAGOGICAL_ATTACHMENT",
+        ):
+            assert marker in text
+    finally:
+        checked(["docker", "rm", "-f", smtp_name], folder / "smtp-cleanup.log")
+
     # A separate final phase intentionally adds TM and checks cross-app context
     # isolation. Independence was asserted before adding any TM business model.
     text = checked(

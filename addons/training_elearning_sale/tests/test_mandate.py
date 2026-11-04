@@ -222,11 +222,63 @@ class TestEnterpriseMandates(MandateCase):
         mandate.action_grant()
         self.service()._assign(mandate.id, contact.id)
         seat = self.env["training.elearning.sale.allocation"].search([("line_id", "=", line.id)])
+        # D16: a controlled attribution now invokes the native invitation;
+        # ambiguous identities remain a separate coordination case.
+        self.assertTrue(seat.activated_at)
+        native_user = contact.with_context(active_test=False).user_ids
+        self.assertEqual(len(native_user), 1)
+        self.assertTrue(native_user.has_group("base.group_portal"))
+        self.assertEqual(seat.membership_id.learning_user_id, native_user)
+        notice = (
+            self.env["training.elearning.reminder"]
+            .sudo()
+            .search([("allocation_id", "=", seat.id), ("kind", "=", "invitation")])
+        )
+        self.assertEqual(notice.state, "queued")
+        self.assertEqual(notice.mail_id.recipient_ids, contact)
+        self.assertFalse(notice.mail_id.email_to or notice.mail_id.email_cc or notice.mail_id.attachment_ids)
+        self.assertEqual(notice.mail_id.model, "res.users")
+        self.assertTrue(notice.mail_id._learning_delivery_allowed())
+        self.service()._assign(mandate.id, contact.id)
+        self.assertEqual(len(contact.with_context(active_test=False).user_ids), 1)
+        self.assertEqual(
+            len(
+                self.env["training.elearning.reminder"]
+                .sudo()
+                .search([("allocation_id", "=", seat.id), ("kind", "=", "invitation")])
+            ),
+            1,
+        )
+        self.assertEqual(self.service()._view(mandate.id)["rows"][0]["state"], "Actif")
+
+    def test_ambiguous_native_account_stays_pending_without_disclosure(self):
+        _course, _slide, _order, line = self.prepared()
+        line.action_learning_authorize("Fictional invitation verification")
+        email = self.learner.partner_id.email
+        contact = self.env["res.partner"].create({"name": "Fictional same email separate contact", "email": email})
+        mandate = (
+            self.env["training.elearning.sale.mandate"]
+            .with_user(self.manager)
+            .create(
+                {
+                    "line_id": line.id,
+                    "user_id": self.representative.id,
+                    "valid_until": fields.Datetime.now() + timedelta(days=20),
+                    "can_assign": True,
+                    "beneficiary_ids": [Command.set(contact.ids)],
+                    "reason": "Fictional ambiguous roster",
+                }
+            )
+        )
+        mandate.action_grant()
+        self.service()._assign(mandate.id, contact.id)
+        seat = self.env["training.elearning.sale.allocation"].search([("line_id", "=", line.id)])
         self.assertFalse(seat.activated_at)
         self.assertTrue(seat.activity_ids)
+        self.assertFalse(contact.user_ids)
+        self.assertNotIn(self.learner.login, str(self.service()._view(mandate.id)))
         self.service()._assign(mandate.id, contact.id)
         self.assertEqual(len(seat.activity_ids), 1)
-        self.assertEqual(self.service()._view(mandate.id)["rows"][0]["state"], "En attente de finalisation")
 
 
 @tagged("post_install", "-at_install")

@@ -15,3 +15,5 @@ from . import public_catalogue
 from . import acquisition
 
 from . import reminder
+from . import native_mail_boundary
+from . import native_invitation

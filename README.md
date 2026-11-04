@@ -77,3 +77,5 @@ Suite : [résultats révisés et bilans de période](docs/J17-motivated-exam-res
 Suite : [invalidation motivée des acquis](docs/J18-motivated-acquisition-invalidation.md).
 
 Suite : [notifications ciblées et rappels contractuels](docs/J19-scoped-learning-notifications.md).
+
+Suite : [invitations natives et transport confiné](docs/J20-native-invitations-and-confined-mail.md).

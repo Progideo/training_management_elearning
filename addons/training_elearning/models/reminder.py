@@ -16,6 +16,7 @@ POLICY = {
     "learning_notice_correction_days",
 }
 KINDS = [
+    ("invitation", "Native Beneficiary Invitation"),
     ("activation", "Learner Access Activated"),
     ("invalidation", "Acquisition Decision"),
     ("course_end", "Course Access Ending"),
@@ -111,6 +112,32 @@ class Reminder(models.Model):
         self.ensure_one()
         item = self.sudo()
         member = item.membership_id
+        if item.kind == "invitation":
+            if member:
+                user = member.learning_user_id
+                if (
+                    not member.learning_started_at
+                    or not member.active
+                    or member.learning_state != "active"
+                    or member.learning_ends_at <= fields.Datetime.now()
+                    or not member.channel_id.active
+                    or member.channel_id.learning_state != "published"
+                    or user.partner_id != member.partner_id
+                ):
+                    return False
+                return {
+                    "user": user,
+                    "company": member.channel_id.learning_company_id,
+                    "deadline": False,
+                    "url": "/web/login",
+                }
+            activation = item.activation_id
+            if not activation or not activation._authorized():
+                return False
+            user = activation.registration_id.user_id
+            if user.partner_id != activation.registration_id.partner_id:
+                return False
+            return {"user": user, "company": activation.company_id, "deadline": False, "url": "/web/login"}
         if item.kind == "invalidation":
             event = item.invalidation_id
             if not event or event.membership_id != member or event.request_key != item.source_event:
@@ -225,7 +252,7 @@ class Reminder(models.Model):
         }.get(source._name)
 
     @api.private
-    def _enqueue(self, kind, source, *, offset=0, event=None, recipient=None):
+    def _enqueue(self, kind, source, *, offset=0, event=None, recipient=None, existing_mail=None):
         """Only private checked hooks/scanners call this factory; no caller defaults survive."""
         field = self._source_field(source)
         if not field:
@@ -273,7 +300,14 @@ class Reminder(models.Model):
         )
         old = self.sudo().search([("event_key", "=", key)], limit=1)
         if old:
+            if existing_mail and old.mail_id != existing_mail:
+                existing_mail.sudo().write({"state": "cancel"})
             return old
+        if existing_mail:
+            mail = existing_mail.sudo()
+            if mail.recipient_ids != user.partner_id or mail.email_to or mail.email_cc or mail.attachment_ids:
+                raise ValidationError(self.env._("Use only the authorized native invitation recipient."))
+            values.update(mail_id=mail.id, state="queued")
         values.update(
             company_id=company.id,
             user_id=user.id,
@@ -286,13 +320,15 @@ class Reminder(models.Model):
             with self.env.cr.savepoint():
                 notice = super(Reminder, self.sudo().with_context({})).create(values)
         except UniqueViolation:
+            if existing_mail:
+                existing_mail.sudo().write({"state": "cancel"})
             # Another worker already owns this event. Under repeatable read its
             # row can remain invisible until the next transaction; preserving
             # the business action is preferable to preparing a duplicate mail.
             return self.sudo().search([("event_key", "=", key)], limit=1)
         if not notice._allowed():
             notice._store({"state": "cancelled"})
-        elif not offset:
+        elif not offset and not existing_mail:
             notice._process()
         return notice
 

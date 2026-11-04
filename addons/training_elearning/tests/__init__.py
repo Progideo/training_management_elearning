@@ -5,3 +5,5 @@ from . import test_practical
 from . import test_review_calendar
 from . import test_human_practical
 from . import test_path
+
+from . import test_certificate

@@ -3,7 +3,7 @@
     <t t-call="portal.portal_layout">
       <div class="container py-4">
         <h1>Mes cours autonomes</h1>
-        <p><a href="/my/learning-paths">Mes parcours autonomes</a></p>
+        <p><a href="/my/learning-paths">Mes parcours autonomes</a> · <a href="/my/learning-certificates">Mes attestations eLearning</a></p>
         <p t-if="not memberships">Aucun accès activé.</p>
         <ul>
           <li t-foreach="memberships" t-as="member">
@@ -21,6 +21,8 @@
         <p>Progression : <t t-out="progress['percentage']" /> %</p>
         <p>Accès ouvert depuis le <t t-out="access_started_at"/> ; consultation autorisée jusqu’au <t t-out="access_ends_at"/> · fuseau : <t t-out="timezone"/>.</p>
         <p>Plusieurs achats peuvent cumuler vos droits sur cette édition tout en conservant un suivi pédagogique unique. Les acquis antérieurs de cette édition restent pris en compte ; chaque financeur voit uniquement le bilan de son achat.</p>
+        <p><a href="/my/learning-certificates">Mon historique d’attestations</a></p>
+        <form method="post" action="/my/learning-certificates/prepare"><input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/><input type="hidden" name="membership_id" t-att-value="member.id"/><button class="btn btn-outline-primary mb-3" type="submit">Prévisualiser une demande d’attestation</button></form>
         <p t-if="expired">L’accès pédagogique est terminé. Vos états et scores sont conservés.</p>
         <ul>
           <li t-foreach="rows" t-as="row">

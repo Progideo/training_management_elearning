@@ -63,3 +63,5 @@ Suite : [correction humaine et révision ciblée des TP](docs/J10-human-practica
 Suite : [parcours natifs et offres partielles](docs/J11-native-learning-paths.md).
 
 Suite : [bilans propres à chaque achat](docs/J12-purchase-scoped-reports.md).
+
+Suite : [attestations autonomes vérifiables](docs/J13-verifiable-learning-certificates.md).

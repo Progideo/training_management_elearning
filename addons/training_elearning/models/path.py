@@ -230,6 +230,7 @@ class Registration(models.Model):
     user_id = fields.Many2one("res.users", required=True, readonly=True, ondelete="restrict")
     registered_at = fields.Datetime(required=True, readonly=True)
     composition = fields.Json(required=True, readonly=True)
+    learning_certificate_revision = fields.Integer(readonly=True, copy=False)
     activation_ids = fields.One2many("training.elearning.path.activation", "registration_id", readonly=True)
     _one_registration = models.Constraint(
         "UNIQUE(path_id, partner_id)",
@@ -246,6 +247,13 @@ class Registration(models.Model):
     @api.ondelete(at_uninstall=False)
     def _keep_registration(self):
         raise AccessError(self.env._("Keep curriculum history."))
+
+    @api.private
+    def _certificate_touch(self):
+        super(Registration, self.sudo()).write(
+            {"learning_certificate_revision": self.sudo().learning_certificate_revision + 1}
+        )
+        self.flush_recordset(["learning_certificate_revision"])
 
     @api.private
     def _ensure_registration(self, path, partner, composition):

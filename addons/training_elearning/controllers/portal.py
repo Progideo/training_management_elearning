@@ -112,6 +112,21 @@ class Portal(http.Controller):
         except (AccessError, MissingError):
             raise request.not_found() from None
 
+    @http.route("/my/learning/<int:membership_id>/history", type="http", auth="user", website=True, methods=["GET"])
+    def history(self, membership_id, **kw):
+        try:
+            data = request.env["training.elearning.service"]._history(membership_id)
+            tz = request.env.user.tz or "UTC"
+            for row in data["rows"]:
+                row["acquired_at"] = (
+                    format_datetime(request.env, row["acquired_at"], tz=tz) if row["acquired_at"] else False
+                )
+                for entry in row["entries"]:
+                    entry["date"] = format_datetime(request.env, entry["date"], tz=tz) if entry["date"] else False
+            return private(request.render("training_elearning.learning_history", {"history": data, "timezone": tz}))
+        except (AccessError, MissingError):
+            raise request.not_found() from None
+
     @http.route(
         "/my/learning/<int:membership_id>/activities/<int:slide_id>",
         type="http",

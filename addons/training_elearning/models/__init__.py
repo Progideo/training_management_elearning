@@ -7,3 +7,7 @@ from . import human_practical, review_queue, review_notice, human_access
 from . import path, path_activation, path_notice, path_service, path_boundary
 
 from . import certificate, certificate_service, certificate_boundary, certificate_notice
+
+from . import interactive, interactive_attempt, interactive_lease
+
+from . import history

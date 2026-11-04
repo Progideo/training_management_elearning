@@ -5,14 +5,12 @@ from odoo.exceptions import AccessError, ValidationError
 from odoo.tools import sql
 
 
-def prepare_counter(model):
-    # Before this addon version there are no practical-category lessons. Add
+def prepare_counter(model, name="nbr_learning_task"):
+    # For a newly supported category there are no historical lessons. Add
     # the zero-valued nullable counter without recomputing native stored
     # statistics (and their audit dates) on every historical course/section.
-    if sql.table_exists(model.env.cr, model._table) and not sql.column_exists(
-        model.env.cr, model._table, "nbr_learning_task"
-    ):
-        sql.create_column(model.env.cr, model._table, "nbr_learning_task", "int4")
+    if sql.table_exists(model.env.cr, model._table) and not sql.column_exists(model.env.cr, model._table, name):
+        sql.create_column(model.env.cr, model._table, name, "int4")
 
 
 class Course(models.Model):
@@ -31,6 +29,7 @@ class Slide(models.Model):
     def _auto_init(self):
         prepare_counter(self)
         return super()._auto_init()
+
     slide_category = fields.Selection(
         selection_add=[("learning_task", "Practical Work")], ondelete={"learning_task": "set default"}
     )

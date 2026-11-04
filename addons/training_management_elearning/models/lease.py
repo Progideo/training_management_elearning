@@ -14,7 +14,7 @@ class Lease(models.Model):
         if not attempt:
             return super()._context_values(version, attempt)
         if getattr(attempt, "_name", None) != "training.elearning.attempt":
-            raise AccessError(self.env._("Unsupported learner context."))
+            return super()._context_values(version, attempt)
         attempt.with_env(self.env)._authorize()
         if attempt.sudo().version_id != version:
             raise AccessError(self.env._("Attempt version mismatch."))
@@ -30,7 +30,7 @@ class Lease(models.Model):
 
     @api.private
     def _is_preview(self):
-        return not self.sudo().attempt_id
+        return False if self.sudo().attempt_id else super()._is_preview()
 
     @api.private
     def _content_snapshot(self):

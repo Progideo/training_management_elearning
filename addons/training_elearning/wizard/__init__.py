@@ -6,3 +6,5 @@ from . import review
 from . import path
 
 from . import certificate
+
+from . import interactive

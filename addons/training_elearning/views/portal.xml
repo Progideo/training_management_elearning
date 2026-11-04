@@ -21,7 +21,7 @@
         <p>Progression : <t t-out="progress['percentage']" /> %</p>
         <p>Accès ouvert depuis le <t t-out="access_started_at"/> ; consultation autorisée jusqu’au <t t-out="access_ends_at"/> · fuseau : <t t-out="timezone"/>.</p>
         <p>Plusieurs achats peuvent cumuler vos droits sur cette édition tout en conservant un suivi pédagogique unique. Les acquis antérieurs de cette édition restent pris en compte ; chaque financeur voit uniquement le bilan de son achat.</p>
-        <p><a href="/my/learning-certificates">Mon historique d’attestations</a></p>
+        <p><a t-att-href="'/my/learning/%s/history' % member.id">Mon historique pédagogique</a> · <a href="/my/learning-certificates">Mon historique d’attestations</a></p>
         <form method="post" action="/my/learning-certificates/prepare"><input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/><input type="hidden" name="membership_id" t-att-value="member.id"/><button class="btn btn-outline-primary mb-3" type="submit">Prévisualiser une demande d’attestation</button></form>
         <p t-if="expired">L’accès pédagogique est terminé. Vos états et scores sont conservés.</p>
         <ul>
@@ -61,4 +61,5 @@
       </div>
     </t>
   </template>
+  <template id="learning_history" name="Private retained learning history"><t t-call="portal.portal_layout"><div class="container py-4"><a t-att-href="'/my/learning/%s' % history['id']">Mon cours</a><h1>Mon historique pédagogique</h1><h2 class="h4" t-out="history['title']"/><p>Fuseau horaire : <t t-out="timezone"/>. Cet historique ne rouvre ni supports, ni questions, ni corrigés d’examens après expiration.</p><article t-foreach="history['rows']" t-as="row" class="card my-3"><div class="card-body"><h3 class="h5" t-out="row['title']"/><p><span t-if="row['complete']">Critère acquis</span><span t-else="">Critère non acquis</span><span t-if="row['acquired_at']"> · <t t-out="row['acquired_at']"/></span></p><ul><li t-foreach="row['entries']" t-as="entry"><a t-if="entry['url']" t-att-href="entry['url']" t-out="entry['label']"/><span t-else="" t-out="entry['label']"/><span t-if="entry['date']"> · <t t-out="entry['date']"/></span><ul t-if="entry['themes']"><li t-foreach="entry['themes']" t-as="theme"><t t-out="theme['name']"/> : <t t-out="theme['points']"/> / <t t-out="theme['maximum']"/></li></ul></li></ul></div></article></div></t></template>
 </odoo>

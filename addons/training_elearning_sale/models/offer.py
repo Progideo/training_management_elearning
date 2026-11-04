@@ -169,7 +169,9 @@ class Line(models.Model):
             if DECISION & vals.keys() or any("default_" + k in self.env.context for k in DECISION):
                 raise AccessError(self.env._("Use the commercial authorization action."))
             if any(
-                vals.get(key) for key in CONTRACT - {"learning_purchase_kind", "learning_report_months"}
+                vals.get(key)
+                for key in CONTRACT
+                - {"learning_purchase_kind", "learning_report_months", "learning_review_days", "learning_revision_days"}
             ) and not self.env.user.has_group(MANAGER):
                 raise AccessError(self.env._("Use the configured autonomous product."))
             if any("default_" + key in self.env.context for key in CONTRACT) and not self.env.user.has_group(MANAGER):
@@ -178,9 +180,12 @@ class Line(models.Model):
             if product_id:
                 defaults = self._learning_defaults(product_id)
                 if (
-                    "learning_report_months" in vals
+                    defaults["learning_channel_id"]
                     and not self.env.user.has_group(MANAGER)
-                    and vals["learning_report_months"] != defaults["learning_report_months"]
+                    and any(
+                        key in vals and vals[key] != defaults[key]
+                        for key in ("learning_report_months", "learning_review_days", "learning_revision_days")
+                    )
                 ):
                     raise AccessError(self.env._("Use the configured autonomous product."))
                 for key, value in defaults.items():

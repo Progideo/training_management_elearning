@@ -160,7 +160,7 @@ class TestEnterpriseMandates(MandateCase):
         with self.assertRaises(AccessError):
             self.env["training.elearning.exam.service"].with_user(self.representative)._result(attempt)
         data = self.service()._view(mandate.id)
-        self.assertEqual(set(data["rows"][0]), {"beneficiary", "start", "end", "state"})
+        self.assertEqual(set(data["rows"][0]), {"beneficiary", "start", "end", "state", "summary"})
         for word in ("score", "attempt", "answers", "membership_id", "activity_ids", "notification_mail_id"):
             self.assertNotIn(word, str(data).lower())
         view = self.mandate(line, self.peer, assign=False)
@@ -264,12 +264,23 @@ class TestEnterprisePortal(MandateCase, HttpCase):
         seat = self.env["training.elearning.sale.allocation"].search([("line_id", "=", line.id)])
         self.assertEqual(len(seat), 1)
         self.assertEqual(self.url_open("/my/learning/%s" % seat.membership_id.id).status_code, 404)
+        export = "/my/learning-purchases/%s/summary.csv" % mandate.id
+        self.learner.partner_id.name = "=FICTIONAL FORMULA()"
+        downloaded = self.url_open(export)
+        self.assertEqual(downloaded.status_code, 200)
+        self.assertIn("no-store", downloaded.headers["Cache-Control"])
+        self.assertIn("'=FICTIONAL FORMULA()", downloaded.text)
+        self.assertIn("Progression des cours financés", downloaded.text)
+        self.assertNotIn("score", downloaded.text.lower())
+
         self.authenticate(self.peer.login, self.peer.login)
         self.assertEqual(self.url_open("/my/learning-purchases/%s" % mandate.id).status_code, 404)
+        self.assertEqual(self.url_open(export).status_code, 404)
         self.authenticate(self.representative.login, self.representative.login)
         mandate.write({"revocation_reason": "Fictional immediate withdrawal"})
         mandate.action_revoke()
         self.assertEqual(self.url_open("/my/learning-purchases/%s" % mandate.id).status_code, 404)
+        self.assertEqual(self.url_open(export).status_code, 404)
         response = self.url_open(
             "/my/counters", data=json.dumps(counters), headers={"Content-Type": "application/json"}
         )

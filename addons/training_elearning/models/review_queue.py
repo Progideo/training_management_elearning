@@ -99,6 +99,16 @@ class Queue(models.Model):
                 raise AccessError(self.env._("A first practical deposit requires active course access."))
             reviewer = slide._learning_check_reviewer(member.learning_user_id)
         pending = bool(queue and queue.state == "pending")
+        # Preserve the feedback that originated this revision cycle, including
+        # replacement candidates. It cannot be reconstructed from the mutable
+        # queue once another purchase funds later practical work.
+        submission._store(
+            {
+                "revision_parent_id": (queue.submission_id.revision_parent_id.id if pending else queue.review_id.id)
+                if queue
+                else False
+            }
+        )
         calendar = self.env["resource.calendar"].sudo().browse(item.get("review_calendar")).exists()
         if not calendar or calendar.company_id != member.channel_id.learning_company_id:
             raise ValidationError(self.env._("Check the frozen practical contract calendar."))
@@ -315,3 +325,4 @@ class Submission(models.Model):
     learner_name = fields.Char(related="membership_id.partner_id.name")
     review_queue_id = fields.Many2one("training.elearning.review.queue", readonly=True, ondelete="restrict")
     review_id = fields.Many2one("training.elearning.review", readonly=True, ondelete="restrict")
+    revision_parent_id = fields.Many2one("training.elearning.review", readonly=True, ondelete="restrict")

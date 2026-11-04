@@ -190,6 +190,100 @@ class TestAutonomousExams(AutonomousCase):
             service._start(member.id, slides.id)
         self.assertEqual(member._learning_progress()["percentage"], 100)
 
+    def test_mixed_native_lessons_exam_prerequisites_and_optional_obligations(self):
+        exam = self.exam()
+        course = (
+            self.env["slide.channel"]
+            .with_user(self.manager)
+            .create({"name": "Fictional mixed edition", "training_course_id": self.catalog.id})
+        )
+        article = (
+            self.env["slide.slide"]
+            .with_user(self.manager)
+            .create(
+                {
+                    "name": "Fictional mixed article",
+                    "channel_id": course.id,
+                    "slide_category": "article",
+                    "html_content": "<p>Fictional lesson</p>",
+                    "is_published": True,
+                }
+            )
+        )
+        required = (
+            self.env["slide.slide"]
+            .with_user(self.manager)
+            .create(
+                {
+                    "channel_id": course.id,
+                    "survey_id": exam.id,
+                    "learning_exam_obligation": "pass",
+                    "learning_prerequisite_ids": [Command.set(article.ids)],
+                    "is_published": True,
+                }
+            )
+        )
+        optional = (
+            self.env["slide.slide"]
+            .with_user(self.manager)
+            .create(
+                {
+                    "channel_id": course.id,
+                    "survey_id": self.exam().id,
+                    "learning_exam_obligation": "optional",
+                    "is_published": True,
+                }
+            )
+        )
+        course.action_learning_publish()
+        financial = new_test_user(
+            self.env, login="fictional_mixed_financial", groups="training_elearning.group_elearning_manager"
+        )
+        member = (
+            self.env["slide.channel.partner"]
+            .with_user(financial)
+            .create({"channel_id": course.id, "partner_id": self.learner.partner_id.id})
+        )
+        member.action_learning_activate(
+            fields.Datetime.now() + timedelta(days=2), self.learner.id, "Fictional mixed activation"
+        )
+        service = self.env["training.elearning.exam.service"].with_user(self.learner)
+        with self.assertRaises(AccessError):
+            service._start(member.id, required.id)
+        # Display order is never a prerequisite; this optional exam is open.
+        attempt = service._start(member.id, optional.id)
+        service._submit(attempt.id)
+        self.assertEqual(member.completion, 0)
+        self.env["training.elearning.service"].with_user(self.learner)._declare(member.id, article.id)
+        self.assertEqual(member.completion, 50)
+        attempt = service._start(member.id, required.id)
+        question = attempt.predefined_question_ids[0]
+        service._save(attempt.id, question.id, question.suggested_answer_ids.filtered("is_correct").ids, False)
+        service._submit(attempt.id)
+        self.assertEqual(member.completion, 100)
+        leaf = (
+            self.env["slide.slide.partner"]
+            .sudo()
+            .search([("slide_id", "=", required.id), ("partner_id", "=", self.learner.partner_id.id)])
+        )
+        self.assertTrue(leaf.completed)
+        with self.assertRaises(AccessError):
+            self.env["training.elearning.service"].with_user(self.learner)._declare(member.id, required.id)
+        self.assertEqual(
+            self.env["training.elearning.exam.requirement"].sudo().search_count([("membership_id", "=", member.id)]), 2
+        )
+
+    def test_legacy_typed_requirement_survives_source_archival_without_plan_backfill(self):
+        course, slide = self.offer(obligations=["complete"])
+        member = self.member(course)
+        member._learning_store({"learning_plan": False})
+        slide.with_user(self.manager).write({"active": False})
+        self.assertEqual(member._learning_progress()["required"], 1)
+        self.assertEqual(member.completion, 0)
+        self.assertFalse(member.learning_plan)
+        with self.assertRaises(AccessError):
+            self.env["training.elearning.exam.service"].with_user(self.learner)._start(member.id, slide.id)
+
     def test_standard_unmanaged_course_still_uses_native_completion(self):
         course = (
             self.env["slide.channel"]

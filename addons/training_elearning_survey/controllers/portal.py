@@ -16,59 +16,6 @@ def private(response):
 
 
 class Portal(http.Controller):
-    @http.route("/my/learning", type="http", auth="user", website=True, methods=["GET"])
-    def workspace(self, **kw):
-        candidates = (
-            request.env["slide.channel.partner"]
-            .sudo()
-            .search(
-                [("learning_user_id", "=", request.env.uid), ("learning_state", "=", "active"), ("active", "=", True)]
-            )
-        )
-        allowed = candidates.browse()
-        for member in candidates:
-            try:
-                request.env["training.elearning.service"]._membership(member.id, history=True)
-                allowed |= member
-            except AccessError:
-                continue
-        return private(request.render("training_elearning_survey.workspace", {"memberships": allowed}))
-
-    @http.route("/my/learning/<int:membership_id>", type="http", auth="user", website=True, methods=["GET"])
-    def course(self, membership_id, **kw):
-        try:
-            member = request.env["training.elearning.service"]._membership(membership_id, history=True)
-            member._learning_sync_progress()
-            requirements = (
-                request.env["training.elearning.exam.requirement"]
-                .sudo()
-                .search([("membership_id", "=", member.id)], order="id")
-            )
-            service = request.env["training.elearning.exam.service"]
-            labels = dict(requirements._fields["obligation"]._description_selection(request.env))
-            rows = [
-                {
-                    "slide": row.slide_id.id,
-                    "title": row.exam_id.title,
-                    "label": labels[row.obligation],
-                    "status": service._requirement_status(row),
-                }
-                for row in requirements
-            ]
-            return private(
-                request.render(
-                    "training_elearning_survey.course",
-                    {
-                        "member": member,
-                        "rows": rows,
-                        "progress": member._learning_progress(),
-                        "expired": member.learning_ends_at <= fields.Datetime.now(),
-                    },
-                )
-            )
-        except (AccessError, MissingError):
-            raise request.not_found() from None
-
     @http.route(
         "/my/learning/<int:membership_id>/exams/<int:slide_id>",
         type="http",
@@ -78,7 +25,7 @@ class Portal(http.Controller):
     )
     def exam(self, membership_id, slide_id, **kw):
         try:
-            member = request.env["training.elearning.service"]._membership(membership_id)
+            member, _slide, _item = request.env["training.elearning.service"]._activity(membership_id, slide_id)
             service = request.env["training.elearning.exam.service"]
             row = service._requirement(member, slide_id)
             if request.httprequest.method == "POST":

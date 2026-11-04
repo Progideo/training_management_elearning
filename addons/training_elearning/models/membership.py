@@ -69,7 +69,8 @@ class Membership(models.Model):
     def _recompute_completion(self):
         managed = self.filtered(lambda m: m.channel_id.training_course_id)
         result = super(Membership, self - managed)._recompute_completion()
-        managed._learning_sync_progress()
+        if not self.env.context.get("learning_projection_in_progress"):
+            managed._learning_sync_progress()
         return result
 
     def action_learning_access(self):
@@ -134,7 +135,7 @@ class Membership(models.Model):
                 "learning_ends_at": end,
                 "learning_access_log": log,
                 "active": True,
-                "member_status": "joined",
+                "member_status": self.member_status if self.learning_started_at else "joined",
             }
         )
         self._learning_sync_progress()
@@ -173,6 +174,20 @@ class Membership(models.Model):
 
 class LessonEvidence(models.Model):
     _inherit = "slide.slide.partner"
+
+    @api.private
+    def _learning_project(self, member, slide_id, complete):
+        # This flag only suppresses recursive recomputation. Public create/write
+        # remain denied regardless of any context supplied by a caller.
+        model = self.sudo().with_context({}, learning_projection_in_progress=True)  # pylint: disable=context-overridden
+        row = model.search([("slide_id", "=", slide_id), ("partner_id", "=", member.partner_id.id)], limit=1)
+        if not row:
+            row = super(LessonEvidence, model).create(  # pylint: disable=super-method-mismatch
+                {"slide_id": slide_id, "partner_id": member.partner_id.id, "completed": bool(complete)}
+            )
+        elif row.completed != bool(complete):
+            super(LessonEvidence, row).write({"completed": bool(complete)})  # pylint: disable=super-method-mismatch
+        return row
 
     @api.model_create_multi
     def create(self, vals_list):

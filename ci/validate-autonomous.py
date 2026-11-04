@@ -46,6 +46,8 @@ with Database("autonomous", folder) as db:
     assert_tests_ran(text, ["training_elearning"])
     with (ROOT / "ci/probe-lessons.py").open() as data:
         checked(command("shell", "--no-http"), folder / "lessons-prepare.log", stdin=data)
+    with (ROOT / "ci/probe-practicals.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "practicals-prepare.log", stdin=data)
     text = checked(
         command(
             "-u", "training_elearning", "--stop-after-init", "--test-enable", "--test-tags=/training_elearning,-/web"
@@ -56,6 +58,9 @@ with Database("autonomous", folder) as db:
     assert_tests_ran(text, ["training_elearning"])
     with (ROOT / "ci/probe-lessons.py").open() as data:
         checked(command("shell", "--no-http"), folder / "lessons-preserved.log", stdin=data)
+
+    with (ROOT / "ci/probe-practicals.py").open() as data:
+        checked(command("shell", "--no-http"), folder / "practicals-preserved.log", stdin=data)
 
     addons = ["training_elearning", "training_elearning_survey", "training_mock_exam"]
     text = checked(

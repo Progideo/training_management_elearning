@@ -328,7 +328,7 @@ class TestNativeLessonPortal(LessonCase, HttpCase):
         )
         slide.write(
             {
-                "html_content": '<p>Fictional article</p><img src="/web/image/%s?access_token=untrusted"/><img src="/web/image/%s"/><iframe src="https://example.invalid/untrusted"></iframe>'
+                "html_content": '<p>Fictional article</p><img src="/web/image/%s-a1b2c3/fictional.png?access_token=untrusted"/><img src="/web/image/%s"/><iframe src="https://example.invalid/untrusted"></iframe>'
                 % (image.id, foreign.id)
             }
         )

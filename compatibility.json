@@ -13,7 +13,7 @@
   ],
   "elearning_version": "20.0.3.4.0",
   "autonomous_addons": {
-    "training_elearning": "20.0.1.3.0",
+    "training_elearning": "20.0.1.4.0",
     "training_elearning_survey": "20.0.1.3.0",
     "training_elearning_sale": "20.0.1.3.0"
   },

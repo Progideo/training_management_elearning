@@ -46,11 +46,13 @@ msgstr "Ligne de vente"
 
 #. module: training_elearning_sale
 #: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_allocation__partner_id
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__beneficiary_id
 msgid "Partner"
 msgstr "Bénéficiaire"
 
 #. module: training_elearning_sale
 #: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_allocation__membership_id
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__membership_id
 msgid "Membership"
 msgstr "Accès apprenant"
 
@@ -223,3 +225,93 @@ msgstr "Accordé"
 #: model:ir.model.fields.selection,name:training_elearning_sale.selection__training_elearning_sale_mandate__state__revoked
 msgid "Revoked"
 msgstr "Révoqué"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__order_id
+msgid "Sales Order"
+msgstr "Commande"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__allocation_id
+msgid "Allocation"
+msgstr "Attribution nominative"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__course_id
+msgid "Course"
+msgstr "Édition du cours"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__starts_at
+msgid "Starts At"
+msgstr "Début de la période financée"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__ends_at
+msgid "Ends At"
+msgstr "Fin de la période financée"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__percentage
+msgid "Progression (%)"
+msgstr "Progression (%)"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__complete
+msgid "Complete"
+msgstr "Achevé"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__completed_at
+msgid "Completed At"
+msgstr "Achevé le"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__waiting_correction
+msgid "Waiting Correction"
+msgstr "Correction en attente"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__prerequisite_blocked
+msgid "Prerequisite Blocked"
+msgstr "Prérequis non satisfait"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__closed_at
+msgid "Closed At"
+msgstr "Bilan figé le"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__company_id
+msgid "Company"
+msgstr "Société exploitante"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_product_template__learning_review_days
+#: model:ir.model.fields,field_description:training_elearning_sale.field_sale_order_line__learning_review_days
+msgid "Learning Review Days"
+msgstr "Correction (jours ouvrés)"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_product_template__learning_revision_days
+#: model:ir.model.fields,field_description:training_elearning_sale.field_sale_order_line__learning_revision_days
+msgid "Learning Revision Days"
+msgstr "Révision (jours calendaires)"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_product_template__learning_path_id
+#: model:ir.model.fields,field_description:training_elearning_sale.field_sale_order_line__learning_path_id
+msgid "Learning Path"
+msgstr "Édition du parcours"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_product_template__learning_path_course_ids
+#: model:ir.model.fields,field_description:training_elearning_sale.field_sale_order_line__learning_path_course_ids
+msgid "Learning Path Course"
+msgstr "Cours couverts par l’offre"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_product_template__learning_path_start_months
+#: model:ir.model.fields,field_description:training_elearning_sale.field_sale_order_line__learning_path_start_months
+msgid "Learning Path Start Months"
+msgstr "Démarrage des cours (mois)"

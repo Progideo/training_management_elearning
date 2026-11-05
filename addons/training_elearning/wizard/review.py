@@ -115,5 +115,11 @@ class DeliveryResolution(models.TransientModel):
 
     def action_apply(self):
         self.ensure_one()
-        self.notice_id.action_retry(reason=self.reason, manual=self.manual)
-        return {"type": "ir.actions.act_window_close"}
+        notice_id = self.notice_id.action_retry(reason=self.reason, manual=self.manual)
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "training.elearning.review.notice",
+            "res_id": notice_id,
+            "view_mode": "form",
+            "target": "current",
+        }

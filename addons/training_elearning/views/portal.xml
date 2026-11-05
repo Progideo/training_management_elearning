@@ -49,7 +49,7 @@
         </p>
         <t t-if="item['kind']=='video'">
           <p>Cette vidéo est hébergée sur un service public externe.</p>
-          <iframe t-if="video" t-att-src="video" title="Vidéo pédagogique publique" class="w-100" height="400" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-presentation" allowfullscreen="allowfullscreen" />
+          <iframe t-if="video" t-att-src="video" title="Vidéo pédagogique publique" class="w-100" height="400" referrerpolicy="strict-origin" sandbox="allow-scripts allow-same-origin allow-presentation" allowfullscreen="allowfullscreen" />
           <p t-else="">Cette vidéo est indisponible.</p>
         </t>
         <p>Ouvrir cette activité ne la termine pas. Votre déclaration confirme sa complétion ; elle ne constitue pas une évaluation de maîtrise.</p>

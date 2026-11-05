@@ -294,6 +294,41 @@ class TestNativeLessons(LessonCase):
 
 @tagged("post_install", "-at_install")
 class TestNativeLessonPortal(LessonCase, HttpCase):
+    def test_public_video_identifies_only_site_origin_and_keeps_private_page_policy(self):
+        from lxml import html
+
+        course = self.course()
+        slide = (
+            self.env["slide.slide"]
+            .with_user(self.manager)
+            .with_context(website_slides_skip_fetch_metadata=True)
+            .create(
+                {
+                    "name": "Fictional intentionally public video",
+                    "channel_id": course.id,
+                    "slide_category": "video",
+                    "video_url": "https://www.youtube.com/watch?v=fictional01",
+                    "learning_public_video": True,
+                    "is_published": True,
+                }
+            )
+        )
+        course.action_learning_publish()
+        member = self.member(course)
+        self.authenticate(self.learner.login, self.learner.login)
+        path = "/my/learning/%s/activities/%s" % (member.id, slide.id)
+        response = self.url_open(path + "?private_context=fictional")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers["Referrer-Policy"], "no-referrer")
+        self.assertIn("no-store", response.headers["Cache-Control"])
+        frame = html.fromstring(response.content).xpath("//iframe[@title='Vidéo pédagogique publique']")[0]
+        self.assertEqual(frame.get("src"), "https://www.youtube-nocookie.com/embed/fictional01")
+        self.assertEqual(frame.get("referrerpolicy"), "strict-origin")
+        self.assertEqual(frame.get("sandbox"), "allow-scripts allow-same-origin allow-presentation")
+        self.assertEqual(member.completion, 0)
+        self.authenticate(self.other.login, self.other.login)
+        self.assertEqual(self.url_open(path).status_code, 404)
+
     def test_article_images_are_owned_sanitized_and_not_bearer_links(self):
         course = self.course()
         slide = self.article(course)

@@ -33,5 +33,39 @@ const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/st
  assert.equal(calls,2);assert.equal(bodies[0],bodies[1],'Retry preserves idempotence key and revision');
  assert.match(status.textContent,/Sauvegarde confirmée/);
  let warned=false;callbacks.beforeunload({preventDefault(){warned=true}});assert.equal(warned,false);
+ // A failed lease renewal removes the actual iframe. A later successful save
+ // still has to acknowledge the server receipt and drain the retained queue.
+ const closedCallbacks={},savedBodies=[];
+ let renew,acknowledgements=0;
+ const closedStatus={textContent:'',after(){}},closedRetry={hidden:true};
+ const closedFrame={contentWindow:{postMessage(){acknowledgements++;}},remove(){this.contentWindow=null;}};
+ const closedCfg={...cfg,save:'/closed-frame/save',renew:'/closed-frame/renew'};
+ const closedDocument={getElementById:id=>({config:{textContent:JSON.stringify(closedCfg)},status:closedStatus,content:closedFrame})[id],createElement:()=>closedRetry};
+ vm.runInNewContext(fs.readFileSync(sharedAddons+'/training_interactive/static/src/parent.js','utf8'),{
+  document:closedDocument,window:{addEventListener:(key,callback)=>closedCallbacks[key]=callback},URLSearchParams,AbortController,
+  setTimeout:()=>0,clearTimeout(){},setInterval:callback=>{renew=callback;return 1;},
+  fetch:async(url,options)=>{
+   if(url===closedCfg.renew)throw new Error('offline');
+   savedBodies.push(options.body.toString());
+   if(savedBodies.length===1)throw new Error('offline');
+   return {ok:true,redirected:false,json:async()=>({ok:true,revision:1})};
+  },
+ });
+ closedCallbacks.message({origin:closedCfg.origin,source:closedFrame.contentWindow,data:{nonce:closedCfg.nonce,type:'report',key:'retained-offline-key',data:{state:{step:2}}}});
+ await new Promise(setImmediate);
+ assert.equal(closedRetry.hidden,false);
+ await renew();assert.equal(closedFrame.contentWindow,null,'Renewal failure removes the iframe');
+ closedRetry.onclick();await new Promise(setImmediate);
+ assert.equal(savedBodies.length,2);assert.equal(savedBodies[0],savedBodies[1]);
+ assert.equal(closedRetry.hidden,true,'A confirmed save is not reported as a failure after frame removal');
+ assert.match(closedStatus.textContent,/Sauvegarde confirmée/);
+ assert.match(closedStatus.textContent,/Rechargez le lecteur/);
+ assert.equal(acknowledgements,0);
+ let closedWarned=false;closedCallbacks.beforeunload({preventDefault(){closedWarned=true;}});
+ assert.equal(closedWarned,false,'The confirmed queue permits resuming the reader');
+ closedCallbacks.message({origin:closedCfg.origin,source:null,data:{nonce:closedCfg.nonce,type:'report',key:'forged-detached-frame',data:{state:{step:99}}}});
+ await new Promise(setImmediate);
+ assert.equal(savedBodies.length,2,'A null source cannot impersonate a removed frame');
  console.log('PASS: timeout, visible failure, stable exact replay, ready cannot mask failure, queue drained.');
+ console.log('PASS: offline replay after iframe removal preserves confirmation and rejects null message sources.');
 })().catch(e=>{console.error(e);process.exitCode=1});

@@ -65,6 +65,58 @@ class TestPathSales(PathCase):
             )
         )
 
+    def mandate(self, line):
+        mandate = self.env["training.elearning.sale.mandate"].with_user(self.commercial).create(
+            {
+                "line_id": line.id,
+                "user_id": self.representative.id,
+                "valid_until": fields.Datetime.now() + relativedelta(years=3),
+                "reason": "Fictional purchase projection mandate",
+            }
+        )
+        mandate.action_grant()
+        return mandate
+
+    def test_purchase_offer_keeps_native_product_name_without_line_description(self):
+        first, _a = self.edition("Fictional first named course")
+        second, _b = self.edition("Fictional second named course")
+        product = self.product(self.path([(first, True), (second, True)]))
+        order, line = self.order(product)
+        self.assertFalse(line.name)
+        order.action_confirm()
+        mandate = self.mandate(line)
+        view = self.env["training.elearning.company.service"].with_user(self.representative)._view(mandate.id)
+        self.assertEqual(view["offer"], product.display_name)
+        self.assertNotIn("PRIVATE LESSON TEXT", view["offer"])
+
+    def test_unstarted_path_prerequisites_are_scoped_to_the_purchase_start_window(self):
+        first, activity = self.edition("Fictional prerequisite course")
+        second, _b = self.edition("Fictional dependent course", first)
+        path = self.path([(first, True), (second, True)])
+        seats = []
+        for included in (first | second, second):
+            order, line = self.order(self.product(path, included))
+            order.action_confirm()
+            line.action_learning_authorize("Fictional scoped curriculum agreement")
+            seat = self.seat(line)
+            seat.action_learning_activate()
+            mandate = self.mandate(line)
+            view = self.env["training.elearning.company.service"].with_user(self.representative)._view(mandate.id)
+            self.assertTrue(view["rows"][0]["summary"]["prerequisite_blocked"])
+            self.assertEqual(bool(seat.report_course_ids), first in included)
+            self.assertFalse(seat.path_activation_id.item_ids.filtered(lambda item: item.course_id == second).activated_at)
+            seats.append(seat)
+        later = max(seat.path_activation_id.starts_until for seat in seats) + timedelta(days=1)
+        with patch.object(fields.Datetime, "now", return_value=later):
+            closed = [seat._purchase_summary() for seat in seats]
+            self.assertTrue(all(not summary["prerequisite_blocked"] for summary in closed))
+            member = seats[0].path_activation_id.registration_id._member(first.id)
+            member.with_user(self.manager).action_learning_activate(
+                later + relativedelta(months=6), self.learner.id, "Fictional later independent authorization"
+            )
+            self.env["training.elearning.service"].with_user(self.learner)._declare(member.id, activity.id)
+            self.assertEqual([seat._purchase_summary() for seat in seats], closed)
+
     def test_confirm_authorize_named_seat_and_one_native_membership_per_course(self):
         first, a = self.edition("Fictional whole-path first course")
         second, b = self.edition("Fictional whole-path second course")

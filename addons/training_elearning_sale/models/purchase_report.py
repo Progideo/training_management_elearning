@@ -16,6 +16,7 @@ class CourseReport(models.Model):
     allocation_id = fields.Many2one(
         "training.elearning.sale.allocation", required=True, readonly=True, ondelete="restrict"
     )
+    order_id = fields.Many2one(related="allocation_id.line_id.order_id", string="Sales Order", readonly=True)
     company_id = fields.Many2one(related="allocation_id.company_id", store=True)
     beneficiary_id = fields.Many2one(related="allocation_id.partner_id")
     course_id = fields.Many2one(related="membership_id.channel_id")

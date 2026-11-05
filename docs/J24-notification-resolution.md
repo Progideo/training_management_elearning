@@ -6,7 +6,7 @@ Après une résolution motivée, le formulaire ouvre la notification du nouvel e
 L’incident précédent reste conservé et le traitement existant conserve ses contrôles
 serveur, son destinataire et le départ de la fenêtre contractuelle à l’envoi effectif.
 Le formulaire et les états de notification disposent des libellés français.
-Le champ de motif de la fenêtre possède un identifiant distinct de celui de la fiche.
+Le contre-essai a montré que l’identifiant XML ne change pas l’identifiant du champ natif ; la séparation accessible du motif reste à corriger dans J25.
 
 ## Recette
 

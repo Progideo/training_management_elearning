@@ -165,6 +165,7 @@ msgstr "Fin de l’accès"
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_reviewer_setup__reason
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__reason
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_delivery__reason
+#: model_terms:ir.ui.view,arch_db:training_elearning.review_notice_form
 msgid "Reason"
 msgstr "Motif"
 

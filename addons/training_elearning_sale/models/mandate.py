@@ -237,10 +237,13 @@ class CompanyPortal(models.AbstractModel):
                     not seat and len(seats) < line.product_uom_qty
                 ):
                     choices.append({"id": partner.id, "name": partner.name})
+        offer = line.product_id.display_name
+        if line.name and line.name != offer:
+            offer = "\n".join(filter(None, (offer, line.name)))
         return {
             "id": mandate.id,
             "reference": line.order_id.name,
-            "offer": line.name,
+            "offer": offer,
             "quantity": int(line.product_uom_qty),
             "allocated": len(seats),
             "remaining": max(0, int(line.product_uom_qty) - len(seats)),

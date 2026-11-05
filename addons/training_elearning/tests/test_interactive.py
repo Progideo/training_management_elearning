@@ -249,3 +249,41 @@ class TestAutonomousInteractivePortal(InteractiveCase, HttpCase):
             self.assertNotIn("PRIVATE RUNTIME STATE", hub.text)
             self.assertEqual(self.url_open("/my/learning-interactive/attempt/%s" % config["attempt"]).status_code, 404)
             self.assertIn(self.url_open(file_url).status_code, (403, 404))
+
+    def test_suspension_blocks_open_reader_and_preserves_saved_evidence(self):
+        import json
+        import re
+
+        _course, slide, _version, member = self.interactive()
+        self.authenticate(self.learner.login, self.learner.login)
+        entry = "/my/learning/%s/interactive/%s" % (member.id, slide.id)
+        csrf = re.search(r'name="csrf_token" value="([^"]+)"', self.url_open(entry).text).group(1)
+        parent = self.url_open(entry + "/start", data={"request_key": str(uuid4()), "csrf_token": csrf})
+        config = json.loads(re.search(r'<script id="config" type="application/json">(.*?)</script>', parent.text).group(1))
+        source = re.search(r'<iframe[^>]+src="([^"]+)"', parent.text).group(1)
+        file_url = source.removesuffix("/launch") + "/file/index.html"
+        self.assertEqual(self.url_open(file_url).status_code, 200)
+        renewal = {"csrf_token": config["csrf"], "lease": str(config["lease"])}
+        self.assertEqual(self.url_open(config["renew"], data=renewal).status_code, 200)
+        payload = {"key": str(uuid4()), "revision": 1, "data": {"state": {"step": 2}}}
+        saved = self.url_open(config["save"], data={"csrf_token": config["csrf"], "payload": json.dumps(payload)})
+        self.assertTrue(saved.json()["ok"])
+        attempt = self.env["training.elearning.interactive.attempt"].sudo().browse(config["attempt"])
+        columns = ["revision", "state_json", "result_json", "last_saved_at"]
+        original = attempt.read(columns)
+        started, end, completion = member.learning_started_at, member.learning_ends_at, member.completion
+        member.with_user(self.manager).action_learning_suspend("Fictional isolated reader suspension")
+        self.assertEqual(member.learning_state, "suspended")
+        self.assertEqual(self.url_open("/my/learning-interactive/attempt/%s" % attempt.id).status_code, 404)
+        self.assertIn(self.url_open(source).status_code, (403, 404))
+        self.assertIn(self.url_open(file_url).status_code, (403, 404))
+        self.assertIn(self.url_open(config["renew"], data=renewal).status_code, (403, 404))
+        for data in (payload, {**payload, "key": str(uuid4()), "revision": 2}):
+            response = self.url_open(config["save"], data={"csrf_token": config["csrf"], "payload": json.dumps(data)})
+            self.assertIn(response.status_code, (403, 404))
+        self.assertEqual(attempt.read(columns), original)
+        self.assertEqual(self.env["training.elearning.interactive.event"].search_count([("attempt_id", "=", attempt.id)]), 1)
+        member.with_user(self.manager).action_learning_activate(end, self.learner.id, "Fictional original period restored")
+        self.assertEqual((member.learning_started_at, member.learning_ends_at, member.completion), (started, end, completion))
+        self.assertEqual(self.url_open("/my/learning-interactive/attempt/%s" % attempt.id).status_code, 200)
+        self.assertEqual(attempt.read(columns), original)

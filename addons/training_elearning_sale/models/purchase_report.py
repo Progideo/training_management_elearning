@@ -315,8 +315,14 @@ class Allocation(models.Model):
     def _purchase_summary(self):
         self.ensure_one()
         reports = self.sudo().report_course_ids
+        context = self.sudo().path_activation_id
+        path_blocked = bool(
+            context
+            and fields.Datetime.now() < context.starts_until
+            and context.item_ids.filtered(lambda item: not item.activated_at and not item._ready())
+        )
         if not reports:
-            return {"available": False}
+            return {"available": False, "prerequisite_blocked": path_blocked} if context else {"available": False}
         results = [report._evaluate() for report in reports]
         total = sum(row["required"] for row in results)
         satisfied = sum(row["satisfied"] for row in results)
@@ -349,7 +355,7 @@ class Allocation(models.Model):
             "complete": complete,
             "completed_at": max(completion_dates) if complete and completion_dates else False,
             "waiting_correction": any(row["waiting_correction"] for row in results),
-            "prerequisite_blocked": any(row["prerequisite_blocked"] for row in results),
+            "prerequisite_blocked": path_blocked or any(row["prerequisite_blocked"] for row in results),
             "closed_at": max(closures)
             if len(closures) == len(reports)
             and (not self.path_activation_id or fields.Datetime.now() >= self._path_period_end())

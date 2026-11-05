@@ -607,3 +607,33 @@ msgstr "Retour individuel publié"
 #: code:addons/training_elearning/models/acquisition.py:0
 msgid "Invalidate an acquisition"
 msgstr "Invalider un acquis"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__actor_id
+msgid "Actor"
+msgstr "Auteur de la décision"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__invalidated_at
+msgid "Invalidated At"
+msgstr "Invalidé le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__previous_valid_at
+msgid "Previous Valid At"
+msgstr "Acquis précédent le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__restored_at
+msgid "Restored At"
+msgstr "Nouvel acquis le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__needs_certificate_review
+msgid "Needs Certificate Review"
+msgstr "Attestations à vérifier"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__certificate_ids
+msgid "Certificate"
+msgstr "Attestations"

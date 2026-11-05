@@ -163,6 +163,8 @@ msgstr "Fin de l’accès"
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_access__reason
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_reassign__reason
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_reviewer_setup__reason
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__reason
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_delivery__reason
 msgid "Reason"
 msgstr "Motif"
 
@@ -185,6 +187,7 @@ msgstr "Publié"
 
 #. module: training_elearning
 #: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel_partner__learning_state__pending
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__state__pending
 msgid "Pending"
 msgstr "En attente"
 
@@ -254,6 +257,7 @@ msgstr "Nom"
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__reviewer_id
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_reassign__reviewer_id
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_reviewer_setup__reviewer_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__reviewer_id
 msgid "Reviewer"
 msgstr "Correcteur"
 
@@ -261,6 +265,7 @@ msgstr "Correcteur"
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__submission_id
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__submission_id
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_wizard__submission_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__submission_id
 msgid "Submission"
 msgstr "Rendu"
 
@@ -278,6 +283,7 @@ msgstr "Échéance"
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__state
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__state
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__state
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__state
 msgid "State"
 msgstr "Statut"
 
@@ -311,6 +317,7 @@ msgstr "Clôturé sans validation"
 #. module: training_elearning
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__review_id
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__review_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__review_id
 msgid "Review"
 msgstr "Correction"
 
@@ -338,6 +345,7 @@ msgstr "Notification d’affectation"
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__queue_id
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_reassign__queue_id
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_wizard__queue_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__queue_id
 msgid "Queue"
 msgstr "File de correction"
 
@@ -522,3 +530,68 @@ msgstr "Contenu du rendu"
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__revision_parent_id
 msgid "Revision Parent"
 msgstr "Correction à l’origine de la révision"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__kind
+msgid "Kind"
+msgstr "Type"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__attempt
+msgid "Attempt"
+msgstr "Essai"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__sent_at
+msgid "Sent At"
+msgstr "Envoyé le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__failed
+msgid "Failed"
+msgstr "Échec signalé"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__manual_delivery
+msgid "Manual Delivery"
+msgstr "Remise manuellement tracée"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_delivery__notice_id
+msgid "Notice"
+msgstr "Notification"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_delivery__manual
+msgid "Agreed Alternative Channel"
+msgstr "Canal alternatif convenu"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__state__queued
+msgid "Queued"
+msgstr "En file d’envoi"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__state__sent
+msgid "Sent"
+msgstr "Envoyé"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__state__exception
+msgid "Delivery Incident"
+msgstr "Incident d’envoi"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__state__cancelled
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__kind__assignment
+msgid "Reviewer Assignment"
+msgstr "Affectation du correcteur"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__kind__feedback
+msgid "Published Learner Feedback"
+msgstr "Retour individuel publié"

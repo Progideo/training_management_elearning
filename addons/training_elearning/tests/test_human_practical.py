@@ -217,8 +217,19 @@ class TestHumanPractical(HumanCase):
             self.assertFalse(queue._revision_open())
             self.assertFalse(queue.revision_until)
             self.assertTrue(notice.incident_activity_id)
-            new_id = notice.with_user(self.pedagogy).action_retry(reason="Fictional repaired address")
-            new = self.env["training.elearning.review.notice"].browse(new_id)
+            with Form(
+                self.env["training.elearning.review.delivery"]
+                .with_user(self.pedagogy)
+                .with_context(default_notice_id=notice.id)
+            ) as form:
+                form.reason = "Fictional repaired address"
+            action = form.record.action_apply()
+            self.assertEqual(action["type"], "ir.actions.act_window")
+            self.assertEqual(action["res_model"], "training.elearning.review.notice")
+            self.assertEqual(action["target"], "current")
+            new = self.env["training.elearning.review.notice"].browse(action["res_id"])
+            self.assertEqual(new, review.delivery_notice_id)
+            self.assertEqual(new.attempt, notice.attempt + 1)
             self.sent(new)
             self.assertEqual(queue.revision_until, late + timedelta(days=14))
             notification = self.env["mail.notification"].create(

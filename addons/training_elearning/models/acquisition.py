@@ -211,6 +211,7 @@ class Membership(models.Model):
         coordinator(self)
         return {
             "type": "ir.actions.act_window",
+            "name": self.env._("Invalidate an acquisition"),
             "res_model": "training.elearning.acquisition.invalidate",
             "view_mode": "form",
             "target": "new",

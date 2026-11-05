@@ -146,6 +146,8 @@ msgstr "Fin de l’accès"
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_access__membership_id
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__membership_id
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__membership_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidate__membership_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__membership_id
 msgid "Membership"
 msgstr "Accès apprenant"
 
@@ -166,6 +168,8 @@ msgstr "Fin de l’accès"
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__reason
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_delivery__reason
 #: model_terms:ir.ui.view,arch_db:training_elearning.review_notice_form
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidate__reason
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__reason
 msgid "Reason"
 msgstr "Motif"
 
@@ -227,6 +231,8 @@ msgstr "Révoquer"
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__slide_id
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_reviewer_setup__slide_id
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__slide_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidate__slide_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__slide_id
 msgid "Slide"
 msgstr "Leçon"
 
@@ -596,3 +602,8 @@ msgstr "Affectation du correcteur"
 #: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__kind__feedback
 msgid "Published Learner Feedback"
 msgstr "Retour individuel publié"
+
+#. module: training_elearning
+#: code:addons/training_elearning/models/acquisition.py:0
+msgid "Invalidate an acquisition"
+msgstr "Invalider un acquis"

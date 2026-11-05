@@ -27,3 +27,5 @@ Validation locale : 18 tests natifs existants de correction humaine et de
 bilans par achat réussis ; installation française, libellés effectivement
 chargés et vue compilée vérifiés. Contre-essais navigateur après livraison
 requis, notamment le nombre effectif de libellés du champ dans le dialogue.
+
+La composition épingle également le correctif [TM #144](https://github.com/Progideo/training_management/issues/144), qui empêche le doublon du retour P11 sans fichier. Le socle conserve les deux traces fictives déjà créées ; neuf tests P11 locaux réussis. La CI doit qualifier la nouvelle composition exacte.

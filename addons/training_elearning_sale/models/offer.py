@@ -320,6 +320,7 @@ class Line(models.Model):
         require_manager(self)
         return {
             "type": "ir.actions.act_window",
+            "name": self.env._("Authorize Autonomous Sale Access"),
             "res_model": "training.elearning.sale.authorization",
             "view_mode": "form",
             "target": "new",

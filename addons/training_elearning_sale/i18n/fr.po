@@ -283,6 +283,7 @@ msgstr "Bilan figé le"
 
 #. module: training_elearning_sale
 #: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_course_report__company_id
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_allocation__company_id
 msgid "Company"
 msgstr "Société exploitante"
 
@@ -315,3 +316,14 @@ msgstr "Cours couverts par l’offre"
 #: model:ir.model.fields,field_description:training_elearning_sale.field_sale_order_line__learning_path_start_months
 msgid "Learning Path Start Months"
 msgstr "Démarrage des cours (mois)"
+
+#. module: training_elearning_sale
+#: model:ir.model.fields,field_description:training_elearning_sale.field_training_elearning_sale_allocation__path_activation_id
+msgid "Path Activation"
+msgstr "Autorisation du parcours"
+
+#. module: training_elearning_sale
+#. odoo-python
+#: code:addons/training_elearning_sale/models/offer.py:0
+msgid "Authorize Autonomous Sale Access"
+msgstr "Autoriser les accès autonomes"

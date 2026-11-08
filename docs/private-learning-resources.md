@@ -16,7 +16,7 @@ L’application conserve ses comptes, cours, adhésions et échéances existants
    cours. Les prérequis et indisponibilités de l’activité restent applicables.
 
 Formats téléchargeables : ZIP, XLSX, XLS, PNG, GIF, JPG/JPEG ; les PDF natifs sont
-également conservés. Maximum : **40 Mio par fichier**, non vide, nom sans chemin.
+également conservés. Maximum : **64 Mio par fichier**, non vide, nom sans chemin.
 Les images et classeurs sont téléchargés dans leur format d’origine : le module
 n’ajoute pas de lecteur Excel ni de prévisualisation d’images. Les animations GIF
 restent dans le fichier original. Le redimensionnement natif des grandes images

@@ -25,8 +25,8 @@ msgstr "Choisissez un fichier ZIP, Excel, PNG, GIF, JPEG ou PDF avec un nom sans
 
 #. module: training_elearning_resources
 #: code:addons/training_elearning_resources/models/resource.py:0
-msgid "Choose a nonempty file no larger than 40 MiB."
-msgstr "Choisissez un fichier non vide de 40 Mio maximum."
+msgid "Choose a nonempty file no larger than 64 MiB."
+msgstr "Choisissez un fichier non vide de 64 Mio maximum."
 
 #. module: training_elearning_resources
 #: code:addons/training_elearning_resources/models/resource.py:0

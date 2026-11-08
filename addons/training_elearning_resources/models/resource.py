@@ -11,7 +11,7 @@ from odoo.exceptions import ValidationError
 from odoo.fields import Domain
 from odoo.addons.training_elearning.models.course import AUTHOR
 
-MAX_BYTES = 40 * 1024 * 1024
+MAX_BYTES = 64 * 1024 * 1024
 MIMES = {
     ".zip": "application/zip",
     ".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -85,7 +85,7 @@ class Resource(models.Model):
         data = self.with_context(bin_size=False).data
         body = data.content if data else b""
         if not body or len(body) > MAX_BYTES:
-            raise ValidationError(self.env._("Choose a nonempty file no larger than 40 MiB."))
+            raise ValidationError(self.env._("Choose a nonempty file no larger than 64 MiB."))
         try:
             if ext in (".zip", ".xlsx"):
                 with zipfile.ZipFile(io.BytesIO(body)) as archive:

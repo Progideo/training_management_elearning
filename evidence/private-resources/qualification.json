@@ -11,9 +11,9 @@
     "concurrency",
     "restored"
   ],
-  "resource_addon_sha256": "eb63fc053973d4dd73bd7d0aab2fb40b64f293646a9b29441a6a590ac71ba1e5",
+  "resource_addon_sha256": "27809759d1bc3f400cd8918379fa274f9dbd5301f92242a544e4ed22ee9b2def",
   "shared_addons_sha256": "8e3e55bf98136b2e16f30487ff639c9ca0c59f33d3f9b1e81b30c40cb8f2e4b3",
-  "dump_sha256": "2d7d512bb4e6ccdd7179111225ba1197c642804ad9582c06f3413c271b989d6f",
+  "dump_sha256": "626fe613cb22cba2642e721c6cbe47750710bace1476c7a8e0a54d4e891d0c49",
   "date": "2026-11-08",
   "base_elearning_commit": "98f112757f918000e9a1923d671005b5a03cf3c9",
   "training_management_commit": "645dfe160f5d413684b00f56daabe1fcaa59c4d6",

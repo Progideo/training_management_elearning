@@ -1,6 +1,6 @@
 # Qualification locale — 8 novembre 2026
 
-Complément `training_elearning_resources`, version 20.0.1.0.0, empilé sur la PR #59.
+Complément `training_elearning_resources`, version 20.0.1.0.1, empilé sur la PR #59.
 Aucun fichier de `addons/training_elearning/` ni des autres addons existants n’a
 été modifié. La composition de référence reste épinglée dans `compatibility.json` ;
 le nouveau complément est une installation optionnelle, pas une livraison active.
@@ -44,3 +44,8 @@ exploitable. Les dumps et journaux complets restent locaux. Aucune CI, fusion,
 installation sur une base réelle ou intervention sur un serveur actif.
 
 Recette et limites : [ressources privées](../../docs/private-learning-resources.md).
+
+La limite de téléchargement passe de 40 à 64 Mio pour accepter des archives
+d’exercices plus volumineuses sans changement de leurs octets. Le refus au-delà
+de 64 Mio fait partie des tests répétés. Aucun changement du cœur ou de
+`training_elearning`, aucun nouveau format ni traitement actif des ZIP.

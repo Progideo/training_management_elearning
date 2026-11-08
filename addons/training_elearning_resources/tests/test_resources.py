@@ -193,7 +193,7 @@ class TestResources(ResourceCase, TransactionCase):
             with self.assertRaises(ValidationError), self.cr.savepoint():
                 self.file(slide, name, data)
         with self.assertRaises(ValidationError), self.cr.savepoint():
-            self.file(slide, "oversized.zip", b"x" * (40 * 1024 * 1024 + 1))
+            self.file(slide, "oversized.zip", b"x" * (64 * 1024 * 1024 + 1))
         for link in ("javascript:alert(1)", "//example.invalid", "https://user:pass@example.invalid", "https://example.invalid/\n"):
             with self.assertRaises(ValidationError), self.cr.savepoint():
                 self.env["slide.slide.resource"].with_user(self.manager).create({

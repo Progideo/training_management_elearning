@@ -1,0 +1,40 @@
+{
+  "fictional_only": true,
+  "image": "odoo@sha256:61e3c71b0503c5f658e604c3e340bede20b97d05f726179fa006eae50a32fd23",
+  "full_composition": true,
+  "postgres": "postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336",
+  "phases": [
+    "install",
+    "prepare",
+    "update",
+    "preserved",
+    "concurrency",
+    "restored"
+  ],
+  "resource_addon_sha256": "eb63fc053973d4dd73bd7d0aab2fb40b64f293646a9b29441a6a590ac71ba1e5",
+  "shared_addons_sha256": "8e3e55bf98136b2e16f30487ff639c9ca0c59f33d3f9b1e81b30c40cb8f2e4b3",
+  "dump_sha256": "2d7d512bb4e6ccdd7179111225ba1197c642804ad9582c06f3413c271b989d6f",
+  "date": "2026-11-08",
+  "base_elearning_commit": "98f112757f918000e9a1923d671005b5a03cf3c9",
+  "training_management_commit": "645dfe160f5d413684b00f56daabe1fcaa59c4d6",
+  "ci_triggered": false,
+  "active_databases_touched": false,
+  "qualification_scope": "local fictional complete composition",
+  "new_resource_test_cases": 7,
+  "tests": {
+    "install": {
+      "total": 44,
+      "failed": 0,
+      "errors": 0
+    },
+    "update": {
+      "total": 42,
+      "failed": 0,
+      "errors": 0
+    }
+  },
+  "manual_bench_sha256": {
+    "bench/test-resources.py": "b6007bdbc5e9e5cd4836ce0530eb377aa4f2de7be10e23494188f01c6c688b56",
+    "bench/probe-resources.py": "cfeb50616750751bbc29e04e3b0fe298beec0f41b225a86ecd8c79b0a828a29f"
+  }
+}

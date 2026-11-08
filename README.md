@@ -1,7 +1,8 @@
 # Training Management eLearning
 
 Application eLearning autonome Odoo 20 Community, fondée sur les cours natifs.
-Ce dépôt porte trois addons, sans dépendance métier à TM. L’adaptateur historique
+Ce dépôt porte trois addons principaux et un complément optionnel de
+[ressources privées](docs/private-learning-resources.md), sans dépendance métier à TM. L’adaptateur historique
 a rejoint le dépôt TM sous `training_management_interactive` ; voir le
 [découpage final](docs/J15-module-layout.md).
 

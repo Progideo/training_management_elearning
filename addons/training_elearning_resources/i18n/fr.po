@@ -1,0 +1,54 @@
+# Translation of Training eLearning Resources.
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo 20\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: training_elearning_resources
+#: code:addons/training_elearning_resources/models/resource.py:0
+msgid "Use an absolute HTTP(S) link without credentials or whitespace."
+msgstr "Utilisez un lien HTTP(S) absolu, sans identifiants ni espaces."
+
+#. module: training_elearning_resources
+#: code:addons/training_elearning_resources/models/resource.py:0
+msgid "Create a new course edition to change its supplementary resources."
+msgstr "Créez une nouvelle édition du cours pour modifier ses ressources complémentaires."
+
+#. module: training_elearning_resources
+#: code:addons/training_elearning_resources/models/resource.py:0
+msgid "Choose a ZIP, Excel, PNG, GIF, JPEG or PDF file with a simple filename."
+msgstr "Choisissez un fichier ZIP, Excel, PNG, GIF, JPEG ou PDF avec un nom sans chemin."
+
+#. module: training_elearning_resources
+#: code:addons/training_elearning_resources/models/resource.py:0
+msgid "Choose a nonempty file no larger than 40 MiB."
+msgstr "Choisissez un fichier non vide de 40 Mio maximum."
+
+#. module: training_elearning_resources
+#: code:addons/training_elearning_resources/models/resource.py:0
+msgid "The file does not match its declared format."
+msgstr "Le fichier ne correspond pas au format déclaré."
+
+#. module: training_elearning_resources
+#: code:addons/training_elearning_resources/models/resource.py:0
+msgid "Supplementary resources must remain private without bearer tokens."
+msgstr "Les ressources complémentaires doivent rester privées, sans jeton de partage."
+
+#. module: training_elearning_resources
+#: code:addons/training_elearning_resources/models/resource.py:0
+msgid "This private supplementary resource is unavailable."
+msgstr "Cette ressource complémentaire privée est indisponible."
+
+#. module: training_elearning_resources
+#: code:addons/training_elearning_resources/models/resource.py:0
+msgid "Private supplementary resource access"
+msgstr "Accès privé aux ressources complémentaires"
+
+#. module: training_elearning_resources
+#: code:addons/training_elearning_resources/models/boundary.py:0
+msgid "Update private supplementary files separately from other attachments."
+msgstr "Modifiez les fichiers complémentaires privés séparément des autres pièces jointes."

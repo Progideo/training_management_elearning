@@ -1,0 +1,33 @@
+<odoo>
+  <record id="course_resources" model="ir.ui.view">
+    <field name="name">training.elearning.supplementary.resources</field>
+    <field name="model">slide.channel</field>
+    <field name="inherit_id" ref="training_elearning.course_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//group[@name='learning_content']" position="after">
+        <group string="Ressources complémentaires">
+          <p>ZIP, Excel, PNG, GIF, JPEG et PDF : téléchargement privé. Liens HTTP(S) : ouverture externe. Ressources figées dès la première attribution de cette édition.</p>
+          <field name="slide_resource_ids">
+            <list editable="bottom"><field name="sequence" widget="handle"/><field name="name"/><field name="resource_type"/><field name="file_name"/><field name="data" filename="file_name" invisible="resource_type != 'file'"/><field name="link" invisible="resource_type != 'url'"/></list>
+          </field>
+        </group>
+      </xpath>
+    </field>
+  </record>
+  <template id="course_resources_portal" inherit_id="training_elearning.course">
+    <xpath expr="//p[@t-if='expired']" position="after">
+      <t t-set="resource_rows" t-value="request.env['training.elearning.resource.service']._rows(member.id)"/>
+      <section t-if="resource_rows" aria-label="Ressources complémentaires">
+        <h2>Ressources complémentaires</h2>
+        <article t-foreach="resource_rows" t-as="resource_row">
+          <h3 class="h5" t-out="resource_row['title']"/>
+          <ul><li t-foreach="resource_row['entries']" t-as="resource">
+            <a t-att-href="resource['url']" rel="noreferrer noopener" t-out="resource['name']"/>
+            <span t-if="resource['type']=='url'"> · Site externe</span>
+            <span t-else=""> · Télécharger (<t t-out="resource['filename']"/>)</span>
+          </li></ul>
+        </article>
+      </section>
+    </xpath>
+  </template>
+</odoo>

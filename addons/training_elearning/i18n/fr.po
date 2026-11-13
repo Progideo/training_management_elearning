@@ -1,0 +1,639 @@
+msgid ""
+msgstr ""
+"Language: fr_FR\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "eLearning coordination permission is required."
+msgstr "Le droit de coordination eLearning est requis."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+#: code:addons/training_elearning/models/course.py:0
+msgid "Use courses in your active companies."
+msgstr "Utilisez les cours de vos sociétés actives."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "Publish the course through its controlled action."
+msgstr "Publiez le cours avec son action dédiée."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "Create a new course edition instead of changing its identity."
+msgstr "Créez une nouvelle édition pour changer l’identité du cours."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "Use the controlled course actions."
+msgstr "Utilisez les actions dédiées du cours."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "Keep this course private and on controlled invitation."
+msgstr "Conservez le cours privé avec activation contrôlée des accès."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+#: code:addons/training_elearning/models/course.py:0
+#: code:addons/training_elearning/models/course.py:0
+msgid "Create a new edition for changed content or obligations."
+msgstr "Créez une nouvelle édition pour modifier les contenus ou obligations."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "Check the course identity, active state and prerequisites."
+msgstr "Vérifiez la formation, l’état actif et les prérequis du cours."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/course.py:0
+msgid "Choose supported published course activities."
+msgstr "Choisissez des activités publiées prises en charge."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Use controlled learner access actions."
+msgstr "Utilisez les actions dédiées des accès apprenants."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Provide a reason and a future access end."
+msgstr "Indiquez un motif et une date de fin d’accès future."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Publish an active course before activation."
+msgstr "Publiez un cours actif avant d’activer les accès."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Choose the active Odoo account of this learner."
+msgstr "Choisissez le compte Odoo actif de cet apprenant."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "An activated membership keeps its learner identity."
+msgstr "Un accès déjà activé conserve son compte apprenant."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Renewal cannot shorten active access."
+msgstr "Un renouvellement ne peut pas raccourcir un accès actif."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Provide an access change reason."
+msgstr "Indiquez le motif de modification de l’accès."
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "This private course is unavailable."
+msgstr "Ce cours privé est indisponible."
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel__training_course_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__training_course_id
+msgid "Training Course"
+msgstr "Formation du catalogue"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel__learning_company_id
+msgid "Learning Company"
+msgstr "Société exploitante"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel__learning_state
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel_partner__learning_state
+msgid "Learning State"
+msgstr "État de l’accès"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel_partner__learning_user_id
+msgid "Learning User"
+msgstr "Compte apprenant"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel_partner__learning_started_at
+msgid "Learning Started At"
+msgstr "Accès ouvert le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel_partner__learning_ends_at
+msgid "Learning Ends At"
+msgstr "Fin de l’accès"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_access__membership_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__membership_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__membership_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidate__membership_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__membership_id
+msgid "Membership"
+msgstr "Accès apprenant"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_access__user_id
+msgid "User"
+msgstr "Compte Odoo"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_access__ends_at
+msgid "Ends At"
+msgstr "Fin de l’accès"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_access__reason
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_reassign__reason
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_reviewer_setup__reason
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__reason
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_delivery__reason
+#: model_terms:ir.ui.view,arch_db:training_elearning.review_notice_form
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidate__reason
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__reason
+msgid "Reason"
+msgstr "Motif"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_access__operation
+msgid "Operation"
+msgstr "Opération"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel__learning_state__draft
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_practical__state__draft
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel__learning_state__published
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_practical__state__published
+msgid "Published"
+msgstr "Publié"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel_partner__learning_state__pending
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__state__pending
+msgid "Pending"
+msgstr "En attente"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel_partner__learning_state__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel_partner__learning_state__suspended
+msgid "Suspended"
+msgstr "Suspendu"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__slide_channel_partner__learning_state__revoked
+msgid "Revoked"
+msgstr "Révoqué"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_access__operation__activate
+msgid "Activate or Renew"
+msgstr "Activer ou renouveler"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_access__operation__suspend
+msgid "Suspend"
+msgstr "Suspendre"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_access__operation__revoke
+msgid "Revoke"
+msgstr "Révoquer"
+
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__slide_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_reviewer_setup__slide_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__slide_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidate__slide_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__slide_id
+msgid "Slide"
+msgstr "Leçon"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical_rubric__practical_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__practical_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__practical_id
+msgid "Practical"
+msgstr "TP"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__company_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical_rubric__company_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__company_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__company_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__name
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__learner_name
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__learner_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__reviewer_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__reviewer_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_reassign__reviewer_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_reviewer_setup__reviewer_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__reviewer_id
+msgid "Reviewer"
+msgstr "Correcteur"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__submission_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__submission_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_wizard__submission_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__submission_id
+msgid "Submission"
+msgstr "Rendu"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__first_received_at
+msgid "First Received At"
+msgstr "Premier rendu recevable le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__due_at
+msgid "Due At"
+msgstr "Échéance"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__state
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__state
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__state
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__state
+msgid "State"
+msgstr "Statut"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_queue__state__pending
+msgid "Pending Review"
+msgstr "En attente de correction"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review__outcome__revision
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_queue__state__revision
+msgid "Revision Requested"
+msgstr "Révision demandée"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_queue__state__delivery
+msgid "Feedback Delivery Pending"
+msgstr "Retour en attente de notification"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review__outcome__validated
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_queue__state__validated
+msgid "Validated"
+msgstr "Validé"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_queue__state__closed
+msgid "Closed Without Validation"
+msgstr "Clôturé sans validation"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__review_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__review_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__review_id
+msgid "Review"
+msgstr "Correction"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__revision_until
+msgid "Revision Until"
+msgstr "Révision possible jusqu’au"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__late_submission_used
+msgid "Late Submission Used"
+msgstr "Rendu tardif utilisé"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__assignment_log
+msgid "Assignment Log"
+msgstr "Historique des affectations"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_queue__assignment_notice_id
+msgid "Assignment Notice"
+msgstr "Notification d’affectation"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__queue_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_reassign__queue_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_wizard__queue_id
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__queue_id
+msgid "Queue"
+msgstr "File de correction"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__published_at
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__published_at
+msgid "Published At"
+msgstr "Publié le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__outcome
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_wizard__outcome
+msgid "Outcome"
+msgstr "Décision"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__feedback
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_wizard__feedback
+msgid "Feedback"
+msgstr "Retour pédagogique"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__rubric_results
+msgid "Rubric Results"
+msgstr "Résultats par critère"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__rubric_summary
+msgid "Rubric Summary"
+msgstr "Synthèse des critères"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__revision_eligible
+msgid "Revision Eligible"
+msgstr "Révision autorisée"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review__delivery_notice_id
+msgid "Delivery Notice"
+msgstr "Notification du retour"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_wizard__outcome__validated
+msgid "Validate"
+msgstr "Valider"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_wizard__outcome__revision
+msgid "Request Revision"
+msgstr "Demander une révision"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_wizard__line_ids
+msgid "Line"
+msgstr "Critères"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_wizard_line__wizard_id
+msgid "Wizard"
+msgstr "Assistant"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__criterion
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_wizard_line__criterion_id
+msgid "Criterion"
+msgstr "Critère"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical_rubric__description
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_wizard_line__description
+msgid "Description"
+msgstr "Description"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical_rubric__required
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_wizard_line__required
+msgid "Required"
+msgstr "Obligatoire"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_wizard_line__satisfied
+msgid "Satisfied"
+msgstr "Satisfait"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_reviewer_setup__course_id
+msgid "Course"
+msgstr "Cours"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__origin_id
+msgid "Origin"
+msgstr "Version d’origine"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__version_ref
+msgid "Version Ref"
+msgstr "Référence de version"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__revision_reason
+msgid "Revision Reason"
+msgstr "Motif de révision"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_practical__criterion__self
+msgid "Self-assessment Declaration"
+msgstr "Déclaration d’autoévaluation"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_practical__criterion__deposit
+msgid "Receivable File Submission"
+msgstr "Dépôt de fichiers recevable"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_practical__criterion__human
+msgid "Human Review"
+msgstr "Correction humaine"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__instructions
+msgid "Instructions"
+msgstr "Consignes"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__upload_extensions
+msgid "Upload Extensions"
+msgstr "Extensions autorisées"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__max_files
+msgid "Max Files"
+msgstr "Nombre maximal de fichiers"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__file_mib
+msgid "File Mib"
+msgstr "Taille maximale par fichier (Mio)"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__total_mib
+msgid "Total Mib"
+msgstr "Taille totale maximale (Mio)"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__rubric_ids
+msgid "Rubric"
+msgstr "Grille de critères"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical__review_queue_ids
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__review_queue_id
+msgid "Review Queue"
+msgstr "File de correction"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_practical_rubric__sequence
+msgid "Sequence"
+msgstr "Ordre"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__received_at
+msgid "Received At"
+msgstr "Reçu le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__request_key
+msgid "Request Key"
+msgstr "Clé de dépôt"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_submission__state__received
+msgid "Receivable Deposit"
+msgstr "Dépôt recevable"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__payload_id
+msgid "Payload"
+msgstr "Contenu du rendu"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_submission__revision_parent_id
+msgid "Revision Parent"
+msgstr "Correction à l’origine de la révision"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__kind
+msgid "Kind"
+msgstr "Type"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__attempt
+msgid "Attempt"
+msgstr "Essai"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__sent_at
+msgid "Sent At"
+msgstr "Envoyé le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__failed
+msgid "Failed"
+msgstr "Échec signalé"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_notice__manual_delivery
+msgid "Manual Delivery"
+msgstr "Remise manuellement tracée"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_delivery__notice_id
+msgid "Notice"
+msgstr "Notification"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_review_delivery__manual
+msgid "Agreed Alternative Channel"
+msgstr "Canal alternatif convenu"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__state__queued
+msgid "Queued"
+msgstr "En file d’envoi"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__state__sent
+msgid "Sent"
+msgstr "Envoyé"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__state__exception
+msgid "Delivery Incident"
+msgstr "Incident d’envoi"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__state__cancelled
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__kind__assignment
+msgid "Reviewer Assignment"
+msgstr "Affectation du correcteur"
+
+#. module: training_elearning
+#: model:ir.model.fields.selection,name:training_elearning.selection__training_elearning_review_notice__kind__feedback
+msgid "Published Learner Feedback"
+msgstr "Retour individuel publié"
+
+#. module: training_elearning
+#: code:addons/training_elearning/models/acquisition.py:0
+msgid "Invalidate an acquisition"
+msgstr "Invalider un acquis"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__actor_id
+msgid "Actor"
+msgstr "Auteur de la décision"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__invalidated_at
+msgid "Invalidated At"
+msgstr "Invalidé le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__previous_valid_at
+msgid "Previous Valid At"
+msgstr "Acquis précédent le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__restored_at
+msgid "Restored At"
+msgstr "Nouvel acquis le"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__needs_certificate_review
+msgid "Needs Certificate Review"
+msgstr "Attestations à vérifier"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__certificate_ids
+msgid "Certificate"
+msgstr "Attestations"

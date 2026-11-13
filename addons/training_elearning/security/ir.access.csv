@@ -1,0 +1,72 @@
+id,name,model_id,group_id/id,operation,domain
+course_author,Private course authors,slide.channel,training_elearning.group_elearning_author,crud,"[('training_course_id', '!=', False)]"
+course_scope,Private managed courses,slide.channel,,crud,"['|', ('training_course_id', '=', False), ('learning_company_id', 'in', company_ids)] if user.active and user.has_group('training_elearning.group_elearning_author') else [('training_course_id', '=', False)]"
+slide_author,Private lesson authors,slide.slide,training_elearning.group_elearning_author,crud,"[('channel_id.training_course_id', '!=', False)]"
+slide_scope,Private managed lessons,slide.slide,,crud,"['|', ('channel_id.training_course_id', '=', False), ('channel_id.learning_company_id', 'in', company_ids)] if user.active and user.has_group('training_elearning.group_elearning_author') else [('channel_id.training_course_id', '=', False)]"
+member_manager,Managed learner administration,slide.channel.partner,training_elearning.group_elearning_manager,crud,"[('channel_id.training_course_id', '!=', False)]"
+member_scope,Managed learner privacy,slide.channel.partner,,crud,"['|', ('channel_id.training_course_id', '=', False), ('channel_id.learning_company_id', 'in', company_ids)] if user.active and user.has_group('training_elearning.group_elearning_manager') else [('channel_id.training_course_id', '=', False)]"
+progress_scope,Managed native lesson evidence,slide.slide.partner,,crud,"['|', ('channel_id.training_course_id', '=', False), ('channel_id.learning_company_id', 'in', company_ids)] if user.active and user.has_group('training_elearning.group_elearning_manager') else [('channel_id.training_course_id', '=', False)]"
+access_wizard,Managed access action,training.elearning.access,training_elearning.group_elearning_manager,crud,
+editorial_wizard,Audited editorial correction,training.elearning.editorial,training_elearning.group_elearning_author,crud,
+availability_wizard,Motivated activity availability,training.elearning.availability,training_elearning.group_elearning_manager,crud,
+notice_manager,Private learning notifications,training.elearning.notice,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
+notice_scope,Private notice company scope,training.elearning.notice,,crud,"[('company_id','in',company_ids)]"
+practical_author,Private practical definitions,training.elearning.practical,training_elearning.group_elearning_author,crud,"[('company_id','in',company_ids)]"
+practical_scope,Practical company scope,training.elearning.practical,,crud,"[('company_id','in',company_ids)]"
+practical_revision,Practical version selection,training.elearning.practical.revision,training_elearning.group_elearning_author,crud,
+submission_manager,Practical submission metadata,training.elearning.submission,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
+submission_scope,Submission company scope,training.elearning.submission,,crud,"[('company_id','in',company_ids)]"
+payload_pedagogy,Private pedagogical work files,training.elearning.submission.payload,training_elearning.group_elearning_pedagogy_manager,r,"[('company_id','in',company_ids)]"
+payload_scope,Private work company scope,training.elearning.submission.payload,,crud,"[('company_id','in',company_ids)]"
+rubric_author,Practical rubric author,training.elearning.practical.rubric,training_elearning.group_elearning_author,crud,"[('company_id','in',company_ids)]"
+rubric_reviewer,Assigned practical rubric,training.elearning.practical.rubric,training_elearning.group_elearning_reviewer,r,"[('practical_id.review_queue_ids.reviewer_id','=',user.id)]"
+rubric_scope,Practical rubric company,training.elearning.practical.rubric,,crud,"[('company_id','in',company_ids)]"
+practical_reviewer,Assigned practical definition,training.elearning.practical,training_elearning.group_elearning_reviewer,r,"[('review_queue_ids.reviewer_id','=',user.id)]"
+queue_reviewer,Assigned correction queue,training.elearning.review.queue,training_elearning.group_elearning_reviewer,r,"[('reviewer_id','=',user.id)]"
+queue_pedagogy,Pedagogical correction queue,training.elearning.review.queue,training_elearning.group_elearning_pedagogy_manager,r,"[('company_id','in',company_ids)]"
+queue_scope,Review queue company,training.elearning.review.queue,,crud,"[('company_id','in',company_ids)]"
+submission_reviewer,Assigned practical receipts,training.elearning.submission,training_elearning.group_elearning_reviewer,r,"[('review_queue_id.reviewer_id','=',user.id)]"
+payload_reviewer,Assigned practical files,training.elearning.submission.payload,training_elearning.group_elearning_reviewer,r,"[('submission_id.review_queue_id.reviewer_id','=',user.id),('submission_id.membership_id.learning_user_id','!=',user.id)]"
+review_reviewer,Assigned private judgements,training.elearning.review,training_elearning.group_elearning_reviewer,r,"[('queue_id.reviewer_id','=',user.id)]"
+review_pedagogy,Pedagogical private judgements,training.elearning.review,training_elearning.group_elearning_pedagogy_manager,r,"[('company_id','in',company_ids)]"
+review_scope,Private judgement company,training.elearning.review,,crud,"[('company_id','in',company_ids)]"
+review_wizard,Current reviewer judgement,training.elearning.review.wizard,training_elearning.group_elearning_reviewer,crud,
+review_wizard_line,Current reviewer criteria,training.elearning.review.wizard.line,training_elearning.group_elearning_reviewer,crud,
+review_reassign,Pedagogical reviewer reassignment,training.elearning.review.reassign,training_elearning.group_elearning_pedagogy_manager,crud,
+reviewer_setup,Pedagogical reviewer configuration,training.elearning.reviewer.setup,training_elearning.group_elearning_pedagogy_manager,crud,
+review_notice_pedagogy,Private practical delivery evidence,training.elearning.review.notice,training_elearning.group_elearning_pedagogy_manager,r,"[('company_id','in',company_ids)]"
+review_notice_scope,Practical delivery company,training.elearning.review.notice,,crud,"[('company_id','in',company_ids)]"
+review_delivery,Practical delivery resolution,training.elearning.review.delivery,training_elearning.group_elearning_pedagogy_manager,crud,
+path_author,Curriculum author,training.elearning.path,training_elearning.group_elearning_author,crud,"[('company_id','in',company_ids)]"
+path_scope,Curriculum company,training.elearning.path,,crud,"[('company_id','in',company_ids)]"
+path_line_author,Curriculum composition author,training.elearning.path.line,training_elearning.group_elearning_author,crud,"[('company_id','in',company_ids)]"
+path_line_scope,Curriculum composition company,training.elearning.path.line,,crud,"[('company_id','in',company_ids)]"
+path_registration_manager,Curriculum aggregation coordination,training.elearning.path.registration,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
+path_registration_scope,Curriculum learner company,training.elearning.path.registration,,crud,"[('company_id','in',company_ids)]"
+path_activation_manager,Curriculum contractual activations,training.elearning.path.activation,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
+path_activation_scope,Curriculum activation company,training.elearning.path.activation,,crud,"[('company_id','in',company_ids)]"
+path_item_manager,Curriculum native course provenance,training.elearning.path.item,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
+path_item_scope,Curriculum native course company,training.elearning.path.item,,crud,"[('company_id','in',company_ids)]"
+path_notice_manager,Curriculum private notifications,training.elearning.path.notice,training_elearning.group_elearning_manager,r,"[('company_id','in',company_ids)]"
+path_notice_scope,Curriculum notification company,training.elearning.path.notice,,crud,"[('company_id','in',company_ids)]"
+path_activate_wizard,Explicit manual curriculum authorization,training.elearning.path.activate,training_elearning.group_elearning_manager,crud,
+path_adjust_wizard,Motivated curriculum start adjustment,training.elearning.path.adjust,training_elearning.group_elearning_manager,crud,
+training_elearning_certificate_consent_pedagogy,Private learning certificate records,training.elearning.certificate.consent,training_elearning.group_elearning_pedagogy_manager,r,
+training_elearning_certificate_consent_company,Learning certificate company boundary,training.elearning.certificate.consent,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+training_elearning_certificate_pedagogy,Private learning certificate records,training.elearning.certificate,training_elearning.group_elearning_pedagogy_manager,r,
+training_elearning_certificate_company,Learning certificate company boundary,training.elearning.certificate,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+certificate_change_wizard,Certificate decision dialogue,training.elearning.certificate.change,training_elearning.group_elearning_pedagogy_manager,crud,
+certificate_replace_wizard,Certificate decision dialogue,training.elearning.certificate.replace,training_elearning.group_elearning_pedagogy_manager,crud,
+certificate_notice_pedagogy,Private certificate notifications,training.elearning.certificate.notice,training_elearning.group_elearning_pedagogy_manager,r,
+certificate_notice_company,Certificate notification company boundary,training.elearning.certificate.notice,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+interactive_attempt_pedagogy,Private formative evidence,training.elearning.interactive.attempt,training_elearning.group_elearning_pedagogy_manager,r,
+interactive_attempt_company,Formative company boundary,training.elearning.interactive.attempt,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+interactive_event_pedagogy,Private formative evidence,training.elearning.interactive.event,training_elearning.group_elearning_pedagogy_manager,r,
+interactive_event_company,Formative company boundary,training.elearning.interactive.event,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+interactive_revision_author,Interactive version revision dialogue,training.elearning.interactive.revision,training_elearning.group_elearning_author,crud,
+acquisition_invalidation_pedagogy,Motivated acquisition history,training.elearning.acquisition.invalidation,training_elearning.group_elearning_pedagogy_manager,r,
+acquisition_invalidation_company,Acquisition company boundary,training.elearning.acquisition.invalidation,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+acquisition_invalidate_wizard,Acquisition decision form,training.elearning.acquisition.invalidate,training_elearning.group_elearning_pedagogy_manager,crud,
+acquisition_invalidate_scope,Acquisition decision company,training.elearning.acquisition.invalidate,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+reminder_pedagogy,Private scoped notifications,training.elearning.reminder,training_elearning.group_elearning_pedagogy_manager,r,
+reminder_company,Scoped notification company boundary,training.elearning.reminder,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"

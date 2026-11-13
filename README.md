@@ -1,14 +1,24 @@
 # Training Management eLearning
 
-Extension Odoo 20 Community : ressources formatives privées H5P/SCORM,
-publication versionnée, affectations, tentatives et reprise, progression native TM,
-portail et deux types d’examen blanc — appariement et mise en ordre.
+Application eLearning autonome Odoo 20 Community, fondée sur les cours natifs.
+Ce dépôt porte trois addons principaux et un complément optionnel de
+[ressources privées](docs/private-learning-resources.md), sans dépendance métier à TM. L’adaptateur historique
+a rejoint le dépôt TM sous `training_management_interactive` ; voir le
+[découpage final](docs/J15-module-layout.md).
 
-Un seul addon `training_management_elearning`, LGPL-3.0-only. Il dépend de
-`training_management` et, depuis Q01, de `training_management_survey`. Aucun fichier
-métier TM ni cœur Odoo modifié. Les lecteurs tiers embarqués gardent leurs licences.
+Les nouveaux
+addons `training_elearning` et `training_elearning_survey` livrent les
+[offres autonomes composées d’examens](docs/J3-autonomous-exam-offers.md), sur les
+cours et adhésions natifs sans dépendance métier à TM. Le [raccordement aux ventes](docs/J4-autonomous-sales.md) ajoute les sièges nominatifs,
+l’autorisation commerciale et le renouvellement. Le [portail entreprise](docs/J5-company-mandates.md)
+limite consultation et attribution aux achats explicitement mandatés. Les [activités natives](docs/J6-native-course-activities.md) ajoutent PDF, articles, vidéos publiques et prérequis explicites. Les [plans vendus et corrections d’édition](docs/J7-edition-revisions.md) conservent les références et acquis antérieurs. Le [retrait motivé](docs/J8-availability-notices.md) ferme les activités sans effacer les preuves. Les activités interactives et TP utilisent les mêmes obligations natives et historiques personnels. Les [lecteurs et examens communs](docs/J1-shared-readers-exams.md)
+poursuivent cette extraction. Le [moteur de passation commun](docs/J1-shared-exam-runtime.md)
+porte désormais le chronométrage et les réponses. Les [obligations des offres TM](docs/J2-shared-exam-obligations.md)
+sont figées par inscription. Voir [la tranche J1](docs/J1-shared-interactive.md)
+et la composition exacte de `compatibility.json`. Les lecteurs embarqués gardent
+leurs licences ; aucun cœur Odoo n'est modifié.
 
-## Fonctions livrées
+## Références historiques livrées
 
 | Lot | Fonction livrée | Documentation et preuves |
 | --- | --- | --- |
@@ -30,7 +40,7 @@ sont conservées. [Vérifications de fusion](evidence/merge/verification.txt).
 Dépôt public : [Progideo/training_management_elearning](https://github.com/Progideo/training_management_elearning).
 Voir [organisation et validation](docs/ORGANIZATION.md) et [versions compatibles](compatibility.json).
 
-## Périmètre qualifié
+## Qualification historique
 
 H5P TrueFalse 1.8 via H5PStandalone 3.8.2 ; SCORM 1.2 mono-SCO via scorm-again
 3.5.0. Pas de prise en charge générale H5P, SCORM 2004 ou multi-SCO revendiquée.
@@ -38,7 +48,37 @@ Ces résultats sont formatifs, sans valeur de preuve d’examen inviolable ni é
 automatique d’attestation. Les examens blancs conservent la correction serveur
 native, avec barème exact pour les deux interactions ajoutées.
 
-La charge valide 50 sessions HTTP simultanées, avec sauvegardes p95 de 1,23 s,
+La campagne historique E06 a éprouvé 50 sessions HTTP simultanées, avec sauvegardes p95 de 1,23 s,
 ainsi que leur persistance. Elle ne représente pas 50 navigateurs H5P complets ni
 un dimensionnement de production. Pas d’audit d’accessibilité exhaustif, de
 migration réelle, de banque partagée ou de types complémentaires Q02/Q03.
+
+La cible consolidée du 3 novembre 2026 retient quelques utilisateurs et la
+concurrence ciblée ; les mesures E06 ne sont pas des critères de lancement validés
+pour les nouvelles applications séparées.
+
+Tranche autonome suivante : [TP déclaratifs et dépôts privés](docs/J9-practical-deposits.md).
+
+Suite : [correction humaine et révision ciblée des TP](docs/J10-human-practical-review.md).
+
+Suite : [parcours natifs et offres partielles](docs/J11-native-learning-paths.md).
+
+Suite : [bilans propres à chaque achat](docs/J12-purchase-scoped-reports.md).
+
+Suite : [attestations autonomes vérifiables](docs/J13-verifiable-learning-certificates.md).
+
+Suite : [activités interactives autonomes et historiques personnels](docs/J14-autonomous-interactive.md).
+
+Suite : [trois addons autonomes et déplacement de l’adaptateur TM](docs/J15-module-layout.md).
+
+Suite : [présentation générale des offres autonomes](docs/J16-general-public-offers.md).
+
+Suite : [résultats révisés et bilans de période](docs/J17-motivated-exam-results.md).
+
+Suite : [invalidation motivée des acquis](docs/J18-motivated-acquisition-invalidation.md).
+
+Suite : [notifications ciblées et rappels contractuels](docs/J19-scoped-learning-notifications.md).
+
+Suite : [invitations natives et transport confiné](docs/J20-native-invitations-and-confined-mail.md).
+
+Suite : [composition complète et preuves de restauration](docs/J21-final-release-qualification.md).

@@ -1,0 +1,25 @@
+<odoo>
+ <record id="paperformat_certificate" model="report.paperformat"><field name="name">Learning completion certificate A4</field><field name="format">A4</field><field name="orientation">Portrait</field><field name="margin_top">20</field><field name="margin_bottom">20</field><field name="margin_left">20</field><field name="margin_right">20</field><field name="header_spacing">0</field></record>
+ <record id="report_certificate" model="ir.actions.report"><field name="name">Learning completion certificate</field><field name="model">training.elearning.certificate</field><field name="report_type">qweb-pdf</field><field name="report_name">training_elearning.certificate_pdf</field><field name="paperformat_id" ref="paperformat_certificate"/><field name="group_ids" eval="[(4, ref('training_elearning.group_elearning_pedagogy_manager'))]"/></record>
+ <template id="certificate_pdf"><html><head><meta charset="utf-8"/><style>
+ body { font-family: DejaVu Sans, sans-serif; color: #23354b; font-size: 11pt; line-height: 1.6; }
+ .issuer { font-size: 12pt; border-bottom: 2pt solid #376982; padding-bottom: 14pt; }
+ h1 { font-size: 25pt; line-height: 1.25; margin-top: 34pt; margin-bottom: 28pt; }
+ .holder { font-size: 20pt; font-weight: bold; line-height: 1.3; overflow-wrap: anywhere; }
+ .programme { font-size: 16pt; line-height: 1.4; overflow-wrap: anywhere; }
+ .reference { font-size: 9pt; color: #536273; }
+ .verification { margin-top: 28pt; border-top: 1pt solid #d3dbe1; padding-top: 15pt; }
+ .verification img { width: 90pt; height: 90pt; }
+ .url { font-size: 8pt; overflow-wrap: anywhere; word-break: break-all; }
+ .footer { margin-top: 22pt; font-size: 9pt; color: #536273; }
+ </style></head><body>
+ <div class="issuer" t-out="values['issuer']"/>
+ <h1>Attestation d’achèvement pédagogique</h1>
+ <p>Cette attestation est délivrée à</p><p class="holder" t-out="values['holder_name']"/>
+ <p>pour l’achèvement des obligations pédagogiques applicables à</p><p class="programme" t-out="values['title']"/>
+ <p>Achèvement constaté le <span t-out="values['completed_at']"/> (UTC).<br/>Attestation émise le <span t-out="values['issued_at']"/> (UTC).</p>
+ <p class="reference">Référence : <span t-out="values['reference']"/></p>
+ <div class="verification"><img t-att-src="qr" alt="QR code de vérification"/><p>Vérifiez le statut actuel du document avec ce QR code ou ce lien :</p><p class="url"><a t-att-href="values['url']" t-out="values['url']"/></p></div>
+ <p class="footer">Ce document atteste l’achèvement pédagogique. Il ne prouve ni présence ni temps effectivement passé et ne constitue pas une certification officielle ou Qualiopi.<br/>Modèle : <span t-out="values['template']"/></p>
+ </body></html></template>
+</odoo>

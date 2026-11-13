@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+allocation_manager,Named autonomous seats,training.elearning.sale.allocation,training_elearning_sale.group_learning_sales_manager,crud,
+allocation_company,Named seat company boundary,training.elearning.sale.allocation,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+authorization_manager,Commercial authorization dialogue,training.elearning.sale.authorization,training_elearning_sale.group_learning_sales_manager,crud,
+mandate_manager,Explicit enterprise mandates,training.elearning.sale.mandate,training_elearning_sale.group_learning_sales_manager,crud,
+mandate_company,Enterprise mandate company boundary,training.elearning.sale.mandate,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"
+purchase_report_manager,Purchase course summaries,training.elearning.sale.course.report,training_elearning_sale.group_learning_sales_manager,r,
+purchase_report_company,Purchase summary company boundary,training.elearning.sale.course.report,,crud,"[('company_id','in',company_ids)] if user.active else [('id','=',0)]"

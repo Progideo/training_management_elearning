@@ -3,11 +3,27 @@
   "odoo_image": "odoo@sha256:61e3c71b0503c5f658e604c3e340bede20b97d05f726179fa006eae50a32fd23",
   "training_management": {
     "repository": "Progideo/training_management",
-    "commit": "616d2a342540eb7a7dbb8e48d6ecd084bc2fc926"
+    "commit": "327f1ae70b8c4166f1a640f38757f0f363069b53"
   },
-  "required_addons": [
+  "autonomous_addons": {
+    "training_elearning": "20.0.1.15.6",
+    "training_elearning_survey": "20.0.1.8.1",
+    "training_elearning_sale": "20.0.1.10.3"
+  },
+  "previous_elearning_commit": "6d6b9609801eaae6a53babefd941d457367d0243",
+  "required_tm_interactive_addons": [
+    "training_interactive",
+    "training_mock_exam",
     "training_management",
     "training_management_survey"
   ],
-  "elearning_version": "20.0.2.2.0"
+  "tm_interactive_version": "20.0.3.5.3",
+  "module_relocation_baseline": {
+    "tm_commit": "a56ab67f957e519b61d7c7263fe45bfb2b11d293",
+    "elearning_commit": "5a01ff5bacdf56c6dcd8b4115774d6cbd9bf2a2b"
+  },
+  "legacy_release_baseline": {
+    "tm_commit": "616d2a342540eb7a7dbb8e48d6ecd084bc2fc926",
+    "elearning_commit": "d7d3b976d07831bca2de3c75d6c159308adf7f0d"
+  }
 }

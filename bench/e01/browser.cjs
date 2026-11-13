@@ -3,13 +3,13 @@ const fs=require('node:fs'), assert=require('node:assert/strict');
 (async()=>{
  const ids=JSON.parse(fs.readFileSync('evidence/e01/ids.json','utf8'));
  const password=fs.readFileSync(require('node:path').join(process.env.LMS_SECRET_DIR, 'db_password'),'utf8');
- const browser=await chromium.launch({headless:true,executablePath:chromium.executablePath()});
+ const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_EXECUTABLE_PATH||chromium.executablePath()});
  const context=await browser.newContext(); const page=await context.newPage();
  const base='http://127.0.0.1:18269';
  await page.goto(base+'/web/login');
  await page.locator('[name=login]').fill('e01_browser_author');
  await page.locator('[name=password]').fill(password);
- await Promise.all([page.waitForURL(u=>!u.pathname.endsWith('/web/login')),page.locator('button[type=submit]').click()]);
+ await Promise.all([page.waitForURL(u=>!u.pathname.endsWith('/web/login')),page.locator('form:has([name=login]) button[type=submit]').click()]);
  await page.goto(base+'/training/interactive/preview/'+ids.version);
  await page.locator('#status').filter({hasText:'Contenu chargé'}).waitFor();
  const frame=page.frameLocator('#content').frameLocator('iframe');

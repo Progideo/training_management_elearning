@@ -1,3 +1,4 @@
+const sharedAddons = process.env.TM_ADDONS_DIR;
 const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
 (async()=>{
  const callbacks={},sent=[];
@@ -8,7 +9,7 @@ const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/st
   location:{pathname:'/tm-content/fictitious/launch'},crypto:{randomUUID:()=>String(sent.length)},setInterval:()=>0,
   document:{getElementById:id=>id==='config'?{textContent:JSON.stringify(cfg)}:{},querySelectorAll:()=>[]},
   parent:{postMessage:message=>sent.push(message)}};
- vm.runInNewContext(fs.readFileSync('addons/training_management_elearning/static/src/runner.js','utf8'),context);
+ vm.runInNewContext(fs.readFileSync(sharedAddons+'/training_interactive/static/src/runner.js','utf8'),context);
  await new Promise(setImmediate);
  callbacks.xAPI({data:{statement:{verb:{id:'http://adlnet.gov/expapi/verbs/answered'},result:{completion:true,score:{max:1,raw:1}}}}});
  const report=sent.find(m=>m.type==='report');

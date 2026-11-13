@@ -1,9 +1,9 @@
 import json
 from pathlib import Path
 from odoo.tests import new_test_user
-from odoo.addons.training_management_elearning.tests.test_content_security import package
+from odoo.addons.training_management_interactive.tests.test_content_security import package
 assert env.cr.dbname == 'e01'
-author=new_test_user(env, login='e01_browser_author', password=Path('/run/secrets/db_password').read_text(), groups='training_management_elearning.group_elearning_author')
+author=new_test_user(env, login='e01_browser_author', password=Path('/run/secrets/db_password').read_text(), groups='training_management_interactive.group_elearning_author')
 peer=new_test_user(env, login='e01_browser_peer', password=Path('/run/secrets/db_password').read_text(), groups='base.group_portal')
 params=env['ir.config_parameter']
 params.set_str('training_elearning.portal_origin','http://127.0.0.1:18269')

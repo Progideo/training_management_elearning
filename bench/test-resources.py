@@ -4,7 +4,6 @@ import hashlib
 import json
 from pathlib import Path
 import re
-import shutil
 import subprocess
 import time
 import uuid
@@ -54,7 +53,7 @@ def qualify(addons, output, full=False):
         docker = ["docker", "run", "--rm", "--pull", "never", "-i", "--name", name + "-odoo", "--network", name,
                   "--cpus", "2", "--memory", "3g", "--pids-limit", "256", "--security-opt", "no-new-privileges:true",
                   "-e", "HOST=" + pg, "-e", "USER=fictional", "-e", "PASSWORD=fictional-only",
-                  "-e", "PYTHONDONTWRITEBYTECODE=1", "-v", str(data) + ":/var/lib/odoo",
+                  "-e", "PYTHONDONTWRITEBYTECODE=1",
                   "-v", str(ROOT / "addons") + ":/mnt/elearning-addons:ro",
                   "-v", str(addons) + ":/mnt/shared-addons:ro", "-v", str(ROOT / "bench") + ":/mnt/bench:ro"]
         flags = ["-d", "resources_fictional", "--db-filter=^resources_fictional$",
@@ -62,7 +61,8 @@ def qualify(addons, output, full=False):
                  "--smtp=127.0.0.1", "--smtp-port=1", "--stop-after-init", "--without-demo"]
 
         def execute(label, args, phase=None):
-            command = docker + (["-e", "RESOURCE_PROBE_PHASE=" + phase] if phase else []) + [IMAGE, "odoo"] + args
+            command = docker + ["-v", str(data) + ":/var/lib/odoo"]
+            command += (["-e", "RESOURCE_PROBE_PHASE=" + phase] if phase else []) + [IMAGE, "odoo"] + args
             with (output / (label + ".log")).open("w") as log:
                 result = subprocess.run(command, stdout=log, stderr=log,
                     input="exec(open('/mnt/bench/probe-resources.py').read())" if phase else None, text=True)
@@ -86,14 +86,23 @@ def qualify(addons, output, full=False):
         execute("concurrency", ["shell", *flags, "--no-http"], "concurrency")
         with (output / "fictional.dump").open("wb") as dump:
             call(["docker", "exec", pg, "pg_dump", "-Fc", "-U", "fictional", "resources_fictional"], stdout=dump)
-        shutil.copytree(data, output / "filestore-backup")
+        # Odoo owns the filestore directories on Linux. Archive and restore
+        # as the same container user, without changing the files' permissions.
+        archive = output / "filestore.tar"
+        tar = ["docker", "run", "--rm", "--pull", "never", "--network", "none", "--entrypoint", "tar"]
+        with archive.open("wb") as stream:
+            call(tar + ["-v", str(data) + ":/var/lib/odoo:ro", IMAGE,
+                        "-C", "/var/lib/odoo", "-cf", "-", "filestore"], stdout=stream)
         call(["docker", "exec", pg, "dropdb", "-U", "fictional", "resources_fictional"])
         call(["docker", "exec", pg, "createdb", "-U", "fictional", "resources_fictional"])
         with (output / "fictional.dump").open("rb") as dump:
             call(["docker", "exec", "-i", pg, "pg_restore", "--single-transaction", "-U", "fictional", "-d", "resources_fictional"], stdin=dump)
-        shutil.rmtree(data)
-        shutil.copytree(output / "filestore-backup", data)
+        data = output / "restored-data"
+        data.mkdir()
         data.chmod(0o777)
+        with archive.open("rb") as stream:
+            call(tar + ["-i", "-v", str(data) + ":/var/lib/odoo", IMAGE,
+                        "-C", "/var/lib/odoo", "-xf", "-"], stdin=stream)
         execute("restored", ["shell", *flags, "--no-http"], "preserved")
         (output / "success.json").write_text(json.dumps({"fictional_only": True, "image": IMAGE, "full_composition": full,
             "postgres": POSTGRES, "phases": ["install", "prepare", "update", "preserved", "concurrency", "restored"],

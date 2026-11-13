@@ -92,7 +92,7 @@ def qualify(addons, output, full=False):
         tar = ["docker", "run", "--rm", "--pull", "never", "--network", "none", "--entrypoint", "tar"]
         with archive.open("wb") as stream:
             call(tar + ["-v", str(data) + ":/var/lib/odoo:ro", IMAGE,
-                        "-C", "/var/lib/odoo", "-cf", "-", "filestore"], stdout=stream)
+                        "-C", "/var/lib/odoo", "-cf", "-", "filestore", "resource-checkpoint.json"], stdout=stream)
         call(["docker", "exec", pg, "dropdb", "-U", "fictional", "resources_fictional"])
         call(["docker", "exec", pg, "createdb", "-U", "fictional", "resources_fictional"])
         with (output / "fictional.dump").open("rb") as dump:

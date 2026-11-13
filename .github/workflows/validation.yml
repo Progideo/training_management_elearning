@@ -121,3 +121,45 @@ jobs:
           name: qualification-complete-restauration
           path: ci-results/final-release/
           if-no-files-found: error
+
+  private_resources:
+    name: Ressources privées, conservation et restauration
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Lire le commit Training Management compatible
+        id: resources
+        run: python3 -c 'import json; print("tm=" + json.load(open("compatibility.json"))["training_management"]["commit"])' >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Progideo/training_management
+          ref: ${{ steps.resources.outputs.tm }}
+          path: .dependencies/training_management
+          persist-credentials: false
+      - name: Télécharger les images épinglées du banc
+        run: |
+          python3 - <<'PYTHON'
+          import runpy
+          import subprocess
+
+          bench = runpy.run_path("bench/test-resources.py")
+          for name in ("IMAGE", "POSTGRES"):
+              subprocess.run(["docker", "pull", bench[name]], check=True)
+          PYTHON
+      - name: Tester les ressources privées dans la composition complète
+        run: |
+          python3 bench/test-resources.py --full-composition \
+            --shared-addons .dependencies/training_management/addons \
+            --output "${RUNNER_TEMP}/elearning-resource-results"
+      - name: Journaux de qualification des ressources
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: qualification-ressources-privees
+          path: |
+            ${{ runner.temp }}/elearning-resource-results/*.log
+            ${{ runner.temp }}/elearning-resource-results/success.json
+          if-no-files-found: error

@@ -6,7 +6,7 @@
     "commit": "327f1ae70b8c4166f1a640f38757f0f363069b53"
   },
   "autonomous_addons": {
-    "training_elearning": "20.0.1.15.6",
+    "training_elearning": "20.0.1.15.7",
     "training_elearning_survey": "20.0.1.8.1",
     "training_elearning_sale": "20.0.1.10.3"
   },

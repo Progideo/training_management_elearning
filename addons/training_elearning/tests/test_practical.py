@@ -8,9 +8,23 @@ from uuid import uuid4
 from unittest.mock import patch
 from odoo import fields
 from odoo.exceptions import AccessError, ValidationError
-from odoo.tests import HttpCase, new_test_user, tagged
+from odoo.tests import HttpCase, TransactionCase, new_test_user, tagged
 from .test_activities import LessonCase
 from ..models.submission_files import InvalidSubmission, validate_files
+
+
+@tagged("post_install", "-at_install")
+class TestDefaultViews(TransactionCase):
+    def test_company_defaults_and_upload_policy_action(self):
+        views = self.env["ir.ui.view"]
+        policy_list = self.env.ref("training_elearning.upload_policy_list")
+        policy_form = self.env.ref("training_elearning.upload_policy_form")
+        self.assertEqual(views.default_view("res.company", "form"), self.env.ref("base.view_company_form").id)
+        self.assertNotEqual(views.default_view("res.company", "list"), policy_list.id)
+        self.assertEqual(
+            self.env.ref("training_elearning.upload_policy_action").views,
+            [[policy_list.id, "list"], [policy_form.id, "form"]],
+        )
 
 
 class PracticalCase(LessonCase):

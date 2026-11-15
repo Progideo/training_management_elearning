@@ -60,6 +60,23 @@ class TestPublicAutonomousOffers(LessonCase, HttpCase):
         coordinator = new_test_user(
             self.env, login="fictional_public_tm_coordinator", groups="training_management.group_training_coordinator"
         )
+        editor = new_test_user(
+            self.env, login="fictional_public_catalogue_editor", groups="base.group_user,training_catalog.group_catalog_editor"
+        )
+        tag_group = self.env["slide.channel.tag.group"].create({"name": "Fictional topic group"})
+        public_tag, internal_tag = self.env["slide.channel.tag"].create([
+            {"name": "FICTIONAL SHARED TOPIC", "group_id": tag_group.id, "color": 7},
+            {"name": "SECRET INTERNAL TAG", "group_id": tag_group.id, "color": 0},
+        ])
+        self.assertEqual(public_tag.with_user(editor).name, "FICTIONAL SHARED TOPIC")
+        with self.assertRaises(ValueError), self.env.cr.savepoint():
+            self.catalog.with_user(editor).write({"public_tag_ids": [(4, internal_tag.id)]})
+        self.catalog.with_user(editor).write(
+            {
+                "presentation": "FICTIONAL SHARED PRESENTATION",
+                "public_tag_ids": [(4, public_tag.id)],
+            }
+        )
         self.catalog.category_id = self.env["training.category"].create({"name": "Fictional public shared category"})
         contact = self.env["res.partner"].create({"name": "Fictional public contact"})
         program = (
@@ -75,7 +92,7 @@ class TestPublicAutonomousOffers(LessonCase, HttpCase):
                     "prerequisites": "General prerequisites",
                     "content": "SECRET SUPERVISED PROGRAMME",
                     "duration_hours": 7,
-                    "delivery_mode": "remote",
+                    "delivery_mode": "onsite",
                     "language_id": self.env.ref("base.lang_en").id,
                     "teaching_methods": "Exercises",
                     "evaluation_criteria": "Review",
@@ -97,13 +114,32 @@ class TestPublicAutonomousOffers(LessonCase, HttpCase):
         shared = [row for row in rows if row["id"] == self.catalog.id]
         self.assertEqual(len(shared), 1)
         self.assertEqual(len(shared[0]["offers"]), 2)
-        self.assertEqual({offer["mode"] for offer in shared[0]["offers"]}, {"remote", "autonomous"})
+        self.assertEqual({offer["mode"] for offer in shared[0]["offers"]}, {"onsite", "autonomous"})
         self.authenticate(None, None)
-        response = self.url_open("/formations/catalogue/%s" % self.catalog.id)
+        page_url = "/formations/catalogue/%s" % self.catalog.id
+        response = self.url_open(page_url)
         self.assertEqual(response.status_code, 200)
         self.assertIn(program.title, response.text)
         self.assertIn(course.name, response.text)
         self.assertNotIn(program.content, response.text)
         self.assertNotIn("PRIVATE LESSON TEXT", response.text)
+        for url in (
+            "/formations?mode=onsite",
+            "/formations?mode=autonomous",
+            page_url,
+            "/formations/%s" % program.id,
+        ):
+            html = self.url_open(url).text
+            self.assertIn("FICTIONAL SHARED PRESENTATION", html)
+            self.assertIn("FICTIONAL SHARED TOPIC", html)
+            self.assertIn("o_wslides_channel_tag o_color_7", html)
+            self.assertNotIn("SECRET INTERNAL TAG", html)
+        public_tag.write({"name": "FICTIONAL UPDATED TOPIC", "color": 3})
+        html = self.url_open(page_url).text
+        self.assertIn("FICTIONAL UPDATED TOPIC", html)
+        self.assertIn("o_wslides_channel_tag o_color_3", html)
+        self.assertIn(self.catalog.name, self.url_open("/formations?search=FICTIONAL%20UPDATED%20TOPIC").text)
+        public_tag.color = 0
+        self.assertNotIn("FICTIONAL UPDATED TOPIC", self.url_open(page_url).text)
         self.assertFalse(self.env["slide.channel.partner"].sudo().search_count([("channel_id", "=", course.id)]))
         self.assertFalse(self.env["training.enrollment"].sudo().search_count([("program_id", "=", program.id)]))

@@ -2,6 +2,8 @@
 
 from odoo import api, fields, models
 
+PUBLIC_TAG_COLORS = tuple(range(1, 12))
+
 
 class Course(models.Model):
     _inherit = "slide.channel"
@@ -12,6 +14,25 @@ class Course(models.Model):
 
 class Catalogue(models.Model):
     _inherit = "training.course"
+
+    public_tag_ids = fields.Many2many(
+        "slide.channel.tag",
+        relation="training_course_public_tag_rel",
+        string="Étiquettes publiques",
+        domain=[("color", "in", list(PUBLIC_TAG_COLORS))],
+    )
+
+    @api.private
+    def _catalogue_tags(self):
+        values = super()._catalogue_tags()
+        for course in self:
+            native = course.public_tag_ids.filtered(lambda tag: tag.color in PUBLIC_TAG_COLORS)
+            native = native.sorted(lambda tag: (tag.group_sequence, tag.sequence, tag.id))
+            labels = {tag.name for tag in native}
+            values[course.id] = [tag for tag in values[course.id] if tag["label"] not in labels] + [
+                {"label": tag.name, "color": tag.color} for tag in native
+            ]
+        return values
 
     @api.private
     def _catalogue_offers(self, company):

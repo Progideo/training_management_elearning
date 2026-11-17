@@ -65,3 +65,25 @@ class Catalogue(models.Model):
             }
             for course in courses
         ]
+
+    @api.private
+    def _has_course_review_participation(self, user):
+        self.ensure_one()
+        if super()._has_course_review_participation(user):
+            return True
+        memberships = self.env["slide.channel.partner"].sudo().search(
+            [
+                ("channel_id.training_course_id", "=", self.id),
+                ("channel_id.learning_company_id", "=", self.company_id.id),
+                ("learning_user_id", "=", user.id),
+                ("partner_id", "=", user.partner_id.id),
+                ("learning_started_at", "!=", False),
+                ("learning_state", "=", "active"),
+                ("member_status", "=", "completed"),
+            ]
+        )
+        for member in memberships:
+            progress = member._learning_progress()
+            if progress["required"] and progress["complete"]:
+                return True
+        return False

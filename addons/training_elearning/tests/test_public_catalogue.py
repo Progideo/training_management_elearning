@@ -143,3 +143,21 @@ class TestPublicAutonomousOffers(LessonCase, HttpCase):
         self.assertNotIn("FICTIONAL UPDATED TOPIC", self.url_open(page_url).text)
         self.assertFalse(self.env["slide.channel.partner"].sudo().search_count([("channel_id", "=", course.id)]))
         self.assertFalse(self.env["training.enrollment"].sudo().search_count([("program_id", "=", program.id)]))
+
+    def test_course_review_requires_actual_completion_for_the_signed_in_learner(self):
+        self.catalog.public_catalogue = True
+        edition = self.course()
+        first = self.article(edition)
+        second = self.article(edition, name="Fictional second mandatory article")
+        edition.action_learning_publish()
+        member = self.member(edition)
+        service = self.env["training.elearning.service"].with_user(self.learner)
+        self.assertFalse(self.catalog._course_review_status(self.learner))
+        service._declare(member.id, first.id)
+        self.assertFalse(self.catalog._course_review_status(self.learner))
+        service._declare(member.id, second.id)
+        self.assertEqual(self.catalog._course_review_status(self.learner), "eligible")
+        self.assertFalse(self.catalog._course_review_status(self.other))
+        self.catalog._submit_course_review(self.learner, "5", "Fictional autonomous review", "1")
+        self.assertEqual(self.catalog._course_review_status(self.learner), "pending")
+        self.assertFalse(self.catalog._public_reviews())

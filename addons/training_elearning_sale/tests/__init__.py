@@ -6,3 +6,5 @@ from . import test_practical_policy
 from . import test_paths
 
 from . import test_purchase_report
+
+from . import test_public_catalogue

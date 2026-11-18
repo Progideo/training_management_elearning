@@ -1,4 +1,15 @@
 <odoo>
+  <record id="catalogue_course_public_tags" model="ir.ui.view">
+    <field name="name">training.course.public.tags</field>
+    <field name="model">training.course</field>
+    <field name="inherit_id" ref="training_catalog.view_training_course_form"/>
+    <field name="arch" type="xml">
+      <field name="presentation" position="after">
+        <field name="public_tag_ids" widget="many2many_tags"
+               options="{'color_field': 'color', 'no_create': True, 'no_edit_color': True}"/>
+      </field>
+    </field>
+  </record>
   <record id="course_form" model="ir.ui.view">
     <field name="name">training.elearning.course.form</field>
     <field name="model">slide.channel</field>

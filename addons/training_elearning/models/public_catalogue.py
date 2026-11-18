@@ -2,6 +2,8 @@
 
 from odoo import api, fields, models
 
+PUBLIC_TAG_COLORS = tuple(range(1, 12))
+
 
 class Course(models.Model):
     _inherit = "slide.channel"
@@ -10,8 +12,31 @@ class Course(models.Model):
     learning_public_conditions = fields.Text(string="Conditions commerciales publiques", translate=True)
 
 
+    @api.private
+    def _catalogue_shop_offers(self, company):
+        return {}
+
 class Catalogue(models.Model):
     _inherit = "training.course"
+
+    public_tag_ids = fields.Many2many(
+        "slide.channel.tag",
+        relation="training_course_public_tag_rel",
+        string="Étiquettes publiques",
+        domain=[("color", "in", list(PUBLIC_TAG_COLORS))],
+    )
+
+    @api.private
+    def _catalogue_tags(self):
+        values = super()._catalogue_tags()
+        for course in self:
+            native = course.public_tag_ids.filtered(lambda tag: tag.color in PUBLIC_TAG_COLORS)
+            native = native.sorted(lambda tag: (tag.group_sequence, tag.sequence, tag.id))
+            labels = {tag.name for tag in native}
+            values[course.id] = [tag for tag in values[course.id] if tag["label"] not in labels] + [
+                {"label": tag.name, "color": tag.color} for tag in native
+            ]
+        return values
 
     @api.private
     def _catalogue_offers(self, company):
@@ -32,15 +57,54 @@ class Catalogue(models.Model):
                 ]
             )
         )
-        return offers + [
-            {
+        shop_offers = courses._catalogue_shop_offers(company)
+        for course in courses:
+            presentation = {
                 "course_id": course.training_course_id.id,
                 "title": course.name,
                 "mode": "autonomous",
                 "kind": self.env._("Autonome"),
                 "conditions": course.learning_public_conditions or "",
-                "url": "/contactus",
-                "action": self.env._("Demander une offre autonome"),
             }
-            for course in courses
-        ]
+            products = shop_offers.get(course.id)
+            if products:
+                offers.extend(
+                    {
+                        **presentation,
+                        "title": product["name"] if len(products) > 1 else course.name,
+                        "url": product["url"],
+                        "action": self.env._("S’inscrire en eLearning"),
+                    }
+                    for product in products
+                )
+            else:
+                offers.append(
+                    {
+                        **presentation,
+                        "url": "/contactus",
+                        "action": self.env._("Demander une offre autonome"),
+                    }
+                )
+        return offers
+
+    @api.private
+    def _has_course_review_participation(self, user):
+        self.ensure_one()
+        if super()._has_course_review_participation(user):
+            return True
+        memberships = self.env["slide.channel.partner"].sudo().search(
+            [
+                ("channel_id.training_course_id", "=", self.id),
+                ("channel_id.learning_company_id", "=", self.company_id.id),
+                ("learning_user_id", "=", user.id),
+                ("partner_id", "=", user.partner_id.id),
+                ("learning_started_at", "!=", False),
+                ("learning_state", "=", "active"),
+                ("member_status", "=", "completed"),
+            ]
+        )
+        for member in memberships:
+            progress = member._learning_progress()
+            if progress["required"] and progress["complete"]:
+                return True
+        return False

@@ -12,6 +12,10 @@ class Course(models.Model):
     learning_public_conditions = fields.Text(string="Conditions commerciales publiques", translate=True)
 
 
+    @api.private
+    def _catalogue_shop_offers(self, company):
+        return {}
+
 class Catalogue(models.Model):
     _inherit = "training.course"
 
@@ -53,18 +57,35 @@ class Catalogue(models.Model):
                 ]
             )
         )
-        return offers + [
-            {
+        shop_offers = courses._catalogue_shop_offers(company)
+        for course in courses:
+            presentation = {
                 "course_id": course.training_course_id.id,
                 "title": course.name,
                 "mode": "autonomous",
                 "kind": self.env._("Autonome"),
                 "conditions": course.learning_public_conditions or "",
-                "url": "/contactus",
-                "action": self.env._("Demander une offre autonome"),
             }
-            for course in courses
-        ]
+            products = shop_offers.get(course.id)
+            if products:
+                offers.extend(
+                    {
+                        **presentation,
+                        "title": product["name"] if len(products) > 1 else course.name,
+                        "url": product["url"],
+                        "action": self.env._("S’inscrire en eLearning"),
+                    }
+                    for product in products
+                )
+            else:
+                offers.append(
+                    {
+                        **presentation,
+                        "url": "/contactus",
+                        "action": self.env._("Demander une offre autonome"),
+                    }
+                )
+        return offers
 
     @api.private
     def _has_course_review_participation(self, user):

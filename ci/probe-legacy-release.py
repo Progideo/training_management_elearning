@@ -9,6 +9,8 @@ from psycopg2 import sql
 assert env.cr.dbname in ("tm_suite_test", "tm_suite_restored", "tm_suite_rollback")
 params = env["ir.config_parameter"]
 key = "qualification.legacy.release.snapshot"
+# Columns removed on purpose by a later Training Management migration.
+RETIRED = {("training_delivery", "session_guaranteed")}
 saved = params.get_str(key)
 env.flush_all()
 
@@ -33,7 +35,7 @@ if not saved:
             "SELECT column_name FROM information_schema.columns WHERE table_schema='public' AND table_name=%s ORDER BY ordinal_position",
             [table],
         )
-        columns = [row[0] for row in env.cr.fetchall()]
+        columns = [row[0] for row in env.cr.fetchall() if (table, row[0]) not in RETIRED]
         data["tables"][table] = {"columns": columns, "sha256": table_rows(table, columns)}
     params.set_str(key, json.dumps(data))
     env.cr.commit()

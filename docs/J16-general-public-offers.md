@@ -14,6 +14,12 @@ concerner le site courant. Le contact reste proposé pour une offre générale
 sans produit achetable sur ce site. L’accès pédagogique suit les règles
 d’autorisation et les contrats existants.
 
+Pour la refonte du catalogue (lot 1), la fiche commune reçoit aussi des
+données scalaires de l’offre autonome présentée : durée native du contenu,
+nombre d’activités, et, avec Ventes eLearning, le plus bas prix public hors
+taxes des produits visibles sur le site courant et sa durée d’accès en mois.
+Aucun titre d’activité, description ni fichier n’est projeté.
+
 Retirer cette présence publique ne modifie ni adhésion, ni accès, ni acquis.
 Une consultation ne crée aucune inscription. La société exploitante est celle du
 site courant natif Odoo 20, indépendante d’un identifiant fourni par le visiteur.

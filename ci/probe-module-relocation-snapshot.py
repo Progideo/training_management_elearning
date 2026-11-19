@@ -18,6 +18,9 @@ tables = [
     "training_program_version",
     "ir_attachment",
 ]
+# Opt-in columns added by a later Training Management release: they must stay empty
+# on historical rows, and every original column is still compared.
+ADDED = {"training_program_version": ("also_onsite", "also_remote", "also_blended")}
 actual = {}
 for table in tables:
     env.cr.execute(
@@ -27,9 +30,15 @@ for table in tables:
             else "SELECT * FROM {} ORDER BY id"
         ).format(sql.Identifier(table))
     )
+    names = [column.name for column in env.cr.description]
+    rows = env.cr.fetchall()
+    added = [names.index(column) for column in ADDED.get(table, ()) if column in names]
+    for row in rows:
+        assert all(row[index] in (None, False) for index in added), (table, row[0])
+    rows = [tuple(value for index, value in enumerate(row) if index not in added) for row in rows]
     actual[table] = hashlib.sha256(
         json.dumps(
-            env.cr.fetchall(),
+            rows,
             default=lambda value: (
                 hashlib.sha256(bytes(value)).hexdigest() if isinstance(value, (bytes, memoryview)) else str(value)
             ),

@@ -161,3 +161,17 @@ class TestPublicAutonomousOffers(LessonCase, HttpCase):
         self.catalog._submit_course_review(self.learner, "5", "Fictional autonomous review", "1")
         self.assertEqual(self.catalog._course_review_status(self.learner), "pending")
         self.assertFalse(self.catalog._public_reviews())
+
+    def test_autonomous_catalogue_facts_are_scalars_only(self):
+        course = self.course(name="Fictional autonomous facts", description_html="<p>SECRET NATIVE DESCRIPTION</p>")
+        article = self.article(course)
+        course.action_learning_publish()
+        company = course.learning_company_id
+        facts = self.catalog.sudo()._catalogue_facts(company)[self.catalog.id]
+        self.assertIsNone(facts["autonomous"])
+        course.write({"learning_public_catalogue": True})
+        autonomous = self.catalog.sudo()._catalogue_facts(company)[self.catalog.id]["autonomous"]
+        self.assertEqual(autonomous["modules"], course.total_slides)
+        self.assertEqual(autonomous["hours"], course.total_time)
+        self.assertEqual(set(autonomous), {"hours", "modules", "access_months", "price"})
+        self.assertNotIn(article.name, str(autonomous))

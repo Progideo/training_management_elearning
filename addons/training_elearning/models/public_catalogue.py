@@ -88,6 +88,46 @@ class Catalogue(models.Model):
         return offers
 
     @api.private
+    def _catalogue_public_channels(self, company):
+        """Explicitly presented, published autonomous courses of this operator."""
+        return (
+            self.env["slide.channel"]
+            .sudo()
+            .search(
+                [
+                    ("training_course_id", "in", self.ids),
+                    ("learning_company_id", "=", company.id),
+                    ("learning_state", "=", "published"),
+                    ("active", "=", True),
+                    ("learning_public_catalogue", "=", True),
+                ],
+                order="id",
+            )
+        )
+
+    @api.private
+    def _catalogue_facts(self, company):
+        # The shared catalogue hook exists from Training Management lot 1; older
+        # versions never call it, so this projection stays optional.
+        parent = getattr(super(), "_catalogue_facts", None)
+        facts = parent(company) if parent else {course.id: {} for course in self}
+        channels = self._catalogue_public_channels(company)
+        for course in self:
+            channel = channels.filtered(lambda c, t=course: c.training_course_id == t)[:1]
+            # Scalars only: no native description, slide title or file is projected.
+            facts[course.id]["autonomous"] = (
+                {
+                    "hours": channel.total_time,
+                    "modules": channel.total_slides,
+                    "access_months": None,
+                    "price": None,
+                }
+                if channel
+                else None
+            )
+        return facts
+
+    @api.private
     def _has_course_review_participation(self, user):
         self.ensure_one()
         if super()._has_course_review_participation(user):

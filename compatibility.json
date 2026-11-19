@@ -3,7 +3,7 @@
   "odoo_image": "odoo@sha256:61e3c71b0503c5f658e604c3e340bede20b97d05f726179fa006eae50a32fd23",
   "training_management": {
     "repository": "Progideo/training_management",
-    "commit": "f4889227158bd5966018840d9bc8352a4d0c335a"
+    "commit": "72f64a3903326de5b4bf7cbc84944575d4f65367"
   },
   "autonomous_addons": {
     "training_elearning": "20.0.1.18.0",

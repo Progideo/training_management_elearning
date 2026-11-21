@@ -119,8 +119,11 @@ class TestPublicAutonomousOffers(LessonCase, HttpCase):
         page_url = "/formations/catalogue/%s" % self.catalog.id
         response = self.url_open(page_url)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(program.title, response.text)
+        # Both offers are presented: the trainer-led version through its public conditions,
+        # the autonomous course in its own tab with its public conditions.
+        self.assertIn(program.access_conditions, response.text)
         self.assertIn(course.name, response.text)
+        self.assertIn("Fictional autonomous conditions", response.text)
         self.assertNotIn(program.content, response.text)
         self.assertNotIn("PRIVATE LESSON TEXT", response.text)
         for url in (

@@ -108,22 +108,20 @@ class TestPublicAutonomousOffers(LessonCase, HttpCase):
         rows = self.env["training.course"]._catalogue_rows(self.env.company)
         shared = [row for row in rows if row["id"] == self.catalog.id]
         self.assertEqual(len(shared), 1)
-        self.assertEqual(len(shared[0]["offers"]), 2)
-        self.assertEqual({offer["mode"] for offer in shared[0]["offers"]}, {"onsite", "autonomous"})
+        # No autonomy without a public price (TM #186): only the trainer-led offer is presented.
+        self.assertEqual({offer["mode"] for offer in shared[0]["offers"]}, {"onsite"})
         self.authenticate(None, None)
         page_url = "/formations/catalogue/%s" % self.catalog.id
         response = self.url_open(page_url)
         self.assertEqual(response.status_code, 200)
-        # Both offers are presented: the trainer-led version through its public conditions,
-        # the autonomous course in its own tab with its public conditions.
+        # The trainer-led version is presented through its public conditions; the unpriced
+        # autonomous course is not presented.
         self.assertIn(program.access_conditions, response.text)
-        self.assertIn(course.name, response.text)
-        self.assertIn("Fictional autonomous conditions", response.text)
+        self.assertNotIn("Fictional autonomous conditions", response.text)
         self.assertNotIn(program.content, response.text)
         self.assertNotIn("PRIVATE LESSON TEXT", response.text)
         for url in (
             "/formations?mode=onsite",
-            "/formations?mode=autonomous",
             page_url,
             "/formations/%s" % program.id,
         ):

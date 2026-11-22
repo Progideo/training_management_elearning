@@ -144,5 +144,5 @@ class TestActivityAvailability(LessonCase):
         notice = self.env["training.elearning.notice"].sudo().search([("membership_id", "=", member.id)])
         with self.assertRaises(AccessError):
             notice.write({"state": "sent"})
-        with self.assertRaises(AccessError):
-            notice.unlink()
+        with self.assertRaises(AccessError):  # only an administrator deletes evidence, never sudo() alone
+            notice.with_user(self.env.ref("base.public_user")).sudo().unlink()

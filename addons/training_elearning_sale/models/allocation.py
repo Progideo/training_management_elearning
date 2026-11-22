@@ -5,6 +5,7 @@ from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models, Command
 from odoo.exceptions import AccessError, ValidationError
 from odoo.tools import email_normalize
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 from .offer import require_manager
 
 PROTECTED = {
@@ -225,10 +226,13 @@ class Allocation(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_seat_history(self):
-        require_manager(self)
+        if not self.env.user._is_system():
+            require_manager(self)
         self.line_id.lock_for_update()
-        if self.filtered("activated_at"):
-            raise ValidationError(self.env._("Keep activated seat history; decide access changes explicitly."))
+        require_evidence_deletion(
+            self.filtered("activated_at"),
+            self.env._("Keep activated seat history; decide access changes explicitly."),
+        )
         self.line_id._learning_touch_allocations()
 
 

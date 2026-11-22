@@ -4,6 +4,7 @@
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError, LockError
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 from .offer import require_manager, MANAGER
 
 AUDIT = {"state", "granted_at", "granted_by", "revoked_at", "revoked_by"}
@@ -112,10 +113,12 @@ class Mandate(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_history(self):
-        require_manager(self)
+        if not self.env.user._is_system():
+            require_manager(self)
         self.line_id.lock_for_update()
-        if self.filtered(lambda m: m.state != "draft"):
-            raise ValidationError(self.env._("Keep granted and revoked mandate history."))
+        require_evidence_deletion(
+            self.filtered(lambda m: m.state != "draft"), self.env._("Keep granted and revoked mandate history.")
+        )
 
 
 class CompanyPortal(models.AbstractModel):

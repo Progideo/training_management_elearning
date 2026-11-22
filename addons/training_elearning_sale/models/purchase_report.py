@@ -5,6 +5,7 @@ from datetime import timedelta
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 
 PEDAGOGY = "training_elearning.group_elearning_pedagogy_manager"
 
@@ -57,7 +58,7 @@ class CourseReport(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_report(self):
-        raise AccessError(self.env._("Keep purchase summaries and their history."))
+        require_evidence_deletion(self, self.env._("Keep purchase summaries and their history."), AccessError)
 
     @api.private
     def _store(self, values):

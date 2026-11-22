@@ -2,6 +2,7 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 
 OBLIGATIONS = [("optional", "Optional"), ("complete", "Required to Complete"), ("pass", "Required to Pass")]
 
@@ -97,7 +98,7 @@ class Requirement(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_requirement(self):
-        raise AccessError(self.env._("Keep the frozen exam obligations."))
+        require_evidence_deletion(self, self.env._("Keep the frozen exam obligations."), AccessError)
 
     @api.private
     def _capture(self, membership):
@@ -353,8 +354,8 @@ class Attempt(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_learning_attempt(self):
-        if self.sudo().filtered("learning_membership_id"):
-            raise AccessError(self.env._("Keep the native learning exam history."))
+        attempts = self.filtered(lambda row: row.sudo().learning_membership_id)
+        require_evidence_deletion(attempts, self.env._("Keep the native learning exam history."), AccessError)
 
 
 class ExamService(models.AbstractModel):

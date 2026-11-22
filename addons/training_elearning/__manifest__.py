@@ -2,7 +2,7 @@
 {
     "name": "Training eLearning",
     "summary": "Private native course editions and controlled learner access",
-    "version": "20.0.1.18.0",
+    "version": "20.0.1.19.0",
     "category": "Website/eLearning",
     "author": "Training Management contributors",
     "website": "https://github.com/Progideo/training_management_elearning",
@@ -11,6 +11,7 @@
     "data": [
         "security/groups.xml",
         "security/ir.access.csv",
+        "data/training_dossier_deletion.xml",
         "wizard/access_views.xml",
         "wizard/editorial_views.xml",
         "views/course_views.xml",

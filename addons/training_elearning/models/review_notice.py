@@ -5,6 +5,7 @@ from datetime import timedelta
 import logging
 from odoo import api, fields, models, Command
 from odoo.exceptions import AccessError, ValidationError
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 from .human_practical import PEDAGOGY, valid_reviewer
 
 _logger = logging.getLogger(__name__)
@@ -55,7 +56,7 @@ class ReviewNotice(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_notice(self):
-        raise AccessError(self.env._("Keep practical delivery history."))
+        require_evidence_deletion(self, self.env._("Keep practical delivery history."), AccessError)
 
     @api.private
     def _store(self, values):

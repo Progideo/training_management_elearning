@@ -6,6 +6,7 @@ from contextvars import ContextVar
 from psycopg2.errors import UniqueViolation
 from odoo import api, fields, models, Command
 from odoo.exceptions import AccessError, ValidationError
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 from .human_practical import PEDAGOGY, valid_reviewer
 
 SUPPRESS_ACTIVATION = ContextVar("learning_notification_activation", default=False)
@@ -93,7 +94,7 @@ class Reminder(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_events(self):
-        raise AccessError(self.env._("Keep learning notification history."))
+        require_evidence_deletion(self, self.env._("Keep learning notification history."), AccessError)
 
     @api.private
     def _store(self, values):

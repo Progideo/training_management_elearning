@@ -21,19 +21,14 @@ class TestPublicAutonomousOffers(LessonCase, HttpCase):
         self.assertEqual(self.url_open(page_url).status_code, 404)
         self.assertNotIn(course.name, self.url_open("/formations").text)
         course.write({"learning_public_catalogue": True, "learning_public_conditions": "FICTIONAL PUBLIC TERMS"})
+        # No autonomy without a public price (TM #186, 21 November 2026): the price comes from
+        # the application that sells the offer, absent here, so the offer stays unlisted.
         response = self.url_open(page_url)
-        self.assertEqual(response.status_code, 200)
-        for value in (
-            "FICTIONAL GENERAL PRESENTATION",
-            "FICTIONAL GENERAL OBJECTIVES",
-            "FICTIONAL PUBLIC TERMS",
-            course.name,
-        ):
-            self.assertIn(value, response.text)
-        for value in ("SECRET NATIVE DESCRIPTION", article.name, "PRIVATE LESSON TEXT"):
+        self.assertEqual(response.status_code, 404)
+        for value in ("SECRET NATIVE DESCRIPTION", article.name, "PRIVATE LESSON TEXT", "FICTIONAL PUBLIC TERMS"):
             self.assertNotIn(value, response.text)
         self.assertEqual(self.url_open("/contactus").status_code, 200)
-        self.assertIn(course.name, self.url_open("/formations?mode=autonomous").text)
+        self.assertNotIn(course.name, self.url_open("/formations?mode=autonomous").text)
         self.assertNotIn(course.name, self.url_open("/formations?search=SECRET%20NATIVE").text)
         self.assertFalse(course.is_published or article.is_preview)
         for url in (course.website_url, article.website_url):

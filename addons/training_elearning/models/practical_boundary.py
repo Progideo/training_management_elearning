@@ -78,7 +78,9 @@ class Attachment(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_practical_files(self):
-        self._learning_task_mutation()
+        # Submitted files are evidence: an administrator may delete them (conservation configurée).
+        if not self.env.user._is_system():
+            self._learning_task_mutation()
 
     @api.private
     def _learning_submission_file(self, payload, item):  # pylint: disable=super-method-mismatch,context-overridden

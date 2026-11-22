@@ -4,6 +4,7 @@
 from uuid import UUID
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 from .human_practical import PEDAGOGY
 from .certificate import source_values
 
@@ -62,7 +63,7 @@ class Invalidation(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_history(self):
-        raise AccessError(self.env._("Keep the acquisition decision history."))
+        require_evidence_deletion(self, self.env._("Keep the acquisition decision history."), AccessError)
 
     @api.private
     def _latest(self, member, slide_id):

@@ -2,10 +2,13 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 
 
 class Membership(models.Model):
-    _inherit = "slide.channel.partner"
+    # An administrator deletes a finished learner dossier (conservation configurée, 22 November 2026).
+    _name = "slide.channel.partner"
+    _inherit = ["slide.channel.partner", "training.dossier.deletion"]
     learning_state = fields.Selection(
         [("pending", "Pending"), ("active", "Active"), ("suspended", "Suspended"), ("revoked", "Revoked")],
         default="pending",
@@ -176,10 +179,14 @@ class Membership(models.Model):
     def action_learning_revoke(self, reason=None):
         return self._learning_stop("revoked", reason)
 
+    @api.private
+    def _training_unfinished(self):
+        return self.filtered(lambda member: member.active and member.learning_state != "revoked")
+
     @api.ondelete(at_uninstall=False)
     def _learning_keep_members(self):
-        if self.sudo().channel_id.filtered("training_course_id"):
-            raise ValidationError(self.env._("Archive access instead of deleting learner history."))
+        members = self.filtered(lambda row: row.sudo().channel_id.training_course_id)
+        require_evidence_deletion(members, self.env._("Archive access instead of deleting learner history."))
 
 
 class LessonEvidence(models.Model):
@@ -243,8 +250,8 @@ class LessonEvidence(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _learning_keep_evidence(self):
-        if self.sudo().channel_id.filtered("training_course_id"):
-            raise AccessError(self.env._("Keep the server learning evidence."))
+        evidence = self.filtered(lambda row: row.sudo().channel_id.training_course_id)
+        require_evidence_deletion(evidence, self.env._("Keep the server learning evidence."), AccessError)
 
 
 class LearningService(models.AbstractModel):

@@ -3,6 +3,7 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 from .course import AUTHOR, MANAGER
 
 
@@ -246,7 +247,7 @@ class Registration(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_registration(self):
-        raise AccessError(self.env._("Keep curriculum history."))
+        require_evidence_deletion(self, self.env._("Keep curriculum history."), AccessError)
 
     @api.private
     def _certificate_touch(self):

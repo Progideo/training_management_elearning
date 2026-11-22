@@ -3,6 +3,7 @@
 import logging
 from odoo import api, fields, models, Command
 from odoo.exceptions import AccessError
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 
 _logger = logging.getLogger(__name__)
 
@@ -44,7 +45,7 @@ class Notice(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_notices(self):
-        raise AccessError(self.env._("Keep the notification event history."))
+        require_evidence_deletion(self, self.env._("Keep the notification event history."), AccessError)
 
     @api.private
     def _store(self, values):

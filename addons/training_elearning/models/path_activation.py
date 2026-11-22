@@ -5,6 +5,7 @@ from contextvars import ContextVar
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError, LockError
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 from .course import MANAGER
 
 _STARTING = ContextVar("learning_paths_starting", default=False)
@@ -40,7 +41,7 @@ class Activation(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_activation(self):
-        raise AccessError(self.env._("Keep contractual curriculum activation history."))
+        require_evidence_deletion(self, self.env._("Keep contractual curriculum activation history."), AccessError)
 
     @api.private
     def _store(self, values):
@@ -209,7 +210,7 @@ class Item(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_item(self):
-        raise AccessError(self.env._("Keep curriculum course activation history."))
+        require_evidence_deletion(self, self.env._("Keep curriculum course activation history."), AccessError)
 
     @api.private
     def _store(self, values):

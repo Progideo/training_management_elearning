@@ -8,6 +8,7 @@ from uuid import uuid4
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError
 from odoo.tools import BinaryBytes
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 from .human_practical import PEDAGOGY
 
 
@@ -80,7 +81,7 @@ class Consent(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_consent(self):
-        raise AccessError(self.env._("Keep certificate consent history."))
+        require_evidence_deletion(self, self.env._("Keep certificate consent history."), AccessError)
 
     @api.private
     def _store(self, values):
@@ -312,7 +313,7 @@ class Certificate(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_document(self):
-        raise AccessError(self.env._("Keep issued certificates and their history."))
+        require_evidence_deletion(self, self.env._("Keep issued certificates and their history."), AccessError)
 
     @api.private
     def _create_issued(self, values):

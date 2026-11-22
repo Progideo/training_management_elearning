@@ -20,7 +20,11 @@ tables = [
 ]
 # Opt-in columns added by a later Training Management release: they must stay empty
 # on historical rows, and every original column is still compared.
-ADDED = {"training_program_version": ("also_onsite", "also_remote", "also_blended")}
+ADDED = {
+    "training_program_version": ("also_onsite", "also_remote", "also_blended"),
+    # TM conservation configurée: the anonymization stamp stays empty on history.
+    "training_enrollment": ("anonymized_at",),
+}
 actual = {}
 for table in tables:
     env.cr.execute(

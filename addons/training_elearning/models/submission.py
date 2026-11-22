@@ -3,6 +3,7 @@
 import re
 from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError
+from odoo.addons.training_catalog.models.training_deletion import require_evidence_deletion
 from .submission_files import InvalidSubmission, validate_files
 
 PEDAGOGY = "training_elearning.group_elearning_pedagogy_manager"
@@ -43,7 +44,7 @@ class Submission(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_submission(self):
-        raise AccessError(self.env._("Keep practical submissions and their history."))
+        require_evidence_deletion(self, self.env._("Keep practical submissions and their history."), AccessError)
 
     def action_private_payload(self):
         self.ensure_one()
@@ -117,7 +118,7 @@ class Payload(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _keep_payload(self):
-        raise AccessError(self.env._("Keep the submitted files and their evidence."))
+        require_evidence_deletion(self, self.env._("Keep the submitted files and their evidence."), AccessError)
 
 
 class PracticalService(models.AbstractModel):

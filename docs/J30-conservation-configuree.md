@@ -1,6 +1,6 @@
 # J30 — Conservation configurée hors du module
 
-Décisions du 22 novembre 2026, communes avec Training Management : voir
+Décisions des 22 et 23 novembre 2026 (pas d’anonymisation : le dossier se supprime), communes avec Training Management : voir
 [conservation configurée](https://github.com/Progideo/training_management/blob/main/docs/conservation-configuree.md).
 
 - Les preuves eLearning restent par défaut. Seul un administrateur (`base.group_system`)

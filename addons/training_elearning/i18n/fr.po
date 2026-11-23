@@ -637,3 +637,8 @@ msgstr "Attestations à vérifier"
 #: model:ir.model.fields,field_description:training_elearning.field_training_elearning_acquisition_invalidation__certificate_ids
 msgid "Certificate"
 msgstr "Attestations"
+
+#. module: training_elearning
+#: model:ir.actions.server,name:training_elearning.action_learning_membership_delete_dossier
+msgid "Delete Dossier"
+msgstr "Supprimer le dossier"

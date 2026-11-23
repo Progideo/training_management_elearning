@@ -37,6 +37,7 @@ class TestEvidenceDeletion(PracticalCase):
         with self.assertRaisesRegex(ValidationError, "finished or cancelled"):
             member.with_user(admin).action_training_delete_dossier()
         member.with_user(self.manager).action_learning_revoke("Fictional end of access")
-        member.with_user(admin).action_training_delete_dossier()
+        action = member.with_user(admin).action_training_delete_dossier()
         self.assertFalse(member.exists())
+        self.assertEqual(action["res_model"], "slide.channel.partner")
         self.assertFalse(submission.exists())

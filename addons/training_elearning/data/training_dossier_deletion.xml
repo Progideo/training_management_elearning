@@ -8,6 +8,6 @@
         <field name="binding_view_types">list,form</field>
         <field name="group_ids" eval="[Command.link(ref('base.group_system'))]" />
         <field name="state">code</field>
-        <field name="code">records.action_training_delete_dossier()</field>
+        <field name="code">action = records.action_training_delete_dossier()</field>
     </record>
 </odoo>

@@ -101,7 +101,7 @@ class TestAutonomousExams(AutonomousCase):
         b, slides_b = self.offer([exam], ["pass"])
         first, second = self.member(a), self.member(b)
         service = self.env["training.elearning.exam.service"].with_user(self.learner)
-        before_mail = self.env["mail.mail"].search_count([])
+        before_mail = self.env["mail.mail"].search([], order="id desc", limit=1).id or 0
         one = service._start(first.id, slides_a[0].id)
         two = service._start(second.id, slides_b.id)
         self.assertEqual(one.survey_id, two.survey_id)
@@ -124,7 +124,11 @@ class TestAutonomousExams(AutonomousCase):
         self.assertEqual(second.completion, 100)
         self.assertTrue(second.active)
         self.assertEqual(second.learning_state, "active")
-        self.assertEqual(self.env["mail.mail"].search_count([]), before_mail)
+        # The only message is the native rank email: course karma reaches the first rank
+        # (gamification, decision of 24 November 2026 to keep this native email).
+        mails = self.env["mail.mail"].search([("id", ">", before_mail)])
+        self.assertEqual(mails.mapped("model"), ["res.users"])
+        self.assertEqual(mails.res_id, self.learner.id)
         self.assertFalse(two.slide_partner_id)
         self.assertFalse(exam.certification)
 

@@ -11,6 +11,8 @@ Décisions du 24 novembre 2026, communes avec Training Management : voir
   achèvement le recrédite.
 - Supprimer le dossier d'un accès terminé retire le karma du cours par une ligne de
   compensation ; l'historique natif du karma est conservé.
+- L'email natif de passage de rang est conservé (décision du 24 novembre 2026) : le
+  premier karma fait atteindre le premier rang et envoie ce message à l'apprenant.
 - Le karma n'ouvre aucun accès et ne change ni la progression ni les attestations.
 
 Recette : terminer un cours, vérifier +10 ; invalider l'acquis, vérifier −10 ; révoquer

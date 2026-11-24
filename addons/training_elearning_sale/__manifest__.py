@@ -2,7 +2,7 @@
 {
     "name": "Training eLearning — Sales",
     "summary": "Native sales, named seats and controlled autonomous access",
-    "version": "20.0.1.12.1",
+    "version": "20.0.1.13.0",
     "category": "Sales/Sales",
     "author": "Training Management contributors",
     "website": "https://github.com/Progideo/training_management_elearning",

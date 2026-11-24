@@ -19,6 +19,9 @@ class Membership(models.Model):
     learning_started_at = fields.Datetime(readonly=True, copy=False)
     learning_ends_at = fields.Datetime(readonly=True, copy=False)
     learning_access_log = fields.Json(readonly=True, copy=False)
+    # Native "Course finished" karma actually credited to the learner, to withdraw it exactly
+    # (lost completion, deleted dossier) even if the course setting changes afterwards.
+    learning_karma_granted = fields.Integer(readonly=True, copy=False, groups="base.group_system")
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -68,6 +71,39 @@ class Membership(models.Model):
                     else ("ongoing" if progress["satisfied"] else "joined"),
                 }
             )
+            member._learning_completion_karma(progress["complete"])
+
+    @api.private
+    def _learning_completion_karma(self, complete):
+        """Native "Course finished" karma for managed courses (gamification, 24 November 2026).
+
+        The native completion hook is bypassed for these courses: the karma follows the
+        learner's own account, is granted once per membership and withdrawn when the
+        completion is lost, for instance after a motivated acquisition invalidation.
+        """
+        self.ensure_one()
+        member = self.sudo()
+        user = member.learning_user_id
+        granted = member.learning_karma_granted
+        karma = member.channel_id.karma_gen_channel_finish
+        if complete and not granted and karma > 0 and user:
+            user._add_karma(karma, member.channel_id, self.env._("Course Finished"))
+            member._learning_store({"learning_karma_granted": karma})
+        elif not complete and granted:
+            if user:
+                user._add_karma(-granted, member.channel_id, self.env._("Course Set Uncompleted"))
+            member._learning_store({"learning_karma_granted": 0})
+
+    def unlink(self):
+        # A deleted learner dossier takes its course karma with it.
+        for member in self.sudo().filtered(lambda m: m.learning_karma_granted and m.learning_user_id):
+            user = member.learning_user_id
+            # The native karma history keeps its lines (other course gains share them);
+            # a compensating line removes the course points from the learner's total.
+            user._add_karma(
+                -member.learning_karma_granted, user, self.env._("Training points deleted with their dossier")
+            )
+        return super().unlink()
 
     def _recompute_completion(self):
         managed = self.filtered(lambda m: m.channel_id.training_course_id)

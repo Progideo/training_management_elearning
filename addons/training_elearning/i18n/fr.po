@@ -642,3 +642,26 @@ msgstr "Attestations"
 #: model:ir.actions.server,name:training_elearning.action_learning_membership_delete_dossier
 msgid "Delete Dossier"
 msgstr "Supprimer le dossier"
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Course Finished"
+msgstr "Cours terminé"
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Course Set Uncompleted"
+msgstr "Cours de nouveau inachevé"
+
+#. module: training_elearning
+#. odoo-python
+#: code:addons/training_elearning/models/membership.py:0
+msgid "Training points deleted with their dossier"
+msgstr "Points de formation supprimés avec leur dossier"
+
+#. module: training_elearning
+#: model:ir.model.fields,field_description:training_elearning.field_slide_channel_partner__learning_karma_granted
+msgid "Learning Karma Granted"
+msgstr "Karma de fin de cours attribué"

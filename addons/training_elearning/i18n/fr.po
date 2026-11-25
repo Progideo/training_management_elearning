@@ -665,3 +665,228 @@ msgstr "Points de formation supprimés avec leur dossier"
 #: model:ir.model.fields,field_description:training_elearning.field_slide_channel_partner__learning_karma_granted
 msgid "Learning Karma Granted"
 msgstr "Karma de fin de cours attribué"
+
+#. module: training_elearning
+#: model:mail.template,body_html:training_elearning.path_activation_notice
+msgid ""
+"<div><p t-if=\"object.item_id\">A consultation period is authorized for a "
+"course of your path, from <span "
+"t-field=\"object.item_id.access_started_at\"></span> to <span "
+"t-field=\"object.item_id.access_ends_at\"></span>. The actual dates do not "
+"depend on your first sign-in.</p><p t-else=\"\">Your autonomous path is "
+"activated. The included courses open as soon as their prerequisites are met,"
+" before the start deadline set on <span "
+"t-field=\"object.activation_id.starts_until\"></span>.</p><p><a t-att-"
+"href=\"object.get_base_url() + '/my/learning-paths/%s' % "
+"object.activation_id.registration_id.id\">View my authenticated path and its"
+" dates</a></p><p>Materials and individual results remain in your private "
+"space.</p></div>"
+msgstr ""
+"<div><p t-if=\"object.item_id\">Une période de consultation est autorisée "
+"pour un cours de votre parcours, du <span "
+"t-field=\"object.item_id.access_started_at\"></span> au <span "
+"t-field=\"object.item_id.access_ends_at\"></span>. Les dates effectives sont"
+" indépendantes de votre première connexion.</p><p t-else=\"\">Votre parcours"
+" autonome est activé. Les cours inclus s’ouvrent dès leurs prérequis "
+"satisfaits, avant la limite de démarrage fixée au <span "
+"t-field=\"object.activation_id.starts_until\"></span>.</p><p><a t-att-"
+"href=\"object.get_base_url() + '/my/learning-paths/%s' % "
+"object.activation_id.registration_id.id\">Consulter mon parcours authentifié"
+" et ses dates</a></p><p>Les supports et résultats individuels restent dans "
+"votre espace privé.</p></div>"
+
+#. module: training_elearning
+#: model:mail.template,body_html:training_elearning.practical_assignment_notice
+msgid ""
+"<div><p>A submission is assigned to you. Review deadline: <span "
+"t-field=\"object.queue_id.due_at\"></span>.</p><p>Open your Odoo space, menu"
+" Autonomous Learning / Practical Work Reviews. Files and individual details "
+"remain in the private space. If a more recent submission replaces the "
+"pending candidate, the initial deadline is kept.</p></div>"
+msgstr ""
+"<div><p>Un rendu vous est affecté. Échéance de correction : <span "
+"t-field=\"object.queue_id.due_at\"></span>.</p><p>Ouvrez votre espace Odoo, "
+"menu Apprentissage autonome / Corrections de TP. Les fichiers et détails "
+"individuels restent dans l’espace privé. Si un rendu plus récent remplace le"
+" candidat en attente, l’échéance initiale reste conservée.</p></div>"
+
+#. module: training_elearning
+#: model:mail.template,body_html:training_elearning.scoped_reminder_template
+msgid ""
+"<div><p>Hello,</p><p t-if=\"object.kind == 'activation'\">Your access to a "
+"course has been activated or extended.</p><p t-elif=\"object.kind == "
+"'invalidation'\">The coordination has recorded a decision about an "
+"achievement. Previous evidence is kept; view your private history.</p><p "
+"t-elif=\"object.kind == 'resource_withdrawal'\">A resource of your course "
+"has been withdrawn by the organization. Your work and achievements are kept;"
+" no new version replaces them automatically. The coordination is reviewing "
+"the consequences for your path and deadlines.</p><p t-elif=\"object.kind == "
+"'course_end'\">The end of your access to a course is approaching.</p><p "
+"t-elif=\"object.kind == 'path_start'\">The start deadline for the courses of"
+" your path is approaching. Some courses have not been started yet.</p><p "
+"t-elif=\"object.kind == 'revision_end'\">The deadline to submit your "
+"practical work revision is approaching.</p><p t-elif=\"object.kind == "
+"'review_due'\">The deadline of your assigned review is approaching.</p><p "
+"t-elif=\"object.kind == 'review_late'\">An assigned review is late and "
+"requires action from the coordination.</p><p t-elif=\"object.kind == "
+"'assignment_end'\">The seat assignment deadline of your purchase is "
+"approaching. Some seats are still available.</p><p t-elif=\"object.kind == "
+"'report_ready'\">A report on your purchase is available in your company "
+"space.</p><p t-elif=\"object.kind == 'report_end'\">The end of the "
+"consultation period of your purchase report is approaching.</p><p "
+"t-elif=\"object.kind == 'exam_revision'\">An exam result has been revised. "
+"View your private space to see the decision.</p><p t-else=\"\">Information "
+"about your training or a purchase is available in your private space.</p><t "
+"t-set=\"target\" t-value=\"object._target()\"></t><p t-if=\"target\"><a "
+"t-att-href=\"object.get_base_url() + target['url']\">View my authenticated "
+"space</a></p><p>Results, answer keys, work and learning documents remain in "
+"this space.</p></div>"
+msgstr ""
+"<div><p>Bonjour,</p><p t-if=\"object.kind == 'activation'\">Votre accès à un"
+" cours a été activé ou prolongé.</p><p t-elif=\"object.kind == "
+"'invalidation'\">La coordination a enregistré une décision concernant un "
+"acquis. Les preuves antérieures sont conservées ; consultez votre historique"
+" privé.</p><p t-elif=\"object.kind == 'resource_withdrawal'\">Une ressource "
+"de votre cours a été retirée par l’organisme. Vos travaux et acquis restent "
+"conservés ; aucune nouvelle version ne les remplace automatiquement. La "
+"coordination examine les conséquences sur votre parcours et vos "
+"échéances.</p><p t-elif=\"object.kind == 'course_end'\">La fin de votre "
+"accès à un cours approche.</p><p t-elif=\"object.kind == 'path_start'\">La "
+"limite de démarrage des cours de votre parcours approche. Des cours restent "
+"à démarrer.</p><p t-elif=\"object.kind == 'revision_end'\">Le délai pour "
+"remettre votre révision de TP approche.</p><p t-elif=\"object.kind == "
+"'review_due'\">L’échéance de votre correction affectée approche.</p><p "
+"t-elif=\"object.kind == 'review_late'\">Une correction affectée est en "
+"retard et nécessite une intervention de la coordination.</p><p "
+"t-elif=\"object.kind == 'assignment_end'\">La limite d’attribution des "
+"sièges de votre achat approche. Des sièges restent disponibles.</p><p "
+"t-elif=\"object.kind == 'report_ready'\">Un bilan de votre achat est "
+"disponible dans votre espace entreprise.</p><p t-elif=\"object.kind == "
+"'report_end'\">La fin de consultation du bilan de votre achat "
+"approche.</p><p t-elif=\"object.kind == 'exam_revision'\">Un résultat "
+"d’examen a été révisé. Consultez votre espace privé pour connaître la "
+"décision.</p><p t-else=\"\">Une information concernant votre formation ou un"
+" achat est disponible dans votre espace privé.</p><t t-set=\"target\" "
+"t-value=\"object._target()\"></t><p t-if=\"target\"><a t-att-"
+"href=\"object.get_base_url() + target['url']\">Consulter mon espace "
+"authentifié</a></p><p>Les résultats, corrigés, travaux et documents "
+"pédagogiques restent dans cet espace.</p></div>"
+
+#. module: training_elearning
+#: model:mail.template,body_html:training_elearning.activity_notice
+msgid ""
+"<div><p>Hello,</p><p t-if=\"object.kind == 'withdrawal'\">The organization "
+"has closed an activity of your course. Previous achievements and answers "
+"already recorded are kept. An unavailable requirement is neither failed nor "
+"automatically validated. The coordination is reviewing the consequences for "
+"your deadlines.</p><p t-else=\"\">The organization has reopened an activity "
+"of your course. Your dates and access rights remain those planned for your "
+"membership.</p><p><a t-att-href=\"object.get_base_url() + '/my/learning/%s' "
+"% object.membership_id.id\">View your authenticated "
+"space</a></p><p>Questions, answer keys and learning files remain in this "
+"private space.</p></div>"
+msgstr ""
+"<div><p>Bonjour,</p><p t-if=\"object.kind == 'withdrawal'\">L’organisme a "
+"fermé une activité de votre cours. Les acquis antérieurs et les réponses "
+"déjà enregistrées sont conservés. Une obligation indisponible n’est ni "
+"échouée ni automatiquement validée. La coordination examine les conséquences"
+" sur vos échéances.</p><p t-else=\"\">L’organisme a rouvert une activité de "
+"votre cours. Vos dates et droits d’accès restent ceux prévus pour votre "
+"adhésion.</p><p><a t-att-href=\"object.get_base_url() + '/my/learning/%s' % "
+"object.membership_id.id\">Consulter votre espace authentifié</a></p><p>Les "
+"questions, corrigés et fichiers pédagogiques restent dans cet espace "
+"privé.</p></div>"
+
+#. module: training_elearning
+#: model:mail.template,body_html:training_elearning.practical_feedback_notice
+msgid ""
+"<div><p>Individual feedback is published in your private space. It gives the"
+" result and any revision conditions.</p><p><a t-att-"
+"href=\"object.get_base_url() + '/my/learning-submissions/%s' % "
+"object.submission_id.id\">View my submission and its "
+"feedback</a></p><p>Assessments, criteria and files remain in this "
+"authenticated space.</p></div>"
+msgstr ""
+"<div><p>Un retour individuel est publié dans votre espace privé. Il précise "
+"le résultat et les éventuelles conditions de révision.</p><p><a t-att-"
+"href=\"object.get_base_url() + '/my/learning-submissions/%s' % "
+"object.submission_id.id\">Consulter mon rendu et son retour</a></p><p>Les "
+"appréciations, critères et fichiers restent dans cet espace "
+"authentifié.</p></div>"
+
+#. module: training_elearning
+#: model:mail.template,body_html:training_elearning.certificate_notice_template
+msgid ""
+"<div><p>Your eLearning certificate history has been updated. View the "
+"current status and your documents in your authenticated personal "
+"space.</p><p><a t-att-href=\"object.get_base_url() + '/my/learning-"
+"certificates'\">View my certificates</a></p><p>Documents and verification "
+"links are not attached to this message.</p></div>"
+msgstr ""
+"<div><p>Votre historique d’attestations eLearning a été mis à jour. "
+"Consultez le statut actuel et vos documents dans votre espace personnel "
+"authentifié.</p><p><a t-att-href=\"object.get_base_url() + '/my/learning-"
+"certificates'\">Consulter mes attestations</a></p><p>Les documents et liens "
+"de vérification ne sont pas joints à ce message.</p></div>"
+
+#. module: training_elearning
+#: model:mail.template,subject:training_elearning.practical_assignment_notice
+msgid "A practical work submission awaits your review"
+msgstr "Un rendu de TP attend votre correction"
+
+#. module: training_elearning
+#: model:mail.template,subject:training_elearning.practical_feedback_notice
+msgid "Feedback on your practical work is available"
+msgstr "Un retour sur votre TP est disponible"
+
+#. module: training_elearning
+#: model:mail.template,subject:training_elearning.path_activation_notice
+msgid "Information about your autonomous path"
+msgstr "Information sur votre parcours autonome"
+
+#. module: training_elearning
+#: model:mail.template,subject:training_elearning.activity_notice
+msgid ""
+"Information about your course {{ object.membership_id.channel_id.name }}"
+msgstr ""
+"Information sur votre cours {{ object.membership_id.channel_id.name }}"
+
+#. module: training_elearning
+#: model:mail.template,subject:training_elearning.certificate_notice_template
+msgid "Update of your eLearning certificates"
+msgstr "Mise à jour de vos attestations eLearning"
+
+#. module: training_elearning
+#: model:mail.template,subject:training_elearning.scoped_reminder_template
+msgid "Your training space — information"
+msgstr "Votre espace de formation — information"
+
+#. module: training_elearning
+#: model:mail.template,name:training_elearning.activity_notice
+msgid "eLearning: activity availability"
+msgstr "eLearning — disponibilité d’une activité"
+
+#. module: training_elearning
+#: model:mail.template,name:training_elearning.certificate_notice_template
+msgid "eLearning: certificate history changed"
+msgstr "eLearning : historique d’attestations modifié"
+
+#. module: training_elearning
+#: model:mail.template,name:training_elearning.practical_feedback_notice
+msgid "eLearning: individual practical work feedback published"
+msgstr "eLearning — retour individuel de TP publié"
+
+#. module: training_elearning
+#: model:mail.template,name:training_elearning.path_activation_notice
+msgid "eLearning: path and course start"
+msgstr "eLearning — parcours et démarrage de cours"
+
+#. module: training_elearning
+#: model:mail.template,name:training_elearning.practical_assignment_notice
+msgid "eLearning: practical work review assigned"
+msgstr "eLearning — correction de TP affectée"
+
+#. module: training_elearning
+#: model:mail.template,name:training_elearning.scoped_reminder_template
+msgid "eLearning: targeted private information"
+msgstr "eLearning — information privée ciblée"

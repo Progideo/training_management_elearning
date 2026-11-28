@@ -18,7 +18,7 @@
       <div class="container py-4">
         <a href="/my/learning">Mes cours</a>
         <h1 t-out="member.channel_id.name" />
-        <p>Progression : <t t-out="progress['percentage']" /> %</p>
+        <p>Progression : <t t-out="int(round(progress['percentage']))" /> %</p>
         <p>Accès ouvert depuis le <t t-out="access_started_at"/> ; consultation autorisée jusqu’au <t t-out="access_ends_at"/> · fuseau : <t t-out="timezone"/>.</p>
         <p>Plusieurs achats peuvent cumuler vos droits sur cette édition tout en conservant un suivi pédagogique unique. Les acquis antérieurs de cette édition restent pris en compte ; chaque financeur voit uniquement le bilan de son achat.</p>
         <p><a t-att-href="'/my/learning/%s/history' % member.id">Mon historique pédagogique</a> · <a href="/my/learning-certificates">Mon historique d’attestations</a></p>
@@ -29,7 +29,7 @@
             <strong t-out="row['title']" /> · <span t-if="row['required']">Obligatoire</span>
             <span t-else="">Facultatif</span> · <span t-if="row['status']['complete']">Terminé selon le critère prévu</span>
             <span t-elif="row['status'].get('unavailable')">Activité temporairement indisponible ; obligation conservée</span><span t-elif="row['status'].get('waiting_correction')">En attente de correction</span><span t-elif="row['status'].get('revision_requested')">Révision demandée ; consulter le retour individuel</span><span t-else="">À réaliser</span>
-            <span t-if="row['status'].get('score') is not None"> · Meilleur score : <t t-out="round(row['status']['score'],2)" /> %</span>
+            <span t-if="row['status'].get('score') is not None"> · Meilleur score : <t t-out="int(round(row['status']['score']))" /> %</span>
             <a t-if="row['available']" class="btn btn-outline-primary ms-2" t-att-href="row['url']">Ouvrir l’activité</a>
             <span t-elif="not expired" class="ms-2">Accès soumis aux prérequis ou à la disponibilité de l’activité.</span>
           </li>

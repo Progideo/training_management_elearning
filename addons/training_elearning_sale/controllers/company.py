@@ -13,12 +13,12 @@ def private(response):
 
 def presentation(data):
     data = dict(data)
-    data["valid_until"] = format_datetime(request.env, data["valid_until"], tz=request.env.user.tz or "UTC")
+    data["valid_until"] = format_datetime(request.env, data["valid_until"], tz=request.env.user.tz or "UTC", dt_format="short")
     data["rows"] = [
         dict(
             row,
             **{
-                key: format_datetime(request.env, row[key], tz=request.env.user.tz or "UTC") if row[key] else ""
+                key: format_datetime(request.env, row[key], tz=request.env.user.tz or "UTC", dt_format="short") if row[key] else ""
                 for key in ("start", "end")
             },
         )
@@ -28,8 +28,7 @@ def presentation(data):
         summary = row.get("summary", {})
         if summary.get("completed_at"):
             summary["completed_at"] = format_datetime(
-                request.env, fields.Datetime.to_datetime(summary["completed_at"]), tz=request.env.user.tz or "UTC"
-            )
+                request.env, fields.Datetime.to_datetime(summary["completed_at"]), tz=request.env.user.tz or "UTC", dt_format="short")
     data["timezone"] = request.env.user.tz or "UTC"
     return data
 
@@ -123,7 +122,7 @@ class PurchaseReportExport(http.Controller):
             summary = row.get("summary", {})
             values = [
                 data["reference"],
-                format_datetime(request.env, fields.Datetime.now(), tz=request.env.user.tz or "UTC"),
+                format_datetime(request.env, fields.Datetime.now(), tz=request.env.user.tz or "UTC", dt_format="short"),
                 data["timezone"],
                 row["beneficiary"],
                 row["start"],

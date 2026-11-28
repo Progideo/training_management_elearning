@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- « Mon compte » : tuiles natives, affichées aux seules personnes ayant un cours autonome.
+         Les cours eux-mêmes figurent dans « Mes cours » (training.my.courses). -->
+    <record id="portal_entry_learning_paths" model="portal.entry">
+        <field name="name">Mes parcours autonomes</field>
+        <field name="description">Vos parcours de cours en ligne</field>
+        <field name="url">/my/learning-paths</field>
+        <field name="image" type="bytes" file="training_elearning/static/src/img/portal-learning-paths.svg"/>
+        <field name="placeholder_count">training_learning_path_count</field>
+        <field name="sequence" eval="185"/>
+    </record>
+    <record id="portal_entry_learning_certificates" model="portal.entry">
+        <field name="name">Mes attestations eLearning</field>
+        <field name="description">Attestations de vos cours en ligne</field>
+        <field name="url">/my/learning-certificates</field>
+        <field name="image" type="bytes" file="training_elearning/static/src/img/portal-learning-certificates.svg"/>
+        <field name="placeholder_count">training_learning_course_count</field>
+        <field name="sequence" eval="190"/>
+    </record>
+</odoo>

@@ -18,3 +18,4 @@ from . import reminder
 from . import native_mail_boundary
 from . import native_invitation
 from . import resource_withdrawal
+from . import my_courses

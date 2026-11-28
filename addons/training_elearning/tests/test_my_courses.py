@@ -9,6 +9,8 @@ from .test_activities import LessonCase
 class TestMyCourses(LessonCase):
     def test_active_courses_are_contributed_to_my_courses(self):
         course = self.course()
+        self.article(course)
+        course.with_user(self.manager).action_learning_publish()
         member = self.member(course)
         other = new_test_user(self.env, login="fictional_other_learner", groups="base.group_portal")
         contributions = self.env["training.my.courses"]

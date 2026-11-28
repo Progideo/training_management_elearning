@@ -18,7 +18,7 @@ class CertificatePortal(http.Controller):
     def workspace(self, **kw):
         documents = certificate_service()._list()
         for document in documents:
-            document["issued_at"] = format_datetime(request.env, document["issued_at"], tz=request.env.user.tz or "UTC")
+            document["issued_at"] = format_datetime(request.env, document["issued_at"], tz=request.env.user.tz or "UTC", dt_format="short")
         return private(
             request.render(
                 "training_elearning.certificates",

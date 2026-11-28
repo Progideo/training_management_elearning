@@ -30,7 +30,7 @@ class PathPortal(http.Controller):
             tz = request.env.user.tz or "UTC"
 
             def display(value):
-                return format_datetime(request.env, value, tz=tz) if value else ""
+                return format_datetime(request.env, value, tz=tz, dt_format="short") if value else ""
 
             data["timezone"] = tz
             data["summary"]["completed_at"] = display(data["summary"]["completed_at"])

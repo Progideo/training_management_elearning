@@ -100,11 +100,9 @@ class Portal(http.Controller):
                         "progress": member._learning_progress(),
                         "expired": member.learning_ends_at <= fields.Datetime.now(),
                         "access_started_at": format_datetime(
-                            request.env, member.learning_started_at, tz=request.env.user.tz or "UTC"
-                        ),
+                            request.env, member.learning_started_at, tz=request.env.user.tz or "UTC", dt_format="short"),
                         "access_ends_at": format_datetime(
-                            request.env, member.learning_ends_at, tz=request.env.user.tz or "UTC"
-                        ),
+                            request.env, member.learning_ends_at, tz=request.env.user.tz or "UTC", dt_format="short"),
                         "timezone": request.env.user.tz or "UTC",
                     },
                 )
@@ -119,9 +117,9 @@ class Portal(http.Controller):
             tz = request.env.user.tz or "UTC"
             for row in data["rows"]:
                 for key in ("acquired_at", "invalidated_at", "restored_at"):
-                    row[key] = format_datetime(request.env, row[key], tz=tz) if row[key] else False
+                    row[key] = format_datetime(request.env, row[key], tz=tz, dt_format="short") if row[key] else False
                 for entry in row["entries"]:
-                    entry["date"] = format_datetime(request.env, entry["date"], tz=tz) if entry["date"] else False
+                    entry["date"] = format_datetime(request.env, entry["date"], tz=tz, dt_format="short") if entry["date"] else False
             return private(request.render("training_elearning.learning_history", {"history": data, "timezone": tz}))
         except (AccessError, MissingError):
             raise request.not_found() from None

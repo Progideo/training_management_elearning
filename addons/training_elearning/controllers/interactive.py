@@ -60,7 +60,7 @@ class Interactive(CommonContent):
                 "attempts": [
                     {
                         "number": attempt.number,
-                        "saved_at": format_datetime(request.env, attempt.last_saved_at, tz=request.env.user.tz or "UTC")
+                        "saved_at": format_datetime(request.env, attempt.last_saved_at, tz=request.env.user.tz or "UTC", dt_format="short")
                         if attempt.last_saved_at
                         else False,
                         "score": "%g / %g" % (attempt.score, attempt.maximum) if attempt.maximum else "Non disponible",
